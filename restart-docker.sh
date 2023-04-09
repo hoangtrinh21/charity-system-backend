@@ -1,1 +1,1 @@
-docker restart mysql-charity-hoangtrinh backend-hoangtrinh
+docker restart backend-hoangtrinh
