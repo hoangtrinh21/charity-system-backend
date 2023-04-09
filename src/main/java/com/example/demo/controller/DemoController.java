@@ -55,7 +55,7 @@ public class DemoController {
         }
     }
 
-    @GetMapping("/districts-on-province")
+    @GetMapping("/districts-in-province")
     public ResponseEntity<ResponseModel> getDistrictsOnProvince(@RequestParam(name = "province-code") String provinceCode) {
         try {
             List<DistrictsEntity> districts = districtsRepository.findByProvinceCode(provinceCode);
@@ -72,7 +72,7 @@ public class DemoController {
         }
     }
 
-    @GetMapping("/wards-on-districts")
+    @GetMapping("/wards-in-districts")
     public ResponseEntity<ResponseModel> getWardsOnDistricts(@RequestParam(name = "district-code") String districtCode) {
         try {
             List<WardsEntity> wards = wardsRepository.findByDistrictCode(districtCode);
