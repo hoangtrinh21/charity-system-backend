@@ -33,7 +33,9 @@ public class DemoController {
     @GetMapping("/ping")
     public ResponseEntity<ResponseModel> ping() {
         return ResponseEntity.status(HttpStatus.OK)
-                .body(new ResponseModel(HttpStatus.OK.value(), "Hello, i am demo application run on docker. Can i help you?", "{}"));
+                .body(new ResponseModel(HttpStatus.OK.value(),
+                        "Hello, i am demo application run on docker. Can i help you?",
+                        "{}"));
     }
 
     @GetMapping("/provinces")
@@ -41,11 +43,15 @@ public class DemoController {
         try {
             List<ProvincesEntity> provincesList = provincesRepository.findAll();
             return ResponseEntity.status(HttpStatus.OK)
-                    .body(new ResponseModel(HttpStatus.OK.value(), "Request success", provincesList));
+                    .body(new ResponseModel(HttpStatus.OK.value(),
+                            "Have " + provincesList.size() + " provinces",
+                            provincesList));
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(new ResponseModel(HttpStatus.INTERNAL_SERVER_ERROR.value(), "INTERNAL_SERVER_ERROR", "{}"));
+                    .body(new ResponseModel(HttpStatus.INTERNAL_SERVER_ERROR.value(),
+                            "INTERNAL_SERVER_ERROR",
+                            "{}"));
         }
     }
 
@@ -54,20 +60,26 @@ public class DemoController {
         try {
             List<DistrictsEntity> districts = districtsRepository.findByProvinceCode(provinceCode);
             return ResponseEntity.status(HttpStatus.OK)
-                    .body(new ResponseModel(HttpStatus.OK.value(), "Request success", districts));
+                    .body(new ResponseModel(HttpStatus.OK.value(),
+                            "Have " + districts.size() + " districts",
+                            districts));
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(new ResponseModel(HttpStatus.INTERNAL_SERVER_ERROR.value(), "INTERNAL_SERVER_ERROR", "{}"));
+                    .body(new ResponseModel(HttpStatus.INTERNAL_SERVER_ERROR.value(),
+                            "INTERNAL_SERVER_ERROR",
+                            "{}"));
         }
     }
 
     @GetMapping("/wards-on-districts")
     public ResponseEntity<ResponseModel> getWardsOnDistricts(@RequestParam(name = "district-code") String districtCode) {
         try {
-            List<WardsEntity> districts = wardsRepository.findByDistrictCode(districtCode);
+            List<WardsEntity> wards = wardsRepository.findByDistrictCode(districtCode);
             return ResponseEntity.status(HttpStatus.OK)
-                    .body(new ResponseModel(HttpStatus.OK.value(), "Request success", districts));
+                    .body(new ResponseModel(HttpStatus.OK.value(),
+                            "Have " + wards.size(),
+                            wards));
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
