@@ -33,7 +33,7 @@ public class DemoController {
     @GetMapping("/ping")
     public ResponseEntity<ResponseModel> ping() {
         return ResponseEntity.status(HttpStatus.OK)
-                .body(new ResponseModel(HttpStatus.OK.value(), "Hello, i am demo application run on docker. Can i help you?", new JSONObject()));
+                .body(new ResponseModel(HttpStatus.OK.value(), "Hello, i am demo application run on docker. Can i help you?", new JSONObject("{}")));
     }
 
     @GetMapping("/provinces")
@@ -45,7 +45,7 @@ public class DemoController {
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(new ResponseModel(HttpStatus.INTERNAL_SERVER_ERROR.value(), "INTERNAL_SERVER_ERROR", new JSONObject()));
+                    .body(new ResponseModel(HttpStatus.INTERNAL_SERVER_ERROR.value(), "INTERNAL_SERVER_ERROR", new JSONObject("{}")));
         }
     }
 
@@ -58,7 +58,7 @@ public class DemoController {
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(new ResponseModel(HttpStatus.INTERNAL_SERVER_ERROR.value(), "INTERNAL_SERVER_ERROR", new JSONObject()));
+                    .body(new ResponseModel(HttpStatus.INTERNAL_SERVER_ERROR.value(), "INTERNAL_SERVER_ERROR", new JSONObject("{}")));
         }
     }
 
@@ -71,7 +71,7 @@ public class DemoController {
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(new ResponseModel(HttpStatus.INTERNAL_SERVER_ERROR.value(), "INTERNAL_SERVER_ERROR", new JSONObject()));
+                    .body(new ResponseModel(HttpStatus.INTERNAL_SERVER_ERROR.value(), "INTERNAL_SERVER_ERROR", new JSONObject("{}")));
         }
     }
 }
