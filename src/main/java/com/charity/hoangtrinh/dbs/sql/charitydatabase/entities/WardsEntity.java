@@ -1,4 +1,4 @@
-package com.example.demo.dbs.sql.charitydatabase.entities;
+package com.charity.hoangtrinh.dbs.sql.charitydatabase.entities;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

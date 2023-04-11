@@ -1,6 +1,6 @@
-package com.example.demo.dbs.sql.charitydatabase.repositories;
+package com.charity.hoangtrinh.dbs.sql.charitydatabase.repositories;
 
-import com.example.demo.dbs.sql.charitydatabase.entities.WardsEntity;
+import com.charity.hoangtrinh.dbs.sql.charitydatabase.entities.WardsEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

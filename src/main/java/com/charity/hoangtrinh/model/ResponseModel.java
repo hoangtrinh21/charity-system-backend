@@ -1,4 +1,4 @@
-package com.example.demo.model;
+package com.charity.hoangtrinh.model;
 
 import com.fasterxml.jackson.databind.util.JSONPObject;
 import lombok.AllArgsConstructor;

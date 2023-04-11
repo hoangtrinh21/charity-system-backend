@@ -1,17 +1,13 @@
-package com.example.demo.controller;
+package com.charity.hoangtrinh.controller;
 
-import com.example.demo.dbs.sql.charitydatabase.entities.DistrictsEntity;
-import com.example.demo.dbs.sql.charitydatabase.entities.ProvincesEntity;
-import com.example.demo.dbs.sql.charitydatabase.entities.WardsEntity;
-import com.example.demo.dbs.sql.charitydatabase.repositories.DistrictsRepository;
-import com.example.demo.dbs.sql.charitydatabase.repositories.ProvincesRepository;
-import com.example.demo.dbs.sql.charitydatabase.repositories.WardsRepository;
-import com.example.demo.model.ResponseModel;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import org.json.JSONArray;
-import org.json.JSONObject;
+import com.charity.hoangtrinh.dbs.sql.charitydatabase.entities.ProvincesEntity;
+import com.charity.hoangtrinh.dbs.sql.charitydatabase.entities.WardsEntity;
+import com.charity.hoangtrinh.dbs.sql.charitydatabase.repositories.DistrictsRepository;
+import com.charity.hoangtrinh.dbs.sql.charitydatabase.repositories.ProvincesRepository;
+import com.charity.hoangtrinh.dbs.sql.charitydatabase.repositories.WardsRepository;
+import com.charity.hoangtrinh.dbs.sql.charitydatabase.entities.DistrictsEntity;
+import com.charity.hoangtrinh.model.ResponseModel;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,9 +17,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-@RequestMapping("/charity")
+@RequestMapping("/charity/address")
 @RestController
-public class DemoController {
+public class AddressController {
     @Autowired
     private ProvincesRepository provincesRepository;
     @Autowired

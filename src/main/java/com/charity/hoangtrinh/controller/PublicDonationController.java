@@ -1,0 +1,10 @@
+package com.charity.hoangtrinh.controller;
+
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RequestMapping("/charity/public-donation")
+@RestController
+public class PublicDonationController {
+
+}

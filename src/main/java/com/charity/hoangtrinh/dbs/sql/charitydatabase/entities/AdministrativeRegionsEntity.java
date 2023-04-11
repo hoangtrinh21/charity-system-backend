@@ -1,4 +1,4 @@
-package com.example.demo.dbs.sql.charitydatabase.entities;
+package com.charity.hoangtrinh.dbs.sql.charitydatabase.entities;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -10,23 +10,17 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-@Entity(name = "provinces")
+@Entity(name = "administrative_regions")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Table(name = "provinces")
-public class ProvincesEntity {
+@Table(name = "administrative_regions")
+public class AdministrativeRegionsEntity {
     @Id
-    private String code;
+    private int id;
     @Column(name = "name")
     private String name;
-    @Column(name = "full_name")
-    private String fullName;
     @Column(name = "code_name")
     private String codeName;
-    @Column(name = "administrative_unit_id")
-    private int administrativeUnitId;
-    @Column(name = "administrative_region_id")
-    private int administrativeRegionId;
 }

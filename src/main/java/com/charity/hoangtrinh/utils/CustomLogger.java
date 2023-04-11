@@ -1,4 +1,4 @@
-package com.example.demo.utils;
+package com.charity.hoangtrinh.utils;
 
 import org.apache.log4j.*;
 
