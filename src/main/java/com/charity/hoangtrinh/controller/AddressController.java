@@ -31,7 +31,7 @@ public class AddressController {
         return ResponseEntity.status(HttpStatus.OK)
                 .body(new ResponseModel(HttpStatus.OK.value(),
                         "Hello, i am demo application run on docker. Can i help you?",
-                        "{}"));
+                        ""));
     }
 
     @GetMapping("/provinces")
