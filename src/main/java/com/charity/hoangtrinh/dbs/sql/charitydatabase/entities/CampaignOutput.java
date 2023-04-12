@@ -1,20 +1,17 @@
 package com.charity.hoangtrinh.dbs.sql.charitydatabase.entities;
 
-import com.charity.hoangtrinh.dbs.sql.charitydatabase.entities.CampaignInfo;
-import lombok.*;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.Instant;
 
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
-@Builder
-@Entity(name = "campaign_input")
-@Table(name = "campaign_input")
-public class CampaignInputEntity {
+@Getter
+@Setter
+@Entity
+@Table(name = "campaign_output")
+public class CampaignOutput {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Integer id;
 
@@ -29,6 +26,9 @@ public class CampaignInputEntity {
 
     @Column(name = "amount", nullable = false)
     private Long amount;
+
+    @Column(name = "reason", nullable = false)
+    private String reason;
 
     @Column(name = "note")
     private String note;

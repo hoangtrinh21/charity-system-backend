@@ -1,19 +1,16 @@
 package com.charity.hoangtrinh.dbs.sql.charitydatabase.entities;
 
-import com.charity.hoangtrinh.dbs.sql.charitydatabase.entities.CampaignInfo;
-import lombok.*;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
-@Builder
-@Entity(name = "post_info")
+@Getter
+@Setter
+@Entity
 @Table(name = "post_info")
-public class PostInfoEntity {
+public class PostInfo {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "post_id", nullable = false)
     private Integer id;
 

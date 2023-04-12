@@ -1,18 +1,19 @@
 package com.charity.hoangtrinh.dbs.sql.charitydatabase.entities;
 
-import lombok.*;
+import lombok.Getter;
+import lombok.Setter;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
-@Builder
-@Entity(name = "public_donation")
+@Getter
+@Setter
+@Entity
 @Table(name = "public_donation")
-public class PublicDonationEntity {
+public class PublicDonation {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "donation_id", nullable = false)
     private Integer id;
 

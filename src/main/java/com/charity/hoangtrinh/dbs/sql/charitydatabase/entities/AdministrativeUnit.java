@@ -1,28 +1,29 @@
 package com.charity.hoangtrinh.dbs.sql.charitydatabase.entities;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-@Entity(name = "administrative_units")
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
-@Builder
+@Getter
+@Setter
+@Entity
 @Table(name = "administrative_units")
-public class AdministrativeUnitsEntity {
+public class AdministrativeUnit {
     @Id
-    private int id;
+    @Column(name = "id", nullable = false)
+    private Integer id;
+
     @Column(name = "full_name")
     private String fullName;
+
     @Column(name = "short_name")
-    private String shortname;
+    private String shortName;
+
     @Column(name = "code_name")
     private String codeName;
+
 }

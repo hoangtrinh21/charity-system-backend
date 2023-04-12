@@ -1,11 +1,11 @@
 package com.charity.hoangtrinh.controller;
 
-import com.charity.hoangtrinh.dbs.sql.charitydatabase.entities.ProvincesEntity;
-import com.charity.hoangtrinh.dbs.sql.charitydatabase.entities.WardsEntity;
-import com.charity.hoangtrinh.dbs.sql.charitydatabase.repositories.DistrictsRepository;
-import com.charity.hoangtrinh.dbs.sql.charitydatabase.repositories.ProvincesRepository;
-import com.charity.hoangtrinh.dbs.sql.charitydatabase.repositories.WardsRepository;
-import com.charity.hoangtrinh.dbs.sql.charitydatabase.entities.DistrictsEntity;
+import com.charity.hoangtrinh.dbs.sql.charitydatabase.entities.District;
+import com.charity.hoangtrinh.dbs.sql.charitydatabase.entities.Province;
+import com.charity.hoangtrinh.dbs.sql.charitydatabase.entities.Ward;
+import com.charity.hoangtrinh.dbs.sql.charitydatabase.repositories.DistrictRepository;
+import com.charity.hoangtrinh.dbs.sql.charitydatabase.repositories.ProvinceRepository;
+import com.charity.hoangtrinh.dbs.sql.charitydatabase.repositories.WardRepository;
 import com.charity.hoangtrinh.model.ResponseModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,11 +21,11 @@ import java.util.List;
 @RestController
 public class AddressController {
     @Autowired
-    private ProvincesRepository provincesRepository;
+    private ProvinceRepository provinceRepository;
     @Autowired
-    private DistrictsRepository districtsRepository;
+    private DistrictRepository districtRepository;
     @Autowired
-    private WardsRepository wardsRepository;
+    private WardRepository wardRepository;
     @GetMapping("/ping")
     public ResponseEntity<ResponseModel> ping() {
         return ResponseEntity.status(HttpStatus.OK)
@@ -37,7 +37,7 @@ public class AddressController {
     @GetMapping("/provinces")
     public ResponseEntity<ResponseModel> getProvinces() {
         try {
-            List<ProvincesEntity> provincesList = provincesRepository.findAll();
+            List<Province> provincesList = provinceRepository.findAll();
             return ResponseEntity.status(HttpStatus.OK)
                     .body(new ResponseModel(HttpStatus.OK.value(),
                             "Have " + provincesList.size() + " provinces",
@@ -54,7 +54,7 @@ public class AddressController {
     @GetMapping("/districts-in-province")
     public ResponseEntity<ResponseModel> getDistrictsOnProvince(@RequestParam(name = "province-code") String provinceCode) {
         try {
-            List<DistrictsEntity> districts = districtsRepository.findByProvinceCode(provinceCode);
+            List<District> districts = districtRepository.findByProvinceCode(provinceCode);
             return ResponseEntity.status(HttpStatus.OK)
                     .body(new ResponseModel(HttpStatus.OK.value(),
                             "Have " + districts.size() + " districts",
@@ -71,7 +71,7 @@ public class AddressController {
     @GetMapping("/wards-in-districts")
     public ResponseEntity<ResponseModel> getWardsOnDistricts(@RequestParam(name = "district-code") String districtCode) {
         try {
-            List<WardsEntity> wards = wardsRepository.findByDistrictCode(districtCode);
+            List<Ward> wards = wardRepository.findByDistrictCode(districtCode);
             return ResponseEntity.status(HttpStatus.OK)
                     .body(new ResponseModel(HttpStatus.OK.value(),
                             "Have " + wards.size(),

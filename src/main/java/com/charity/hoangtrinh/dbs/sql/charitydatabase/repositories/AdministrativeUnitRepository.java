@@ -1,10 +1,10 @@
 package com.charity.hoangtrinh.dbs.sql.charitydatabase.repositories;
 
-import com.charity.hoangtrinh.dbs.sql.charitydatabase.entities.CampaignInputEntity;
+import com.charity.hoangtrinh.dbs.sql.charitydatabase.entities.AdministrativeUnit;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
 
-public interface CampaignInputEntityRepository extends JpaRepository<CampaignInputEntity, Integer> {
+public interface AdministrativeUnitRepository extends JpaRepository<AdministrativeUnit, Integer> {
 }
