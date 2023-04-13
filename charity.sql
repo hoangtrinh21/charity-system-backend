@@ -92,7 +92,9 @@ CREATE TABLE `campaign_info` (
   `stop_active_date` date NOT NULL,
   `stop_date` date NOT NULL,
   `status` varchar(50) NOT NULL,
-  PRIMARY KEY (`campaign_id`)
+  PRIMARY KEY (`campaign_id`),
+  KEY `campaign_info_FK` (`organization_id`),
+  CONSTRAINT `campaign_info_FK` FOREIGN KEY (`organization_id`) REFERENCES `user` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -275,7 +277,9 @@ CREATE TABLE `public_donation` (
   `target_address` varchar(255) DEFAULT NULL,
   `target_object` varchar(255) DEFAULT NULL,
   `img` varchar(3000) DEFAULT NULL,
-  PRIMARY KEY (`donation_id`)
+  PRIMARY KEY (`donation_id`),
+  KEY `public_donation_FK` (`donor_id`),
+  CONSTRAINT `public_donation_FK` FOREIGN KEY (`donor_id`) REFERENCES `user` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -302,7 +306,9 @@ CREATE TABLE `request` (
   `status` varchar(100) NOT NULL,
   PRIMARY KEY (`request_id`),
   KEY `request_FK` (`donation_id`),
-  CONSTRAINT `request_FK` FOREIGN KEY (`donation_id`) REFERENCES `public_donation` (`donation_id`)
+  KEY `request_FK_1` (`organization_id`),
+  CONSTRAINT `request_FK` FOREIGN KEY (`donation_id`) REFERENCES `public_donation` (`donation_id`),
+  CONSTRAINT `request_FK_1` FOREIGN KEY (`organization_id`) REFERENCES `user` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -416,4 +422,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-04-13 15:12:18
+-- Dump completed on 2023-04-13 15:18:28
