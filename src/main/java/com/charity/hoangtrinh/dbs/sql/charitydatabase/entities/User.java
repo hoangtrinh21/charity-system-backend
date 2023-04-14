@@ -1,6 +1,5 @@
-package com.charity.hoangtrinh;
+package com.charity.hoangtrinh.dbs.sql.charitydatabase.entities;
 
-import com.charity.hoangtrinh.dbs.sql.charitydatabase.entities.Role;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -42,6 +41,10 @@ public class User {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "role_id", nullable = false)
     private Role role;
+
+    @Lob
+    @Column(name = "social")
+    private String social;
 
     @Column(name = "charity_name")
     private String charityName;

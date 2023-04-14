@@ -1,9 +1,10 @@
 package com.charity.hoangtrinh.dbs.sql.charitydatabase.repositories;
 
-import com.charity.hoangtrinh.User;
+import com.charity.hoangtrinh.dbs.sql.charitydatabase.entities.User;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
 
-@Repository
+import java.util.List;
+
 public interface UserRepository extends JpaRepository<User, Integer> {
+    List<User> findByRole_IdEquals(int i);
 }
