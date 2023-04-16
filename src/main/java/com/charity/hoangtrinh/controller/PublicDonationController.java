@@ -1,5 +1,6 @@
 package com.charity.hoangtrinh.controller;
 
+import com.charity.hoangtrinh.config.Constants;
 import com.charity.hoangtrinh.dbs.sql.charitydatabase.entities.PublicDonation;
 import com.charity.hoangtrinh.dbs.sql.charitydatabase.repositories.PublicDonationRepository;
 import com.charity.hoangtrinh.model.ResponseModel;
@@ -80,7 +81,7 @@ public class PublicDonationController {
             if (userIdStr == null || token == null)
                 return ResponseEntity.status(HttpStatus.FORBIDDEN)
                         .body(new ResponseModel(HttpStatus.FORBIDDEN.value(), "Provide userId and token!", "{}"));
-            int checked = accessService.checkAccessToken(Integer.parseInt(userIdStr), token);
+            int checked = accessService.checkAccessToken(Integer.parseInt(userIdStr), Constants.ROLE_DONOR, token);
             if (checked == 403)
                 return ResponseEntity.status(HttpStatus.FORBIDDEN)
                         .body(new ResponseModel(HttpStatus.FORBIDDEN.value(), "You don't have permission", "{}"));
@@ -130,7 +131,7 @@ public class PublicDonationController {
             if (userIdStr == null || token == null)
                 return ResponseEntity.status(HttpStatus.FORBIDDEN)
                         .body(new ResponseModel(HttpStatus.FORBIDDEN.value(), "Provide userId and token!", "{}"));
-            int checked = accessService.checkAccessToken(Integer.parseInt(userIdStr), token);
+            int checked = accessService.checkAccessToken(Integer.parseInt(userIdStr), Constants.ROLE_DONOR,  token);
             if (checked == 403)
                 return ResponseEntity.status(HttpStatus.FORBIDDEN)
                         .body(new ResponseModel(HttpStatus.FORBIDDEN.value(), "You don't have permission", "{}"));
@@ -177,7 +178,7 @@ public class PublicDonationController {
             if (userIdStr == null || token == null)
                 return ResponseEntity.status(HttpStatus.FORBIDDEN)
                         .body(new ResponseModel(HttpStatus.FORBIDDEN.value(), "Provide userId and token!", "{}"));
-            int checked = accessService.checkAccessToken(Integer.parseInt(userIdStr), token);
+            int checked = accessService.checkAccessToken(Integer.parseInt(userIdStr), Constants.ROLE_DONOR, token);
             if (checked == 403)
                 return ResponseEntity.status(HttpStatus.FORBIDDEN)
                         .body(new ResponseModel(HttpStatus.FORBIDDEN.value(), "You don't have permission", "{}"));
