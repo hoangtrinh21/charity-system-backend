@@ -89,15 +89,16 @@ public class PublicDonationController {
                         .body(new ResponseModel(HttpStatus.UNAUTHORIZED.value(), "Wrong author", "{}"));
 
             JSONObject jsonBody = new JSONObject(body);
-            int donorId = jsonBody.getInt("donor_id");
-            int introPostId = jsonBody.getInt("intro_post_id");
-            String name = jsonBody.getString("name");
-            String status = jsonBody.getString("status");
+            int donorId                 = jsonBody.getInt("donor_id");
+            int introPostId             = jsonBody.getInt("intro_post_id");
             int receivingOrganizationId = jsonBody.getInt("receiving_organization_id");
-            String targetAddress = jsonBody.getString("target_address");
-            String targetObject = jsonBody.getString("target_object");
-            String img = jsonBody.getString("img");
-            PublicDonation publicDonation = new PublicDonation(donorId, introPostId, name, status, receivingOrganizationId, targetAddress, targetObject, img);
+            String name             = jsonBody.getString("name");
+            String status           = jsonBody.getString("status");
+            String targetAddress    = jsonBody.getString("target_address");
+            String targetObject     = jsonBody.getString("target_object");
+            String img              = jsonBody.getString("img");
+            PublicDonation publicDonation =
+                    new PublicDonation(donorId, introPostId, name, status, receivingOrganizationId, targetAddress, targetObject, img);
             publicDonationRepository.save(publicDonation);
 
             return ResponseEntity.status(HttpStatus.CREATED)
