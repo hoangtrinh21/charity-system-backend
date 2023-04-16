@@ -8,7 +8,7 @@ import java.time.Instant;
 
 @Getter
 @Setter
-@Entity
+@Entity(name = "campaign_output")
 @Table(name = "campaign_output")
 public class CampaignOutput {
     @Id

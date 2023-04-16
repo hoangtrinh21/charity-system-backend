@@ -7,7 +7,7 @@ import javax.persistence.*;
 
 @Getter
 @Setter
-@Entity
+@Entity(name = "user")
 @Table(name = "user")
 public class User {
     @Id

@@ -12,7 +12,7 @@ import java.time.LocalDate;
 
 @Getter
 @Setter
-@Entity
+@Entity(name = "campaign_info")
 @Table(name = "campaign_info")
 public class CampaignInfo {
     @Id

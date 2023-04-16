@@ -10,7 +10,7 @@ import javax.persistence.Table;
 
 @Getter
 @Setter
-@Entity
+@Entity(name = "administrative_regions")
 @Table(name = "administrative_regions")
 public class AdministrativeRegion {
     @Id
