@@ -16,6 +16,10 @@ import java.util.List;
 @RestController
 @RequestMapping("/charity/access")
 public class AccessController {
+    /**
+     * API lấy access token
+     * @param body body
+     */
     @PostMapping("/token")
     public ResponseEntity<ResponseModel> postAccessToken(@RequestBody String body) {
         try {

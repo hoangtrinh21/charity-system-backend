@@ -23,6 +23,9 @@ public class OrganizationController {
     @Autowired
     private RoleRepository roleRepository;
 
+    /**
+     * API lấy toàn bộ tổ chức từ thiện
+     */
     @GetMapping("/get-all")
     public ResponseEntity<ResponseModel> getAllOrganization() {
         try {
@@ -40,6 +43,10 @@ public class OrganizationController {
         }
     }
 
+    /**
+     * API lấy  chi tiết tổ chức từ thiện
+     * @param organizationId id của tổ chức
+     */
     @GetMapping("/get")
     public ResponseEntity<ResponseModel> getOrganization(@RequestParam(value = "organization-id") int organizationId) {
         try {

@@ -22,6 +22,9 @@ public class PublicDonationController {
     @Autowired
     private AccessService accessService;
 
+    /**
+     * API lấy toàn bộ vật phẩm ủng hộ
+     */
     @GetMapping("/get-all")
     public ResponseEntity<ResponseModel> getAllPublicDonation() {
         try {
@@ -39,6 +42,10 @@ public class PublicDonationController {
         }
     }
 
+    /**
+     * API lấy chi tiết vật phẩm ủng hộ
+     * @param publicDonationId id của vật phẩm
+     */
     @GetMapping("/get")
     public ResponseEntity<ResponseModel> getPublicDonation(@RequestParam(name = "public-donation-id") int publicDonationId) {
         try {
@@ -59,6 +66,11 @@ public class PublicDonationController {
         }
     }
 
+    /**
+     * API thêm vật phẩm
+     * @param header header của client, header chưa userid và accesstoken
+     * @param body body
+     */
     @PostMapping("/insert")
     public ResponseEntity<ResponseModel> insertPublicDonation(@RequestHeader Map<String, String> header,
                                                               @RequestBody String body) {
@@ -101,6 +113,12 @@ public class PublicDonationController {
         }
     }
 
+    /**
+     * API sửa thông tin 1 vật phẩm
+     * @param header header chứa thông tin userid và accesstoken
+     * @param donationId id của vật phẩm ủng hộ
+     * @param body body
+     */
     @PutMapping("put")
     public ResponseEntity<ResponseModel> updatePublicDonation(@RequestHeader Map<String, String> header,
                                                               @RequestParam(value = "donation-id") int donationId,
@@ -144,6 +162,11 @@ public class PublicDonationController {
         }
     }
 
+    /**
+     * API xóa một bài đăng/vật phẩm ủng hộ
+     * @param donationId id của vật phẩm
+     * @param header header chứa thông tin đăng nhập(*)
+     */
     @DeleteMapping("/delete")
     public ResponseEntity<ResponseModel> deletePublicDonation(@RequestParam(value = "donation_id") int donationId,
                                                               @RequestHeader Map<String, String> header) {

@@ -34,6 +34,10 @@ public class AddressController {
                         ""));
     }
 
+    /**
+     * API lấy toàn bộ các tỉnh
+     * @return danh sách các tỉnh
+     */
     @GetMapping("/provinces")
     public ResponseEntity<ResponseModel> getProvinces() {
         try {
@@ -51,6 +55,11 @@ public class AddressController {
         }
     }
 
+    /**
+     * API lấy toàn bộ huyện trong tỉnh
+     * @param provinceCode mã tỉnh
+     * @return danh sách các huyện trong tỉnh
+     */
     @GetMapping("/districts-in-province")
     public ResponseEntity<ResponseModel> getDistrictsOnProvince(@RequestParam(name = "province-code") String provinceCode) {
         try {
@@ -68,6 +77,11 @@ public class AddressController {
         }
     }
 
+    /**
+     * API lấy toàn bộ các xã trong huyện
+     * @param districtCode mã huyện
+     * @return danh sách các xã
+     */
     @GetMapping("/wards-in-districts")
     public ResponseEntity<ResponseModel> getWardsOnDistricts(@RequestParam(name = "district-code") String districtCode) {
         try {
