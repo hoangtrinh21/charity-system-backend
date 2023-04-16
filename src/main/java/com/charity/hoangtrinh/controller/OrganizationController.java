@@ -40,7 +40,7 @@ public class OrganizationController {
         }
     }
 
-    @GetMapping("/get-all")
+    @GetMapping("/get")
     public ResponseEntity<ResponseModel> getOrganization(@RequestParam(value = "organization-id") int organizationId) {
         try {
             Optional<User> organization = userRepository.findById(organizationId);
