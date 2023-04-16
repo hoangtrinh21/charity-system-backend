@@ -54,7 +54,7 @@ public class AddressController {
     @GetMapping("/districts-in-province")
     public ResponseEntity<ResponseModel> getDistrictsOnProvince(@RequestParam(name = "province-code") String provinceCode) {
         try {
-            List<District> districts = districtRepository.findByProvinceCode(provinceCode);
+            List<District> districts = districtRepository.findByProvinceCode_IdEquals(provinceCode);
             return ResponseEntity.status(HttpStatus.OK)
                     .body(new ResponseModel(HttpStatus.OK.value(),
                             "Have " + districts.size() + " districts",
@@ -71,7 +71,7 @@ public class AddressController {
     @GetMapping("/wards-in-districts")
     public ResponseEntity<ResponseModel> getWardsOnDistricts(@RequestParam(name = "district-code") String districtCode) {
         try {
-            List<Ward> wards = wardRepository.findByDistrictCode(districtCode);
+            List<Ward> wards = wardRepository.findByDistrictCodeEquals(districtCode);
             return ResponseEntity.status(HttpStatus.OK)
                     .body(new ResponseModel(HttpStatus.OK.value(),
                             "Have " + wards.size(),
