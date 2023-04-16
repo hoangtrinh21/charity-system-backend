@@ -1,19 +1,18 @@
 package com.charity.hoangtrinh.dbs.sql.charitydatabase.entities;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
-@Getter
-@Setter
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 @Entity(name = "public_donation")
 @Table(name = "public_donation")
 public class PublicDonation {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "donation_id", nullable = false)
     private Integer id;
 
@@ -41,4 +40,14 @@ public class PublicDonation {
     @Column(name = "img", length = 3000)
     private String img;
 
+    public PublicDonation(Integer donorId, Integer introPostId, String name, String status, Integer receivingOrganizationId, String targetAddress, String targetObject, String img) {
+        this.donorId = donorId;
+        this.introPostId = introPostId;
+        this.name = name;
+        this.status = status;
+        this.receivingOrganizationId = receivingOrganizationId;
+        this.targetAddress = targetAddress;
+        this.targetObject = targetObject;
+        this.img = img;
+    }
 }

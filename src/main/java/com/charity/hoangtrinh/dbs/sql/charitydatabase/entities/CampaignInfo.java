@@ -1,21 +1,20 @@
 package com.charity.hoangtrinh.dbs.sql.charitydatabase.entities;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.time.Instant;
 import java.time.LocalDate;
 
-@Getter
-@Setter
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 @Entity(name = "campaign_info")
 @Table(name = "campaign_info")
 public class CampaignInfo {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "campaign_id", nullable = false)
     private Integer id;
 

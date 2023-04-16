@@ -1,16 +1,18 @@
 package com.charity.hoangtrinh.dbs.sql.charitydatabase.entities;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 
-@Getter
-@Setter
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 @Entity(name = "request")
 @Table(name = "request")
 public class Request {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "request_id", nullable = false)
     private Integer id;
 

@@ -7,3 +7,15 @@
 ## Lưu ý: 
 * Ánh xạ port từ docker sang máy
 * Thay đổi `Dockerfile` cho phù hợp với hệ điều hành tương ứng
+
+## API lấy access token
+
+curl POST .../charity/access/token
+
+***Body:***
+
+    {
+        "user_id": <userId>,
+        "token": <token>
+    }
+

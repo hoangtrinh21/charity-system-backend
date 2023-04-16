@@ -3,15 +3,15 @@ package com.charity.hoangtrinh.controller;
 import com.charity.hoangtrinh.dbs.sql.charitydatabase.entities.PublicDonation;
 import com.charity.hoangtrinh.dbs.sql.charitydatabase.repositories.PublicDonationRepository;
 import com.charity.hoangtrinh.model.ResponseModel;
+import com.charity.hoangtrinh.services.AccessService;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @RequestMapping("/charity/public-donation")
@@ -19,6 +19,8 @@ import java.util.Optional;
 public class PublicDonationController {
     @Autowired
     private PublicDonationRepository publicDonationRepository;
+    @Autowired
+    private AccessService accessService;
 
     @GetMapping("/get-all")
     public ResponseEntity<ResponseModel> getAllPublicDonation() {
@@ -48,6 +50,123 @@ public class PublicDonationController {
                     .body(new ResponseModel(HttpStatus.NOT_FOUND.value(),
                             "Not found public donation!",
                             "{}")));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(new ResponseModel(HttpStatus.INTERNAL_SERVER_ERROR.value(),
+                            "INTERNAL_SERVER_ERROR",
+                            "{}"));
+        }
+    }
+
+    @PostMapping("/insert")
+    public ResponseEntity<ResponseModel> insertPublicDonation(@RequestHeader Map<String, String> header,
+                                                              @RequestBody String body) {
+        try {
+            String userIdStr = header.get("User-Id");
+            String token = header.get("Token");
+            if (userIdStr == null || token == null)
+                return ResponseEntity.status(HttpStatus.FORBIDDEN)
+                        .body(new ResponseModel(HttpStatus.FORBIDDEN.value(), "Provide userId and token!", "{}"));
+            int checked = accessService.checkAccessToken(Integer.parseInt(userIdStr), token);
+            if (checked == 403)
+                return ResponseEntity.status(HttpStatus.FORBIDDEN)
+                        .body(new ResponseModel(HttpStatus.FORBIDDEN.value(), "You don't have permission", "{}"));
+            if (checked == 401)
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                        .body(new ResponseModel(HttpStatus.UNAUTHORIZED.value(), "Wrong author", "{}"));
+
+            JSONObject jsonBody = new JSONObject(body);
+            int donorId = jsonBody.getInt("donor_id");
+            int introPostId = jsonBody.getInt("intro_post_id");
+            String name = jsonBody.getString("name");
+            String status = jsonBody.getString("status");
+            int receivingOrganizationId = jsonBody.getInt("receiving_organization_id");
+            String targetAddress = jsonBody.getString("target_address");
+            String targetObject = jsonBody.getString("target_object");
+            String img = jsonBody.getString("img");
+            PublicDonation publicDonation = new PublicDonation(donorId, introPostId, name, status, receivingOrganizationId, targetAddress, targetObject, img);
+            publicDonationRepository.save(publicDonation);
+
+            return ResponseEntity.status(HttpStatus.CREATED)
+                    .body(new ResponseModel(HttpStatus.CREATED.value(),
+                            "Inserted public donation",
+                            ""));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(new ResponseModel(HttpStatus.INTERNAL_SERVER_ERROR.value(),
+                            "INTERNAL_SERVER_ERROR",
+                            "{}"));
+        }
+    }
+
+    @PutMapping("put")
+    public ResponseEntity<ResponseModel> updatePublicDonation(@RequestHeader Map<String, String> header,
+                                                              @RequestParam(value = "donation-id") int donationId,
+                                                              @RequestBody String body) {
+        try {
+            String userIdStr = header.get("User-Id");
+            String token = header.get("Token");
+            if (userIdStr == null || token == null)
+                return ResponseEntity.status(HttpStatus.FORBIDDEN)
+                        .body(new ResponseModel(HttpStatus.FORBIDDEN.value(), "Provide userId and token!", "{}"));
+            int checked = accessService.checkAccessToken(Integer.parseInt(userIdStr), token);
+            if (checked == 403)
+                return ResponseEntity.status(HttpStatus.FORBIDDEN)
+                        .body(new ResponseModel(HttpStatus.FORBIDDEN.value(), "You don't have permission", "{}"));
+            if (checked == 401)
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                        .body(new ResponseModel(HttpStatus.UNAUTHORIZED.value(), "Wrong author", "{}"));
+
+            JSONObject jsonBody = new JSONObject(body);
+            int donorId = jsonBody.getInt("donor_id");
+            int introPostId = jsonBody.getInt("intro_post_id");
+            String name = jsonBody.getString("name");
+            String status = jsonBody.getString("status");
+            int receivingOrganizationId = jsonBody.getInt("receiving_organization_id");
+            String targetAddress = jsonBody.getString("target_address");
+            String targetObject = jsonBody.getString("target_object");
+            String img = jsonBody.getString("img");
+            PublicDonation publicDonation = new PublicDonation(donationId, donorId, introPostId, name, status, receivingOrganizationId, targetAddress, targetObject, img);
+            publicDonationRepository.save(publicDonation);
+
+            return ResponseEntity.status(HttpStatus.OK)
+                    .body(new ResponseModel(HttpStatus.OK.value(),
+                            "Updated public donation",
+                            "{}}"));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(new ResponseModel(HttpStatus.INTERNAL_SERVER_ERROR.value(),
+                            "INTERNAL_SERVER_ERROR",
+                            "{}"));
+        }
+    }
+
+    @DeleteMapping("/delete")
+    public ResponseEntity<ResponseModel> deletePublicDonation(@RequestParam(value = "donation_id") int donationId,
+                                                              @RequestHeader Map<String, String> header) {
+        try {
+            String userIdStr = header.get("User-Id");
+            String token = header.get("Token");
+            if (userIdStr == null || token == null)
+                return ResponseEntity.status(HttpStatus.FORBIDDEN)
+                        .body(new ResponseModel(HttpStatus.FORBIDDEN.value(), "Provide userId and token!", "{}"));
+            int checked = accessService.checkAccessToken(Integer.parseInt(userIdStr), token);
+            if (checked == 403)
+                return ResponseEntity.status(HttpStatus.FORBIDDEN)
+                        .body(new ResponseModel(HttpStatus.FORBIDDEN.value(), "You don't have permission", "{}"));
+            if (checked == 401)
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                        .body(new ResponseModel(HttpStatus.UNAUTHORIZED.value(), "Wrong author", "{}"));
+
+
+            publicDonationRepository.deleteById(donationId);
+            return ResponseEntity.status(HttpStatus.OK)
+                    .body(new ResponseModel(HttpStatus.OK.value(),
+                            "Deleted public donation!",
+                            "{}}"));
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
