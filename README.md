@@ -16,7 +16,6 @@ curl POST .../charity/access/token
 
     {
         "user_id": <userId>,
-        "role_id": <roleId>,
         "token": <token>
     }
 
