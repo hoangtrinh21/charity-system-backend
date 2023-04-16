@@ -1,8 +1,10 @@
 package com.charity.hoangtrinh.controller;
 
 import com.charity.hoangtrinh.config.CacheConfig;
-import com.charity.hoangtrinh.dbs.sql.charitydatabase.entities.Ward;
 import com.charity.hoangtrinh.model.ResponseModel;
+import com.charity.hoangtrinh.utils.CustomLogger;
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
 import org.json.JSONObject;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,11 +13,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
-
 @RestController
 @RequestMapping("/charity/access")
 public class AccessController {
+    private CustomLogger logger = new CustomLogger(Logger.getLogger(AccessController.class), Level.INFO, true, false);
     /**
      * API lấy access token
      * @param body body
@@ -26,10 +27,9 @@ public class AccessController {
             JSONObject jsonBody = new JSONObject(body);
             int userId = jsonBody.getInt("user_id");
             String token = jsonBody.getString("token");
-            System.out.println(userId + ": " + token);
             CacheConfig.accessToken.put(userId, token);
 
-            System.out.println(CacheConfig.accessToken.asMap());
+            logger.info(CacheConfig.accessToken.asMap().toString());
             return ResponseEntity.status(HttpStatus.OK)
                     .body(new ResponseModel(HttpStatus.OK.value(),
                             "Cached access token of user " + userId,
