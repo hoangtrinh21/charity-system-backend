@@ -1,7 +1,10 @@
 package com.charity.hoangtrinh.services;
 
 import com.charity.hoangtrinh.config.CacheConfig;
+import com.charity.hoangtrinh.config.Constants;
+import com.charity.hoangtrinh.dbs.sql.charitydatabase.entities.CampaignInfo;
 import com.charity.hoangtrinh.dbs.sql.charitydatabase.entities.User;
+import com.charity.hoangtrinh.dbs.sql.charitydatabase.repositories.CampaignInfoRepository;
 import com.charity.hoangtrinh.dbs.sql.charitydatabase.repositories.RoleRepository;
 import com.charity.hoangtrinh.dbs.sql.charitydatabase.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +14,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -19,16 +23,34 @@ public class AccessService {
     private UserRepository userRepository;
     @Autowired
     private RoleRepository roleRepository;
-    public int checkAccessToken(Integer userId, String role, String token) {
-        Map<String, String> roleAndToken = CacheConfig.accessToken.get(userId);
+    @Autowired
+    private CampaignInfoRepository campaignInfoRepository;
+    public int checkAccessToken(String token) {
+        User user = CacheConfig.accessToken.getIfPresent(token);
+        if (user == null) return HttpStatus.FORBIDDEN.value();
 
-        Optional<User> userOptional = userRepository.findById(userId);
-        if (roleAndToken == null || !userOptional.isPresent())
-            return HttpStatus.FORBIDDEN.value();
-
-
-        if (!roleAndToken.get("role").equals(role) || !roleAndToken.get("token").equals(token))
-            return HttpStatus.UNAUTHORIZED.value();
         return HttpStatus.OK.value();
+    }
+
+    public boolean isOrganization(String token) {
+        return token != null && checkAccessToken(token) == 200 &&
+                Objects.requireNonNull(CacheConfig.accessToken.get(token)).getRole().getRoleName()
+                        .equals(Constants.ROLE_ORGANIZATION);
+    }
+
+    public boolean isAdmin(String token) {
+        return token != null && checkAccessToken(token) == 200 &&
+                Objects.requireNonNull(CacheConfig.accessToken.get(token)).getRole().getRoleName()
+                        .equals(Constants.ROLE_ADMIN);
+    }
+
+    public User getUserByCampaignId(int campaignId) {
+        Optional<CampaignInfo> optionalCampaignInfo = campaignInfoRepository.findById(campaignId);
+        assert optionalCampaignInfo.isPresent();
+        return optionalCampaignInfo.get().getOrganization();
+    }
+
+    public User getUserByToken(String token) {
+        return CacheConfig.accessToken.getIfPresent(token);
     }
 }
