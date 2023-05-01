@@ -41,26 +41,22 @@ public class AccessController {
 
             if (userId == null || token == null)
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                        .body(new ResponseModel(HttpStatus.BAD_REQUEST.value(),
-                                "Userid or token is null!",
-                                "{}"));
+                        .body(new ResponseModel("Userid or token is null!"));
 
             Optional<User> userOptional = userRepository.findById(userId);
             if (!userOptional.isPresent())
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                        .body(new ResponseModel(HttpStatus.BAD_REQUEST.value(), "Not found user in database", "{}"));
+                        .body(new ResponseModel("Not found user in database"));
             User user = userOptional.get();
             CacheConfig.accessToken.put(token, user);
 
             logger.info(CacheConfig.accessToken.asMap().toString());
             return ResponseEntity.status(HttpStatus.OK)
-                    .body(new ResponseModel(HttpStatus.OK.value(),
-                            "Cached access token of user " + userId,
-                            "{}"));
+                    .body(new ResponseModel("Cached access token of user " + userId));
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(new ResponseModel(HttpStatus.INTERNAL_SERVER_ERROR.value(), "INTERNAL_SERVER_ERROR", "{}"));
+                    .body(new ResponseModel("INTERNAL_SERVER_ERROR"));
         }
     }
 }

@@ -2,7 +2,9 @@ package com.charity.hoangtrinh.controller;
 
 import com.charity.hoangtrinh.config.Constants;
 import com.charity.hoangtrinh.dbs.sql.charitydatabase.entities.PublicDonation;
+import com.charity.hoangtrinh.dbs.sql.charitydatabase.entities.User;
 import com.charity.hoangtrinh.dbs.sql.charitydatabase.repositories.PublicDonationRepository;
+import com.charity.hoangtrinh.dbs.sql.charitydatabase.repositories.UserRepository;
 import com.charity.hoangtrinh.model.ResponseModel;
 import com.charity.hoangtrinh.services.AccessService;
 import com.charity.hoangtrinh.utils.JsonUtil;
@@ -24,6 +26,8 @@ public class PublicDonationController {
     private PublicDonationRepository publicDonationRepository;
     @Autowired
     private AccessService accessService;
+    @Autowired
+    private UserRepository userRepository;
 
     /**
      * API lấy toàn bộ vật phẩm ủng hộ
@@ -33,59 +37,35 @@ public class PublicDonationController {
         try {
             List<PublicDonation> publicDonations = publicDonationRepository.findAll();
             return ResponseEntity.status(HttpStatus.OK)
-                    .body(new ResponseModel(HttpStatus.OK.value(),
-                            "Have " + publicDonations.size() + " public donation!",
-                            publicDonations));
+                    .body(new ResponseModel(publicDonations));
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(new ResponseModel(HttpStatus.INTERNAL_SERVER_ERROR.value(),
-                            "INTERNAL_SERVER_ERROR",
-                            "{}"));
+                    .body(new ResponseModel("INTERNAL_SERVER_ERROR"));
         }
     }
 
     /**
      * API lấy chi tiết vật phẩm ủng hộ
-     * @param publicDonationId id của vật phẩm
      */
-    @GetMapping("/get-by-id")
-    public ResponseEntity<ResponseModel> getPublicDonationById(@RequestParam(name = "public-donation-id") int publicDonationId) {
+    @GetMapping("/get-by-condition")
+    public ResponseEntity<ResponseModel> getPublicDonationByCondition(@RequestParam Map<String, String> conditions) {
         try {
-            Optional<PublicDonation> publicDonationOptional = publicDonationRepository.findById(publicDonationId);
-            return publicDonationOptional.map(publicDonation -> ResponseEntity.status(HttpStatus.OK)
-                    .body(new ResponseModel(HttpStatus.OK.value(),
-                            "Have public donation!",
-                            publicDonation))).orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND)
-                    .body(new ResponseModel(HttpStatus.NOT_FOUND.value(),
-                            "Not found public donation!",
-                            "{}")));
-        } catch (Exception e) {
-            e.printStackTrace();
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(new ResponseModel(HttpStatus.INTERNAL_SERVER_ERROR.value(),
-                            "INTERNAL_SERVER_ERROR",
-                            "{}"));
-        }
-    }
-
-    @GetMapping("/get-by-name")
-    public ResponseEntity<ResponseModel> getPublicDonationByName(@RequestParam(name = "public-donation-name") String publicDonationName) {
-        try {
-            List<PublicDonation> publicDonationList = publicDonationRepository.findByNameLike(publicDonationName);
-            if (publicDonationList.size() == 0) {
-
-            }
+            Integer donationId = conditions.get("donation-id") == null ?
+                    null : Integer.parseInt(conditions.get("donation-id"));
+            String name = conditions.get("name");
+            String status = conditions.get("status");
+            String targetAddress = conditions.get("target_address");
+            String targetObject = conditions.get("target_object");
+            List<PublicDonation> publicDonationList = publicDonationRepository
+                    .findByIdEqualsAndNameLikeAndStatusLikeAndTargetAddressLikeAndTargetObjectLike(
+                            donationId, name, status, targetAddress, targetObject);
             return ResponseEntity.status(HttpStatus.OK)
-                    .body(new ResponseModel(HttpStatus.OK.value(),
-                            "Have " + publicDonationList.size() + " public donation!",
-                            publicDonationList));
+                    .body(new ResponseModel(publicDonationList));
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(new ResponseModel(HttpStatus.INTERNAL_SERVER_ERROR.value(),
-                            "INTERNAL_SERVER_ERROR",
-                            "{}"));
+                    .body(new ResponseModel("INTERNAL_SERVER_ERROR"));
         }
     }
 
@@ -103,12 +83,12 @@ public class PublicDonationController {
 
             if (!isOrganization)
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                        .body(new ResponseModel(HttpStatus.BAD_REQUEST.value(),
-                                "You are not organization!",
-                                "{}"));
+                        .body(new ResponseModel("You are not organization!"));
 
             JsonObject jsonBody = JsonParser.parseString(body).getAsJsonObject();
             Integer donorId                 = JsonUtil.getInt(jsonBody, "donor_id");
+            assert donorId != null;
+            User donor = userRepository.getReferenceById(donorId);
             Integer introPostId             = JsonUtil.getInt(jsonBody,"intro_post_id");
             Integer receivingOrganizationId = JsonUtil.getInt(jsonBody,"receiving_organization_id");
             String name             = JsonUtil.getString(jsonBody,"name");
@@ -118,19 +98,15 @@ public class PublicDonationController {
             String img              = JsonUtil.getString(jsonBody,"img");
             String contentPost      = JsonUtil.getString(jsonBody,"post_content");
             PublicDonation publicDonation =
-                    new PublicDonation(donorId, introPostId, name, status, receivingOrganizationId, targetAddress, targetObject, img);
+                    new PublicDonation(donor, introPostId, name, status, receivingOrganizationId, targetAddress, targetObject, img);
             publicDonationRepository.save(publicDonation);
 
             return ResponseEntity.status(HttpStatus.CREATED)
-                    .body(new ResponseModel(HttpStatus.CREATED.value(),
-                            "Inserted public donation",
-                            ""));
+                    .body(new ResponseModel("Inserted public donation"));
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(new ResponseModel(HttpStatus.INTERNAL_SERVER_ERROR.value(),
-                            "INTERNAL_SERVER_ERROR",
-                            "{}"));
+                    .body(new ResponseModel("INTERNAL_SERVER_ERROR"));
         }
     }
 
@@ -150,12 +126,12 @@ public class PublicDonationController {
 
             if (!isOrganization)
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                        .body(new ResponseModel(HttpStatus.BAD_REQUEST.value(),
-                                "You are not organization!",
-                                "{}"));
+                        .body(new ResponseModel("You are not organization!"));
 
             JsonObject jsonBody = JsonParser.parseString(body).getAsJsonObject();
             Integer donorId                 = JsonUtil.getInt(jsonBody,"donor_id");
+            assert donorId != null;
+            User donor = userRepository.getReferenceById(donorId);
             Integer introPostId             = JsonUtil.getInt(jsonBody,"intro_post_id");
             Integer receivingOrganizationId = JsonUtil.getInt(jsonBody,"receiving_organization_id");
             String name             = JsonUtil.getString(jsonBody,"name");
@@ -163,19 +139,15 @@ public class PublicDonationController {
             String targetAddress    = JsonUtil.getString(jsonBody,"target_address");
             String targetObject     = JsonUtil.getString(jsonBody,"target_object");
             String img              = JsonUtil.getString(jsonBody,"img");
-            PublicDonation publicDonation = new PublicDonation(donationId, donorId, introPostId, name, status, receivingOrganizationId, targetAddress, targetObject, img);
+            PublicDonation publicDonation = new PublicDonation(donor, introPostId, name, status, receivingOrganizationId, targetAddress, targetObject, img);
             publicDonationRepository.save(publicDonation);
 
             return ResponseEntity.status(HttpStatus.OK)
-                    .body(new ResponseModel(HttpStatus.OK.value(),
-                            "Updated public donation",
-                            "{}}"));
+                    .body(new ResponseModel("Updated public donation"));
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(new ResponseModel(HttpStatus.INTERNAL_SERVER_ERROR.value(),
-                            "INTERNAL_SERVER_ERROR",
-                            "{}"));
+                    .body(new ResponseModel("INTERNAL_SERVER_ERROR"));
         }
     }
 
@@ -193,21 +165,15 @@ public class PublicDonationController {
 
             if (!isOrganization)
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                        .body(new ResponseModel(HttpStatus.BAD_REQUEST.value(),
-                                "You are not organization!",
-                                "{}"));
+                        .body(new ResponseModel("You are not organization!"));
 
             publicDonationRepository.deleteById(donationId);
             return ResponseEntity.status(HttpStatus.OK)
-                    .body(new ResponseModel(HttpStatus.OK.value(),
-                            "Deleted public donation!",
-                            "{}}"));
+                    .body(new ResponseModel("Deleted public donation!"));
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(new ResponseModel(HttpStatus.INTERNAL_SERVER_ERROR.value(),
-                            "INTERNAL_SERVER_ERROR",
-                            "{}"));
+                    .body(new ResponseModel("INTERNAL_SERVER_ERROR"));
         }
     }
 

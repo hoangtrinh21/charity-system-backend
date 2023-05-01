@@ -1,23 +1,25 @@
 package com.charity.hoangtrinh.dbs.sql.charitydatabase.entities;
 
-import lombok.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
-@Builder
-@Entity(name = "public_donation")
+@Getter
+@Setter
+@Entity
 @Table(name = "public_donation")
+@NoArgsConstructor
 public class PublicDonation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "donation_id", nullable = false)
     private Integer id;
 
-    @Column(name = "donor_id", nullable = false)
-    private Integer donorId;
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "donor_id", nullable = false)
+    private User donor;
 
     @Column(name = "intro_post_id", nullable = false)
     private Integer introPostId;
@@ -40,8 +42,9 @@ public class PublicDonation {
     @Column(name = "img", length = 3000)
     private String img;
 
-    public PublicDonation(Integer donorId, Integer introPostId, String name, String status, Integer receivingOrganizationId, String targetAddress, String targetObject, String img) {
-        this.donorId = donorId;
+    public PublicDonation(User donor, Integer introPostId, String name, String status, Integer receivingOrganizationId,
+                          String targetAddress, String targetObject, String img) {
+        this.donor = donor;
         this.introPostId = introPostId;
         this.name = name;
         this.status = status;

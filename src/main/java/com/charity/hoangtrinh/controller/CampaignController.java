@@ -27,7 +27,7 @@ import java.util.Optional;
 @RequestMapping("/charity/campaign")
 public class CampaignController {
     @Autowired
-    UserRepository userRepository;
+    private UserRepository userRepository;
     @Autowired
     CampaignInfoRepository campaignInfoRepository;
     @Autowired
@@ -57,15 +57,11 @@ public class CampaignController {
 
             List<CampaignInfo> campaignInfos = campaignService.getAllCampaigns(isAdminOrOrganization);
             return ResponseEntity.status(HttpStatus.OK)
-                    .body(new ResponseModel(HttpStatus.OK.value(),
-                            "Have " + campaignInfos.size() + " campaign",
-                            campaignInfos));
+                    .body(new ResponseModel(campaignInfos));
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(new ResponseModel(HttpStatus.INTERNAL_SERVER_ERROR.value(),
-                            "INTERNAL_SERVER_ERROR",
-                            "{}"));
+                    .body(new ResponseModel("INTERNAL_SERVER_ERROR"));
         }
     }
 
@@ -84,15 +80,11 @@ public class CampaignController {
             List<CampaignInfo> campaignInfos = campaignService
                     .getByCondition(params, isAdminOrOrganization);
             return ResponseEntity.status(HttpStatus.OK)
-                    .body(new ResponseModel(HttpStatus.OK.value(),
-                            "Have " + campaignInfos.size() + " campaign",
-                            campaignInfos));
+                    .body(new ResponseModel(campaignInfos));
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(new ResponseModel(HttpStatus.INTERNAL_SERVER_ERROR.value(),
-                            "INTERNAL_SERVER_ERROR",
-                            "{}"));
+                    .body(new ResponseModel("INTERNAL_SERVER_ERROR"));
         }
     }
 
@@ -106,9 +98,7 @@ public class CampaignController {
 
             if (!isOrganization)
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                        .body(new ResponseModel(HttpStatus.BAD_REQUEST.value(),
-                                "You are not organization!",
-                                "{}"));
+                        .body(new ResponseModel("You are not organization!"));
 
             JsonObject jsonBody = JsonParser.parseString(body).getAsJsonObject();
 
@@ -140,15 +130,11 @@ public class CampaignController {
             campaignInfoRepository.save(campaignInfo);
 
             return ResponseEntity.status(HttpStatus.CREATED)
-                    .body(new ResponseModel(HttpStatus.CREATED.value(),
-                            "Inserted campaign",
-                            ""));
+                    .body(new ResponseModel("Inserted campaign"));
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(new ResponseModel(HttpStatus.INTERNAL_SERVER_ERROR.value(),
-                            e.getMessage(),
-                            "{}"));
+                    .body(new ResponseModel(e.getMessage()));
         }
     }
 
@@ -161,9 +147,7 @@ public class CampaignController {
 
             if (!isOrganization)
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                        .body(new ResponseModel(HttpStatus.BAD_REQUEST.value(),
-                                "You are not organization!",
-                                "{}"));
+                        .body(new ResponseModel("You are not organization!"));
             JsonObject jsonBody = JsonParser.parseString(body).getAsJsonObject();
             Integer campaignId      = jsonBody.get("campaign-id").getAsInt();
             Integer organizationId  = JsonUtil.getInt(jsonBody, "organization_id");
@@ -194,16 +178,12 @@ public class CampaignController {
             campaignInfoRepository.save(campaignInfo);
 
             return ResponseEntity.status(HttpStatus.CREATED)
-                    .body(new ResponseModel(HttpStatus.CREATED.value(),
-                            "Inserted campaign",
-                            ""));
+                    .body(new ResponseModel("Inserted campaign"));
 
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(new ResponseModel(HttpStatus.INTERNAL_SERVER_ERROR.value(),
-                            e.getMessage(),
-                            "{}"));
+                    .body(new ResponseModel(e.getMessage()));
         }
     }
 
@@ -216,23 +196,17 @@ public class CampaignController {
 
             if (!isOrganization)
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                        .body(new ResponseModel(HttpStatus.BAD_REQUEST.value(),
-                                "You are not organization!",
-                                "{}"));
+                        .body(new ResponseModel("You are not organization!"));
             JsonObject jsonBody = JsonParser.parseString(body).getAsJsonObject();
             Integer campaignId = jsonBody.get("campaign-id").getAsInt();
 
             campaignInfoRepository.deleteById(campaignId);
             return ResponseEntity.status(HttpStatus.OK)
-                    .body(new ResponseModel(HttpStatus.OK.value(),
-                            "Deleted campaign with id: " + campaignId,
-                            ""));
+                    .body(new ResponseModel("Deleted campaign with id: " + campaignId));
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(new ResponseModel(HttpStatus.INTERNAL_SERVER_ERROR.value(),
-                            e.getMessage(),
-                            "{}"));
+                    .body(new ResponseModel(e.getMessage()));
         }
     }
 
@@ -244,34 +218,31 @@ public class CampaignController {
 
         if (!isOrganization)
             return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                    .body(new ResponseModel(HttpStatus.BAD_REQUEST.value(),
-                            "You are not organization!",
-                            "{}"));
+                    .body(new ResponseModel("You are not organization!"));
 
         JsonObject jsonBody = JsonParser.parseString(body).getAsJsonObject();
 
         try {
-            int postId = jsonBody.get("post-id").getAsInt();
-            int campaignId = jsonBody.get("campaign-id").getAsInt();
-            String content = jsonBody.get("content").getAsString();
-            String type = jsonBody.get("type").getAsString();
+            Integer campaignId = JsonUtil.getInt(jsonBody, "campaign-id");
+            String content = JsonUtil.getString(jsonBody, "content");
+            String type = JsonUtil.getString(jsonBody, "type");
             long submitTime = System.currentTimeMillis();
 
+            assert campaignId != null;
+            if (!accessService.getUserByCampaignId(campaignId).equals(accessService.getUserByToken(token)))
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                        .body(new ResponseModel("You do not have permission to this campaign!"));
             CampaignInfo campaign = campaignInfoRepository.getReferenceById(campaignId);
             PostInfo post = new PostInfo(content, type, submitTime, campaign);
 
             postInfoRepository.save(post);
 
             return ResponseEntity.status(HttpStatus.CREATED)
-                    .body(new ResponseModel(HttpStatus.CREATED.value(),
-                            "Inserted campaign",
-                            ""));
+                    .body(new ResponseModel("Inserted campaign"));
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(new ResponseModel(HttpStatus.INTERNAL_SERVER_ERROR.value(),
-                            e.getMessage(),
-                            "{}"));
+                    .body(new ResponseModel(e.getMessage()));
         }
     }
 
@@ -283,23 +254,20 @@ public class CampaignController {
 
         if (!isOrganization)
             return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                    .body(new ResponseModel(HttpStatus.BAD_REQUEST.value(),
-                            "You are not organization!",
-                            "{}"));
+                    .body(new ResponseModel("You are not organization!"));
 
         JsonObject jsonBody = JsonParser.parseString(body).getAsJsonObject();
 
         try {
-            int postId = jsonBody.get("post-id").getAsInt();
-            int campaignId = postService.getCampaignByPostId(postId).getId();
+            Integer postId = JsonUtil.getInt(jsonBody, "post-id");
+            Integer campaignId = JsonUtil.getInt(jsonBody, "campaign-id");
+            assert campaignId != null;
             if (!accessService.getUserByCampaignId(campaignId).equals(accessService.getUserByToken(token)))
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
-                        .body(new ResponseModel(HttpStatus.UNAUTHORIZED.value(),
-                                "You do not have permission to this campaign!",
-                                "{}"));
+                        .body(new ResponseModel("You do not have permission to this campaign!"));
 
-            String content = jsonBody.get("content").getAsString();
-            String type = jsonBody.get("type").getAsString();
+            String content = JsonUtil.getString(jsonBody, "content");
+            String type = JsonUtil.getString(jsonBody, "type");
             long submitTime = System.currentTimeMillis();
 
             CampaignInfo campaign = campaignInfoRepository.getReferenceById(campaignId);
@@ -308,15 +276,11 @@ public class CampaignController {
             postInfoRepository.save(post);
 
             return ResponseEntity.status(HttpStatus.OK)
-                    .body(new ResponseModel(HttpStatus.OK.value(),
-                            "Updated campaign",
-                            ""));
+                    .body(new ResponseModel("Updated campaign"));
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(new ResponseModel(HttpStatus.INTERNAL_SERVER_ERROR.value(),
-                            e.getMessage(),
-                            "{}"));
+                    .body(new ResponseModel(e.getMessage()));
         }
     }
 
@@ -329,34 +293,28 @@ public class CampaignController {
 
         if (!isOrganization)
             return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                    .body(new ResponseModel(HttpStatus.BAD_REQUEST.value(),
-                            "You are not organization!",
-                            "{}"));
+                    .body(new ResponseModel("You are not organization!"));
 
         JsonObject jsonBody = JsonParser.parseString(body).getAsJsonObject();
 
         try {
-            int campaignId = jsonBody.get("campaign-id").getAsInt();
+            Integer campaignId = JsonUtil.getInt(jsonBody, "campaign-id");
+            assert campaignId != null;
             if (!accessService.getUserByCampaignId(campaignId).equals(accessService.getUserByToken(token)))
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
-                        .body(new ResponseModel(HttpStatus.UNAUTHORIZED.value(),
-                                "You do not have permission to this campaign!",
-                                "{}"));
+                        .body(new ResponseModel("You do not have permission to this campaign!"));
 
-            int postId = jsonBody.get("post-id").getAsInt();
+            Integer postId = JsonUtil.getInt(jsonBody, "post-id");
 
+            assert postId != null;
             postInfoRepository.deleteById(postId);
 
             return ResponseEntity.status(HttpStatus.OK)
-                    .body(new ResponseModel(HttpStatus.OK.value(),
-                            "Deleted campaign",
-                            ""));
+                    .body(new ResponseModel("Deleted campaign"));
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(new ResponseModel(HttpStatus.INTERNAL_SERVER_ERROR.value(),
-                            e.getMessage(),
-                            "{}"));
+                    .body(new ResponseModel(e.getMessage()));
         }
     }
 }

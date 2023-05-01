@@ -29,9 +29,7 @@ public class AddressController {
     @GetMapping("/ping")
     public ResponseEntity<ResponseModel> ping() {
         return ResponseEntity.status(HttpStatus.OK)
-                .body(new ResponseModel(HttpStatus.OK.value(),
-                        "Hello, i am demo application run on docker. Can i help you?",
-                        ""));
+                .body(new ResponseModel("Hello, i am demo application run on docker. Can i help you?"));
     }
 
     /**
@@ -43,15 +41,11 @@ public class AddressController {
         try {
             List<Province> provincesList = provinceRepository.findAll();
             return ResponseEntity.status(HttpStatus.OK)
-                    .body(new ResponseModel(HttpStatus.OK.value(),
-                            "Have " + provincesList.size() + " provinces",
-                            provincesList));
+                    .body(new ResponseModel(provincesList));
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(new ResponseModel(HttpStatus.INTERNAL_SERVER_ERROR.value(),
-                            "INTERNAL_SERVER_ERROR",
-                            "{}"));
+                    .body(new ResponseModel("INTERNAL_SERVER_ERROR"));
         }
     }
 
@@ -65,15 +59,11 @@ public class AddressController {
         try {
             List<District> districts = districtRepository.findByProvinceCode_IdEquals(provinceCode);
             return ResponseEntity.status(HttpStatus.OK)
-                    .body(new ResponseModel(HttpStatus.OK.value(),
-                            "Have " + districts.size() + " districts",
-                            districts));
+                    .body(new ResponseModel(districts));
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(new ResponseModel(HttpStatus.INTERNAL_SERVER_ERROR.value(),
-                            "INTERNAL_SERVER_ERROR",
-                            "{}"));
+                    .body(new ResponseModel("INTERNAL_SERVER_ERROR"));
         }
     }
 
@@ -87,13 +77,11 @@ public class AddressController {
         try {
             List<Ward> wards = wardRepository.findByDistrictCodeEquals(districtCode);
             return ResponseEntity.status(HttpStatus.OK)
-                    .body(new ResponseModel(HttpStatus.OK.value(),
-                            "Have " + wards.size(),
-                            wards));
+                    .body(new ResponseModel(wards));
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(new ResponseModel(HttpStatus.INTERNAL_SERVER_ERROR.value(), "INTERNAL_SERVER_ERROR", "{}"));
+                    .body(new ResponseModel("INTERNAL_SERVER_ERROR"));
         }
     }
 }

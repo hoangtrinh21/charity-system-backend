@@ -1,15 +1,16 @@
 package com.charity.hoangtrinh.dbs.sql.charitydatabase.entities;
 
-import lombok.*;
+
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
-
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
-@Builder
+@Getter
+@Setter
 @Entity(name = "post_info")
 @Table(name = "post_info")
+@NoArgsConstructor
 public class PostInfo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
