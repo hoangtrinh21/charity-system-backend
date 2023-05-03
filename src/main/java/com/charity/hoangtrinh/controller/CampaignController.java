@@ -53,11 +53,19 @@ public class CampaignController {
     public ResponseEntity<Object> getAllCampaigns(@RequestHeader Map<String, String> header) {
         try {
             String token = header.getOrDefault("Token", "");
-            boolean isAdminOrOrganization = accessService.isAdmin(token) || accessService.isOrganization(token);
 
-            List<CampaignInfo> campaignInfos = campaignService.getAllCampaigns(isAdminOrOrganization);
+            if (accessService.isAdmin(token))
+                return ResponseEntity.status(HttpStatus.OK)
+                        .body(campaignInfoRepository.findAll());
+
+            if (accessService.isOrganization(token)) {
+                int organizationId = accessService.getUserByToken(token).getId();
+                return ResponseEntity.status(HttpStatus.OK)
+                        .body(campaignInfoRepository.findByOrganization_Id(organizationId));
+            }
+
             return ResponseEntity.status(HttpStatus.OK)
-                    .body(campaignInfos);
+                    .body(campaignInfoRepository.findByIsActiveEquals(true));
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
@@ -102,8 +110,8 @@ public class CampaignController {
 
             JsonObject jsonBody = JsonParser.parseString(body).getAsJsonObject();
 
-            Integer organizationId  = JsonUtil.getInt(jsonBody, "organization_id");
-            Integer lastUpdateTime  = JsonUtil.getInt(jsonBody, "last_update_time");
+            Integer organizationId  = accessService.getUserByToken(token).getId();
+            Integer lastUpdateTime  = (int) System.currentTimeMillis() / 1000;
             String  campaignName    = JsonUtil.getString(jsonBody, "campaign_name");
             String  introduction    = JsonUtil.getString(jsonBody, "introduction");
             String  targetObject    = JsonUtil.getString(jsonBody, "target_object");
@@ -111,9 +119,9 @@ public class CampaignController {
             String  campaignType    = JsonUtil.getString(jsonBody, "campaign_type");
             String  status          = JsonUtil.getString(jsonBody, "status");
             Long    targetAmount    = JsonUtil.getLong(jsonBody, "target_amount");
-            Long    receiveAmount   = JsonUtil.getLong(jsonBody, "receive_amount");
-            Long    donorAmount     = JsonUtil.getLong(jsonBody, "donor_amount");
-            Long    spentAmount     = JsonUtil.getLong(jsonBody, "spent_amount");
+            Long    receiveAmount   = 0L;
+            Long    donorAmount     = 0L;
+            Long    spentAmount     = 0L;
             LocalDate startDate         = JsonUtil.getLocalDate(jsonBody, "start_date");
             LocalDate stopReceiveDate   = JsonUtil.getLocalDate(jsonBody, "stop_receive_date");
             LocalDate startActiveDate   = JsonUtil.getLocalDate(jsonBody, "start_active_date");
@@ -149,9 +157,14 @@ public class CampaignController {
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                         .body(new ResponseModel("You are not organization!"));
             JsonObject jsonBody = JsonParser.parseString(body).getAsJsonObject();
-            Integer campaignId      = jsonBody.get("campaign-id").getAsInt();
-            Integer organizationId  = JsonUtil.getInt(jsonBody, "organization_id");
-            Integer lastUpdateTime  = JsonUtil.getInt(jsonBody, "last_update_time");
+            int campaignId      = jsonBody.get("campaign-id").getAsInt();
+            Integer organizationId  = accessService.getUserByToken(token).getId();
+
+            if (!accessService.getUserByCampaignId(campaignId).getId().equals(organizationId))
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                        .body(new ResponseModel("You do not have permission to this campaign!"));
+
+            Integer lastUpdateTime  = (int) System.currentTimeMillis() / 1000;
             String  campaignName    = JsonUtil.getString(jsonBody, "campaign_name");
             String  introduction    = JsonUtil.getString(jsonBody, "introduction");
             String  targetObject    = JsonUtil.getString(jsonBody, "target_object");
@@ -178,7 +191,7 @@ public class CampaignController {
             campaignInfoRepository.save(campaignInfo);
 
             return ResponseEntity.status(HttpStatus.CREATED)
-                    .body(new ResponseModel("Inserted campaign"));
+                    .body(new ResponseModel("Updated campaign"));
 
         } catch (Exception e) {
             e.printStackTrace();

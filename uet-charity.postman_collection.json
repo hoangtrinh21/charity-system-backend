@@ -1,0 +1,300 @@
+{
+	"info": {
+		"_postman_id": "50143cee-0909-4b91-b00f-8de480c8e45f",
+		"name": "uet-charity",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "access",
+			"item": [
+				{
+					"name": "push access token",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"user_id\" : 1,\n    \"token\": \"abcd\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8089/charity/access/token",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8089",
+							"path": [
+								"charity",
+								"access",
+								"token"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "address",
+			"item": [
+				{
+					"name": "lấy toàn bộ các tỉnh",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8089/charity/address/provinces",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8089",
+							"path": [
+								"charity",
+								"address",
+								"provinces"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all huyện thuộc tỉnh",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8089/charity/address/districts-in-province?province-code=01",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8089",
+							"path": [
+								"charity",
+								"address",
+								"districts-in-province"
+							],
+							"query": [
+								{
+									"key": "province-code",
+									"value": "01"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all xã thuộc huyện",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8089/charity/address/wards-in-districts?district-code=083",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8089",
+							"path": [
+								"charity",
+								"address",
+								"wards-in-districts"
+							],
+							"query": [
+								{
+									"key": "district-code",
+									"value": "083"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "chiến dịch (cuộc vận động)",
+			"item": [
+				{
+					"name": "get all cuộc vận động",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Token",
+								"value": "abcd",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:8089/charity/campaign/get-all",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8089",
+							"path": [
+								"charity",
+								"campaign",
+								"get-all"
+							]
+						},
+						"description": "# API lấy toàn bộ các cuộc vận động\n\n`Token có thể null`\n\n`Từ Token -> vai trò của ngườ dùng`\n\n* Admin: Trả về toàn bộ cuộc vận động (bị khóa và không bị khóa)\n* Tổ chức: Trả về toàn bộ cuộc vận động của tổ chức đó (bị khóa và chưa bị khóa)\n* Người dùng khách: trả về toàn bộ các cuộc vận động không bị khóa"
+					},
+					"response": []
+				},
+				{
+					"name": "get all cuộc vận động bằng các param",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Token",
+								"value": "abcd",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8089/charity/campaign/get-by-condition?campaign-id=1&organization-id=1&organization-name=abc&campaign-name=abc&region=abc&campaign-type=abc&target-object=abc&status=abc",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8089",
+							"path": [
+								"charity",
+								"campaign",
+								"get-by-condition"
+							],
+							"query": [
+								{
+									"key": "campaign-id",
+									"value": "1"
+								},
+								{
+									"key": "organization-id",
+									"value": "1"
+								},
+								{
+									"key": "organization-name",
+									"value": "abc"
+								},
+								{
+									"key": "campaign-name",
+									"value": "abc"
+								},
+								{
+									"key": "region",
+									"value": "abc"
+								},
+								{
+									"key": "campaign-type",
+									"value": "abc"
+								},
+								{
+									"key": "target-object",
+									"value": "abc"
+								},
+								{
+									"key": "status",
+									"value": "abc"
+								}
+							]
+						},
+						"description": "# Lấy toàn bộ các cuộc vận động băng các  param\n\n`Các param có thể null`\n\n`Token có thể null`\n\n`Từ Token -> vai trò của người dùng`\n\n* Admin: Trả về toàn bộ cuộc vận động (bị khóa và không bị khóa)\n* Tổ chức: Trả về toàn bộ cuộc vận động của tổ chức đó (bị khóa và chưa bị khóa)\n* Người dùng khách: trả về toàn bộ các cuộc vận động không bị khóa"
+					},
+					"response": []
+				},
+				{
+					"name": "thêm cuộc vận động",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Token",
+								"value": "abcd",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"campaign_name\" : \"xyz\",\n    \"introduction\" : \"asdfghjkl\",\n    \"target_object\" : \"tre em\",\n    \"region\" : \"tay bac\",\n    \"status\" : \"dang van dong\",\n    \"campaign_type\" : \"ho tro tre em vung cao\",\n    \"target_amount\" : 100000000,\n    \"start_date\" : \"2023-06-01\",\n    \"stop_receive_date\" : \"2023-06-15\",\n    \"start_active_date\" : \"2023-06-16\",\n    \"stop_active_date\" : \"2023-06-30\",\n    \"stop_date\": \"2023-06-30\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8089/charity/campaign/add-campaign",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8089",
+							"path": [
+								"charity",
+								"campaign",
+								"add-campaign"
+							]
+						},
+						"description": "# API thêm cuộc vận động\n\n`Token not null`\n\n`Chỉ Tổ chức có quyền thêm cuộc vận động`"
+					},
+					"response": []
+				},
+				{
+					"name": "cập nhật cuộc vận động",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Token",
+								"value": "abcd",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"campaign-id\": 1,\n    \"campaign_name\" : \"xyz\",\n    \"introduction\" : \"asdfghjkl\",\n    \"target_object\" : \"tre em\",\n    \"region\" : \"tay bac\",\n    \"status\" : \"dang van dong\",\n    \"campaign_type\" : \"ho tro tre em vung cao\",\n    \"target_amount\" : 100000000,\n    \"receive_amount\" : 45000000,\n    \"donor_amount\" : 0,\n    \"spent_amount\" : 0,\n    \"start_date\" : \"2023-06-01\",\n    \"stop_receive_date\" : \"2023-06-15\",\n    \"start_active_date\" : \"2023-06-16\",\n    \"stop_active_date\" : \"2023-06-30\",\n    \"stop_date\": \"2023-06-30\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8089/charity/campaign/update-campaign",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8089",
+							"path": [
+								"charity",
+								"campaign",
+								"update-campaign"
+							]
+						},
+						"description": "# API cập nhật cuộc vận động\n\n`Token not null`\n\n`Chỉ Tổ chức có quyền chỉn sửa cuộc vận động`"
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

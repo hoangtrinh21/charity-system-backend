@@ -10,6 +10,7 @@ import java.util.List;
 @Repository
 
 public interface CampaignInfoRepository extends JpaRepository<CampaignInfo, Integer> {
+    List<CampaignInfo> findByOrganization_Id(Integer id);
     List<CampaignInfo> findByIdEqualsAndOrganization_IdEqualsAndOrganization_UserNameLikeAndCampaignNameLikeAndTargetObjectLikeAndRegionLikeAndCampaignTypeLikeAndStatusLikeAndIsActiveTrue(
             @Nullable Integer id, @Nullable Integer id1, @Nullable String userName, @Nullable String campaignName,
             @Nullable String targetObject, @Nullable String region, @Nullable String campaignType, @Nullable String status);
