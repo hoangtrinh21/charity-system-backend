@@ -37,11 +37,11 @@ public class AddressController {
      * @return danh sách các tỉnh
      */
     @GetMapping("/provinces")
-    public ResponseEntity<ResponseModel> getProvinces() {
+    public ResponseEntity<Object> getProvinces() {
         try {
             List<Province> provincesList = provinceRepository.findAll();
             return ResponseEntity.status(HttpStatus.OK)
-                    .body(new ResponseModel(provincesList));
+                    .body(provincesList);
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
@@ -55,11 +55,11 @@ public class AddressController {
      * @return danh sách các huyện trong tỉnh
      */
     @GetMapping("/districts-in-province")
-    public ResponseEntity<ResponseModel> getDistrictsOnProvince(@RequestParam(name = "province-code") String provinceCode) {
+    public ResponseEntity<Object> getDistrictsOnProvince(@RequestParam(name = "province-code") String provinceCode) {
         try {
             List<District> districts = districtRepository.findByProvinceCode_IdEquals(provinceCode);
             return ResponseEntity.status(HttpStatus.OK)
-                    .body(new ResponseModel(districts));
+                    .body(districts);
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
@@ -73,11 +73,11 @@ public class AddressController {
      * @return danh sách các xã
      */
     @GetMapping("/wards-in-districts")
-    public ResponseEntity<ResponseModel> getWardsOnDistricts(@RequestParam(name = "district-code") String districtCode) {
+    public ResponseEntity<Object> getWardsOnDistricts(@RequestParam(name = "district-code") String districtCode) {
         try {
             List<Ward> wards = wardRepository.findByDistrictCodeEquals(districtCode);
             return ResponseEntity.status(HttpStatus.OK)
-                    .body(new ResponseModel(wards));
+                    .body(wards);
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)

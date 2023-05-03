@@ -13,5 +13,5 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @NoArgsConstructor
 @Builder
 public class ResponseModel {
-    private Object data;
+    private Object message;
 }
