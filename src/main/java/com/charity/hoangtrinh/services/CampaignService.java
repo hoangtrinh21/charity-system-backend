@@ -19,14 +19,16 @@ public class CampaignService {
     }
 
     public List<CampaignInfo> getByCondition(Map<String, String> conditions, boolean isAdmin) {
-        Integer campaignId = conditions.get("campaign-id") == null ? null : Integer.parseInt(conditions.get("campaign-id"));
-        Integer organizationId = conditions.get("organization-id") == null ? null : Integer.parseInt(conditions.get("organization-id"));
+        Integer campaignId      = conditions.get("campaign-id") == null ?
+                null : Integer.parseInt(conditions.get("campaign-id"));
+        Integer organizationId  = conditions.get("organization-id") == null ?
+                null : Integer.parseInt(conditions.get("organization-id"));
         String organizationName = conditions.get("organization-name");
-        String campaignName = conditions.get("campaign-name");
-        String region = conditions.get("region");
-        String campaignType = conditions.get("campaign-type");
-        String targerObject = conditions.get("target-object");
-        String status = conditions.get("status");
+        String campaignName     = conditions.get("campaign-name");
+        String region           = conditions.get("region");
+        String campaignType     = conditions.get("campaign-type");
+        String targerObject     = conditions.get("target-object");
+        String status           = conditions.get("status");
         if (isAdmin)
             return campaignInfoRepository.findByIdEqualsAndOrganization_IdEqualsAndOrganization_UserNameLikeAndCampaignNameLikeAndTargetObjectLikeAndRegionLikeAndCampaignTypeLikeAndStatusLike(
                     campaignId, organizationId, organizationName, campaignName, targerObject, region, campaignType, status

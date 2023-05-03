@@ -50,14 +50,14 @@ public class CampaignController {
      * @return Toàn bộ chiến dịch trong database nếu là admin  hoặc tổ chức từ thiện, ngược lại trả về các chiến dịch chưa bị khóa
      */
     @GetMapping("/get-all")
-    public ResponseEntity<ResponseModel> getAllCampaigns(@RequestHeader Map<String, String> header) {
+    public ResponseEntity<Object> getAllCampaigns(@RequestHeader Map<String, String> header) {
         try {
-            String token = header.get("Token");
+            String token = header.getOrDefault("Token", "");
             boolean isAdminOrOrganization = accessService.isAdmin(token) || accessService.isOrganization(token);
 
             List<CampaignInfo> campaignInfos = campaignService.getAllCampaigns(isAdminOrOrganization);
             return ResponseEntity.status(HttpStatus.OK)
-                    .body(new ResponseModel(campaignInfos));
+                    .body(campaignInfos);
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
@@ -71,16 +71,16 @@ public class CampaignController {
      * @return Toàn bộ chiến dịch trong database nếu là admin  hoặc tổ chức từ thiện, ngược lại trả về các chiến dịch chưa bị khóa
      */
     @GetMapping("/get-by-condition")
-    public ResponseEntity<ResponseModel> getByCondition(@RequestHeader Map<String, String> header,
+    public ResponseEntity<Object> getByCondition(@RequestHeader Map<String, String> header,
                                                         @RequestParam Map<String, String> params) {
         try {
-            String token = header.get("Token");
+            String token = header.getOrDefault("Token", "");
             boolean isAdminOrOrganization = accessService.isAdmin(token) || accessService.isOrganization(token);
 
             List<CampaignInfo> campaignInfos = campaignService
                     .getByCondition(params, isAdminOrOrganization);
             return ResponseEntity.status(HttpStatus.OK)
-                    .body(new ResponseModel(campaignInfos));
+                    .body(campaignInfos);
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
@@ -93,7 +93,7 @@ public class CampaignController {
     public ResponseEntity<ResponseModel> addCampaign(@RequestHeader Map<String, String> header,
                                                      @RequestBody String body) {
         try {
-            String token = header.get("Token");
+            String token = header.getOrDefault("Token", "");
             boolean isOrganization = accessService.isOrganization(token);
 
             if (!isOrganization)
@@ -142,7 +142,7 @@ public class CampaignController {
     public ResponseEntity<ResponseModel> updateCampaign(@RequestHeader Map<String, String> header,
                                                         @RequestBody String body) {
         try {
-            String token = header.get("Token");
+            String token = header.getOrDefault("Token", "");
             boolean isOrganization = accessService.isOrganization(token);
 
             if (!isOrganization)
@@ -189,16 +189,15 @@ public class CampaignController {
 
     @DeleteMapping("/delete-campaign")
     public ResponseEntity<ResponseModel> deleteCampaign(@RequestHeader Map<String, String> header,
-                                                        @RequestBody String body) {
+                                                        @RequestParam(value = "campaign-id") String campaignIdStr) {
         try {
-            String token = header.get("Token");
+            String token = header.getOrDefault("Token", "");
             boolean isOrganization = accessService.isOrganization(token);
 
             if (!isOrganization)
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                         .body(new ResponseModel("You are not organization!"));
-            JsonObject jsonBody = JsonParser.parseString(body).getAsJsonObject();
-            Integer campaignId = jsonBody.get("campaign-id").getAsInt();
+            Integer campaignId = Integer.parseInt(campaignIdStr);
 
             campaignInfoRepository.deleteById(campaignId);
             return ResponseEntity.status(HttpStatus.OK)
@@ -210,10 +209,25 @@ public class CampaignController {
         }
     }
 
+    @GetMapping("/get-post")
+    public ResponseEntity<Object> getAllPostsOnCampaign(@RequestParam(value = "campaign-id") String campaignIdStr) {
+        try {
+            Integer campaignId = Integer.parseInt(campaignIdStr);
+
+            List<PostInfo> postInfoList = postInfoRepository.findByCampaign_Id(campaignId);
+            return ResponseEntity.status(HttpStatus.OK)
+                    .body(postInfoList);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(new ResponseModel(e.getMessage()));
+        }
+    }
+
     @PostMapping("/add-post")
     public ResponseEntity<ResponseModel> addPost(@RequestHeader Map<String, String> header,
                                                  @RequestBody String body) {
-        String token = header.get("Token");
+        String token = header.getOrDefault("Token", "");
         boolean isOrganization = accessService.isOrganization(token);
 
         if (!isOrganization)
@@ -249,7 +263,7 @@ public class CampaignController {
     @PostMapping("/update-post")
     public ResponseEntity<ResponseModel> updatePost(@RequestHeader Map<String, String> header,
                                                  @RequestBody String body) {
-        String token = header.get("Token");
+        String token = header.getOrDefault("Token", "");
         boolean isOrganization = accessService.isOrganization(token);
 
         if (!isOrganization)
@@ -288,7 +302,7 @@ public class CampaignController {
     @DeleteMapping("/delete-post")
     public ResponseEntity<ResponseModel> deletePost(@RequestHeader Map<String, String> header,
                                                     @RequestBody String body) {
-        String token = header.get("Token");
+        String token = header.getOrDefault("Token", "");
         boolean isOrganization = accessService.isOrganization(token);
 
         if (!isOrganization)
