@@ -285,7 +285,7 @@ public class CampaignController {
     }
 
 
-    @PostMapping("/delete-post")
+    @DeleteMapping("/delete-post")
     public ResponseEntity<ResponseModel> deletePost(@RequestHeader Map<String, String> header,
                                                     @RequestBody String body) {
         String token = header.get("Token");
@@ -317,4 +317,13 @@ public class CampaignController {
                     .body(new ResponseModel(e.getMessage()));
         }
     }
+
+    /**
+     * Sao kê
+     */
+//    @PostMapping("/statement")
+//    public ResponseEntity<ResponseModel> statement(@RequestParam(value = "campaign-id") String campaignIdStr) {
+//        int campaignId = Integer.parseInt(campaignIdStr);
+//        CamIn
+//    }
 }
