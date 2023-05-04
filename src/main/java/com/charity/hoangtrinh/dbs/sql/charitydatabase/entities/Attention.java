@@ -15,14 +15,18 @@ public class Attention {
     @Column(name = "id", nullable = false)
     private Integer id;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "user_id", nullable = false)
-    private User user;
+    @MapsId
+    @OneToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "id", nullable = false)
+    private UserAccount userAccount;
 
     @Column(name = "object_id", nullable = false)
     private Integer objectId;
 
     @Column(name = "object_type", nullable = false)
     private Integer objectType;
+
+    @Column(name = "user_id", nullable = false)
+    private Integer userId;
 
 }

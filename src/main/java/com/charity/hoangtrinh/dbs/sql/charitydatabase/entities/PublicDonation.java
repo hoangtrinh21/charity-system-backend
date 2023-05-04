@@ -1,7 +1,6 @@
 package com.charity.hoangtrinh.dbs.sql.charitydatabase.entities;
 
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -10,16 +9,14 @@ import javax.persistence.*;
 @Setter
 @Entity
 @Table(name = "public_donation")
-@NoArgsConstructor
 public class PublicDonation {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "donation_id", nullable = false)
     private Integer id;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "donor_id", nullable = false)
-    private User donor;
+    private UserAccount donor;
 
     @Column(name = "intro_post_id", nullable = false)
     private Integer introPostId;
@@ -42,15 +39,6 @@ public class PublicDonation {
     @Column(name = "img", length = 3000)
     private String img;
 
-    public PublicDonation(User donor, Integer introPostId, String name, String status, Integer receivingOrganizationId,
-                          String targetAddress, String targetObject, String img) {
-        this.donor = donor;
-        this.introPostId = introPostId;
-        this.name = name;
-        this.status = status;
-        this.receivingOrganizationId = receivingOrganizationId;
-        this.targetAddress = targetAddress;
-        this.targetObject = targetObject;
-        this.img = img;
+    public PublicDonation(UserAccount donor, Integer introPostId, String name, String status, Integer receivingOrganizationId, String targetAddress, String targetObject, String img) {
     }
 }

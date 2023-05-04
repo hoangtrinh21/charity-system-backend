@@ -1,10 +1,9 @@
 package com.charity.hoangtrinh.controller;
 
-import com.charity.hoangtrinh.config.Constants;
 import com.charity.hoangtrinh.dbs.sql.charitydatabase.entities.PublicDonation;
-import com.charity.hoangtrinh.dbs.sql.charitydatabase.entities.User;
+import com.charity.hoangtrinh.dbs.sql.charitydatabase.entities.UserAccount;
 import com.charity.hoangtrinh.dbs.sql.charitydatabase.repositories.PublicDonationRepository;
-import com.charity.hoangtrinh.dbs.sql.charitydatabase.repositories.UserRepository;
+import com.charity.hoangtrinh.dbs.sql.charitydatabase.repositories.UserAccountRepository;
 import com.charity.hoangtrinh.model.ResponseModel;
 import com.charity.hoangtrinh.services.AccessService;
 import com.charity.hoangtrinh.utils.JsonUtil;
@@ -27,7 +26,7 @@ public class PublicDonationController {
     @Autowired
     private AccessService accessService;
     @Autowired
-    private UserRepository userRepository;
+    private UserAccountRepository userAccountRepository;
 
     /**
      * API lấy toàn bộ vật phẩm ủng hộ
@@ -88,7 +87,7 @@ public class PublicDonationController {
             JsonObject jsonBody = JsonParser.parseString(body).getAsJsonObject();
             Integer donorId                 = JsonUtil.getInt(jsonBody, "donor_id");
             assert donorId != null;
-            User donor = userRepository.getReferenceById(donorId);
+            UserAccount donor = userAccountRepository.getReferenceById(donorId);
             Integer introPostId             = JsonUtil.getInt(jsonBody,"intro_post_id");
             Integer receivingOrganizationId = JsonUtil.getInt(jsonBody,"receiving_organization_id");
             String name             = JsonUtil.getString(jsonBody,"name");
@@ -131,7 +130,7 @@ public class PublicDonationController {
             JsonObject jsonBody = JsonParser.parseString(body).getAsJsonObject();
             Integer donorId                 = JsonUtil.getInt(jsonBody,"donor_id");
             assert donorId != null;
-            User donor = userRepository.getReferenceById(donorId);
+            UserAccount donor = userAccountRepository.getReferenceById(donorId);
             Integer introPostId             = JsonUtil.getInt(jsonBody,"intro_post_id");
             Integer receivingOrganizationId = JsonUtil.getInt(jsonBody,"receiving_organization_id");
             String name             = JsonUtil.getString(jsonBody,"name");
@@ -176,5 +175,4 @@ public class PublicDonationController {
                     .body(new ResponseModel("INTERNAL_SERVER_ERROR"));
         }
     }
-
 }

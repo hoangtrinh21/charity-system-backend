@@ -1,6 +1,6 @@
 package com.charity.hoangtrinh.config;
 
-import com.charity.hoangtrinh.dbs.sql.charitydatabase.entities.User;
+import com.charity.hoangtrinh.dbs.sql.charitydatabase.entities.UserAccount;
 import com.github.benmanes.caffeine.cache.CacheLoader;
 import com.github.benmanes.caffeine.cache.Caffeine;
 import com.github.benmanes.caffeine.cache.LoadingCache;
@@ -14,11 +14,11 @@ import java.util.concurrent.ConcurrentHashMap;
 
 @Configuration
 public class CacheConfig {
-    public static LoadingCache<String, User> accessToken;
+    public static LoadingCache<String, UserAccount> accessToken;
     @Bean
     public void cacheBuilder() {
         accessToken = Caffeine.newBuilder()
-                .build(k  -> new User());
+                .build(k  -> new UserAccount());
     }
     @Scheduled(cron = "59 59 23 * * ?")
     public void clearAccess() {

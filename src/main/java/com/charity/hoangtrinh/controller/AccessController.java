@@ -1,8 +1,8 @@
 package com.charity.hoangtrinh.controller;
 
 import com.charity.hoangtrinh.config.CacheConfig;
-import com.charity.hoangtrinh.dbs.sql.charitydatabase.entities.User;
-import com.charity.hoangtrinh.dbs.sql.charitydatabase.repositories.UserRepository;
+import com.charity.hoangtrinh.dbs.sql.charitydatabase.entities.UserAccount;
+import com.charity.hoangtrinh.dbs.sql.charitydatabase.repositories.UserAccountRepository;
 import com.charity.hoangtrinh.model.ResponseModel;
 import com.charity.hoangtrinh.utils.CustomLogger;
 import com.charity.hoangtrinh.utils.JsonUtil;
@@ -27,7 +27,7 @@ import java.util.concurrent.ConcurrentHashMap;
 public class AccessController {
     private final CustomLogger logger = new CustomLogger(Logger.getLogger(AccessController.class), Level.INFO, true, false);
     @Autowired
-    private UserRepository userRepository;
+    private UserAccountRepository userAccountRepository;
     /**
      * API lấy access token
      * @param body body
@@ -43,11 +43,11 @@ public class AccessController {
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                         .body(new ResponseModel("Userid or token is null!"));
 
-            Optional<User> userOptional = userRepository.findById(userId);
+            Optional<UserAccount> userOptional = userAccountRepository.findById(userId);
             if (!userOptional.isPresent())
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                         .body(new ResponseModel("Not found user in database"));
-            User user = userOptional.get();
+            UserAccount user = userOptional.get();
             CacheConfig.accessToken.put(token, user);
 
             logger.info(CacheConfig.accessToken.asMap().toString());
