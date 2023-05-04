@@ -104,9 +104,9 @@ public class CampaignController {
             String token = header.getOrDefault("Token", "");
             boolean isOrganization = accessService.isOrganization(token);
 
-//            if (!isOrganization)
-//                return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-//                        .body(new ResponseModel("You are not organization!"));
+            if (!isOrganization)
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                        .body(new ResponseModel("You are not organization!"));
 
             JsonObject jsonBody = JsonParser.parseString(body).getAsJsonObject();
 
@@ -142,7 +142,7 @@ public class CampaignController {
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(new ResponseModel(e.getMessage()));
+                    .body(new ResponseModel(e.getClass()));
         }
     }
 
@@ -153,16 +153,16 @@ public class CampaignController {
             String token = header.getOrDefault("Token", "");
             boolean isOrganization = accessService.isOrganization(token);
 
-//            if (!isOrganization)
-//                return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-//                        .body(new ResponseModel("You are not organization!"));
+            if (!isOrganization)
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                        .body(new ResponseModel("You are not organization!"));
             JsonObject jsonBody = JsonParser.parseString(body).getAsJsonObject();
             int campaignId      = jsonBody.get("campaign-id").getAsInt();
             Integer organizationId  = accessService.getUserByToken(token).getId();
 
-//            if (!accessService.getUserByCampaignId(campaignId).getId().equals(organizationId))
-//                return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
-//                        .body(new ResponseModel("You do not have permission to this campaign!"));
+            if (!accessService.getUserByCampaignId(campaignId).getId().equals(organizationId))
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                        .body(new ResponseModel("You do not have permission to this campaign!"));
 
             Integer lastUpdateTime  = (int) System.currentTimeMillis() / 1000;
             String  campaignName    = JsonUtil.getString(jsonBody, "campaign_name");
@@ -195,7 +195,7 @@ public class CampaignController {
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(new ResponseModel(e.getMessage()));
+                    .body(new ResponseModel(e.getClass()));
         }
     }
 
@@ -206,9 +206,9 @@ public class CampaignController {
             String token = header.getOrDefault("Token", "");
             boolean isOrganization = accessService.isOrganization(token);
 
-//            if (!isOrganization)
-//                return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-//                        .body(new ResponseModel("You are not organization!"));
+            if (!isOrganization)
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                        .body(new ResponseModel("You are not organization!"));
             Integer campaignId = Integer.parseInt(campaignIdStr);
 
             campaignInfoRepository.deleteById(campaignId);
@@ -217,7 +217,7 @@ public class CampaignController {
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(new ResponseModel(e.getMessage()));
+                    .body(new ResponseModel(e.getClass()));
         }
     }
     /**
