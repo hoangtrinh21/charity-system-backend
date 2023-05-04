@@ -1,8 +1,9 @@
 {
 	"info": {
-		"_postman_id": "50143cee-0909-4b91-b00f-8de480c8e45f",
+		"_postman_id": "388deed5-697d-476c-ac4d-8658245ff5f3",
 		"name": "uet-charity",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23235687"
 	},
 	"item": [
 		{
@@ -233,7 +234,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"campaign_name\" : \"xyz\",\n    \"introduction\" : \"asdfghjkl\",\n    \"target_object\" : \"tre em\",\n    \"region\" : \"tay bac\",\n    \"status\" : \"dang van dong\",\n    \"campaign_type\" : \"ho tro tre em vung cao\",\n    \"target_amount\" : 100000000,\n    \"start_date\" : \"2023-06-01\",\n    \"stop_receive_date\" : \"2023-06-15\",\n    \"start_active_date\" : \"2023-06-16\",\n    \"stop_active_date\" : \"2023-06-30\",\n    \"stop_date\": \"2023-06-30\"\n}",
+							"raw": "{\n    \"campaign_name\" : \"xyz\", // not null\n    \"introduction\" : \"asdfghjkl\", // not null\n    \"target_object\" : \"tre em\", // not null\n    \"region\" : \"tay bac\", // not null\n    \"status\" : \"dang van dong\", // not null\n    \"campaign_type\" : \"ho tro tre em vung cao\", // not null\n    \"target_amount\" : 100000000, // not null\n    \"start_date\" : \"2023-06-01\", // not null\n    \"stop_receive_date\" : \"2023-06-15\", // not null\n    \"start_active_date\" : \"2023-06-16\", // not null\n    \"stop_active_date\" : \"2023-06-30\", // not null\n    \"stop_date\": \"2023-06-30\" // not null\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -253,7 +254,7 @@
 								"add-campaign"
 							]
 						},
-						"description": "# API thêm cuộc vận động\n\n`Token not null`\n\n`Chỉ Tổ chức có quyền thêm cuộc vận động`"
+						"description": "# API thêm cuộc vận động\n\n`Token not null`\n\n`Chỉ Tổ chức có quyền thêm cuộc vận động`\n\n`Các trường trong body not null`"
 					},
 					"response": []
 				},
@@ -270,7 +271,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"campaign-id\": 1,\n    \"campaign_name\" : \"xyz\",\n    \"introduction\" : \"asdfghjkl\",\n    \"target_object\" : \"tre em\",\n    \"region\" : \"tay bac\",\n    \"status\" : \"dang van dong\",\n    \"campaign_type\" : \"ho tro tre em vung cao\",\n    \"target_amount\" : 100000000,\n    \"receive_amount\" : 45000000,\n    \"donor_amount\" : 0,\n    \"spent_amount\" : 0,\n    \"start_date\" : \"2023-06-01\",\n    \"stop_receive_date\" : \"2023-06-15\",\n    \"start_active_date\" : \"2023-06-16\",\n    \"stop_active_date\" : \"2023-06-30\",\n    \"stop_date\": \"2023-06-30\"\n}",
+							"raw": "{\n    \"campaign-id\": 1, // not null\n    \"campaign_name\" : \"xyz\", // not null\n    \"introduction\" : \"asdfghjkl\", // not null\n    \"target_object\" : \"tre em\", // not null\n    \"region\" : \"tay bac\", // not null\n    \"status\" : \"dang van dong\", // not null\n    \"campaign_type\" : \"ho tro tre em vung cao\", // not null\n    \"target_amount\" : 100000000, // not null\n    \"receive_amount\" : 45000000, // not null\n    \"donor_amount\" : 0, // not null\n    \"spent_amount\" : 0, // not null\n    \"start_date\" : \"2023-06-01\", // not null\n    \"stop_receive_date\" : \"2023-06-15\", // not null\n    \"start_active_date\" : \"2023-06-16\", // not null\n    \"stop_active_date\" : \"2023-06-30\", // not null\n    \"stop_date\": \"2023-06-30\" // not null\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -291,6 +292,209 @@
 							]
 						},
 						"description": "# API cập nhật cuộc vận động\n\n`Token not null`\n\n`Chỉ Tổ chức có quyền chỉn sửa cuộc vận động`"
+					},
+					"response": []
+				},
+				{
+					"name": "xóa cuộc vận động",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Token",
+								"value": "abcd",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8089/charity/campaign/delete-campaign?campaign-id=1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8089",
+							"path": [
+								"charity",
+								"campaign",
+								"delete-campaign"
+							],
+							"query": [
+								{
+									"key": "campaign-id",
+									"value": "1"
+								}
+							]
+						},
+						"description": "# API xóa cuộc vận động\n\n`Token not null`\n\n`Chỉ Tổ chức có quyền xóa cuộc vận động`"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "bài đăng",
+			"item": [
+				{
+					"name": "get all bài đăng của chiến dịch",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8089/charity/post/get-post?campaign-id=1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8089",
+							"path": [
+								"charity",
+								"post",
+								"get-post"
+							],
+							"query": [
+								{
+									"key": "campaign-id",
+									"value": "1"
+								}
+							]
+						},
+						"description": "# API lấy toàn bộ bài đăng của cuộc vận động\n\n\\`param not null\\`"
+					},
+					"response": []
+				},
+				{
+					"name": "get all bài đăng theo id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8089/charity/post/get-post-by-id?post-id=1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8089",
+							"path": [
+								"charity",
+								"post",
+								"get-post-by-id"
+							],
+							"query": [
+								{
+									"key": "post-id",
+									"value": "1"
+								}
+							]
+						},
+						"description": "# API lấy bài đăng theo post id\n\n\\`param not null\\`"
+					},
+					"response": []
+				},
+				{
+					"name": "thêm bài đăng vào chiến dịch",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Token",
+								"value": "abcd",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"campaign-id\": 1, // not null\n    \"content\": \"Đây la nội dung bài đăng\", // not null\n    \"type\": \"Đây là loại bài đăng (vận động, hoạt động, ...)\" // not null\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8089/charity/post/add-post",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8089",
+							"path": [
+								"charity",
+								"post",
+								"add-post"
+							]
+						},
+						"description": "# API thêm bài đăng theo post id\n\n`param not null`\n\n`Các trường trong body bắt buộc có`"
+					},
+					"response": []
+				},
+				{
+					"name": "cập nhật bài đăng vào chiến dịch Copy",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Token",
+								"value": "abcd",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"post-id\": 1, // not null\n    \"campaign-id\": 1, // not null\n    \"content\": \"Đây la nội dung bài đăng\", // not null\n    \"type\": \"Đây là loại bài đăng (vận động, hoạt động, ...)\" // not null\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8089/charity/post/update-post",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8089",
+							"path": [
+								"charity",
+								"post",
+								"update-post"
+							]
+						},
+						"description": "# API cập nhật đăng theo post id"
+					},
+					"response": []
+				},
+				{
+					"name": "cập nhật bài đăng vào chiến dịch Copy 2",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Token",
+								"value": "abcd",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8089/charity/post/delete-post?post-id=1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8089",
+							"path": [
+								"charity",
+								"post",
+								"delete-post"
+							],
+							"query": [
+								{
+									"key": "post-id",
+									"value": "1"
+								}
+							]
+						},
+						"description": "# API xóa bài đăng theo post id\n\n`param not null`"
 					},
 					"response": []
 				}

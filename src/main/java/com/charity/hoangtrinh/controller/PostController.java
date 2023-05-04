@@ -43,6 +43,21 @@ public class PostController {
         }
     }
 
+    @GetMapping("/get-post-by-id")
+    public ResponseEntity<Object> getAllPostsById(@RequestParam(value = "post-id") String postIdStr) {
+        try {
+            Integer postId = Integer.parseInt(postIdStr);
+
+            PostInfo postInfo = postInfoRepository.getReferenceById(postId);
+            return ResponseEntity.status(HttpStatus.OK)
+                    .body(postInfo);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(new ResponseModel(e.getMessage()));
+        }
+    }
+
     @PostMapping("/add-post")
     public ResponseEntity<ResponseModel> addPost(@RequestHeader Map<String, String> header,
                                                  @RequestBody String body) {
@@ -57,16 +72,17 @@ public class PostController {
 
         try {
             Integer campaignId = JsonUtil.getInt(jsonBody, "campaign-id");
-            String content = JsonUtil.getString(jsonBody, "content");
-            String type = JsonUtil.getString(jsonBody, "type");
-            long submitTime = System.currentTimeMillis();
 
             assert campaignId != null;
             if (!accessService.getUserByCampaignId(campaignId).equals(accessService.getUserByToken(token)))
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
                         .body(new ResponseModel("You do not have permission to this campaign!"));
-            CampaignInfo campaign = campaignInfoRepository.getReferenceById(campaignId);
-            PostInfo post = new PostInfo(content, type, submitTime, campaign);
+
+            CampaignInfo    campaign    = campaignInfoRepository.getReferenceById(campaignId);
+            String          content     = JsonUtil.getString(jsonBody, "content");
+            String          type        = JsonUtil.getString(jsonBody, "type");
+            long            submitTime  = System.currentTimeMillis();
+            PostInfo        post        = new PostInfo(content, type, submitTime, campaign);
 
             postInfoRepository.save(post);
 
