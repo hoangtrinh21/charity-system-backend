@@ -59,9 +59,8 @@ public class PostController {
     }
 
     @PostMapping("/add-post")
-    public ResponseEntity<ResponseModel> addPost(@RequestHeader Map<String, String> header,
+    public ResponseEntity<Object> addPost(@RequestHeader(value = "Token") String token,
                                                  @RequestBody String body) {
-        String token = header.getOrDefault("Token", "");
         boolean isOrganization = accessService.isOrganization(token);
 
         if (!isOrganization)
@@ -87,7 +86,7 @@ public class PostController {
             postInfoRepository.save(post);
 
             return ResponseEntity.status(HttpStatus.CREATED)
-                    .body(new ResponseModel("Inserted campaign"));
+                    .body(post);
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
@@ -95,10 +94,9 @@ public class PostController {
         }
     }
 
-    @PostMapping("/update-post")
-    public ResponseEntity<ResponseModel> updatePost(@RequestHeader Map<String, String> header,
+    @PutMapping("/update-post")
+    public ResponseEntity<Object> updatePost(@RequestHeader(value = "Token") String token,
                                                     @RequestBody String body) {
-        String token = header.getOrDefault("Token", "");
         boolean isOrganization = accessService.isOrganization(token);
 
         if (!isOrganization)
@@ -125,7 +123,7 @@ public class PostController {
             postInfoRepository.save(post);
 
             return ResponseEntity.status(HttpStatus.OK)
-                    .body(new ResponseModel("Updated campaign"));
+                    .body(post);
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
@@ -135,28 +133,25 @@ public class PostController {
 
 
     @DeleteMapping("/delete-post")
-    public ResponseEntity<ResponseModel> deletePost(@RequestHeader Map<String, String> header,
-                                                    @RequestBody String body) {
-        String token = header.getOrDefault("Token", "");
+    public ResponseEntity<Object> deletePost(@RequestHeader(value = "Token") String token,
+                                             @RequestParam(value = "campaign-id") String campaignId,
+                                             @RequestParam(value = "post-id") String postId) {
         boolean isOrganization = accessService.isOrganization(token);
 
         if (!isOrganization)
             return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                     .body(new ResponseModel("You are not organization!"));
 
-        JsonObject jsonBody = JsonParser.parseString(body).getAsJsonObject();
 
         try {
-            Integer campaignId = JsonUtil.getInt(jsonBody, "campaign-id");
             assert campaignId != null;
-            if (!accessService.getUserByCampaignId(campaignId).equals(accessService.getUserByToken(token)))
+            if (!accessService.getUserByCampaignId(Integer.parseInt(campaignId)).equals(accessService.getUserByToken(token)))
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
                         .body(new ResponseModel("You do not have permission to this campaign!"));
 
-            Integer postId = JsonUtil.getInt(jsonBody, "post-id");
 
             assert postId != null;
-            postInfoRepository.deleteById(postId);
+            postInfoRepository.deleteById(Integer.valueOf(postId));
 
             return ResponseEntity.status(HttpStatus.OK)
                     .body(new ResponseModel("Deleted campaign"));

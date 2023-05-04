@@ -1,9 +1,8 @@
 {
 	"info": {
-		"_postman_id": "388deed5-697d-476c-ac4d-8658245ff5f3",
+		"_postman_id": "bf9d473e-9f47-41f8-9705-5c08fe672872",
 		"name": "uet-charity",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "23235687"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
@@ -171,7 +170,7 @@
 							}
 						],
 						"url": {
-							"raw": "http://localhost:8089/charity/campaign/get-by-condition?campaign-id=1&organization-id=1&organization-name=abc&campaign-name=abc&region=abc&campaign-type=abc&target-object=abc&status=abc",
+							"raw": "http://localhost:8089/charity/campaign/get-by-condition?campaign-id=4",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -185,35 +184,42 @@
 							"query": [
 								{
 									"key": "campaign-id",
-									"value": "1"
+									"value": "4"
 								},
 								{
 									"key": "organization-id",
-									"value": "1"
+									"value": "1",
+									"disabled": true
 								},
 								{
 									"key": "organization-name",
-									"value": "abc"
+									"value": "abc",
+									"disabled": true
 								},
 								{
 									"key": "campaign-name",
-									"value": "abc"
+									"value": "abc",
+									"disabled": true
 								},
 								{
 									"key": "region",
-									"value": "abc"
+									"value": "abc",
+									"disabled": true
 								},
 								{
 									"key": "campaign-type",
-									"value": "abc"
+									"value": "abc",
+									"disabled": true
 								},
 								{
 									"key": "target-object",
-									"value": "abc"
+									"value": "abc",
+									"disabled": true
 								},
 								{
 									"key": "status",
-									"value": "abc"
+									"value": "abc",
+									"disabled": true
 								}
 							]
 						},
@@ -271,7 +277,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"campaign-id\": 1, // not null\n    \"campaign_name\" : \"xyz\", // not null\n    \"introduction\" : \"asdfghjkl\", // not null\n    \"target_object\" : \"tre em\", // not null\n    \"region\" : \"tay bac\", // not null\n    \"status\" : \"dang van dong\", // not null\n    \"campaign_type\" : \"ho tro tre em vung cao\", // not null\n    \"target_amount\" : 100000000, // not null\n    \"receive_amount\" : 45000000, // not null\n    \"donor_amount\" : 0, // not null\n    \"spent_amount\" : 0, // not null\n    \"start_date\" : \"2023-06-01\", // not null\n    \"stop_receive_date\" : \"2023-06-15\", // not null\n    \"start_active_date\" : \"2023-06-16\", // not null\n    \"stop_active_date\" : \"2023-06-30\", // not null\n    \"stop_date\": \"2023-06-30\" // not null\n}",
+							"raw": "{\n    \"campaign-id\": 4, // not null\n    \"campaign_name\" : \"xyz\", // not null\n    \"introduction\" : \"asdfghjkl\", // not null\n    \"target_object\" : \"tre em\", // not null\n    \"region\" : \"tay bac\", // not null\n    \"status\" : \"dang van dong\", // not null\n    \"campaign_type\" : \"ho tro tre em vung cao\", // not null\n    \"target_amount\" : 100000000, // not null\n    \"receive_amount\" : 45000000, // not null\n    \"donor_amount\" : 0, // not null\n    \"spent_amount\" : 0, // not null\n    \"start_date\" : \"2023-06-01\", // not null\n    \"stop_receive_date\" : \"2023-06-15\", // not null\n    \"start_active_date\" : \"2023-06-16\", // not null\n    \"stop_active_date\" : \"2023-06-30\", // not null\n    \"stop_date\": \"2023-06-30\" // not null\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -307,7 +313,7 @@
 							}
 						],
 						"url": {
-							"raw": "http://localhost:8089/charity/campaign/delete-campaign?campaign-id=1",
+							"raw": "http://localhost:8089/charity/campaign/delete-campaign?campaign-id=5",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -321,7 +327,7 @@
 							"query": [
 								{
 									"key": "campaign-id",
-									"value": "1"
+									"value": "5"
 								}
 							]
 						},
@@ -332,7 +338,7 @@
 			]
 		},
 		{
-			"name": "bài đăng",
+			"name": "bài đăng vận động",
 			"item": [
 				{
 					"name": "get all bài đăng của chiến dịch",
@@ -340,7 +346,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8089/charity/post/get-post?campaign-id=1",
+							"raw": "http://localhost:8089/charity/post/get-post?campaign-id=7",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -354,7 +360,7 @@
 							"query": [
 								{
 									"key": "campaign-id",
-									"value": "1"
+									"value": "7"
 								}
 							]
 						},
@@ -403,7 +409,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"campaign-id\": 1, // not null\n    \"content\": \"Đây la nội dung bài đăng\", // not null\n    \"type\": \"Đây là loại bài đăng (vận động, hoạt động, ...)\" // not null\n}",
+							"raw": "{\n    \"campaign-id\": 7, // not null\n    \"content\": \"Đây la nội dung bài đăng so 2\", // not null\n    \"type\": \"Đây là loại bài đăng (vận động, hoạt động, ...)\" // not null\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -440,7 +446,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"post-id\": 1, // not null\n    \"campaign-id\": 1, // not null\n    \"content\": \"Đây la nội dung bài đăng\", // not null\n    \"type\": \"Đây là loại bài đăng (vận động, hoạt động, ...)\" // not null\n}",
+							"raw": "{\n    \"post-id\": 1, // not null\n    \"campaign-id\": 7, // not null\n    \"content\": \"Đây la nội dung bài đăng caapj nhaat\", // not null\n    \"type\": \"Đây là loại bài đăng (vận động, hoạt động, ...)\" // not null\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -476,7 +482,7 @@
 							}
 						],
 						"url": {
-							"raw": "http://localhost:8089/charity/post/delete-post?post-id=1",
+							"raw": "http://localhost:8089/charity/post/delete-post?campaign-id=7&post-id=1",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -488,6 +494,10 @@
 								"delete-post"
 							],
 							"query": [
+								{
+									"key": "campaign-id",
+									"value": "7"
+								},
 								{
 									"key": "post-id",
 									"value": "1"

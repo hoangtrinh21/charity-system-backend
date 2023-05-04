@@ -98,10 +98,9 @@ public class CampaignController {
 
 
     @PostMapping("/add-campaign")
-    public ResponseEntity<ResponseModel> addCampaign(@RequestHeader Map<String, String> header,
+    public ResponseEntity<Object> addCampaign(@RequestHeader(value = "Token") String token,
                                                      @RequestBody String body) {
         try {
-            String token = header.getOrDefault("Token", "");
             boolean isOrganization = accessService.isOrganization(token);
 
             if (!isOrganization)
@@ -111,7 +110,7 @@ public class CampaignController {
             JsonObject jsonBody = JsonParser.parseString(body).getAsJsonObject();
 
             Integer organizationId  = accessService.getUserByToken(token).getId();
-            Integer lastUpdateTime  = (int) System.currentTimeMillis() / 1000;
+            Integer lastUpdateTime  = (int) (System.currentTimeMillis() / 1000);
             String  campaignName    = JsonUtil.getString(jsonBody, "campaign_name");
             String  introduction    = JsonUtil.getString(jsonBody, "introduction");
             String  targetObject    = JsonUtil.getString(jsonBody, "target_object");
@@ -130,6 +129,7 @@ public class CampaignController {
 
             assert organizationId != null;
             UserAccount organization = userAccountRepository.getReferenceById(organizationId);
+            System.out.println(organization);
 
             CampaignInfo campaignInfo = new CampaignInfo(organization, campaignName, introduction, targetObject,
                     region, campaignType, targetAmount, receiveAmount, donorAmount,
@@ -138,7 +138,7 @@ public class CampaignController {
             campaignInfoRepository.save(campaignInfo);
 
             return ResponseEntity.status(HttpStatus.CREATED)
-                    .body(new ResponseModel("Inserted campaign"));
+                    .body(campaignInfo);
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
@@ -147,10 +147,9 @@ public class CampaignController {
     }
 
     @PutMapping("/update-campaign")
-    public ResponseEntity<ResponseModel> updateCampaign(@RequestHeader Map<String, String> header,
+    public ResponseEntity<Object> updateCampaign(@RequestHeader(value = "Token") String token,
                                                         @RequestBody String body) {
         try {
-            String token = header.getOrDefault("Token", "");
             boolean isOrganization = accessService.isOrganization(token);
 
             if (!isOrganization)
@@ -164,7 +163,7 @@ public class CampaignController {
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
                         .body(new ResponseModel("You do not have permission to this campaign!"));
 
-            Integer lastUpdateTime  = (int) System.currentTimeMillis() / 1000;
+            Integer lastUpdateTime  = (int) (System.currentTimeMillis() / 1000);
             String  campaignName    = JsonUtil.getString(jsonBody, "campaign_name");
             String  introduction    = JsonUtil.getString(jsonBody, "introduction");
             String  targetObject    = JsonUtil.getString(jsonBody, "target_object");
@@ -200,10 +199,9 @@ public class CampaignController {
     }
 
     @DeleteMapping("/delete-campaign")
-    public ResponseEntity<ResponseModel> deleteCampaign(@RequestHeader Map<String, String> header,
+    public ResponseEntity<Object> deleteCampaign(@RequestHeader(value = "Token") String token,
                                                         @RequestParam(value = "campaign-id") String campaignIdStr) {
         try {
-            String token = header.getOrDefault("Token", "");
             boolean isOrganization = accessService.isOrganization(token);
 
             if (!isOrganization)

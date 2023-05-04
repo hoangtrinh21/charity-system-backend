@@ -43,9 +43,9 @@ public class AccessService {
     }
 
     public UserAccount getUserByCampaignId(int campaignId) {
-        Optional<CampaignInfo> optionalCampaignInfo = campaignInfoRepository.findById(campaignId);
-        assert optionalCampaignInfo.isPresent();
-        return optionalCampaignInfo.get().getOrganization();
+        UserAccount organization = campaignInfoRepository.getReferenceById(campaignId).getOrganization();
+        System.out.println(organization);
+        return organization;
     }
 
     public UserAccount getUserByToken(String token) {
