@@ -69,14 +69,12 @@ public class PublicDonationController {
 
     /**
      * API thêm vật phẩm
-     * @param header header của client, header chưa userid và accesstoken
      * @param body body
      */
     @PostMapping("/insert")
-    public ResponseEntity<ResponseModel> insertPublicDonation(@RequestHeader Map<String, String> header,
+    public ResponseEntity<ResponseModel> insertPublicDonation(@RequestHeader(value = "Token") String token,
                                                               @RequestBody String body) {
         try {
-            String token = header.get("Token");
             boolean isOrganization = accessService.isOrganization(token);
 
             if (!isOrganization)
@@ -115,11 +113,10 @@ public class PublicDonationController {
      * @param body body
      */
     @PutMapping("put")
-    public ResponseEntity<ResponseModel> updatePublicDonation(@RequestHeader Map<String, String> header,
+    public ResponseEntity<ResponseModel> updatePublicDonation(@RequestHeader(value = "Token") String token,
                                                               @RequestParam(value = "donation-id") int donationId,
                                                               @RequestBody String body) {
         try {
-            String token = header.get("Token");
             boolean isOrganization = accessService.isOrganization(token);
 
             if (!isOrganization)

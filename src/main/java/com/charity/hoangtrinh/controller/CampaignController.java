@@ -50,9 +50,8 @@ public class CampaignController {
      * @return Toàn bộ chiến dịch trong database nếu là admin  hoặc tổ chức từ thiện, ngược lại trả về các chiến dịch chưa bị khóa
      */
     @GetMapping("/get-all")
-    public ResponseEntity<Object> getAllCampaigns(@RequestHeader Map<String, String> header) {
+    public ResponseEntity<Object> getAllCampaigns(@RequestHeader(value = "Token") String token) {
         try {
-            String token = header.getOrDefault("Token", "");
 
             if (accessService.isAdmin(token))
                 return ResponseEntity.status(HttpStatus.OK)
@@ -69,7 +68,7 @@ public class CampaignController {
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(new ResponseModel("INTERNAL_SERVER_ERROR"));
+                    .body(new ResponseModel(e.getClass()));
         }
     }
 
@@ -79,10 +78,9 @@ public class CampaignController {
      * @return Toàn bộ chiến dịch trong database nếu là admin  hoặc tổ chức từ thiện, ngược lại trả về các chiến dịch chưa bị khóa
      */
     @GetMapping("/get-by-condition")
-    public ResponseEntity<Object> getByCondition(@RequestHeader Map<String, String> header,
+    public ResponseEntity<Object> getByCondition(@RequestHeader(value = "Token") String token,
                                                         @RequestParam Map<String, String> params) {
         try {
-            String token = header.getOrDefault("Token", "");
             boolean isAdminOrOrganization = accessService.isAdmin(token) || accessService.isOrganization(token);
 
             List<CampaignInfo> campaignInfos = campaignService
@@ -92,7 +90,7 @@ public class CampaignController {
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(new ResponseModel("INTERNAL_SERVER_ERROR"));
+                    .body(new ResponseModel(e.getClass()));
         }
     }
 

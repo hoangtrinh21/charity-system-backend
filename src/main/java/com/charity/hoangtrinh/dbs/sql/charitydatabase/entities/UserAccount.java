@@ -66,6 +66,19 @@ public class UserAccount {
     private Byte isLocked;
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        UserAccount that = (UserAccount) o;
+        return Objects.equals(id, that.id) && Objects.equals(userName, that.userName) && Objects.equals(password, that.password) && Objects.equals(saltPassword, that.saltPassword) && Objects.equals(role, that.role) && Objects.equals(address, that.address) && Objects.equals(email, that.email) && Objects.equals(phoneNumber, that.phoneNumber) && Objects.equals(charityName, that.charityName) && Objects.equals(charityAddress, that.charityAddress) && Objects.equals(charityPhone, that.charityPhone) && Objects.equals(charityEmail, that.charityEmail) && Objects.equals(charityMotto, that.charityMotto) && Objects.equals(charityTarget, that.charityTarget) && Objects.equals(charityDescription, that.charityDescription) && Objects.equals(charityFile, that.charityFile) && Objects.equals(isLocked, that.isLocked);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, userName, password, saltPassword, role, address, email, phoneNumber, charityName, charityAddress, charityPhone, charityEmail, charityMotto, charityTarget, charityDescription, charityFile, isLocked);
+    }
+
+    @Override
     public String toString() {
         return "UserAccount{" +
                 "id=" + id +
@@ -86,18 +99,5 @@ public class UserAccount {
                 ", charityFile='" + charityFile + '\'' +
                 ", isLocked=" + isLocked +
                 '}';
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        UserAccount that = (UserAccount) o;
-        return Objects.equals(id, that.id) && Objects.equals(userName, that.userName) && Objects.equals(password, that.password) && Objects.equals(saltPassword, that.saltPassword) && Objects.equals(role, that.role) && Objects.equals(address, that.address) && Objects.equals(email, that.email) && Objects.equals(phoneNumber, that.phoneNumber) && Objects.equals(charityName, that.charityName) && Objects.equals(charityAddress, that.charityAddress) && Objects.equals(charityPhone, that.charityPhone) && Objects.equals(charityEmail, that.charityEmail) && Objects.equals(charityMotto, that.charityMotto) && Objects.equals(charityTarget, that.charityTarget) && Objects.equals(charityDescription, that.charityDescription) && Objects.equals(charityFile, that.charityFile) && Objects.equals(isLocked, that.isLocked);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, userName, password, saltPassword, role, address, email, phoneNumber, charityName, charityAddress, charityPhone, charityEmail, charityMotto, charityTarget, charityDescription, charityFile, isLocked);
     }
 }

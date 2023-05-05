@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 8.0.32, for Linux (x86_64)
 --
--- Host: 127.0.0.1    Database: charity
+-- Host: 0.0.0.0    Database: charity
 -- ------------------------------------------------------
 -- Server version	8.0.32
 
@@ -75,12 +75,12 @@ DROP TABLE IF EXISTS `attention`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `attention` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `user_id` int NOT NULL,
   `object_id` int NOT NULL,
   `object_type` int NOT NULL,
+  `user_id` int NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `attention_FK` (`user_id`),
-  CONSTRAINT `attention_FK` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`)
+  KEY `FK3g2x012yp8g4ylx4jr2rr4pcl` (`user_id`),
+  CONSTRAINT `attention_FK` FOREIGN KEY (`id`) REFERENCES `user_account` (`Id`) ON DELETE RESTRICT ON UPDATE RESTRICT
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -112,17 +112,18 @@ CREATE TABLE `campaign_info` (
   `receive_amount` bigint NOT NULL,
   `donor_amount` bigint NOT NULL,
   `spent_amount` bigint NOT NULL,
-  `last_update_time` datetime NOT NULL,
+  `last_update_time` int NOT NULL,
   `start_date` date NOT NULL,
   `stop_receive_date` date NOT NULL,
   `start_active_date` date NOT NULL,
   `stop_active_date` date NOT NULL,
   `stop_date` date NOT NULL,
   `status` varchar(50) NOT NULL,
+  `is_active` bit(1) NOT NULL,
   PRIMARY KEY (`campaign_id`),
-  KEY `campaign_info_FK` (`organization_id`),
-  CONSTRAINT `campaign_info_FK` FOREIGN KEY (`organization_id`) REFERENCES `user` (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  KEY `campaign_info_FK_1` (`organization_id`),
+  CONSTRAINT `campaign_info_FK_1` FOREIGN KEY (`organization_id`) REFERENCES `user_account` (`Id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -131,6 +132,7 @@ CREATE TABLE `campaign_info` (
 
 LOCK TABLES `campaign_info` WRITE;
 /*!40000 ALTER TABLE `campaign_info` DISABLE KEYS */;
+INSERT INTO `campaign_info` VALUES (1,2,'xyz','asdfghjkl','tre em','tay bac','ho tro tre em vung cao',100000000,0,0,0,1683255009,'2023-06-01','2023-06-15','2023-06-16','2023-06-30','2023-06-30','dang van dong',_binary '');
 /*!40000 ALTER TABLE `campaign_info` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -228,28 +230,6 @@ INSERT INTO `districts` VALUES ('001','Ba Đình','Quận Ba Đình','ba_dinh','
 UNLOCK TABLES;
 
 --
--- Table structure for table `hibernate_sequence`
---
-
-DROP TABLE IF EXISTS `hibernate_sequence`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `hibernate_sequence` (
-  `next_val` bigint DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `hibernate_sequence`
---
-
-LOCK TABLES `hibernate_sequence` WRITE;
-/*!40000 ALTER TABLE `hibernate_sequence` DISABLE KEYS */;
-INSERT INTO `hibernate_sequence` VALUES (1);
-/*!40000 ALTER TABLE `hibernate_sequence` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `post_info`
 --
 
@@ -259,13 +239,13 @@ DROP TABLE IF EXISTS `post_info`;
 CREATE TABLE `post_info` (
   `post_id` int NOT NULL AUTO_INCREMENT,
   `content` text NOT NULL,
-  `tyoe` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `type` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `submit_time` bigint NOT NULL,
   `campaign_id` int NOT NULL,
   PRIMARY KEY (`post_id`),
   KEY `campaign_id_fkey` (`campaign_id`),
   CONSTRAINT `campaign_id_fkey` FOREIGN KEY (`campaign_id`) REFERENCES `campaign_info` (`campaign_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -274,6 +254,7 @@ CREATE TABLE `post_info` (
 
 LOCK TABLES `post_info` WRITE;
 /*!40000 ALTER TABLE `post_info` DISABLE KEYS */;
+INSERT INTO `post_info` VALUES (1,'Đây la nội dung bài đăng so 2','Đây là loại bài đăng (vận động, hoạt động, ...)',1683255120348,1);
 /*!40000 ALTER TABLE `post_info` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -327,8 +308,8 @@ CREATE TABLE `public_donation` (
   `target_object` varchar(255) DEFAULT NULL,
   `img` varchar(3000) DEFAULT NULL,
   PRIMARY KEY (`donation_id`),
-  KEY `public_donation_FK` (`donor_id`),
-  CONSTRAINT `public_donation_FK` FOREIGN KEY (`donor_id`) REFERENCES `user` (`user_id`)
+  KEY `public_donation_FK_1` (`donor_id`),
+  CONSTRAINT `public_donation_FK_1` FOREIGN KEY (`donor_id`) REFERENCES `user_account` (`Id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -355,9 +336,9 @@ CREATE TABLE `request` (
   `status` varchar(100) NOT NULL,
   PRIMARY KEY (`request_id`),
   KEY `request_FK` (`donation_id`),
-  KEY `request_FK_1` (`organization_id`),
+  KEY `request_FK_2` (`organization_id`),
   CONSTRAINT `request_FK` FOREIGN KEY (`donation_id`) REFERENCES `public_donation` (`donation_id`),
-  CONSTRAINT `request_FK_1` FOREIGN KEY (`organization_id`) REFERENCES `user` (`user_id`)
+  CONSTRAINT `request_FK_2` FOREIGN KEY (`organization_id`) REFERENCES `user_account` (`Id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -396,51 +377,59 @@ INSERT INTO `role` VALUES (1,'admin',NULL),(2,'organization',NULL),(3,'donor',NU
 UNLOCK TABLES;
 
 --
--- Table structure for table `user`
+-- Table structure for table `user_account`
 --
 
-DROP TABLE IF EXISTS `user`;
+DROP TABLE IF EXISTS `user_account`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `user` (
-  `user_id` int NOT NULL AUTO_INCREMENT,
-  `user_name` varchar(255) NOT NULL,
-  `email` varchar(255) NOT NULL,
-  `phone_number` int NOT NULL,
-  `province_code` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `district_code` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `ward_code` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `password` varchar(255) NOT NULL,
-  `salt_password` varchar(255) NOT NULL,
-  `is_verified` tinyint(1) NOT NULL,
-  `image` varchar(255) DEFAULT NULL,
-  `role_id` int NOT NULL,
-  `charity_name` varchar(255) DEFAULT NULL,
-  `charity_motto` varchar(3000) DEFAULT NULL,
-  `charity_target` varchar(3000) DEFAULT NULL,
-  `charity_description` varchar(3000) DEFAULT NULL,
+CREATE TABLE `user_account` (
+  `Id` int NOT NULL AUTO_INCREMENT,
+  `UserName` varchar(255) DEFAULT NULL,
+  `Password` varchar(255) DEFAULT NULL,
+  `SaltPassword` varchar(255) DEFAULT NULL,
+  `RoleId` int NOT NULL,
+  `Address` varchar(255) DEFAULT NULL,
+  `Email` varchar(50) DEFAULT NULL,
+  `PhoneNumber` varchar(255) DEFAULT NULL,
+  `CharityName` varchar(255) DEFAULT NULL,
+  `CharityAddress` varchar(255) DEFAULT NULL,
+  `CharityPhone` varchar(255) DEFAULT NULL,
+  `CharityEmail` varchar(255) DEFAULT NULL,
+  `CharityMotto` varchar(255) DEFAULT NULL,
+  `CharityTarget` varchar(255) DEFAULT NULL,
+  `CharityDescription` varchar(255) DEFAULT NULL,
+  `CharityFile` varchar(255) DEFAULT NULL,
+  `IsLocked` tinyint DEFAULT NULL,
+  `charity_address` varchar(255) DEFAULT NULL,
+  `charity_description` varchar(255) DEFAULT NULL,
+  `charity_email` varchar(255) DEFAULT NULL,
   `charity_file` varchar(255) DEFAULT NULL,
-  `social` longtext,
-  `status` varchar(20) NOT NULL,
-  PRIMARY KEY (`user_id`),
-  KEY `user_FK` (`role_id`),
-  KEY `user_FK_1` (`district_code`),
-  KEY `user_FK_2` (`province_code`),
-  KEY `user_FK_3` (`ward_code`),
-  CONSTRAINT `user_FK` FOREIGN KEY (`role_id`) REFERENCES `role` (`role_id`),
-  CONSTRAINT `user_FK_1` FOREIGN KEY (`district_code`) REFERENCES `districts` (`code`),
-  CONSTRAINT `user_FK_2` FOREIGN KEY (`province_code`) REFERENCES `provinces` (`code`),
-  CONSTRAINT `user_FK_3` FOREIGN KEY (`ward_code`) REFERENCES `wards` (`code`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `charity_motto` varchar(255) DEFAULT NULL,
+  `charity_name` varchar(255) DEFAULT NULL,
+  `charity_phone` varchar(255) DEFAULT NULL,
+  `charity_target` varchar(255) DEFAULT NULL,
+  `is_locked` tinyint DEFAULT NULL,
+  `phone_number` varchar(255) DEFAULT NULL,
+  `salt_password` varchar(255) DEFAULT NULL,
+  `user_name` varchar(255) DEFAULT NULL,
+  `role_id` int DEFAULT NULL,
+  PRIMARY KEY (`Id`),
+  KEY `user_account_FK` (`RoleId`),
+  KEY `FK4j8uoaeve853dcbl0tjd0yoq0` (`role_id`),
+  CONSTRAINT `FK4j8uoaeve853dcbl0tjd0yoq0` FOREIGN KEY (`role_id`) REFERENCES `role` (`role_id`),
+  CONSTRAINT `user_account_FK` FOREIGN KEY (`RoleId`) REFERENCES `role` (`role_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci AVG_ROW_LENGTH=3276;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `user`
+-- Dumping data for table `user_account`
 --
 
-LOCK TABLES `user` WRITE;
-/*!40000 ALTER TABLE `user` DISABLE KEYS */;
-/*!40000 ALTER TABLE `user` ENABLE KEYS */;
+LOCK TABLES `user_account` WRITE;
+/*!40000 ALTER TABLE `user_account` DISABLE KEYS */;
+INSERT INTO `user_account` VALUES (1,'hoang',NULL,NULL,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1),(2,'son',NULL,NULL,2,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,2),(3,'tien',NULL,NULL,3,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,3);
+/*!40000 ALTER TABLE `user_account` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -482,4 +471,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-04-19 22:10:42
+-- Dump completed on 2023-05-05 10:01:39
