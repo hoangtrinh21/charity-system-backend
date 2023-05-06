@@ -72,6 +72,47 @@ public class CampaignController {
         }
     }
 
+    @GetMapping("/get-by-id")
+    public ResponseEntity<Object> getById(@RequestHeader(value = "Token") String token,
+                                          @RequestParam(value = "campaign-id") String campaignIdStr) {
+        try {
+            boolean isAdminOrOrganization = accessService.isAdmin(token) || accessService.isOrganization(token);
+            Integer campaignId = Integer.parseInt(campaignIdStr);
+
+            if (isAdminOrOrganization)
+                return ResponseEntity.status(HttpStatus.OK)
+                        .body(campaignInfoRepository.findById(campaignId));
+
+            return ResponseEntity.status(HttpStatus.OK)
+                    .body(campaignInfoRepository.findByIdEqualsAndIsActiveTrue(campaignId));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(new ResponseModel(e.getClass()));
+        }
+    }
+
+    @GetMapping("/get-by-organization")
+    public ResponseEntity<Object> getByOrganization(@RequestHeader(value = "Token") String token,
+                                          @RequestParam(value = "organization-id") String organizationIdStr) {
+        try {
+            boolean isAdminOrOrganization = accessService.isAdmin(token) || accessService.isOrganization(token);
+            Integer organizationId = Integer.parseInt(organizationIdStr);
+
+            if (isAdminOrOrganization)
+                return ResponseEntity.status(HttpStatus.OK)
+                        .body(campaignInfoRepository.findByOrganization_IdEquals(organizationId));
+
+            return ResponseEntity.status(HttpStatus.OK)
+                    .body(campaignInfoRepository.findByOrganization_IdEqualsAndIsActiveTrue(organizationId));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(new ResponseModel(e.getClass()));
+        }
+    }
+
+
     /**
      * Lấy các chiến dịch theo các diều kiện (campaign name, region,...)
      * @param params các diều kiện
@@ -82,7 +123,21 @@ public class CampaignController {
                                                         @RequestParam Map<String, String> params) {
         try {
             boolean isAdminOrOrganization = accessService.isAdmin(token) || accessService.isOrganization(token);
+            System.out.println(isAdminOrOrganization);
 
+            Integer campaignId      = params.get("campaign-id") == null ?
+                    null : Integer.parseInt(params.get("campaign-id"));
+            Integer organizationId  = params.get("organization-id") == null ?
+                    null : Integer.parseInt(params.get("organization-id"));
+            String organizationName = params.get("organization-name");
+            String campaignName     = params.get("campaign-name");
+            String region           = params.get("region");
+            String campaignType     = params.get("campaign-type");
+            String targetObject     = params.get("target-object");
+            String status           = params.get("status");
+            System.out.println(campaignId);
+            if (campaignId != null) return ResponseEntity.status(HttpStatus.OK)
+                    .body(campaignInfoRepository.findById(campaignId).get());;
             List<CampaignInfo> campaignInfos = campaignService
                     .getByCondition(params, isAdminOrOrganization);
             return ResponseEntity.status(HttpStatus.OK)

@@ -27,14 +27,19 @@ public class CampaignService {
         String campaignName     = conditions.get("campaign-name");
         String region           = conditions.get("region");
         String campaignType     = conditions.get("campaign-type");
-        String targerObject     = conditions.get("target-object");
+        String targetObject     = conditions.get("target-object");
         String status           = conditions.get("status");
+        System.out.println(isAdmin);
         if (isAdmin)
+//            return campaignInfoRepository.findByIdEqualsAndOrganization_IdEqualsAndOrganization_UserNameLikeAndCampaignNameLikeAndRegionLikeAndCampaignTypeLikeAndIsActiveTrue(
+//                    campaignId, organizationId, organizationName, campaignName, region, campaignType
+//            )
             return campaignInfoRepository.findByIdEqualsAndOrganization_IdEqualsAndOrganization_UserNameLikeAndCampaignNameLikeAndTargetObjectLikeAndRegionLikeAndCampaignTypeLikeAndStatusLike(
-                    campaignId, organizationId, organizationName, campaignName, targerObject, region, campaignType, status
+                    campaignId, organizationId, organizationName, campaignName, targetObject, region, campaignType, status
             );
         return campaignInfoRepository.findByIdEqualsAndOrganization_IdEqualsAndOrganization_UserNameLikeAndCampaignNameLikeAndTargetObjectLikeAndRegionLikeAndCampaignTypeLikeAndStatusLikeAndIsActiveTrue(
-                campaignId, organizationId, organizationName, campaignName, targerObject, region, campaignType, status);
+                campaignId, organizationId, organizationName, campaignName, targetObject, region, campaignType, status);
 
     }
+
 }

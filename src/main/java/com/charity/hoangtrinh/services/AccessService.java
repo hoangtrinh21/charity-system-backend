@@ -31,7 +31,7 @@ public class AccessService {
     }
 
     public boolean isOrganization(String token) {
-        System.out.println(Objects.requireNonNull(CacheConfig.accessToken.get(token)).getRole().getRoleName());
+//        System.out.println(Objects.requireNonNull(CacheConfig.accessToken.get(token)).getRole().getRoleName());
         return token != null && checkAccessToken(token) == 200 &&
                 Objects.requireNonNull(CacheConfig.accessToken.get(token)).getRole().getRoleName()
                         .equals(Constants.ROLE_ORGANIZATION);

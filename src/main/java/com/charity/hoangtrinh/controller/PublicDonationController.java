@@ -1,9 +1,12 @@
 package com.charity.hoangtrinh.controller;
 
 import com.charity.hoangtrinh.dbs.sql.charitydatabase.entities.PublicDonation;
+import com.charity.hoangtrinh.dbs.sql.charitydatabase.entities.Request;
 import com.charity.hoangtrinh.dbs.sql.charitydatabase.entities.UserAccount;
 import com.charity.hoangtrinh.dbs.sql.charitydatabase.repositories.PublicDonationRepository;
+import com.charity.hoangtrinh.dbs.sql.charitydatabase.repositories.RequestRepository;
 import com.charity.hoangtrinh.dbs.sql.charitydatabase.repositories.UserAccountRepository;
+import com.charity.hoangtrinh.model.Donation;
 import com.charity.hoangtrinh.model.ResponseModel;
 import com.charity.hoangtrinh.services.AccessService;
 import com.charity.hoangtrinh.utils.JsonUtil;
@@ -14,6 +17,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -26,16 +30,45 @@ public class PublicDonationController {
     private AccessService accessService;
     @Autowired
     private UserAccountRepository userAccountRepository;
+    @Autowired
+    private RequestRepository requestRepository;
 
     /**
      * API lấy toàn bộ vật phẩm ủng hộ
      */
     @GetMapping("/get-all")
-    public ResponseEntity<ResponseModel> getAllPublicDonation() {
+    public ResponseEntity<Object> getAllPublicDonation() {
         try {
             List<PublicDonation> publicDonations = publicDonationRepository.findAll();
+            List<Donation> donationList = new ArrayList<>();
+            Donation donationTmp;
+            int id, idDonor, idOrganization;
+            String status, organizationReceived, name, donationAddress, donationObject, donorName, address, province,
+                    district, ward, date, description, phone;
+            List<Request> requestList;
+            List<String> images;
+            for (PublicDonation publicDonation : publicDonations) {
+                id = publicDonation.getId();
+                idDonor = publicDonation.getDonor().getId();
+                status = publicDonation.getStatus();
+                organizationReceived = publicDonation.getStatus();
+                idOrganization = publicDonation.getReceivingOrganization().getId();
+                requestList = requestRepository.findByDonation_IdEquals(id);
+                name = publicDonation.getName();
+                donationAddress = publicDonation.getTargetAddress();
+                donationObject = publicDonation.getTargetObject();
+                donorName = publicDonation.getDonor().getUserName();
+                phone = publicDonation.getDonor().getPhoneNumber();
+//                province;
+//                district;
+//                ward;
+//                date;
+//                description;
+//                images;
+            }
+
             return ResponseEntity.status(HttpStatus.OK)
-                    .body(new ResponseModel(publicDonations));
+                    .body(publicDonations);
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
@@ -108,7 +141,6 @@ public class PublicDonationController {
 
     /**
      * API sửa thông tin 1 vật phẩm
-     * @param header header chứa thông tin userid và accesstoken
      * @param donationId id của vật phẩm ủng hộ
      * @param body body
      */

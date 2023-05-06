@@ -30,8 +30,9 @@ public class PublicDonation {
     @Column(name = "status", nullable = false, length = 100)
     private String status;
 
-    @Column(name = "receiving_organization_id")
-    private Integer receivingOrganizationId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "receiving_organization_id")
+    private UserAccount receivingOrganization;
 
     @Column(name = "target_address")
     private String targetAddress;

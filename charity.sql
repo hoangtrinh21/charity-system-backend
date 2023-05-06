@@ -19,9 +19,9 @@
 -- Table structure for table `administrative_regions`
 --
 
-DROP DATABASE IF EXIST `charity`;
+DROP DATABASE IF EXISTS `charity`;
 
-CREATE DATABSE `charity`;
+CREATE DATABASE `charity`;
 
 USE `charity`;
 
