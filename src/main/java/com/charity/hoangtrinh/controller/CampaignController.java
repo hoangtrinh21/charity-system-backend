@@ -123,25 +123,23 @@ public class CampaignController {
                                                         @RequestParam Map<String, String> params) {
         try {
             boolean isAdminOrOrganization = accessService.isAdmin(token) || accessService.isOrganization(token);
-            System.out.println(isAdminOrOrganization);
-
-            Integer campaignId      = params.get("campaign-id") == null ?
-                    null : Integer.parseInt(params.get("campaign-id"));
-            Integer organizationId  = params.get("organization-id") == null ?
-                    null : Integer.parseInt(params.get("organization-id"));
             String organizationName = params.get("organization-name");
             String campaignName     = params.get("campaign-name");
             String region           = params.get("region");
             String campaignType     = params.get("campaign-type");
             String targetObject     = params.get("target-object");
             String status           = params.get("status");
-            System.out.println(campaignId);
-            if (campaignId != null) return ResponseEntity.status(HttpStatus.OK)
-                    .body(campaignInfoRepository.findById(campaignId).get());;
-            List<CampaignInfo> campaignInfos = campaignService
-                    .getByCondition(params, isAdminOrOrganization);
+
+            if (isAdminOrOrganization)
+                return ResponseEntity.status(HttpStatus.OK)
+                        .body(campaignInfoRepository.findByOrganization_UserNameLikeAndCampaignNameLikeAndTargetObjectLikeAndRegionLikeAndCampaignTypeLikeAndStatusLike(
+                                organizationName, campaignName, region, campaignType, targetObject, status
+                        ));
+            
             return ResponseEntity.status(HttpStatus.OK)
-                    .body(campaignInfos);
+                    .body(campaignInfoRepository.findByOrganization_UserNameLikeAndCampaignNameLikeAndTargetObjectLikeAndRegionLikeAndCampaignTypeLikeAndStatusLikeAndIsActiveTrue(
+                            organizationName, campaignName, region, campaignType, targetObject, status
+                    ));
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
