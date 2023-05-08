@@ -357,86 +357,83 @@ LOCK TABLES `request` WRITE;
 /*!40000 ALTER TABLE `request` ENABLE KEYS */;
 UNLOCK TABLES;
 
---
--- Table structure for table `role`
---
 
-DROP TABLE IF EXISTS `role`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `role` (
-  `role_id` int NOT NULL AUTO_INCREMENT,
-  `role_name` varchar(255) DEFAULT NULL,
-  `role_desc` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`role_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS user_account;
+CREATE TABLE charity.user_account (
+  Id int NOT NULL AUTO_INCREMENT,
+  Name varchar(255) DEFAULT NULL,
+  UserName varchar(255) DEFAULT NULL,
+  PhoneNumber varchar(20) DEFAULT NULL,
+  Password varchar(255) DEFAULT NULL,
+  SaltPassword varchar(255) DEFAULT NULL,
+  RoleId int DEFAULT NULL,
+  Address varchar(255) DEFAULT NULL,
+  Email varchar(50) DEFAULT NULL,
+  IsLocked tinyint DEFAULT 0,
+  CharityId int DEFAULT NULL,
+  Province varchar(50) DEFAULT NULL,
+  District varchar(50) DEFAULT NULL,
+  Ward varchar(50) DEFAULT NULL,
+  ProvinceId varchar(10) DEFAULT NULL,
+  DistrictId varchar(10) DEFAULT NULL,
+  WardId varchar(10) DEFAULT NULL,
+  PRIMARY KEY (Id)
+)
+ENGINE = INNODB,
+AVG_ROW_LENGTH = 3276,
+CHARACTER SET utf8mb4,
+COLLATE utf8mb4_0900_ai_ci;
 
---
--- Dumping data for table `role`
---
 
-LOCK TABLES `role` WRITE;
-/*!40000 ALTER TABLE `role` DISABLE KEYS */;
-INSERT INTO `role` VALUES (1,'admin',NULL),(2,'organization',NULL),(3,'donor',NULL);
-/*!40000 ALTER TABLE `role` ENABLE KEYS */;
-UNLOCK TABLES;
+DROP TABLE IF EXISTS role;
+CREATE TABLE charity.role (
+  Id int NOT NULL AUTO_INCREMENT,
+  RoleName varchar(255) NOT NULL DEFAULT '',
+  PRIMARY KEY (Id)
+)
+ENGINE = INNODB,
+AUTO_INCREMENT = 4,
+AVG_ROW_LENGTH = 8192,
+CHARACTER SET utf8mb4,
+COLLATE utf8mb4_0900_ai_ci,
+COMMENT = 'Lưu thông tin vai trò';
 
---
--- Table structure for table `user_account`
---
 
-DROP TABLE IF EXISTS `user_account`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `user_account` (
-  `Id` int NOT NULL AUTO_INCREMENT,
-  `UserName` varchar(255) DEFAULT NULL,
-  `Password` varchar(255) DEFAULT NULL,
-  `SaltPassword` varchar(255) DEFAULT NULL,
-  `RoleId` int NOT NULL,
-  `Address` varchar(255) DEFAULT NULL,
-  `Email` varchar(50) DEFAULT NULL,
-  `PhoneNumber` varchar(255) DEFAULT NULL,
-  `CharityName` varchar(255) DEFAULT NULL,
-  `CharityAddress` varchar(255) DEFAULT NULL,
-  `CharityPhone` varchar(255) DEFAULT NULL,
-  `CharityEmail` varchar(255) DEFAULT NULL,
-  `CharityMotto` varchar(255) DEFAULT NULL,
-  `CharityTarget` varchar(255) DEFAULT NULL,
-  `CharityDescription` varchar(255) DEFAULT NULL,
-  `CharityFile` varchar(255) DEFAULT NULL,
-  `IsLocked` tinyint DEFAULT NULL,
-  `charity_address` varchar(255) DEFAULT NULL,
-  `charity_description` varchar(255) DEFAULT NULL,
-  `charity_email` varchar(255) DEFAULT NULL,
-  `charity_file` varchar(255) DEFAULT NULL,
-  `charity_motto` varchar(255) DEFAULT NULL,
-  `charity_name` varchar(255) DEFAULT NULL,
-  `charity_phone` varchar(255) DEFAULT NULL,
-  `charity_target` varchar(255) DEFAULT NULL,
-  `is_locked` tinyint DEFAULT NULL,
-  `phone_number` varchar(255) DEFAULT NULL,
-  `salt_password` varchar(255) DEFAULT NULL,
-  `user_name` varchar(255) DEFAULT NULL,
-  `role_id` int DEFAULT NULL,
-  PRIMARY KEY (`Id`),
-  KEY `user_account_FK` (`RoleId`),
-  KEY `FK4j8uoaeve853dcbl0tjd0yoq0` (`role_id`),
-  CONSTRAINT `FK4j8uoaeve853dcbl0tjd0yoq0` FOREIGN KEY (`role_id`) REFERENCES `role` (`role_id`),
-  CONSTRAINT `user_account_FK` FOREIGN KEY (`RoleId`) REFERENCES `role` (`role_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci AVG_ROW_LENGTH=3276;
-/*!40101 SET character_set_client = @saved_cs_client */;
+INSERT INTO role (Id, RoleName) VALUES
+(1, 'Admin'),
+(2, 'UserNormal'),
+(3, 'UserCharity');
 
---
--- Dumping data for table `user_account`
---
 
-LOCK TABLES `user_account` WRITE;
-/*!40000 ALTER TABLE `user_account` DISABLE KEYS */;
-INSERT INTO `user_account` VALUES (1,'hoang',NULL,NULL,1,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1),(2,'son',NULL,NULL,2,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,2),(3,'tien',NULL,NULL,3,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,3);
-/*!40000 ALTER TABLE `user_account` ENABLE KEYS */;
-UNLOCK TABLES;
+
+DROP TABLE IF EXISTS charities;
+CREATE TABLE charity.charities (
+  Id int NOT NULL AUTO_INCREMENT,
+  CharityMotto varchar(1000) DEFAULT NULL,
+  CharityTarget varchar(1000) DEFAULT NULL,
+  CharityDescription varchar(1000) DEFAULT NULL,
+  CharityFacebook varchar(500) DEFAULT NULL,
+  CharityInstagram varchar(500) DEFAULT NULL,
+  CharityTwitter varchar(500) DEFAULT NULL,
+  CharityLinkedIn varchar(500) DEFAULT NULL,
+  CharityIntroVideo varchar(500) DEFAULT NULL,
+  CharityBank varchar(255) DEFAULT NULL,
+  CharityFile varchar(255) DEFAULT NULL,
+  CharityAccountNumber varchar(255) DEFAULT NULL,
+  Avatar varchar(255) DEFAULT NULL,
+  CharityImages varchar(3000) DEFAULT NULL,
+  GoogleMap varchar(255) DEFAULT NULL,
+  IsVerificated tinyint DEFAULT 0,
+  NumFollower int DEFAULT NULL,
+  NumCampaign int DEFAULT NULL,
+  Reach varchar(255) DEFAULT NULL,
+  Star tinyint DEFAULT 0,
+  PRIMARY KEY (Id)
+)
+ENGINE = INNODB,
+AVG_ROW_LENGTH = 5461,
+CHARACTER SET utf8mb4,
+COLLATE utf8mb4_0900_ai_ci;
 
 --
 -- Table structure for table `wards`

@@ -52,4 +52,10 @@ public class AccessService {
     public UserAccount getUserByToken(String token) {
         return CacheConfig.accessToken.getIfPresent(token);
     }
+
+    public boolean isDonor(String token) {
+        return token != null && checkAccessToken(token) == 200 &&
+                Objects.requireNonNull(CacheConfig.accessToken.get(token)).getRole().getRoleName()
+                        .equals(Constants.ROLE_DONOR);
+    }
 }

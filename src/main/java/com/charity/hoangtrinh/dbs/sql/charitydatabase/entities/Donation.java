@@ -1,6 +1,7 @@
 package com.charity.hoangtrinh.dbs.sql.charitydatabase.entities;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -10,6 +11,7 @@ import java.time.LocalDate;
 @Setter
 @Entity
 @Table(name = "donation")
+@NoArgsConstructor
 public class Donation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -47,4 +49,39 @@ public class Donation {
     @Column(name = "images")
     private String images;
 
+    public Donation(UserAccount idDonor, String name, String status, String donationAddress, String donationObject, LocalDate date, String description, String images) {
+        this.idDonor = idDonor;
+        this.name = name;
+        this.status = status;
+        this.donationAddress = donationAddress;
+        this.donationObject = donationObject;
+        this.date = date;
+        this.description = description;
+        this.images = images;
+    }
+
+    public Donation(Integer id, UserAccount idDonor, String name, String status, UserAccount organizationReceived, String donationAddress, String donationObject, LocalDate date, String description, String images) {
+        this.id = id;
+        this.idDonor = idDonor;
+        this.name = name;
+        this.status = status;
+        this.organizationReceived = organizationReceived;
+        this.donationAddress = donationAddress;
+        this.donationObject = donationObject;
+        this.date = date;
+        this.description = description;
+        this.images = images;
+    }
+
+    public Donation(Integer id, UserAccount idDonor, String name, String status, String donationAddress, String donationObject, LocalDate date, String description, String images) {
+        this.id = id;
+        this.idDonor = idDonor;
+        this.name = name;
+        this.status = status;
+        this.donationAddress = donationAddress;
+        this.donationObject = donationObject;
+        this.date = date;
+        this.description = description;
+        this.images = images;
+    }
 }

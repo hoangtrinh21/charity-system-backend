@@ -207,7 +207,7 @@ public class CampaignController {
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                         .body(new ResponseModel("You are not organization!"));
             JsonObject jsonBody = JsonParser.parseString(body).getAsJsonObject();
-            int campaignId      = jsonBody.get("campaign-id").getAsInt();
+            int campaignId      = jsonBody.get("campaign_id").getAsInt();
             Integer organizationId  = accessService.getUserByToken(token).getId();
 
             if (!accessService.getUserByCampaignId(campaignId).getId().equals(organizationId))
