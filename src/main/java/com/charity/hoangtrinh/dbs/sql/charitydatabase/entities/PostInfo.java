@@ -1,16 +1,14 @@
 package com.charity.hoangtrinh.dbs.sql.charitydatabase.entities;
 
-
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+
 @Getter
 @Setter
-@Entity(name = "post_info")
+@Entity
 @Table(name = "post_info")
-@NoArgsConstructor
 public class PostInfo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,10 +25,12 @@ public class PostInfo {
     @Column(name = "submit_time", nullable = false)
     private Long submitTime;
 
-
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "campaign_id", nullable = false)
     private CampaignInfo campaign;
+
+    public PostInfo() {
+    }
 
     public PostInfo(String content, String type, Long submitTime, CampaignInfo campaign) {
         this.content = content;

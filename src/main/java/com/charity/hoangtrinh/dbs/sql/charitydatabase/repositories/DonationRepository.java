@@ -7,5 +7,5 @@ import org.springframework.lang.Nullable;
 import java.util.List;
 
 public interface DonationRepository extends JpaRepository<Donation, Integer> {
-    List<Donation> findByNameLikeAndStatusLikeAndDonationAddressLikeAndDonationObjectLikeAndIdDonor_UserNameLike(@Nullable String name, @Nullable String status, @Nullable String donationAddress, @Nullable String donationObject, @Nullable String userName);
+    List<Donation> findByIdDonor_NameLikeAndNameLikeAndStatusLikeAndDonationAddressLikeAndDonationObjectLike(@Nullable String name, @Nullable String name1, @Nullable String status, @Nullable String donationAddress, @Nullable String donationObject);
 }

@@ -3,6 +3,7 @@ package com.charity.hoangtrinh.controller;
 import com.charity.hoangtrinh.dbs.sql.charitydatabase.entities.CampaignInfo;
 import com.charity.hoangtrinh.dbs.sql.charitydatabase.entities.PostInfo;
 import com.charity.hoangtrinh.dbs.sql.charitydatabase.repositories.CampaignInfoRepository;
+import com.charity.hoangtrinh.dbs.sql.charitydatabase.repositories.CharityRepository;
 import com.charity.hoangtrinh.dbs.sql.charitydatabase.repositories.PostInfoRepository;
 import com.charity.hoangtrinh.model.ResponseModel;
 import com.charity.hoangtrinh.services.AccessService;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 @RestController
 @RequestMapping("/charity/post/")
@@ -26,6 +28,8 @@ public class PostController {
     private AccessService accessService;
     @Autowired
     private CampaignInfoRepository campaignInfoRepository;
+    @Autowired
+    private CharityRepository charityRepository;
 
 
     @GetMapping("/get-post")
@@ -33,7 +37,7 @@ public class PostController {
         try {
             Integer campaignId = Integer.parseInt(campaignIdStr);
 
-            List<PostInfo> postInfoList = postInfoRepository.findByCampaign_Id(campaignId);
+            List<PostInfo> postInfoList = postInfoRepository.findByCampaign_IdEquals(campaignId);
             return ResponseEntity.status(HttpStatus.OK)
                     .body(postInfoList);
         } catch (Exception e) {
@@ -70,10 +74,11 @@ public class PostController {
         JsonObject jsonBody = JsonParser.parseString(body).getAsJsonObject();
 
         try {
-            Integer campaignId = JsonUtil.getInt(jsonBody, "campaign-id");
+            Integer campaignId = JsonUtil.getInt(jsonBody, "campaign_id");
 
             assert campaignId != null;
-            if (!accessService.getUserByCampaignId(campaignId).equals(accessService.getUserByToken(token)))
+            if (!Objects.equals(charityRepository.getReferenceById(accessService.getUserByToken(token).getCharityId()),
+                    accessService.getUserByCampaignId(campaignId)))
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
                         .body(new ResponseModel("You do not have permission to this campaign!"));
 
@@ -107,9 +112,11 @@ public class PostController {
 
         try {
             Integer postId = JsonUtil.getInt(jsonBody, "post-id");
-            Integer campaignId = JsonUtil.getInt(jsonBody, "campaign-id");
+            Integer campaignId = JsonUtil.getInt(jsonBody, "campaign_id");
+
             assert campaignId != null;
-            if (!accessService.getUserByCampaignId(campaignId).equals(accessService.getUserByToken(token)))
+            if (!Objects.equals(charityRepository.getReferenceById(accessService.getUserByToken(token).getCharityId()),
+                    accessService.getUserByCampaignId(campaignId)))
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
                         .body(new ResponseModel("You do not have permission to this campaign!"));
 
@@ -145,7 +152,8 @@ public class PostController {
 
         try {
             assert campaignId != null;
-            if (!accessService.getUserByCampaignId(Integer.parseInt(campaignId)).equals(accessService.getUserByToken(token)))
+            if (!Objects.equals(charityRepository.getReferenceById(accessService.getUserByToken(token).getCharityId()),
+                    accessService.getUserByCampaignId(Integer.parseInt(campaignId))))
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
                         .body(new ResponseModel("You do not have permission to this campaign!"));
 

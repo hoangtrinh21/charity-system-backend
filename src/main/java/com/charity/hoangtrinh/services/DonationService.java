@@ -4,7 +4,9 @@ import com.charity.hoangtrinh.dbs.sql.charitydatabase.entities.Donation;
 import com.charity.hoangtrinh.dbs.sql.charitydatabase.repositories.RequestRepository;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class DonationService {
     @Autowired
     private RequestRepository requestRepository;
@@ -12,7 +14,7 @@ public class DonationService {
         JSONObject object = new JSONObject();
         object.put("id", String.valueOf(donation.getId()));
         object.put("idDonor", String.valueOf(donation.getIdDonor().getId()));
-        object.put("organizationReceived", donation.getOrganizationReceived().getCharityName());
+        object.put("organizationReceived", donation.getOrganizationReceived());
         object.put("name", donation.getName());
         object.put("donationAddress", donation.getDonationAddress());
         object.put("donationObject", donation.getDonationObject());
@@ -25,7 +27,7 @@ public class DonationService {
         object.put("date", String.valueOf(donation.getDate()));
         object.put("description", donation.getDescription());
         object.put("images", donation.getImages());
-        object.put("request", requestRepository.findByDonation_IdEquals(donation.getIdDonor().getId()));
+        object.put("request", requestRepository.findByDonation_IdEquals(donation.getId()));
 
         return object;
     }

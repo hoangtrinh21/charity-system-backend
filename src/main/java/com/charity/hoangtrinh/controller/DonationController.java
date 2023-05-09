@@ -4,6 +4,7 @@ import com.charity.hoangtrinh.dbs.sql.charitydatabase.entities.Charity;
 import com.charity.hoangtrinh.dbs.sql.charitydatabase.entities.Donation;
 import com.charity.hoangtrinh.dbs.sql.charitydatabase.entities.Request;
 import com.charity.hoangtrinh.dbs.sql.charitydatabase.entities.UserAccount;
+import com.charity.hoangtrinh.dbs.sql.charitydatabase.repositories.CharityRepository;
 import com.charity.hoangtrinh.dbs.sql.charitydatabase.repositories.DonationRepository;
 import com.charity.hoangtrinh.dbs.sql.charitydatabase.repositories.RequestRepository;
 import com.charity.hoangtrinh.dbs.sql.charitydatabase.repositories.UserAccountRepository;
@@ -38,6 +39,8 @@ public class DonationController {
     private UserAccountRepository userAccountRepository;
     @Autowired
     private RequestRepository requestRepository;
+    @Autowired
+    private CharityRepository charityRepository;
 
     @GetMapping("/get-all")
     public ResponseEntity<Object> getAllDonation(@RequestHeader(value = "Token") String token) {
@@ -76,7 +79,7 @@ public class DonationController {
             String donationObject = conditions.get("donation_object");
 
             return ResponseEntity.status(HttpStatus.OK)
-                    .body(donationRepository.findByNameLikeAndStatusLikeAndDonationAddressLikeAndDonationObjectLikeAndIdDonor_UserNameLike(
+                    .body(donationRepository.findByIdDonor_NameLikeAndNameLikeAndStatusLikeAndDonationAddressLikeAndDonationObjectLike(
                     name, status, donationAddress, donationObject, donorName));
         } catch (Exception e) {
             e.printStackTrace();
@@ -102,7 +105,7 @@ public class DonationController {
             String description = jsonBody.getString("description");
             String images = jsonBody.getString("images");
 
-            Donation donation = new Donation(donor, name, "Chưa nhận", donationAddress, donationObject, LocalDate.now(), description, images);
+            Donation donation = new Donation(LocalDate.now(), description, donationAddress, donationObject, images, name, "Chưa nhận", donor);
             donationRepository.save(donation);
             return ResponseEntity.status(HttpStatus.OK)
                     .body("Inserted donation!");
@@ -139,7 +142,7 @@ public class DonationController {
             donation.setImages(jsonBody.get("images").getAsString());
             JsonElement organizationIdElement = jsonBody.get("organizationId");
             if (organizationIdElement != null)
-                donation.setOrganizationReceived(userAccountRepository.getReferenceById(organizationIdElement.getAsInt()));
+                donation.setOrganizationReceived(charityRepository.getReferenceById(organizationIdElement.getAsInt()));
 
             donationRepository.save(donation);
             return ResponseEntity.status(HttpStatus.OK)
@@ -154,27 +157,21 @@ public class DonationController {
     @PostMapping("add-request")
     public ResponseEntity<Object> addRequest(@RequestHeader(value = "Token") String token, @RequestBody String body) {
         try {
-            boolean isDonor = accessService.isDonor(token);
-            if (!isDonor)
+            boolean isOrganization = accessService.isOrganization(token);
+            if (!isOrganization)
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                        .body(new ResponseModel("You are not donor!"));
+                        .body(new ResponseModel("You are not organization!"));
             JSONObject jsonBody = new JSONObject(body);
 
-            UserAccount donor = accessService.getUserByToken(token);
+            Charity organization = charityRepository
+                    .getReferenceById(accessService.getUserByToken(token).getCharityId());
 
             int donationId = jsonBody.getInt("donationId");
             Donation donation = donationRepository.getReferenceById(donationId);
 
-            if (!Objects.equals(donation.getIdDonor(), donor))
-                return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                        .body(new ResponseModel("You are not permission!"));
-
-            int organizationId = jsonBody.getInt("organizationId");
-            Charity charity =
-
-            donationRepository.save(donation);
+            requestRepository.save(new Request(donation, organization, "Đợi xác nhận"));
             return ResponseEntity.status(HttpStatus.OK)
-                    .body("Updated donation!");
+                    .body("Added request!");
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)

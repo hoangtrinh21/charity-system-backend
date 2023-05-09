@@ -43,12 +43,11 @@ public class AccessController {
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                         .body(new ResponseModel("Userid or token is null!"));
 
-            Optional<UserAccount> userOptional = userAccountRepository.findById(userId);
-            if (!userOptional.isPresent())
-                return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                        .body(new ResponseModel("Not found user in database"));
-            UserAccount user = userOptional.get();
-            CacheConfig.accessToken.put(token, user);
+            Optional<UserAccount> userAccountOptional = userAccountRepository.findById(userId);
+            if (!userAccountOptional.isPresent())
+                return ResponseEntity.status(HttpStatus.OK)
+                        .body(new ResponseModel("Do not have user: " + userId));
+            CacheConfig.accessToken.put(token, userAccountOptional.get());
 
             logger.info(CacheConfig.accessToken.asMap().toString());
             return ResponseEntity.status(HttpStatus.OK)

@@ -1,13 +1,15 @@
 package com.charity.hoangtrinh.dbs.sql.charitydatabase.entities;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
+import java.util.LinkedHashSet;
+import java.util.Objects;
+import java.util.Set;
 
 @Getter
 @Setter
-@Entity
+@Entity(name = "user_account")
 @Table(name = "user_account")
 public class UserAccount {
     @Id
@@ -63,4 +65,42 @@ public class UserAccount {
     @Column(name = "WardId", length = 10)
     private String wardId;
 
+    @OneToMany(mappedBy = "idDonor")
+    private Set<Donation> donations = new LinkedHashSet<>();
+
+    @Override
+    public String toString() {
+        return "UserAccount{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", userName='" + userName + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", password='" + password + '\'' +
+                ", saltPassword='" + saltPassword + '\'' +
+                ", roleId=" + roleId +
+                ", address='" + address + '\'' +
+                ", email='" + email + '\'' +
+                ", isLocked=" + isLocked +
+                ", charityId=" + charityId +
+                ", province='" + province + '\'' +
+                ", district='" + district + '\'' +
+                ", ward='" + ward + '\'' +
+                ", provinceId='" + provinceId + '\'' +
+                ", districtId='" + districtId + '\'' +
+                ", wardId='" + wardId + '\'' +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        UserAccount that = (UserAccount) o;
+        return Objects.equals(id, that.id) && Objects.equals(name, that.name) && Objects.equals(userName, that.userName) && Objects.equals(phoneNumber, that.phoneNumber) && Objects.equals(password, that.password) && Objects.equals(saltPassword, that.saltPassword) && Objects.equals(roleId, that.roleId) && Objects.equals(address, that.address) && Objects.equals(email, that.email) && Objects.equals(isLocked, that.isLocked) && Objects.equals(charityId, that.charityId) && Objects.equals(province, that.province) && Objects.equals(district, that.district) && Objects.equals(ward, that.ward) && Objects.equals(provinceId, that.provinceId) && Objects.equals(districtId, that.districtId) && Objects.equals(wardId, that.wardId);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, userName, phoneNumber, password, saltPassword, roleId, address, email, isLocked, charityId, province, district, ward, provinceId, districtId, wardId);
+    }
 }

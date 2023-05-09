@@ -5,8 +5,9 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.time.Instant;
 import java.time.LocalDate;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -21,7 +22,7 @@ public class CampaignInfo {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "organization_id")
-    private UserAccount organization;
+    private Charity organization;
 
     @Column(name = "campaign_name", nullable = false)
     private String campaignName;
@@ -75,7 +76,17 @@ public class CampaignInfo {
     @Column(name = "is_active", nullable = false)
     private Boolean isActive = false;
 
-    public CampaignInfo(UserAccount organization, String campaignName, String introduction, String targetObject, String region, String campaignType, Long targetAmount, Long receiveAmount, Long donorAmount, Long spentAmount, Integer lastUpdateTime, LocalDate startDate, LocalDate stopReceiveDate, LocalDate startActiveDate, LocalDate stopActiveDate, LocalDate stopDate, String status, Boolean isActive) {
+    @OneToMany(mappedBy = "campaign")
+    private Set<CampaignInput> campaignInputs = new LinkedHashSet<>();
+
+    @OneToMany(mappedBy = "campaign")
+    private Set<CampaignOutput> campaignOutputs = new LinkedHashSet<>();
+
+    @OneToMany(mappedBy = "campaign")
+    private Set<PostInfo> postInfos = new LinkedHashSet<>();
+
+     public CampaignInfo(Integer id, Charity organization, String campaignName, String introduction, String targetObject, String region, String campaignType, Long targetAmount, Long receiveAmount, Long donorAmount, Long spentAmount, Integer lastUpdateTime, LocalDate startDate, LocalDate stopReceiveDate, LocalDate startActiveDate, LocalDate stopActiveDate, LocalDate stopDate, String status, Boolean isActive) {
+        this.id = id;
         this.organization = organization;
         this.campaignName = campaignName;
         this.introduction = introduction;
@@ -96,7 +107,7 @@ public class CampaignInfo {
         this.isActive = isActive;
     }
 
-    public CampaignInfo(UserAccount organization, String campaignName, String introduction, String targetObject, String region, String campaignType, Long targetAmount, Long receiveAmount, Long donorAmount, Long spentAmount, Integer lastUpdateTime, LocalDate startDate, LocalDate stopReceiveDate, LocalDate startActiveDate, LocalDate stopActiveDate, LocalDate stopDate, String status, boolean b) {
+    public CampaignInfo(Charity organization, String campaignName, String introduction, String targetObject, String region, String campaignType, Long targetAmount, Long receiveAmount, Long donorAmount, Long spentAmount, Integer lastUpdateTime, LocalDate startDate, LocalDate stopReceiveDate, LocalDate startActiveDate, LocalDate stopActiveDate, LocalDate stopDate, String status, Boolean isActive) {
         this.organization = organization;
         this.campaignName = campaignName;
         this.introduction = introduction;
@@ -114,53 +125,6 @@ public class CampaignInfo {
         this.stopActiveDate = stopActiveDate;
         this.stopDate = stopDate;
         this.status = status;
-        this.isActive = b;
-    }
-
-    public CampaignInfo(int campaignId, UserAccount organization, String campaignName, String introduction, String targetObject, String region, String campaignType, Long targetAmount, Long receiveAmount, Long donorAmount, Long spentAmount, Integer lastUpdateTime, LocalDate startDate, LocalDate stopReceiveDate, LocalDate startActiveDate, LocalDate stopActiveDate, LocalDate stopDate, String status, boolean b) {
-        this.id = campaignId;
-        this.organization = organization;
-        this.campaignName = campaignName;
-        this.introduction = introduction;
-        this.targetObject = targetObject;
-        this.region = region;
-        this.campaignType = campaignType;
-        this.targetAmount = targetAmount;
-        this.receiveAmount = receiveAmount;
-        this.donorAmount = donorAmount;
-        this.spentAmount = spentAmount;
-        this.lastUpdateTime = lastUpdateTime;
-        this.startDate = startDate;
-        this.stopReceiveDate = stopReceiveDate;
-        this.startActiveDate = startActiveDate;
-        this.stopActiveDate = stopActiveDate;
-        this.stopDate = stopDate;
-        this.status = status;
-        this.isActive = b;
-    }
-
-    @Override
-    public String toString() {
-        return "CampaignInfo{" +
-                "id=" + id +
-                ", organization=" + organization +
-                ", campaignName='" + campaignName + '\'' +
-                ", introduction='" + introduction + '\'' +
-                ", targetObject='" + targetObject + '\'' +
-                ", region='" + region + '\'' +
-                ", campaignType='" + campaignType + '\'' +
-                ", targetAmount=" + targetAmount +
-                ", receiveAmount=" + receiveAmount +
-                ", donorAmount=" + donorAmount +
-                ", spentAmount=" + spentAmount +
-                ", lastUpdateTime=" + lastUpdateTime +
-                ", startDate=" + startDate +
-                ", stopReceiveDate=" + stopReceiveDate +
-                ", startActiveDate=" + startActiveDate +
-                ", stopActiveDate=" + stopActiveDate +
-                ", stopDate=" + stopDate +
-                ", status='" + status + '\'' +
-                ", isActive=" + isActive +
-                '}';
+        this.isActive = isActive;
     }
 }

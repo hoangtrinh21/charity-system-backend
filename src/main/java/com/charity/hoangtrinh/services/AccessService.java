@@ -3,6 +3,7 @@ package com.charity.hoangtrinh.services;
 import com.charity.hoangtrinh.config.CacheConfig;
 import com.charity.hoangtrinh.config.Constants;
 import com.charity.hoangtrinh.dbs.sql.charitydatabase.entities.CampaignInfo;
+import com.charity.hoangtrinh.dbs.sql.charitydatabase.entities.Charity;
 import com.charity.hoangtrinh.dbs.sql.charitydatabase.entities.UserAccount;
 import com.charity.hoangtrinh.dbs.sql.charitydatabase.repositories.CampaignInfoRepository;
 import com.charity.hoangtrinh.dbs.sql.charitydatabase.repositories.RoleRepository;
@@ -31,31 +32,30 @@ public class AccessService {
     }
 
     public boolean isOrganization(String token) {
-//        System.out.println(Objects.requireNonNull(CacheConfig.accessToken.get(token)).getRole().getRoleName());
         return token != null && checkAccessToken(token) == 200 &&
-                Objects.requireNonNull(CacheConfig.accessToken.get(token)).getRole().getRoleName()
-                        .equals(Constants.ROLE_ORGANIZATION);
+                Objects.equals(Objects.requireNonNull(CacheConfig.accessToken.get(token)).getRoleId(),
+                        Constants.ORGANIZATION_ROLE_ID);
     }
 
     public boolean isAdmin(String token) {
         return token != null && checkAccessToken(token) == 200 &&
-                Objects.requireNonNull(CacheConfig.accessToken.get(token)).getRole().getRoleName()
-                        .equals(Constants.ROLE_ADMIN);
+                Objects.equals(Objects.requireNonNull(CacheConfig.accessToken.get(token)).getRoleId(),
+                        Constants.ADMIN_ROLE_ID);
     }
 
-    public UserAccount getUserByCampaignId(int campaignId) {
-        UserAccount organization = campaignInfoRepository.getReferenceById(campaignId).getOrganization();
-        System.out.println(organization);
-        return organization;
+    public boolean isDonor(String token) {
+        return token != null && checkAccessToken(token) == 200 &&
+                Objects.equals(Objects.requireNonNull(CacheConfig.accessToken.get(token)).getRoleId(),
+                                Constants.DONOR_ROLE_ID);
+    }
+
+    public Charity getUserByCampaignId(int campaignId) {
+        Charity Charity = campaignInfoRepository.getReferenceById(campaignId).getOrganization();
+        return Charity;
     }
 
     public UserAccount getUserByToken(String token) {
         return CacheConfig.accessToken.getIfPresent(token);
     }
 
-    public boolean isDonor(String token) {
-        return token != null && checkAccessToken(token) == 200 &&
-                Objects.requireNonNull(CacheConfig.accessToken.get(token)).getRole().getRoleName()
-                        .equals(Constants.ROLE_DONOR);
-    }
 }

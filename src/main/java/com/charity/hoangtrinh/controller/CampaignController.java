@@ -1,9 +1,7 @@
 package com.charity.hoangtrinh.controller;
 
-import com.charity.hoangtrinh.config.Constants;
 import com.charity.hoangtrinh.dbs.sql.charitydatabase.entities.CampaignInfo;
-import com.charity.hoangtrinh.dbs.sql.charitydatabase.entities.PostInfo;
-import com.charity.hoangtrinh.dbs.sql.charitydatabase.entities.UserAccount;
+import com.charity.hoangtrinh.dbs.sql.charitydatabase.entities.Charity;
 import com.charity.hoangtrinh.dbs.sql.charitydatabase.repositories.*;
 import com.charity.hoangtrinh.model.ResponseModel;
 import com.charity.hoangtrinh.services.AccessService;
@@ -12,7 +10,6 @@ import com.charity.hoangtrinh.services.PostService;
 import com.charity.hoangtrinh.utils.JsonUtil;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import com.sun.org.apache.bcel.internal.generic.FSUB;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
 
 @RestController
@@ -41,26 +39,29 @@ public class CampaignController {
     @Autowired
     private CampaignService campaignService;
     @Autowired
-    private PublicDonationRepository publicDonationRepository;
+    private DonationRepository donationRepository;
     @Autowired
     private PostService postService;
+    @Autowired
+    private CharityRepository charityRepository;
 
     /**
      * Lấy toàn bộ chiến dịch
-     * @return Toàn bộ chiến dịch trong database nếu là admin  hoặc tổ chức từ thiện, ngược lại trả về các chiến dịch chưa bị khóa
+     * @return Toàn bộ các chiến dịch trong database nếu là admin; toàn bộ các chiến dịch của tổ chức nếu là tổ chức từ thiện;
+     * toàn bộ các chiến dịch chưa bị khóa nếu là người dùng khách
      */
     @GetMapping("/get-all")
     public ResponseEntity<Object> getAllCampaigns(@RequestHeader(value = "Token") String token) {
         try {
-
             if (accessService.isAdmin(token))
                 return ResponseEntity.status(HttpStatus.OK)
                         .body(campaignInfoRepository.findAll());
 
             if (accessService.isOrganization(token)) {
                 int organizationId = accessService.getUserByToken(token).getId();
+                System.out.println(organizationId);
                 return ResponseEntity.status(HttpStatus.OK)
-                        .body(campaignInfoRepository.findByOrganization_Id(organizationId));
+                        .body(campaignInfoRepository.findByOrganization_IdEquals(organizationId));
             }
 
             return ResponseEntity.status(HttpStatus.OK)
@@ -84,7 +85,7 @@ public class CampaignController {
                         .body(campaignInfoRepository.findById(campaignId));
 
             return ResponseEntity.status(HttpStatus.OK)
-                    .body(campaignInfoRepository.findByIdEqualsAndIsActiveTrue(campaignId));
+                    .body(campaignInfoRepository.findByIdEqualsAndIsActiveEquals(campaignId ,true));
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
@@ -99,12 +100,14 @@ public class CampaignController {
             boolean isAdminOrOrganization = accessService.isAdmin(token) || accessService.isOrganization(token);
             Integer organizationId = Integer.parseInt(organizationIdStr);
 
-            if (isAdminOrOrganization)
+            if (isAdminOrOrganization &&
+                    Objects.equals(accessService.getUserByToken(token),
+                            userAccountRepository.findByCharityIdEquals(organizationId)))
                 return ResponseEntity.status(HttpStatus.OK)
                         .body(campaignInfoRepository.findByOrganization_IdEquals(organizationId));
 
             return ResponseEntity.status(HttpStatus.OK)
-                    .body(campaignInfoRepository.findByOrganization_IdEqualsAndIsActiveTrue(organizationId));
+                    .body(campaignInfoRepository.findByOrganization_IdEqualsAndIsActiveEquals(organizationId, true));
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
@@ -123,7 +126,6 @@ public class CampaignController {
                                                         @RequestParam Map<String, String> params) {
         try {
             boolean isAdminOrOrganization = accessService.isAdmin(token) || accessService.isOrganization(token);
-            String organizationName = params.get("organization-name");
             String campaignName     = params.get("campaign-name");
             String region           = params.get("region");
             String campaignType     = params.get("campaign-type");
@@ -132,13 +134,13 @@ public class CampaignController {
 
             if (isAdminOrOrganization)
                 return ResponseEntity.status(HttpStatus.OK)
-                        .body(campaignInfoRepository.findByOrganization_UserNameLikeAndCampaignNameLikeAndTargetObjectLikeAndRegionLikeAndCampaignTypeLikeAndStatusLike(
-                                organizationName, campaignName, region, campaignType, targetObject, status
+                        .body(campaignInfoRepository.findByCampaignNameLikeAndRegionLikeAndCampaignTypeLikeAndTargetObjectLikeAndStatusLike(
+                                campaignName, region, campaignType, targetObject, status
                         ));
             
             return ResponseEntity.status(HttpStatus.OK)
-                    .body(campaignInfoRepository.findByOrganization_UserNameLikeAndCampaignNameLikeAndTargetObjectLikeAndRegionLikeAndCampaignTypeLikeAndStatusLikeAndIsActiveTrue(
-                            organizationName, campaignName, region, campaignType, targetObject, status
+                    .body(campaignInfoRepository.findByCampaignNameLikeAndRegionLikeAndCampaignTypeLikeAndTargetObjectLikeAndStatusLikeAndIsActiveTrue(
+                            campaignName, region, campaignType, targetObject, status
                     ));
         } catch (Exception e) {
             e.printStackTrace();
@@ -160,7 +162,7 @@ public class CampaignController {
 
             JsonObject jsonBody = JsonParser.parseString(body).getAsJsonObject();
 
-            Integer organizationId  = accessService.getUserByToken(token).getId();
+            Integer organizationId  = accessService.getUserByToken(token).getCharityId();
             Integer lastUpdateTime  = (int) (System.currentTimeMillis() / 1000);
             String  campaignName    = JsonUtil.getString(jsonBody, "campaign_name");
             String  introduction    = JsonUtil.getString(jsonBody, "introduction");
@@ -179,8 +181,7 @@ public class CampaignController {
             LocalDate stopDate          = JsonUtil.getLocalDate(jsonBody, "stop_date");
 
             assert organizationId != null;
-            UserAccount organization = userAccountRepository.getReferenceById(organizationId);
-            System.out.println(organization);
+            Charity organization = charityRepository.getReferenceById(organizationId);
 
             CampaignInfo campaignInfo = new CampaignInfo(organization, campaignName, introduction, targetObject,
                     region, campaignType, targetAmount, receiveAmount, donorAmount,
@@ -208,7 +209,7 @@ public class CampaignController {
                         .body(new ResponseModel("You are not organization!"));
             JsonObject jsonBody = JsonParser.parseString(body).getAsJsonObject();
             int campaignId      = jsonBody.get("campaign_id").getAsInt();
-            Integer organizationId  = accessService.getUserByToken(token).getId();
+            Integer organizationId  = accessService.getUserByToken(token).getCharityId();
 
             if (!accessService.getUserByCampaignId(campaignId).getId().equals(organizationId))
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
@@ -231,7 +232,7 @@ public class CampaignController {
             LocalDate stopActiveDate    = JsonUtil.getLocalDate(jsonBody, "stop_active_date");
             LocalDate stopDate          = JsonUtil.getLocalDate(jsonBody, "stop_date");
 
-            UserAccount organization = userAccountRepository.getReferenceById(organizationId);
+            Charity organization = charityRepository.getReferenceById(organizationId);
 
             CampaignInfo campaignInfo = new CampaignInfo(campaignId, organization, campaignName, introduction, targetObject,
                     region, campaignType, targetAmount, receiveAmount, donorAmount,

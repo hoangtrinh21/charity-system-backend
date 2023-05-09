@@ -2,21 +2,19 @@ package com.charity.hoangtrinh.dbs.sql.charitydatabase.repositories;
 
 import com.charity.hoangtrinh.dbs.sql.charitydatabase.entities.CampaignInfo;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.lang.Nullable;
-import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@Repository
-
 public interface CampaignInfoRepository extends JpaRepository<CampaignInfo, Integer> {
-    List<CampaignInfo> findByOrganization_UserNameLikeAndCampaignNameLikeAndTargetObjectLikeAndRegionLikeAndCampaignTypeLikeAndStatusLikeAndIsActiveTrue(@Nullable String userName, @Nullable String campaignName, @Nullable String targetObject, @Nullable String region, @Nullable String campaignType, @Nullable String status);
-    List<CampaignInfo> findByOrganization_UserNameLikeAndCampaignNameLikeAndTargetObjectLikeAndRegionLikeAndCampaignTypeLikeAndStatusLike(@Nullable String userName, @Nullable String campaignName, @Nullable String targetObject, @Nullable String region, @Nullable String campaignType, @Nullable String status);
-    List<CampaignInfo> findByOrganization_IdEqualsAndIsActiveTrue(Integer id);
+    @Query("select c from CampaignInfo c where c.organization.id = ?1")
     List<CampaignInfo> findByOrganization_IdEquals(Integer id);
-    List<CampaignInfo> findByIdEqualsAndIsActiveTrue(Integer id);
+    List<CampaignInfo> findByCampaignNameLikeAndRegionLikeAndCampaignTypeLikeAndTargetObjectLikeAndStatusLikeAndIsActiveTrue(@Nullable String campaignName, @Nullable String region, @Nullable String campaignType, @Nullable String targetObject, @Nullable String status);
+    List<CampaignInfo> findByCampaignNameLikeAndRegionLikeAndCampaignTypeLikeAndTargetObjectLikeAndStatusLike(@Nullable String campaignName, @Nullable String region, @Nullable String campaignType, @Nullable String targetObject, @Nullable String status);
     List<CampaignInfo> findByOrganization_Id(Integer id);
+    List<CampaignInfo> findByOrganization_IdEqualsAndIsActiveEquals(Integer id, Boolean isActive);
+    List<CampaignInfo> findByIdEqualsAndIsActiveEquals(Integer id, Boolean isActive);
     List<CampaignInfo> findByIsActiveEquals(Boolean isActive);
-
-
+    List<CampaignInfo> findByIsActiveTrue();
 }

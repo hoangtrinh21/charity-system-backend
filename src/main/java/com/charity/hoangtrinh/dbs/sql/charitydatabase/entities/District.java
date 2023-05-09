@@ -1,14 +1,13 @@
 package com.charity.hoangtrinh.dbs.sql.charitydatabase.entities;
 
-import lombok.*;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
-@Builder
-@Entity(name = "districts")
+@Getter
+@Setter
+@Entity
 @Table(name = "districts")
 public class District {
     @Id

@@ -16,13 +16,28 @@ public class Request {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "donation_id", nullable = false)
-    private PublicDonation donation;
+    private Donation donation;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "organization_id", nullable = false)
-    private UserAccount organization;
+    private Charity organization;
 
     @Column(name = "status", nullable = false, length = 100)
     private String status;
 
+    public Request() {
+    }
+
+    public Request(Donation donation, Charity organization, String status) {
+        this.donation = donation;
+        this.organization = organization;
+        this.status = status;
+    }
+
+    public Request(Integer id, Donation donation, Charity organization, String status) {
+        this.id = id;
+        this.donation = donation;
+        this.organization = organization;
+        this.status = status;
+    }
 }
