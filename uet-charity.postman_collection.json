@@ -775,7 +775,7 @@
 							}
 						],
 						"url": {
-							"raw": "http://localhost:8089/charity/request/get-all-of-donation?donation-id=12",
+							"raw": "http://localhost:8089/charity/request/get-all-of-organization?organization-id=1",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -784,12 +784,12 @@
 							"path": [
 								"charity",
 								"request",
-								"get-all-of-donation"
+								"get-all-of-organization"
 							],
 							"query": [
 								{
-									"key": "donation-id",
-									"value": "12"
+									"key": "organization-id",
+									"value": "1"
 								}
 							]
 						}
