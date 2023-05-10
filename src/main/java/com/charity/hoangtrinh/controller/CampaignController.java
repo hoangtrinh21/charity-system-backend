@@ -58,7 +58,7 @@ public class CampaignController {
                         .body(campaignInfoRepository.findAll());
 
             if (accessService.isOrganization(token)) {
-                int organizationId = accessService.getUserByToken(token).getId();
+                int organizationId = accessService.getUserByToken(token).getCharityId();
                 System.out.println(organizationId);
                 return ResponseEntity.status(HttpStatus.OK)
                         .body(campaignInfoRepository.findByOrganization_IdEquals(organizationId));
