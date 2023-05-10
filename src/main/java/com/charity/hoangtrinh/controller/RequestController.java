@@ -70,7 +70,11 @@ public class RequestController {
             int donationId = jsonBody.getInt("donationId");
             Donation donation = donationRepository.getReferenceById(donationId);
 
-            requestRepository.save(new Request(donation.getId(), organization.getId(), "Đợi xác nhận"));
+            Request request = new Request();
+            request.setDonationId(donationId);
+            request.setOrganizationId(organization.getId());
+            request.setStatus("Đợi xác nhận");
+            requestRepository.save(request);
             return ResponseEntity.status(HttpStatus.OK)
                     .body("Added request!");
         } catch (Exception e) {

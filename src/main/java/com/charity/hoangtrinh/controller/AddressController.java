@@ -3,6 +3,7 @@ package com.charity.hoangtrinh.controller;
 import com.charity.hoangtrinh.dbs.sql.charitydatabase.entities.District;
 import com.charity.hoangtrinh.dbs.sql.charitydatabase.entities.Province;
 import com.charity.hoangtrinh.dbs.sql.charitydatabase.entities.Ward;
+import com.charity.hoangtrinh.dbs.sql.charitydatabase.repositories.AdministrativeRegionRepository;
 import com.charity.hoangtrinh.dbs.sql.charitydatabase.repositories.DistrictRepository;
 import com.charity.hoangtrinh.dbs.sql.charitydatabase.repositories.ProvinceRepository;
 import com.charity.hoangtrinh.dbs.sql.charitydatabase.repositories.WardRepository;
@@ -26,6 +27,9 @@ public class AddressController {
     private DistrictRepository districtRepository;
     @Autowired
     private WardRepository wardRepository;
+    @Autowired
+    private AdministrativeRegionRepository administrativeRegionRepository;
+
     @GetMapping("/ping")
     public ResponseEntity<ResponseModel> ping() {
         return ResponseEntity.status(HttpStatus.OK)
@@ -83,5 +87,18 @@ public class AddressController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body(new ResponseModel("INTERNAL_SERVER_ERROR"));
         }
+    }
+
+    @GetMapping("/regions")
+    public ResponseEntity<Object> getRegions() {
+        try {
+            return ResponseEntity.status(HttpStatus.OK)
+                    .body(administrativeRegionRepository.findAll());
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(new ResponseModel("INTERNAL_SERVER_ERROR"));
+        }
+
     }
 }

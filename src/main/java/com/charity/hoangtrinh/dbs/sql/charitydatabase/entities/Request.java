@@ -24,20 +24,4 @@ public class Request {
 
     @Column(name = "status", nullable = false, length = 100)
     private String status;
-
-    public Request() {
-    }
-
-    public Request(Integer id, Integer organizationId, String status) {
-        this.id = id;
-        this.organizationId = organizationId;
-        this.status = status;
-    }
-
-    public Request(Integer id, Integer donationId, Integer organizationId, String status) {
-        this.id = id;
-        this.donationId = donationId;
-        this.organizationId = organizationId;
-        this.status = status;
-    }
 }
