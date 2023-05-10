@@ -52,8 +52,9 @@ public class DonationController {
                 object = donationService.buildDonationJsonBody(donation);
                 response.put(object);
             }
+            System.out.println(response);
             return ResponseEntity.status(HttpStatus.OK)
-                    .body(new ResponseModel(response));
+                    .body(response);
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
