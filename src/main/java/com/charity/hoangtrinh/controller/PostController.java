@@ -10,6 +10,7 @@ import com.charity.hoangtrinh.services.AccessService;
 import com.charity.hoangtrinh.utils.JsonUtil;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -37,7 +38,8 @@ public class PostController {
         try {
             Integer campaignId = Integer.parseInt(campaignIdStr);
 
-            List<PostInfo> postInfoList = postInfoRepository.findByCampaign_IdEquals(campaignId);
+            CampaignInfo campaignInfo = campaignInfoRepository.getReferenceById(campaignId);
+            List<PostInfo> postInfoList = postInfoRepository.findByCampaignEquals(campaignInfo);
             return ResponseEntity.status(HttpStatus.OK)
                     .body(postInfoList);
         } catch (Exception e) {
@@ -86,7 +88,11 @@ public class PostController {
             String          content     = JsonUtil.getString(jsonBody, "content");
             String          type        = JsonUtil.getString(jsonBody, "type");
             long            submitTime  = System.currentTimeMillis();
-            PostInfo        post        = new PostInfo(content, type, submitTime, campaign);
+            PostInfo        post        = new PostInfo();
+            post.setContent(content);
+            post.setType(type);
+            post.setCampaign(campaign);
+            post.setSubmitTime(submitTime);
 
             postInfoRepository.save(post);
 
@@ -111,7 +117,7 @@ public class PostController {
         JsonObject jsonBody = JsonParser.parseString(body).getAsJsonObject();
 
         try {
-            Integer postId = JsonUtil.getInt(jsonBody, "post-id");
+            Integer postId = JsonUtil.getInt(jsonBody, "post_id");
             Integer campaignId = JsonUtil.getInt(jsonBody, "campaign_id");
 
             assert campaignId != null;

@@ -183,10 +183,25 @@ public class CampaignController {
             assert organizationId != null;
             Charity organization = charityRepository.getReferenceById(organizationId);
 
-            CampaignInfo campaignInfo = new CampaignInfo(organization, campaignName, introduction, targetObject,
-                    region, campaignType, targetAmount, receiveAmount, donorAmount,
-                    spentAmount, lastUpdateTime, startDate, stopReceiveDate,
-                    startActiveDate, stopActiveDate, stopDate, status, true);
+            CampaignInfo campaignInfo = new CampaignInfo();
+            campaignInfo.setOrganization(organization);
+            campaignInfo.setLastUpdateTime(lastUpdateTime);
+            campaignInfo.setCampaignName(campaignName);
+            campaignInfo.setIntroduction(introduction);
+            campaignInfo.setTargetObject(targetObject);
+            campaignInfo.setRegion(region);
+            campaignInfo.setCampaignType(campaignType);
+            campaignInfo.setStatus(status);
+            campaignInfo.setTargetAmount(targetAmount);
+            campaignInfo.setReceiveAmount(receiveAmount);
+            campaignInfo.setDonorAmount(donorAmount);
+            campaignInfo.setOrganization(organization);
+            campaignInfo.setSpentAmount(spentAmount);
+            campaignInfo.setStartDate(startDate);
+            campaignInfo.setStopReceiveDate(stopReceiveDate);
+            campaignInfo.setStartActiveDate(startActiveDate);
+            campaignInfo.setStopActiveDate(stopActiveDate);
+            campaignInfo.setStopDate(stopDate);
             campaignInfoRepository.save(campaignInfo);
 
             return ResponseEntity.status(HttpStatus.CREATED)
@@ -234,10 +249,26 @@ public class CampaignController {
 
             Charity organization = charityRepository.getReferenceById(organizationId);
 
-            CampaignInfo campaignInfo = new CampaignInfo(campaignId, organization, campaignName, introduction, targetObject,
-                    region, campaignType, targetAmount, receiveAmount, donorAmount,
-                    spentAmount, lastUpdateTime, startDate, stopReceiveDate,
-                    startActiveDate, stopActiveDate, stopDate, status, true);
+            CampaignInfo campaignInfo = new CampaignInfo();
+            campaignInfo.setId(campaignId);
+            campaignInfo.setOrganization(organization);
+            campaignInfo.setLastUpdateTime(lastUpdateTime);
+            campaignInfo.setCampaignName(campaignName);
+            campaignInfo.setIntroduction(introduction);
+            campaignInfo.setTargetObject(targetObject);
+            campaignInfo.setRegion(region);
+            campaignInfo.setCampaignType(campaignType);
+            campaignInfo.setStatus(status);
+            campaignInfo.setTargetAmount(targetAmount);
+            campaignInfo.setReceiveAmount(receiveAmount);
+            campaignInfo.setDonorAmount(donorAmount);
+            campaignInfo.setOrganization(organization);
+            campaignInfo.setSpentAmount(spentAmount);
+            campaignInfo.setStartDate(startDate);
+            campaignInfo.setStopReceiveDate(stopReceiveDate);
+            campaignInfo.setStartActiveDate(startActiveDate);
+            campaignInfo.setStopActiveDate(stopActiveDate);
+            campaignInfo.setStopDate(stopDate);
             campaignInfoRepository.save(campaignInfo);
 
             return ResponseEntity.status(HttpStatus.CREATED)

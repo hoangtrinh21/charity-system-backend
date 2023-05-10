@@ -1,9 +1,8 @@
 {
 	"info": {
-		"_postman_id": "500c184c-838c-40d3-800a-95c6dd2ba2b2",
+		"_postman_id": "df57f768-6e27-497a-9c6e-2be7264cfadb",
 		"name": "uet-charity",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "23235687"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
@@ -429,7 +428,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8089/charity/post/get-post?campaign-id=1",
+							"raw": "http://localhost:8089/charity/post/get-post?campaign-id=3",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -443,7 +442,7 @@
 							"query": [
 								{
 									"key": "campaign-id",
-									"value": "1"
+									"value": "3"
 								}
 							]
 						},
@@ -492,7 +491,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"campaign-id\": 7, // not null\n    \"content\": \"Đây la nội dung bài đăng so 2\", // not null\n    \"type\": \"Đây là loại bài đăng (vận động, hoạt động, ...)\" // not null\n}",
+							"raw": "{\n    \"campaign_id\": 2, // not null\n    \"content\": \"Đây la nội dung bài đăng so 5435\", // not null\n    \"type\": \"Đây là loại bài đăng (vận động, hoạt động, ...)\" // not null\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -529,7 +528,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"post-id\": 1, // not null\n    \"campaign-id\": 7, // not null\n    \"content\": \"Đây la nội dung bài đăng caapj nhaat\", // not null\n    \"type\": \"Đây là loại bài đăng (vận động, hoạt động, ...)\" // not null\n}",
+							"raw": "{\n    \"post_id\": 1, // not null\n    \"campaign_id\": 7, // not null\n    \"content\": \"Đây la nội dung bài đăng caapj nhaat\", // not null\n    \"type\": \"Đây là loại bài đăng (vận động, hoạt động, ...)\" // not null\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -554,7 +553,7 @@
 					"response": []
 				},
 				{
-					"name": "cập nhật bài đăng vào chiến dịch Copy 2",
+					"name": "xóa bài đăng của chiến dịch",
 					"request": {
 						"method": "DELETE",
 						"header": [

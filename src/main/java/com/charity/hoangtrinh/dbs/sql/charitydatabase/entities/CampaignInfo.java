@@ -1,19 +1,18 @@
 package com.charity.hoangtrinh.dbs.sql.charitydatabase.entities;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-@Getter
-@Setter
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @Entity
 @Table(name = "campaign_info")
-@NoArgsConstructor
 public class CampaignInfo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -82,49 +81,4 @@ public class CampaignInfo {
     @OneToMany(mappedBy = "campaign")
     private Set<CampaignOutput> campaignOutputs = new LinkedHashSet<>();
 
-    @OneToMany(mappedBy = "campaign")
-    private Set<PostInfo> postInfos = new LinkedHashSet<>();
-
-     public CampaignInfo(Integer id, Charity organization, String campaignName, String introduction, String targetObject, String region, String campaignType, Long targetAmount, Long receiveAmount, Long donorAmount, Long spentAmount, Integer lastUpdateTime, LocalDate startDate, LocalDate stopReceiveDate, LocalDate startActiveDate, LocalDate stopActiveDate, LocalDate stopDate, String status, Boolean isActive) {
-        this.id = id;
-        this.organization = organization;
-        this.campaignName = campaignName;
-        this.introduction = introduction;
-        this.targetObject = targetObject;
-        this.region = region;
-        this.campaignType = campaignType;
-        this.targetAmount = targetAmount;
-        this.receiveAmount = receiveAmount;
-        this.donorAmount = donorAmount;
-        this.spentAmount = spentAmount;
-        this.lastUpdateTime = lastUpdateTime;
-        this.startDate = startDate;
-        this.stopReceiveDate = stopReceiveDate;
-        this.startActiveDate = startActiveDate;
-        this.stopActiveDate = stopActiveDate;
-        this.stopDate = stopDate;
-        this.status = status;
-        this.isActive = isActive;
-    }
-
-    public CampaignInfo(Charity organization, String campaignName, String introduction, String targetObject, String region, String campaignType, Long targetAmount, Long receiveAmount, Long donorAmount, Long spentAmount, Integer lastUpdateTime, LocalDate startDate, LocalDate stopReceiveDate, LocalDate startActiveDate, LocalDate stopActiveDate, LocalDate stopDate, String status, Boolean isActive) {
-        this.organization = organization;
-        this.campaignName = campaignName;
-        this.introduction = introduction;
-        this.targetObject = targetObject;
-        this.region = region;
-        this.campaignType = campaignType;
-        this.targetAmount = targetAmount;
-        this.receiveAmount = receiveAmount;
-        this.donorAmount = donorAmount;
-        this.spentAmount = spentAmount;
-        this.lastUpdateTime = lastUpdateTime;
-        this.startDate = startDate;
-        this.stopReceiveDate = stopReceiveDate;
-        this.startActiveDate = startActiveDate;
-        this.stopActiveDate = stopActiveDate;
-        this.stopDate = stopDate;
-        this.status = status;
-        this.isActive = isActive;
-    }
 }

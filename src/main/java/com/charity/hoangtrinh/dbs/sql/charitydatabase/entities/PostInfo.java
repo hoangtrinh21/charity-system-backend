@@ -1,12 +1,13 @@
 package com.charity.hoangtrinh.dbs.sql.charitydatabase.entities;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 
-@Getter
-@Setter
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @Entity
 @Table(name = "post_info")
 public class PostInfo {
@@ -29,21 +30,4 @@ public class PostInfo {
     @JoinColumn(name = "campaign_id", nullable = false)
     private CampaignInfo campaign;
 
-    public PostInfo() {
-    }
-
-    public PostInfo(String content, String type, Long submitTime, CampaignInfo campaign) {
-        this.content = content;
-        this.type = type;
-        this.submitTime = submitTime;
-        this.campaign = campaign;
-    }
-
-    public PostInfo(Integer id, String content, String type, Long submitTime, CampaignInfo campaign) {
-        this.id = id;
-        this.content = content;
-        this.type = type;
-        this.submitTime = submitTime;
-        this.campaign = campaign;
-    }
 }
