@@ -1,17 +1,17 @@
 package com.charity.hoangtrinh.dbs.sql.charitydatabase.entities;
 
-import lombok.*;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.LinkedHashSet;
+import java.io.Serializable;
 import java.util.Objects;
-import java.util.Set;
 
 @Getter
 @Setter
-@Entity(name = "user_account")
+@Entity
 @Table(name = "user_account")
-public class UserAccount {
+public class UserAccount implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id", nullable = false)
@@ -65,8 +65,18 @@ public class UserAccount {
     @Column(name = "WardId", length = 10)
     private String wardId;
 
-    @OneToMany(mappedBy = "idDonor")
-    private Set<Donation> donations = new LinkedHashSet<>();
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        UserAccount that = (UserAccount) o;
+        return Objects.equals(id, that.id) && Objects.equals(name, that.name) && Objects.equals(userName, that.userName) && Objects.equals(phoneNumber, that.phoneNumber) && Objects.equals(password, that.password) && Objects.equals(saltPassword, that.saltPassword) && Objects.equals(roleId, that.roleId) && Objects.equals(address, that.address) && Objects.equals(email, that.email) && Objects.equals(isLocked, that.isLocked) && Objects.equals(charityId, that.charityId) && Objects.equals(province, that.province) && Objects.equals(district, that.district) && Objects.equals(ward, that.ward) && Objects.equals(provinceId, that.provinceId) && Objects.equals(districtId, that.districtId) && Objects.equals(wardId, that.wardId);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, userName, phoneNumber, password, saltPassword, roleId, address, email, isLocked, charityId, province, district, ward, provinceId, districtId, wardId);
+    }
 
     @Override
     public String toString() {
@@ -89,18 +99,5 @@ public class UserAccount {
                 ", districtId='" + districtId + '\'' +
                 ", wardId='" + wardId + '\'' +
                 '}';
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        UserAccount that = (UserAccount) o;
-        return Objects.equals(id, that.id) && Objects.equals(name, that.name) && Objects.equals(userName, that.userName) && Objects.equals(phoneNumber, that.phoneNumber) && Objects.equals(password, that.password) && Objects.equals(saltPassword, that.saltPassword) && Objects.equals(roleId, that.roleId) && Objects.equals(address, that.address) && Objects.equals(email, that.email) && Objects.equals(isLocked, that.isLocked) && Objects.equals(charityId, that.charityId) && Objects.equals(province, that.province) && Objects.equals(district, that.district) && Objects.equals(ward, that.ward) && Objects.equals(provinceId, that.provinceId) && Objects.equals(districtId, that.districtId) && Objects.equals(wardId, that.wardId);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, name, userName, phoneNumber, password, saltPassword, roleId, address, email, isLocked, charityId, province, district, ward, provinceId, districtId, wardId);
     }
 }

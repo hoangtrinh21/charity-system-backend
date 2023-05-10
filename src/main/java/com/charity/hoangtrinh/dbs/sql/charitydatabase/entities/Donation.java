@@ -1,16 +1,18 @@
 package com.charity.hoangtrinh.dbs.sql.charitydatabase.entities;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.time.LocalDate;
 
-@Getter
-@Setter
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @Entity
 @Table(name = "donation")
-public class Donation {
+public class Donation implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
@@ -46,43 +48,4 @@ public class Donation {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "organization_received_id")
     private Charity organizationReceived;
-
-    public Donation() {
-    }
-
-    public Donation(LocalDate date, String description, String donationAddress, String donationObject, String images, String name, String status, UserAccount idDonor) {
-        this.date = date;
-        this.description = description;
-        this.donationAddress = donationAddress;
-        this.donationObject = donationObject;
-        this.images = images;
-        this.name = name;
-        this.status = status;
-        this.idDonor = idDonor;
-    }
-
-    public Donation(LocalDate date, String description, String donationAddress, String donationObject, String images, String name, String status, UserAccount idDonor, Charity organizationReceived) {
-        this.date = date;
-        this.description = description;
-        this.donationAddress = donationAddress;
-        this.donationObject = donationObject;
-        this.images = images;
-        this.name = name;
-        this.status = status;
-        this.idDonor = idDonor;
-        this.organizationReceived = organizationReceived;
-    }
-
-    public Donation(Integer id, LocalDate date, String description, String donationAddress, String donationObject, String images, String name, String status, UserAccount idDonor, Charity organizationReceived) {
-        this.id = id;
-        this.date = date;
-        this.description = description;
-        this.donationAddress = donationAddress;
-        this.donationObject = donationObject;
-        this.images = images;
-        this.name = name;
-        this.status = status;
-        this.idDonor = idDonor;
-        this.organizationReceived = organizationReceived;
-    }
 }

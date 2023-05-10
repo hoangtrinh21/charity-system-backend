@@ -27,7 +27,7 @@ public class DonationService {
         object.put("date", String.valueOf(donation.getDate()));
         object.put("description", donation.getDescription());
         object.put("images", donation.getImages());
-        object.put("request", requestRepository.findByDonation_IdEquals(donation.getId()));
+        object.put("request", requestRepository.findByDonationIdEquals(donation.getId()));
 
         return object;
     }

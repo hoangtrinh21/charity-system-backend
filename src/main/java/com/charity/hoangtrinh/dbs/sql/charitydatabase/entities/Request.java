@@ -1,6 +1,7 @@
 package com.charity.hoangtrinh.dbs.sql.charitydatabase.entities;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -11,16 +12,15 @@ import javax.persistence.*;
 @Table(name = "request")
 public class Request {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "request_id", nullable = false)
     private Integer id;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "donation_id", nullable = false)
-    private Donation donation;
+    @Column(name = "donation_id", nullable = false)
+    private Integer donationId;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "organization_id", nullable = false)
-    private Charity organization;
+    @Column(name = "organization_id", nullable = false)
+    private Integer organizationId;
 
     @Column(name = "status", nullable = false, length = 100)
     private String status;
@@ -28,16 +28,16 @@ public class Request {
     public Request() {
     }
 
-    public Request(Donation donation, Charity organization, String status) {
-        this.donation = donation;
-        this.organization = organization;
+    public Request(Integer id, Integer organizationId, String status) {
+        this.id = id;
+        this.organizationId = organizationId;
         this.status = status;
     }
 
-    public Request(Integer id, Donation donation, Charity organization, String status) {
+    public Request(Integer id, Integer donationId, Integer organizationId, String status) {
         this.id = id;
-        this.donation = donation;
-        this.organization = organization;
+        this.donationId = donationId;
+        this.organizationId = organizationId;
         this.status = status;
     }
 }
