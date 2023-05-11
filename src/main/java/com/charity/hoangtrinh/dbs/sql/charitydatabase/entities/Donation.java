@@ -1,51 +1,72 @@
 package com.charity.hoangtrinh.dbs.sql.charitydatabase.entities;
 
-import lombok.*;
+import com.google.gson.JsonArray;
+import lombok.Getter;
+import lombok.Setter;
+import org.json.JSONArray;
 
 import javax.persistence.*;
-import java.io.Serializable;
-import java.time.LocalDate;
+import java.sql.Blob;
 
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
+@Getter
+@Setter
 @Entity
-@Table(name = "donation")
-public class Donation implements Serializable {
+@Table(name = "donations")
+public class Donation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Integer id;
 
-    @Column(name = "date", nullable = false)
-    private LocalDate date;
-
-    @Lob
-    @Column(name = "description")
-    private String description;
-
-    @Column(name = "donation_address", nullable = false)
-    private String donationAddress;
-
-    @Column(name = "donation_object", nullable = false)
-    private String donationObject;
-
-    @Lob
-    @Column(name = "images")
-    private String images;
-
-    @Column(name = "name", nullable = false)
-    private String name;
+    @Column(name = "idDornor")
+    private Integer idDornor;
 
     @Column(name = "status", nullable = false)
     private String status;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "id_donor", nullable = false)
-    private UserAccount idDonor;
+    @Column(name = "organizationReceived")
+    private String organizationReceived;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "organization_received_id")
-    private Charity organizationReceived;
+    @Column(name = "idOrganization")
+    private Integer idOrganization;
+
+    @Column(name = "listRequest", length = 1073741824)
+    private Blob listRequest;
+
+    @Column(name = "name", nullable = false)
+    private String name;
+
+    @Column(name = "donationAddress")
+    private String donationAddress;
+
+    @Column(name = "donationObject")
+    private String donationObject;
+
+    @Column(name = "donorName")
+    private String donorName;
+
+    @Column(name = "phone")
+    private String phone;
+
+    @Column(name = "address")
+    private String address;
+
+    @Column(name = "province")
+    private String province;
+
+    @Column(name = "district")
+    private String district;
+
+    @Column(name = "ward")
+    private String ward;
+
+    @Column(name = "date")
+    private String date;
+
+    @Column(name = "description")
+    private String description;
+
+    @Column(name = "images")
+    private String images;
+
 }

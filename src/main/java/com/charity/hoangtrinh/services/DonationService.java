@@ -25,20 +25,20 @@ public class DonationService {
     public DonationResponse buildDonationJsonBody(Donation donation) {
         DonationResponse donationResponse = new DonationResponse();
         donationResponse.setId(donation.getId());
-        donationResponse.setIdDonor(donation.getIdDonor().getId());
+//        donationResponse.setIdDonor(donation.getIdDonor().getId());
         donationResponse.setStatus(donation.getStatus());
-        donationResponse.setOrganizationReceived(userAccountRepository.findByCharityIdEquals(donation.getOrganizationReceived().getId()).getName());
-        donationResponse.setIdOrganization(donation.getOrganizationReceived().getId());
+//        donationResponse.setOrganizationReceived(userAccountRepository.findByCharityIdEquals(donation.getOrganizationReceived().getId()).getName());
+//        donationResponse.setIdOrganization(donation.getOrganizationReceived().getId());
         donationResponse.setName(donation.getName());
         donationResponse.setDonationAddress(donation.getDonationAddress());
         donationResponse.setDonationObject(donation.getDonationObject());
-        donationResponse.setDonorName(donation.getIdDonor().getName());
-        donationResponse.setPhone(donation.getIdDonor().getName());
-        donationResponse.setAddress(donation.getIdDonor().getAddress());
-        donationResponse.setProvince(donation.getIdDonor().getProvince());
-        donationResponse.setDistrict(donation.getIdDonor().getDistrict());
-        donationResponse.setWard(donation.getIdDonor().getWard());
-        donationResponse.setDate(donation.getDate());
+//        donationResponse.setDonorName(donation.getIdDonor().getName());
+//        donationResponse.setPhone(donation.getIdDonor().getName());
+//        donationResponse.setAddress(donation.getIdDonor().getAddress());
+//        donationResponse.setProvince(donation.getIdDonor().getProvince());
+//        donationResponse.setDistrict(donation.getIdDonor().getDistrict());
+//        donationResponse.setWard(donation.getIdDonor().getWard());
+//        donationResponse.setDate(donation.getDate());
         donationResponse.setDescription(donation.getDescription());
         donationResponse.setImages(donation.getImages());
 

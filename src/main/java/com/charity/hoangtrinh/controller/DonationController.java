@@ -12,6 +12,7 @@ import com.charity.hoangtrinh.model.DonationResponse;
 import com.charity.hoangtrinh.model.ResponseModel;
 import com.charity.hoangtrinh.services.AccessService;
 import com.charity.hoangtrinh.services.DonationService;
+import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -22,6 +23,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.sql.rowset.serial.SerialBlob;
+import java.nio.charset.StandardCharsets;
+import java.sql.Blob;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -46,13 +50,6 @@ public class DonationController {
     public Object getAllDonation() {
         try {
             List<Donation> donations = donationRepository.findAll();
-            List<DonationResponse> response = new ArrayList<>();
-            DonationResponse object;
-            for (Donation donation : donations) {
-                object = donationService.buildDonationJsonBody(donation);
-                response.add(object);
-            }
-
             return ResponseEntity.status(HttpStatus.OK)
                     .body(donations);
         } catch (Exception e) {
@@ -68,9 +65,8 @@ public class DonationController {
             Integer id = Integer.parseInt(donationIdStr);
 
             Donation donation = donationRepository.getReferenceById(id);
-            DonationResponse object = donationService.buildDonationJsonBody(donation);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(object);
+                    .body(donation);
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
@@ -85,26 +81,47 @@ public class DonationController {
             if (!isDonor)
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                         .body(new ResponseModel("You are not donor!"));
-            JSONObject jsonBody = new JSONObject(body);
 
-            UserAccount donor = accessService.getUserByToken(token);
+            JsonObject jsonBody = JsonParser.parseString(body).getAsJsonObject();
 
-            String name = jsonBody.getString("name");
-            String donationAddress = jsonBody.getString("donationAddress");
-            String donationObject = jsonBody.getString("donationObject");
-            String description = jsonBody.getString("description");
-            String images = jsonBody.getString("images");
+            Integer idDonor  = Integer.valueOf(jsonBody.get("idDonor").getAsString());
+            String status   = jsonBody.get("status").getAsString();
+            String idOrganization       = jsonBody.get("idOrganization").getAsString();
+            String name = jsonBody.get("name").getAsString();
+            String donationAddress = jsonBody.get("donationAddress").getAsString();
+            String donationObject = jsonBody.get("donationObject").getAsString();
+            String date = jsonBody.get("date").getAsString();
+            String description = jsonBody.get("description").getAsString();
+            String images = jsonBody.get("images").getAsString();
+            JsonArray listRequest = jsonBody.get("listRequest").getAsJsonArray();
 
-//            Donation donation = new Donation(LocalDate.now(), description, donationAddress, donationObject, images, name, "Chưa nhận", donor);
+            UserAccount donor = userAccountRepository.getReferenceById(idDonor);
+
             Donation donation = new Donation();
+            donation.setIdDornor(idDonor);
+            donation.setStatus(status);
+
+            if (idOrganization != null) {
+                UserAccount organizationReceived = userAccountRepository.getReferenceById(Integer.valueOf(idOrganization));
+                donation.setOrganizationReceived(organizationReceived.getName());
+                donation.setIdOrganization(organizationReceived.getCharityId());
+            }
+
+            Blob requestBlob = new SerialBlob(listRequest.toString().getBytes(StandardCharsets.UTF_8));
+            donation.setListRequest(requestBlob);
+
             donation.setName(name);
-            donation.setDate(LocalDate.now());
-            donation.setDescription(description);
             donation.setDonationAddress(donationAddress);
             donation.setDonationObject(donationObject);
+            donation.setDonorName(donor.getName());
+            donation.setPhone(donor.getPhoneNumber());
+            donation.setAddress(donor.getAddress());
+            donation.setProvince(donor.getProvince());
+            donation.setDistrict(donor.getDistrict());
+            donation.setWard(donor.getWard());
+            donation.setDate(date);
+            donation.setDescription(description);
             donation.setImages(images);
-            donation.setStatus("Chưa nhận");
-            donation.setIdDonor(donor);
 
             donationRepository.save(donation);
 
@@ -132,11 +149,11 @@ public class DonationController {
             int donationId = jsonBody.get("donationId").getAsInt();
             Donation donation = donationRepository.getReferenceById(donationId);
             System.out.println(donor);
-            System.out.println(donation.getIdDonor());
+//            System.out.println(donation.getIdDonor());
 
-            if (!Objects.equals(donation.getIdDonor(), donor))
-                return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                        .body(new ResponseModel("You are not permission!"));
+//            if (!Objects.equals(donation.getIdDonor(), donor))
+//                return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+//                        .body(new ResponseModel("You are not permission!"));
 
             donation.setName(jsonBody.get("name").getAsString());
             donation.setStatus(jsonBody.get("status").getAsString());
@@ -145,8 +162,8 @@ public class DonationController {
             donation.setDescription(jsonBody.get("description").getAsString());
             donation.setImages(jsonBody.get("images").getAsString());
             JsonElement organizationIdElement = jsonBody.get("organizationId");
-            if (organizationIdElement != null)
-                donation.setOrganizationReceived(charityRepository.getReferenceById(organizationIdElement.getAsInt()));
+//            if (organizationIdElement != null)
+//                donation.setOrganizationReceived(charityRepository.getReferenceById(organizationIdElement.getAsInt()));
 
             donationRepository.save(donation);
             return ResponseEntity.status(HttpStatus.OK)
