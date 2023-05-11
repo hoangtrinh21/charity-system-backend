@@ -8,6 +8,7 @@ import com.charity.hoangtrinh.dbs.sql.charitydatabase.repositories.CharityReposi
 import com.charity.hoangtrinh.dbs.sql.charitydatabase.repositories.DonationRepository;
 import com.charity.hoangtrinh.dbs.sql.charitydatabase.repositories.RequestRepository;
 import com.charity.hoangtrinh.dbs.sql.charitydatabase.repositories.UserAccountRepository;
+import com.charity.hoangtrinh.model.DonationResponse;
 import com.charity.hoangtrinh.model.ResponseModel;
 import com.charity.hoangtrinh.services.AccessService;
 import com.charity.hoangtrinh.services.DonationService;
@@ -45,13 +46,12 @@ public class DonationController {
     public Object getAllDonation() {
         try {
             List<Donation> donations = donationRepository.findAll();
-            List<JSONObject> response = new ArrayList<>();
-            JSONObject object;
+            List<DonationResponse> response = new ArrayList<>();
+            DonationResponse object;
             for (Donation donation : donations) {
                 object = donationService.buildDonationJsonBody(donation);
                 response.add(object);
             }
-            JSONArray array = new JSONArray(response);
 
             return ResponseEntity.status(HttpStatus.OK)
                     .body(donations);
@@ -68,9 +68,9 @@ public class DonationController {
             Integer id = Integer.parseInt(donationIdStr);
 
             Donation donation = donationRepository.getReferenceById(id);
-            JSONObject object = donationService.buildDonationJsonBody(donation);
+            DonationResponse object = donationService.buildDonationJsonBody(donation);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(object.toString());
+                    .body(object);
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)

@@ -2,6 +2,7 @@ package com.charity.hoangtrinh.services;
 
 import com.charity.hoangtrinh.dbs.sql.charitydatabase.entities.Donation;
 import com.charity.hoangtrinh.dbs.sql.charitydatabase.entities.Request;
+import com.charity.hoangtrinh.dbs.sql.charitydatabase.repositories.CharityRepository;
 import com.charity.hoangtrinh.dbs.sql.charitydatabase.repositories.RequestRepository;
 import com.charity.hoangtrinh.dbs.sql.charitydatabase.repositories.UserAccountRepository;
 import com.charity.hoangtrinh.model.DonationResponse;
@@ -18,6 +19,8 @@ public class DonationService {
     private RequestRepository requestRepository;
     @Autowired
     private UserAccountRepository userAccountRepository;
+    @Autowired
+    private CharityRepository charityRepository;
 
     public DonationResponse buildDonationJsonBody(Donation donation) {
         DonationResponse donationResponse = new DonationResponse();
@@ -44,7 +47,11 @@ public class DonationService {
 
         for (Request r : requestRepository.findByDonationIdEquals(donation.getId())) {
             request.put("id", r.getOrganizationId());
+            request.put("status", r.getStatus());
+            request.put("name", userAccountRepository.findByCharityIdEquals(r.getDonationId()).getName());
+            list.add(request);
         }
+        donationResponse.setListRequest(list);
         return donationResponse;
     }
 }
