@@ -100,7 +100,7 @@ CREATE TABLE `campaign_info` (
   PRIMARY KEY (`campaign_id`),
   KEY `campaign_info_FK_1` (`organization_id`),
   CONSTRAINT `campaign_info_FK` FOREIGN KEY (`organization_id`) REFERENCES `charities` (`Id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -109,7 +109,7 @@ CREATE TABLE `campaign_info` (
 
 LOCK TABLES `campaign_info` WRITE;
 /*!40000 ALTER TABLE `campaign_info` DISABLE KEYS */;
-INSERT INTO `campaign_info` VALUES (2,1,'xyz','asdfghjkl','tre em','tay bac','ho tro tre em vung cao',100000000,0,0,0,1683664676,'2023-06-01','2023-06-15','2023-06-16','2023-06-30','2023-06-30','dang van dong',_binary '');
+INSERT INTO `campaign_info` VALUES (2,1,'cập nhật','asdfghjkl','tre em','tay bac','ho tro tre em vung cao',100000000,45000000,0,0,1683728913,'2023-06-01','2023-06-15','2023-06-16','2023-06-30','2023-06-30','dang van dong',_binary ''),(3,1,'cuocoj vaanj dong 3','asdfghjkl','tre em','tay bac','ho tro tre em vung cao',100000000,0,0,0,1683728894,'2023-06-01','2023-06-15','2023-06-16','2023-06-30','2023-06-30','dang van dong',_binary '');
 /*!40000 ALTER TABLE `campaign_info` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -249,38 +249,42 @@ INSERT INTO `districts` VALUES ('001','Ba Đình','Quận Ba Đình','ba_dinh','
 UNLOCK TABLES;
 
 --
--- Table structure for table `donation`
+-- Table structure for table `donations`
 --
 
-DROP TABLE IF EXISTS `donation`;
+DROP TABLE IF EXISTS `donations`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `donation` (
+CREATE TABLE `donations` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `date` date NOT NULL,
-  `description` longtext,
-  `donation_address` varchar(255) NOT NULL,
-  `donation_object` varchar(255) NOT NULL,
-  `images` longtext,
-  `name` varchar(255) NOT NULL,
+  `idDornor` int DEFAULT NULL,
   `status` varchar(255) NOT NULL,
-  `id_donor` int NOT NULL,
-  `organization_received_id` int DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `donation_FK` (`id_donor`),
-  KEY `donation_FK_1` (`organization_received_id`),
-  CONSTRAINT `donation_FK` FOREIGN KEY (`id_donor`) REFERENCES `user_account` (`Id`),
-  CONSTRAINT `donation_FK_1` FOREIGN KEY (`organization_received_id`) REFERENCES `charities` (`Id`)
+  `organizationReceived` varchar(255) DEFAULT NULL,
+  `idOrganization` int DEFAULT NULL,
+  `listRequest` blob,
+  `name` varchar(255) NOT NULL,
+  `donationAddress` varchar(255) DEFAULT NULL,
+  `donationObject` varchar(255) DEFAULT NULL,
+  `donorName` varchar(255) DEFAULT NULL,
+  `phone` varchar(255) DEFAULT NULL,
+  `address` varchar(255) DEFAULT NULL,
+  `province` varchar(255) DEFAULT NULL,
+  `district` varchar(255) DEFAULT NULL,
+  `ward` varchar(255) DEFAULT NULL,
+  `date` varchar(255) DEFAULT NULL,
+  `description` varchar(255) DEFAULT NULL,
+  `images` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `donation`
+-- Dumping data for table `donations`
 --
 
-LOCK TABLES `donation` WRITE;
-/*!40000 ALTER TABLE `donation` DISABLE KEYS */;
-/*!40000 ALTER TABLE `donation` ENABLE KEYS */;
+LOCK TABLES `donations` WRITE;
+/*!40000 ALTER TABLE `donations` DISABLE KEYS */;
+/*!40000 ALTER TABLE `donations` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -298,8 +302,8 @@ CREATE TABLE `post_info` (
   `campaign_id` int NOT NULL,
   PRIMARY KEY (`post_id`),
   KEY `campaign_id_fkey` (`campaign_id`),
-  CONSTRAINT `campaign_id_fkey` FOREIGN KEY (`campaign_id`) REFERENCES `campaign_info` (`campaign_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  CONSTRAINT `post_info_FK` FOREIGN KEY (`campaign_id`) REFERENCES `campaign_info` (`campaign_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -308,6 +312,7 @@ CREATE TABLE `post_info` (
 
 LOCK TABLES `post_info` WRITE;
 /*!40000 ALTER TABLE `post_info` DISABLE KEYS */;
+INSERT INTO `post_info` VALUES (5,'Đây la nội dung bài đăng caapj nhaat','Đây là loại bài đăng (vận động, hoạt động, ...)',1683730878700,3),(6,'Đây la nội dung bài đăng so 1','Đây là loại bài đăng (vận động, hoạt động, ...)',1683730693655,3),(7,'Đây la nội dung bài đăng so 1','Đây là loại bài đăng (vận động, hoạt động, ...)',1683730795672,3),(8,'Đây la nội dung bài đăng so 5435','Đây là loại bài đăng (vận động, hoạt động, ...)',1683731116486,2),(9,'Đây la nội dung bài đăng so 5435','Đây là loại bài đăng (vận động, hoạt động, ...)',1683732860809,2);
 /*!40000 ALTER TABLE `post_info` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -341,35 +346,6 @@ LOCK TABLES `provinces` WRITE;
 /*!40000 ALTER TABLE `provinces` DISABLE KEYS */;
 INSERT INTO `provinces` VALUES ('01','Hà Nội','Thành phố Hà Nội','ha_noi',1,3),('02','Hà Giang','Tỉnh Hà Giang','ha_giang',2,1),('04','Cao Bằng','Tỉnh Cao Bằng','cao_bang',2,1),('06','Bắc Kạn','Tỉnh Bắc Kạn','bac_kan',2,1),('08','Tuyên Quang','Tỉnh Tuyên Quang','tuyen_quang',2,1),('10','Lào Cai','Tỉnh Lào Cai','lao_cai',2,2),('11','Điện Biên','Tỉnh Điện Biên','dien_bien',2,2),('12','Lai Châu','Tỉnh Lai Châu','lai_chau',2,2),('14','Sơn La','Tỉnh Sơn La','son_la',2,2),('15','Yên Bái','Tỉnh Yên Bái','yen_bai',2,2),('17','Hoà Bình','Tỉnh Hoà Bình','hoa_binh',2,2),('19','Thái Nguyên','Tỉnh Thái Nguyên','thai_nguyen',2,1),('20','Lạng Sơn','Tỉnh Lạng Sơn','lang_son',2,1),('22','Quảng Ninh','Tỉnh Quảng Ninh','quang_ninh',2,1),('24','Bắc Giang','Tỉnh Bắc Giang','bac_giang',2,1),('25','Phú Thọ','Tỉnh Phú Thọ','phu_tho',2,1),('26','Vĩnh Phúc','Tỉnh Vĩnh Phúc','vinh_phuc',2,3),('27','Bắc Ninh','Tỉnh Bắc Ninh','bac_ninh',2,3),('30','Hải Dương','Tỉnh Hải Dương','hai_duong',2,3),('31','Hải Phòng','Thành phố Hải Phòng','hai_phong',1,3),('33','Hưng Yên','Tỉnh Hưng Yên','hung_yen',2,3),('34','Thái Bình','Tỉnh Thái Bình','thai_binh',2,3),('35','Hà Nam','Tỉnh Hà Nam','ha_nam',2,3),('36','Nam Định','Tỉnh Nam Định','nam_dinh',2,3),('37','Ninh Bình','Tỉnh Ninh Bình','ninh_binh',2,3),('38','Thanh Hóa','Tỉnh Thanh Hóa','thanh_hoa',2,4),('40','Nghệ An','Tỉnh Nghệ An','nghe_an',2,4),('42','Hà Tĩnh','Tỉnh Hà Tĩnh','ha_tinh',2,4),('44','Quảng Bình','Tỉnh Quảng Bình','quang_binh',2,4),('45','Quảng Trị','Tỉnh Quảng Trị','quang_tri',2,4),('46','Thừa Thiên Huế','Tỉnh Thừa Thiên Huế','thua_thien_hue',2,4),('48','Đà Nẵng','Thành phố Đà Nẵng','da_nang',1,5),('49','Quảng Nam','Tỉnh Quảng Nam','quang_nam',2,5),('51','Quảng Ngãi','Tỉnh Quảng Ngãi','quang_ngai',2,5),('52','Bình Định','Tỉnh Bình Định','binh_dinh',2,5),('54','Phú Yên','Tỉnh Phú Yên','phu_yen',2,5),('56','Khánh Hòa','Tỉnh Khánh Hòa','khanh_hoa',2,5),('58','Ninh Thuận','Tỉnh Ninh Thuận','ninh_thuan',2,5),('60','Bình Thuận','Tỉnh Bình Thuận','binh_thuan',2,5),('62','Kon Tum','Tỉnh Kon Tum','kon_tum',2,6),('64','Gia Lai','Tỉnh Gia Lai','gia_lai',2,6),('66','Đắk Lắk','Tỉnh Đắk Lắk','dak_lak',2,6),('67','Đắk Nông','Tỉnh Đắk Nông','dak_nong',2,6),('68','Lâm Đồng','Tỉnh Lâm Đồng','lam_dong',2,6),('70','Bình Phước','Tỉnh Bình Phước','binh_phuoc',2,7),('72','Tây Ninh','Tỉnh Tây Ninh','tay_ninh',2,7),('74','Bình Dương','Tỉnh Bình Dương','binh_duong',2,7),('75','Đồng Nai','Tỉnh Đồng Nai','dong_nai',2,7),('77','Bà Rịa - Vũng Tàu','Tỉnh Bà Rịa - Vũng Tàu','ba_ria_vung_tau',2,7),('79','Hồ Chí Minh','Thành phố Hồ Chí Minh','ho_chi_minh',1,7),('80','Long An','Tỉnh Long An','long_an',2,8),('82','Tiền Giang','Tỉnh Tiền Giang','tien_giang',2,8),('83','Bến Tre','Tỉnh Bến Tre','ben_tre',2,8),('84','Trà Vinh','Tỉnh Trà Vinh','tra_vinh',2,8),('86','Vĩnh Long','Tỉnh Vĩnh Long','vinh_long',2,8),('87','Đồng Tháp','Tỉnh Đồng Tháp','dong_thap',2,8),('89','An Giang','Tỉnh An Giang','an_giang',2,8),('91','Kiên Giang','Tỉnh Kiên Giang','kien_giang',2,8),('92','Cần Thơ','Thành phố Cần Thơ','can_tho',1,8),('93','Hậu Giang','Tỉnh Hậu Giang','hau_giang',2,8),('94','Sóc Trăng','Tỉnh Sóc Trăng','soc_trang',2,8),('95','Bạc Liêu','Tỉnh Bạc Liêu','bac_lieu',2,8),('96','Cà Mau','Tỉnh Cà Mau','ca_mau',2,8);
 /*!40000 ALTER TABLE `provinces` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `request`
---
-
-DROP TABLE IF EXISTS `request`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `request` (
-  `request_id` int NOT NULL AUTO_INCREMENT,
-  `donation_id` int NOT NULL,
-  `organization_id` int NOT NULL,
-  `status` varchar(100) NOT NULL,
-  PRIMARY KEY (`request_id`),
-  KEY `request_FK` (`donation_id`),
-  KEY `request_FK_2` (`organization_id`),
-  CONSTRAINT `request_FK` FOREIGN KEY (`organization_id`) REFERENCES `charities` (`Id`),
-  CONSTRAINT `request_FK_1` FOREIGN KEY (`donation_id`) REFERENCES `donation` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `request`
---
-
-LOCK TABLES `request` WRITE;
-/*!40000 ALTER TABLE `request` DISABLE KEYS */;
-/*!40000 ALTER TABLE `request` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -422,7 +398,7 @@ CREATE TABLE `user_account` (
   `DistrictId` varchar(10) DEFAULT NULL,
   `WardId` varchar(10) DEFAULT NULL,
   PRIMARY KEY (`Id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci AVG_ROW_LENGTH=3276;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci AVG_ROW_LENGTH=3276;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -431,7 +407,7 @@ CREATE TABLE `user_account` (
 
 LOCK TABLES `user_account` WRITE;
 /*!40000 ALTER TABLE `user_account` DISABLE KEYS */;
-INSERT INTO `user_account` VALUES (2,'organization','o',NULL,NULL,NULL,3,NULL,NULL,0,1,NULL,NULL,NULL,NULL,NULL,NULL);
+INSERT INTO `user_account` VALUES (2,'organization','o',NULL,NULL,NULL,3,NULL,NULL,0,1,NULL,NULL,NULL,NULL,NULL,NULL),(3,'donor','do',NULL,NULL,NULL,2,NULL,NULL,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `user_account` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -474,4 +450,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-05-10  3:44:47
+-- Dump completed on 2023-05-12  0:07:25
