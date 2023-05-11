@@ -55,6 +55,7 @@ public class PostController {
             Integer postId = Integer.parseInt(postIdStr);
 
             PostInfo postInfo = postInfoRepository.getReferenceById(postId);
+            System.out.println(postInfo);
             return ResponseEntity.status(HttpStatus.OK)
                     .body(postInfo);
         } catch (Exception e) {

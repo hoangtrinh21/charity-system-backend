@@ -42,9 +42,8 @@ public class DonationController {
     private CharityRepository charityRepository;
 
     @GetMapping("/get-all")
-    public Object getAllDonation(@RequestHeader(value = "Token") String token) {
+    public Object getAllDonation() {
         try {
-
             List<Donation> donations = donationRepository.findAll();
             List<JSONObject> response = new ArrayList<>();
             JSONObject object;
@@ -55,7 +54,7 @@ public class DonationController {
             JSONArray array = new JSONArray(response);
 
             return ResponseEntity.status(HttpStatus.OK)
-                    .body(array.toList());
+                    .body(donations);
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
@@ -64,35 +63,14 @@ public class DonationController {
     }
 
     @GetMapping("get-by-id")
-    public ResponseEntity<Object> getByCondition(@RequestParam Map<String, String> conditions) {
+    public ResponseEntity<Object> getById(@RequestParam(value = "donation-id") String donationIdStr) {
         try {
-            Integer id = conditions.get("donation-id") == null ? null : Integer.valueOf(conditions.get("donation-id"));
-            if (id != null) {
-                Donation donation = donationRepository.getReferenceById(id);
-                JSONObject object = donationService.buildDonationJsonBody(donation);
-                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                        .body(object.toString());
-            }
+            Integer id = Integer.parseInt(donationIdStr);
 
-            String donorName = conditions.get("donor-name");
-            String name = conditions.get("name");
-            String status = conditions.get("status");
-            String donationAddress = conditions.get("donation-address");
-            String donationObject = conditions.get("donation-object");
-
-            List<Donation> donations = donationRepository.findByIdDonor_NameLikeAndNameLikeAndStatusLikeAndDonationAddressLikeAndDonationObjectLike(
-                    donorName, name, status, donationAddress, donationObject);
-
-            List<JSONObject> response = new ArrayList<>();
-            JSONObject object;
-            for (Donation donation : donations) {
-                object = donationService.buildDonationJsonBody(donation);
-                response.add(object);
-            }
-            JSONArray array = new JSONArray(response);
-
-            return ResponseEntity.status(HttpStatus.OK)
-                    .body(array.toList());
+            Donation donation = donationRepository.getReferenceById(id);
+            JSONObject object = donationService.buildDonationJsonBody(donation);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(object.toString());
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
@@ -131,7 +109,7 @@ public class DonationController {
             donationRepository.save(donation);
 
             return ResponseEntity.status(HttpStatus.OK)
-                    .body(new ResponseModel("Inserted donation!"));
+                    .body(donation);
         } catch (Exception e) {
             System.out.println("error");
             e.printStackTrace();

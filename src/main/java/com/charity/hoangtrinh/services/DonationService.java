@@ -1,34 +1,50 @@
 package com.charity.hoangtrinh.services;
 
 import com.charity.hoangtrinh.dbs.sql.charitydatabase.entities.Donation;
+import com.charity.hoangtrinh.dbs.sql.charitydatabase.entities.Request;
 import com.charity.hoangtrinh.dbs.sql.charitydatabase.repositories.RequestRepository;
+import com.charity.hoangtrinh.dbs.sql.charitydatabase.repositories.UserAccountRepository;
+import com.charity.hoangtrinh.model.DonationResponse;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class DonationService {
     @Autowired
     private RequestRepository requestRepository;
-    public JSONObject buildDonationJsonBody(Donation donation) {
-        JSONObject object = new JSONObject();
-        object.put("id", String.valueOf(donation.getId()));
-        object.put("idDonor", String.valueOf(donation.getIdDonor().getId()));
-        object.put("organizationReceived", donation.getOrganizationReceived());
-        object.put("name", donation.getName());
-        object.put("donationAddress", donation.getDonationAddress());
-        object.put("donationObject", donation.getDonationObject());
-        object.put("donorName", donation.getIdDonor().getUserName());
-        object.put("phone", donation.getIdDonor().getPhoneNumber());
-        object.put("address", donation.getIdDonor().getAddress());
-        object.put("province", donation.getIdDonor().getAddress());
-        object.put("district", donation.getIdDonor().getAddress());
-        object.put("ward", donation.getIdDonor().getAddress());
-        object.put("date", String.valueOf(donation.getDate()));
-        object.put("description", donation.getDescription());
-        object.put("images", donation.getImages());
-        object.put("request", requestRepository.findByDonationIdEquals(donation.getId()));
+    @Autowired
+    private UserAccountRepository userAccountRepository;
 
-        return object;
+    public DonationResponse buildDonationJsonBody(Donation donation) {
+        DonationResponse donationResponse = new DonationResponse();
+        donationResponse.setId(donation.getId());
+        donationResponse.setIdDonor(donation.getIdDonor().getId());
+        donationResponse.setStatus(donation.getStatus());
+        donationResponse.setOrganizationReceived(userAccountRepository.findByCharityIdEquals(donation.getOrganizationReceived().getId()).getName());
+        donationResponse.setIdOrganization(donation.getOrganizationReceived().getId());
+        donationResponse.setName(donation.getName());
+        donationResponse.setDonationAddress(donation.getDonationAddress());
+        donationResponse.setDonationObject(donation.getDonationObject());
+        donationResponse.setDonorName(donation.getIdDonor().getName());
+        donationResponse.setPhone(donation.getIdDonor().getName());
+        donationResponse.setAddress(donation.getIdDonor().getAddress());
+        donationResponse.setProvince(donation.getIdDonor().getProvince());
+        donationResponse.setDistrict(donation.getIdDonor().getDistrict());
+        donationResponse.setWard(donation.getIdDonor().getWard());
+        donationResponse.setDate(donation.getDate());
+        donationResponse.setDescription(donation.getDescription());
+        donationResponse.setImages(donation.getImages());
+
+        JSONObject request = new JSONObject();
+        List<JSONObject> list = new ArrayList<>();
+
+        for (Request r : requestRepository.findByDonationIdEquals(donation.getId())) {
+            request.put("id", r.getOrganizationId());
+        }
+        return donationResponse;
     }
 }
