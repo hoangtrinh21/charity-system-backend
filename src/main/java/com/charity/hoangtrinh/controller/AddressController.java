@@ -67,7 +67,7 @@ public class AddressController {
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(new ResponseModel("INTERNAL_SERVER_ERROR"));
+                    .body(new ResponseModel(e.getClass() + "\n" + e.getMessage()));
         }
     }
 
@@ -85,7 +85,7 @@ public class AddressController {
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(new ResponseModel("INTERNAL_SERVER_ERROR"));
+                    .body(new ResponseModel(e.getClass() + "\n" + e.getMessage()));
         }
     }
 
@@ -97,7 +97,7 @@ public class AddressController {
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(new ResponseModel("INTERNAL_SERVER_ERROR"));
+                    .body(new ResponseModel(e.getClass() + "\n" + e.getMessage()));
         }
 
     }

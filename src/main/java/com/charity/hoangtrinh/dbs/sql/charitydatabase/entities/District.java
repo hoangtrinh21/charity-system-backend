@@ -1,5 +1,6 @@
 package com.charity.hoangtrinh.dbs.sql.charitydatabase.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -24,10 +25,12 @@ public class District {
     @Column(name = "code_name")
     private String codeName;
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "province_code")
     private Province provinceCode;
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "administrative_unit_id")
     private AdministrativeUnit administrativeUnit;

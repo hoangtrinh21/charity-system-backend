@@ -1,13 +1,12 @@
 package com.charity.hoangtrinh.dbs.sql.charitydatabase.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
 
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
+@Getter
+@Setter
 @Entity
 @Table(name = "wards")
 public class Ward {
@@ -27,6 +26,7 @@ public class Ward {
     @Column(name = "district_code", length = 20)
     private String districtCode;
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "administrative_unit_id")
     private AdministrativeUnit administrativeUnit;
