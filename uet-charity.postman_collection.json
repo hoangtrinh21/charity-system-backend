@@ -1,8 +1,9 @@
 {
 	"info": {
-		"_postman_id": "df57f768-6e27-497a-9c6e-2be7264cfadb",
+		"_postman_id": "4ad911a9-80c3-41da-9b42-724bc21be1a7",
 		"name": "uet-charity",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23235687"
 	},
 	"item": [
 		{
@@ -252,7 +253,7 @@
 							}
 						],
 						"url": {
-							"raw": "http://localhost:8089/charity/campaign/get-by-condition?campaign-id=1",
+							"raw": "http://localhost:8089/charity/campaign/get-by-condition?campaign-id=14",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -295,13 +296,13 @@
 									"disabled": true
 								},
 								{
-									"key": "campaign-id",
-									"value": "1"
-								},
-								{
 									"key": "organization-id",
 									"value": "1",
 									"disabled": true
+								},
+								{
+									"key": "campaign-id",
+									"value": "14"
 								}
 							]
 						},
@@ -670,7 +671,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"name\": \"quần áo 7\",\n    \"donationAddress\": \"vùng caeo\",\n    \"donationObject\": \"trẻ em\",\n    \"description\": \"quần áo\",\n    \"images\": \"\"\n}",
+							"raw": "{\n    \"idDonor\": \"3\",\n    \"status\": \"vùng caeo\",\n    \"idOrganization\": \"1\",\n    \"name\": \"quần áo\",\n    \"donationAddress\": \"trẻ em\",\n    \"donationObject\": \"abc xyz\",\n    \"date\": \"12/05/2023\",\n    \"description\": \"mô tả\",\n    \"images\": \"ảnh\",\n    \"listRequest\": [\n        {\n          \"status\": \"Đợi xác nhận\",\n          \"id\": \"abc12345678910\",\n          \"name\": \"toi yeu nam dinh\"\n        }\n    ]\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -706,7 +707,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"donationId\": 12,\n    \"name\": \"quần áo 2\",\n    \"donationAddress\": \"vùng cao\",\n    \"donationObject\": \"trẻ em\",\n    \"description\": \"quần áo\",\n    \"images\": \"\",\n    \"status\": \"Đã nhận\",\n    \"organizationId\": 1\n}",
+							"raw": "{\n    \"id\": 10,\n    \"idDonor\": 3,\n    \"status\": \"miền trung\",\n    \"organizationReceived\": \"organization\",\n    \"idOrganization\": 1,\n    \"listRequest\": [\n        {\n            \"name\": \"toi yeu nam dinh\",\n            \"id\": \"abc12345678910\",\n            \"status\": \"Đợi xác nhận\"\n        }\n    ],\n    \"name\": \"quần áo\",\n    \"donationAddress\": \"trẻ em\",\n    \"donationObject\": \"abc xyz\",\n    \"donorName\": \"donor\",\n    \"phone\": null,\n    \"address\": null,\n    \"province\": null,\n    \"district\": null,\n    \"ward\": null,\n    \"date\": \"12/05/2023\",\n    \"description\": \"mô tả\",\n    \"images\": \"caapj nhaat anh\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -730,9 +731,9 @@
 					"response": []
 				},
 				{
-					"name": "lấy các yêu cầu theo donation id",
+					"name": "donor xóa bài đăng ủng hộ",
 					"request": {
-						"method": "GET",
+						"method": "DELETE",
 						"header": [
 							{
 								"key": "Token",
@@ -741,7 +742,7 @@
 							}
 						],
 						"url": {
-							"raw": "http://localhost:8089/charity/request/get-all-of-donation?donation-id=12",
+							"raw": "http://localhost:8089/charity/donation/donor-delete-donation?id=13",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -749,83 +750,14 @@
 							"port": "8089",
 							"path": [
 								"charity",
-								"request",
-								"get-all-of-donation"
+								"donation",
+								"donor-delete-donation"
 							],
 							"query": [
 								{
-									"key": "donation-id",
-									"value": "12"
+									"key": "id",
+									"value": "13"
 								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "lấy các yêu cầu theo tổ chức",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Token",
-								"value": "abcde",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "http://localhost:8089/charity/request/get-all-of-organization?organization-id=1",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8089",
-							"path": [
-								"charity",
-								"request",
-								"get-all-of-organization"
-							],
-							"query": [
-								{
-									"key": "organization-id",
-									"value": "1"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "thêm bài yêu cầu xác nhận donation",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Token",
-								"value": "abcd",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"donationId\": 12\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://localhost:8089/charity/request/add-request",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8089",
-							"path": [
-								"charity",
-								"request",
-								"add-request"
 							]
 						}
 					},

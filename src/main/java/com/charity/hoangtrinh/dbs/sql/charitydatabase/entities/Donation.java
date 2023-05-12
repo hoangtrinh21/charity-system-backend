@@ -2,13 +2,18 @@ package com.charity.hoangtrinh.dbs.sql.charitydatabase.entities;
 
 import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonSetter;
+import com.google.gson.Gson;
 import com.google.gson.JsonArray;
+import com.google.gson.JsonParser;
 import lombok.*;
+import org.camunda.bpm.engine.impl.json.JsonArrayConverter;
+import org.camunda.bpm.engine.impl.json.JsonArrayOfObjectsConverter;
 import org.json.JSONArray;
 
 import javax.persistence.*;
 import java.io.IOException;
 import java.sql.Blob;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -35,6 +40,7 @@ public class Donation {
     private Integer idOrganization;
 
     @Column(name = "listRequest", length = 1073741824)
+    @Lob
     private String listRequest;
 
     @Column(name = "name", nullable = false)
@@ -73,13 +79,11 @@ public class Donation {
     @Column(name = "images")
     private String images;
 
-    @JsonGetter("listRequest")
-    public JSONArray getListRequest() {
-        return new JSONArray(listRequest);
-    }
-
-    @JsonSetter("listRequest")
     public void setListRequest(JSONArray listRequest) {
         this.listRequest = listRequest.toString();
+    }
+
+    public List<Object> getListRequest() {
+        return new JSONArray(listRequest).toList();
     }
 }

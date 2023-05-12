@@ -70,6 +70,13 @@
 			<version>20230227</version>
 		</dependency>
 
+		<!-- https://mvnrepository.com/artifact/org.camunda.bpm/camunda-engine -->
+		<dependency>
+			<groupId>org.camunda.bpm</groupId>
+			<artifactId>camunda-engine</artifactId>
+			<version>7.19.0</version>
+		</dependency>
+
 	</dependencies>
 
 	<build>

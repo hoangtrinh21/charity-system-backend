@@ -209,7 +209,7 @@ CREATE TABLE `charities` (
 
 LOCK TABLES `charities` WRITE;
 /*!40000 ALTER TABLE `charities` DISABLE KEYS */;
-INSERT INTO `charities` VALUES (1,NULL,'a','b','c','e','e ','e','g','h','i',NULL,NULL,NULL,NULL,NULL,0,NULL,NULL,NULL,0);
+INSERT INTO `charities` VALUES (1,'Tổ chức 1','a','b','c','e','e ','e','g','h','i',NULL,NULL,NULL,NULL,NULL,0,NULL,NULL,NULL,0);
 /*!40000 ALTER TABLE `charities` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -258,7 +258,7 @@ CREATE TABLE `donations` (
   `status` varchar(255) NOT NULL,
   `organizationReceived` varchar(255) DEFAULT NULL,
   `idOrganization` int DEFAULT NULL,
-  `listRequest` blob,
+  `listRequest` text,
   `name` varchar(255) NOT NULL,
   `donationAddress` varchar(255) DEFAULT NULL,
   `donationObject` varchar(255) DEFAULT NULL,
@@ -272,7 +272,7 @@ CREATE TABLE `donations` (
   `description` varchar(255) DEFAULT NULL,
   `images` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -281,7 +281,7 @@ CREATE TABLE `donations` (
 
 LOCK TABLES `donations` WRITE;
 /*!40000 ALTER TABLE `donations` DISABLE KEYS */;
-INSERT INTO `donations` VALUES (6,3,'vùng caeo','organization',1,_binary '[{\"status\":\"Đợi xác nhận\",\"id\":\"abc12345678910\",\"name\":\"toi yeu nam dinh\"}]','quần áo','trẻ em','abc xyz','donor',NULL,NULL,NULL,NULL,NULL,'12/05/2023','mô tả','ảnh');
+INSERT INTO `donations` VALUES (13,NULL,'vùng caeo','Tổ chức 1',1,'[{\"name\":\"toi yeu nam dinh\",\"id\":\"abc12345678910\",\"status\":\"Đợi xác nhận\"}]','quần áo','trẻ em','abc xyz','donor',NULL,NULL,NULL,NULL,NULL,'12/05/2023','mô tả','ảnh'),(14,3,'miền trung','Tổ chức 1',1,'[{\"name\":\"toi yeu nam dinh\",\"id\":\"abc12345678910\",\"status\":\"Đợi xác nhận\"}]','quần áo','trẻ em','abc xyz','donor',NULL,NULL,NULL,NULL,NULL,'12/05/2023','mô tả','caapj nhaat anh'),(15,3,'vùng caeo','Tổ chức 1',1,'[{\"name\":\"toi yeu nam dinh\",\"id\":\"abc12345678910\",\"status\":\"Đợi xác nhận\"}]','quần áo','trẻ em','abc xyz','donor',NULL,NULL,NULL,NULL,NULL,'12/05/2023','mô tả','ảnh');
 /*!40000 ALTER TABLE `donations` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -448,4 +448,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-05-12 10:08:57
+-- Dump completed on 2023-05-12 11:40:38
