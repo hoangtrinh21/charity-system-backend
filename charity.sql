@@ -93,6 +93,7 @@ CREATE TABLE `campaign_info` (
   `stop_date` date NOT NULL,
   `status` varchar(50) NOT NULL,
   `is_active` bit(1) NOT NULL,
+  `images` text,
   PRIMARY KEY (`campaign_id`),
   KEY `campaign_info_FK_1` (`organization_id`),
   CONSTRAINT `campaign_info_FK` FOREIGN KEY (`organization_id`) REFERENCES `charities` (`Id`)
@@ -105,7 +106,7 @@ CREATE TABLE `campaign_info` (
 
 LOCK TABLES `campaign_info` WRITE;
 /*!40000 ALTER TABLE `campaign_info` DISABLE KEYS */;
-INSERT INTO `campaign_info` VALUES (2,1,'cập nhật','asdfghjkl','tre em','tay bac','ho tro tre em vung cao',100000000,45000000,0,0,1683728913,'2023-06-01','2023-06-15','2023-06-16','2023-06-30','2023-06-30','dang van dong',_binary ''),(3,1,'cuocoj vaanj dong 3','asdfghjkl','tre em','tay bac','ho tro tre em vung cao',100000000,0,0,0,1683728894,'2023-06-01','2023-06-15','2023-06-16','2023-06-30','2023-06-30','dang van dong',_binary '');
+INSERT INTO `campaign_info` VALUES (2,1,'cập nhật','asdfghjkl','tre em','tay bac','ho tro tre em vung cao',100000000,45000000,0,0,1683728913,'2023-06-01','2023-06-15','2023-06-16','2023-06-30','2023-06-30','dang van dong',_binary '',NULL),(3,1,'cuocoj vaanj dong 3','asdfghjkl','tre em','tay bac','ho tro tre em vung cao',100000000,0,0,0,1683728894,'2023-06-01','2023-06-15','2023-06-16','2023-06-30','2023-06-30','dang van dong',_binary '',NULL);
 /*!40000 ALTER TABLE `campaign_info` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -448,4 +449,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-05-12 11:40:38
+-- Dump completed on 2023-05-12 12:08:58
