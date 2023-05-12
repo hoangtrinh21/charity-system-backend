@@ -22,6 +22,9 @@ public class Charity {
     @Column(name = "CharityMotto", length = 1000)
     private String charityMotto;
 
+    @Column(name = "CharityName", length = 1000)
+    private String charityName;
+
     @Column(name = "CharityTarget", length = 1000)
     private String charityTarget;
 

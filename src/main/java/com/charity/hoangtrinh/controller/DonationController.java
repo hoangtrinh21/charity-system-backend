@@ -98,7 +98,7 @@ public class DonationController {
             UserAccount donor = userAccountRepository.getReferenceById(idDonor);
 
             Donation donation = new Donation();
-            donation.setIdDornor(idDonor);
+            donation.setIdDonor(idDonor);
             donation.setStatus(status);
 
             if (idOrganization != null) {
@@ -107,8 +107,7 @@ public class DonationController {
                 donation.setIdOrganization(organizationReceived.getCharityId());
             }
 
-            Blob requestBlob = new SerialBlob(listRequest.toString().getBytes(StandardCharsets.UTF_8));
-            donation.setListRequest(requestBlob);
+            donation.setListRequest(new JSONArray(listRequest.toString()));
 
             donation.setName(name);
             donation.setDonationAddress(donationAddress);

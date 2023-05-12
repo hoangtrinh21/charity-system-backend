@@ -19,10 +19,6 @@
 -- Table structure for table `administrative_regions`
 --
 
-DROP DATABASE IF EXISTS charity;
-CREATE DATABASE charity;
-USE charity;
-
 DROP TABLE IF EXISTS `administrative_regions`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
@@ -183,6 +179,7 @@ DROP TABLE IF EXISTS `charities`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `charities` (
   `Id` int NOT NULL AUTO_INCREMENT,
+  `CharityName` varchar(1000) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
   `CharityMotto` varchar(1000) DEFAULT NULL,
   `CharityTarget` varchar(1000) DEFAULT NULL,
   `CharityDescription` varchar(1000) DEFAULT NULL,
@@ -212,7 +209,7 @@ CREATE TABLE `charities` (
 
 LOCK TABLES `charities` WRITE;
 /*!40000 ALTER TABLE `charities` DISABLE KEYS */;
-INSERT INTO `charities` VALUES (1,'a','b','c','e','e ','e','g','h','i',NULL,NULL,NULL,NULL,NULL,0,NULL,NULL,NULL,0);
+INSERT INTO `charities` VALUES (1,NULL,'a','b','c','e','e ','e','g','h','i',NULL,NULL,NULL,NULL,NULL,0,NULL,NULL,NULL,0);
 /*!40000 ALTER TABLE `charities` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -257,7 +254,7 @@ DROP TABLE IF EXISTS `donations`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `donations` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `idDornor` int DEFAULT NULL,
+  `idDonor` int DEFAULT NULL,
   `status` varchar(255) NOT NULL,
   `organizationReceived` varchar(255) DEFAULT NULL,
   `idOrganization` int DEFAULT NULL,
@@ -275,7 +272,7 @@ CREATE TABLE `donations` (
   `description` varchar(255) DEFAULT NULL,
   `images` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -284,6 +281,7 @@ CREATE TABLE `donations` (
 
 LOCK TABLES `donations` WRITE;
 /*!40000 ALTER TABLE `donations` DISABLE KEYS */;
+INSERT INTO `donations` VALUES (6,3,'vùng caeo','organization',1,_binary '[{\"status\":\"Đợi xác nhận\",\"id\":\"abc12345678910\",\"name\":\"toi yeu nam dinh\"}]','quần áo','trẻ em','abc xyz','donor',NULL,NULL,NULL,NULL,NULL,'12/05/2023','mô tả','ảnh');
 /*!40000 ALTER TABLE `donations` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -450,4 +448,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-05-12  0:07:25
+-- Dump completed on 2023-05-12 10:08:57
