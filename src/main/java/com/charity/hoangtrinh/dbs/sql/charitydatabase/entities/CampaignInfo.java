@@ -75,6 +75,9 @@ public class CampaignInfo {
     @Column(name = "is_active", nullable = false)
     private Boolean isActive = false;
 
+    @Column(name = "images", nullable = false)
+    private String images;
+
     @OneToMany(mappedBy = "campaign")
     private Set<CampaignInput> campaignInputs = new LinkedHashSet<>();
 
