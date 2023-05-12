@@ -237,6 +237,7 @@ public class CampaignController {
             String  region          = JsonUtil.getString(jsonBody, "region");
             String  campaignType    = JsonUtil.getString(jsonBody, "campaign_type");
             String  status          = JsonUtil.getString(jsonBody, "status");
+            String  images          = JsonUtil.getString(jsonBody, "images");
             Long    targetAmount    = JsonUtil.getLong(jsonBody, "target_amount");
             Long    receiveAmount   = JsonUtil.getLong(jsonBody, "receive_amount");
             Long    donorAmount     = JsonUtil.getLong(jsonBody, "donor_amount");
@@ -269,6 +270,7 @@ public class CampaignController {
             campaignInfo.setStartActiveDate(startActiveDate);
             campaignInfo.setStopActiveDate(stopActiveDate);
             campaignInfo.setStopDate(stopDate);
+            campaignInfo.setImages(images);
             campaignInfoRepository.save(campaignInfo);
 
             return ResponseEntity.status(HttpStatus.CREATED)
