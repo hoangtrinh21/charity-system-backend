@@ -313,7 +313,8 @@ public class CampaignController {
     @GetMapping("/campaign-get-follower")
     public ResponseEntity<Object> getFollowerCampaign(@RequestParam(value = "campaign-id") String campaignIdStr) {
         try {
-            List<CampaignFollower> campaignFollowers = campaignFollowerRepository.findByCampaign_IdEquals(Integer.valueOf(campaignIdStr));
+            List<CampaignFollower> campaignFollowers =
+                    campaignFollowerRepository.findByCampaign_IdEquals(Integer.valueOf(campaignIdStr));
             List<UserAccount> followers = new ArrayList<>();
             for (CampaignFollower c : campaignFollowers) {
                 followers.add(c.getUser());
@@ -338,8 +339,15 @@ public class CampaignController {
                         .body(new ResponseModel("You are not donor!"));
             UserAccount donor = accessService.getUserByToken(token);
 
+            List<CampaignFollower> campaignFollowers =
+                    campaignFollowerRepository.findByUserEquals(donor);
+            List<CampaignInfo> campaignInfos = new ArrayList<>();
+            for (CampaignFollower c : campaignFollowers) {
+                campaignInfos.add(c.getCampaign());
+            }
+
             return ResponseEntity.status(HttpStatus.OK)
-                    .body(campaignFollowerRepository.findByUserEquals(donor));
+                    .body(campaignInfos);
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
