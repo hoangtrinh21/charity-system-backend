@@ -25,12 +25,12 @@ public class Province {
     @Column(name = "code_name")
     private String codeName;
 
-    @JsonIgnore
+//    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "administrative_unit_id")
     private AdministrativeUnit administrativeUnit;
 
-    @JsonIgnore
+//    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "administrative_region_id")
     private AdministrativeRegion administrativeRegion;

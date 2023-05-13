@@ -75,13 +75,11 @@ public class CampaignInfo {
     @Column(name = "is_active", nullable = false)
     private Boolean isActive = false;
 
-    @Column(name = "images", nullable = false)
+    @Lob
+    @Column(name = "images")
     private String images;
 
     @OneToMany(mappedBy = "campaign")
-    private Set<CampaignInput> campaignInputs = new LinkedHashSet<>();
-
-    @OneToMany(mappedBy = "campaign")
-    private Set<CampaignOutput> campaignOutputs = new LinkedHashSet<>();
+    private Set<CampaignFollower> campaignFollowers = new LinkedHashSet<>();
 
 }

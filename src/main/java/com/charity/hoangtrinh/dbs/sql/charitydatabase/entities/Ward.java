@@ -26,7 +26,7 @@ public class Ward {
     @Column(name = "district_code", length = 20)
     private String districtCode;
 
-    @JsonIgnore
+//    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "administrative_unit_id")
     private AdministrativeUnit administrativeUnit;

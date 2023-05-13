@@ -1,7 +1,9 @@
 package com.charity.hoangtrinh.controller;
 
+import com.charity.hoangtrinh.dbs.sql.charitydatabase.entities.CampaignFollower;
 import com.charity.hoangtrinh.dbs.sql.charitydatabase.entities.CampaignInfo;
 import com.charity.hoangtrinh.dbs.sql.charitydatabase.entities.Charity;
+import com.charity.hoangtrinh.dbs.sql.charitydatabase.entities.UserAccount;
 import com.charity.hoangtrinh.dbs.sql.charitydatabase.repositories.*;
 import com.charity.hoangtrinh.model.ResponseModel;
 import com.charity.hoangtrinh.services.AccessService;
@@ -16,6 +18,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
@@ -42,6 +45,8 @@ public class CampaignController {
     private PostService postService;
     @Autowired
     private CharityRepository charityRepository;
+    @Autowired
+    private CampaignFollowerRepository campaignFollowerRepository;
 
     /**
      * Lấy toàn bộ chiến dịch
@@ -303,9 +308,77 @@ public class CampaignController {
                     .body(new ResponseModel(e.getClass()));
         }
     }
-    /**
-     * Sao kê
-     */
+
+    @GetMapping("/user-get-campaign-follow")
+    public ResponseEntity<Object> getCampaignsUserFollow(@RequestHeader(value = "Token") String token) {
+        try {
+            boolean isDonor = accessService.isDonor(token);
+
+            if (!isDonor)
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                        .body(new ResponseModel("You are not donor!"));
+            UserAccount donor = accessService.getUserByToken(token);
+
+            return ResponseEntity.status(HttpStatus.OK)
+                    .body(campaignInfoRepository.findByCampaignFollowers_UserEquals(donor));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(new ResponseModel(e.getClass()));
+        }
+    }
+
+    @PostMapping("/user-follow-campaign")
+    public ResponseEntity<Object> userFollowCampaign(@RequestHeader(value = "Token") String token,
+                                                        @RequestParam(value = "campaign-id") String campaignIdStr) {
+        try {
+            boolean isDonor = accessService.isDonor(token);
+
+            if (!isDonor)
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                        .body(new ResponseModel("You are not donor!"));
+            UserAccount donor = accessService.getUserByToken(token);
+
+            CampaignInfo campaignInfo = campaignInfoRepository.getReferenceById(Integer.valueOf(campaignIdStr));
+
+            CampaignFollower campaignFollower = new CampaignFollower();
+            campaignFollower.setUser(donor);
+            campaignFollower.setCampaign(campaignInfo);
+            campaignFollowerRepository.save(campaignFollower);
+
+            return ResponseEntity.status(HttpStatus.OK)
+                    .body(campaignFollower);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(new ResponseModel(e.getClass()));
+        }
+    }
+
+    @PostMapping("/user-unfollow-campaign")
+    public ResponseEntity<Object> userUnfollowCampaign(@RequestHeader(value = "Token") String token,
+                                                        @RequestParam(value = "campaign-id") String campaignIdStr) {
+        try {
+            boolean isDonor = accessService.isDonor(token);
+
+            if (!isDonor)
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                        .body(new ResponseModel("You are not donor!"));
+            UserAccount donor = accessService.getUserByToken(token);
+
+            CampaignInfo campaignInfo = campaignInfoRepository.getReferenceById(Integer.valueOf(campaignIdStr));
+
+            long deleteCounter = campaignFollowerRepository.deleteByUserEqualsAndCampaignEquals(donor, campaignInfo);
+
+            return ResponseEntity.status(HttpStatus.OK)
+                    .body(new ResponseModel("Unfollowed!"));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(new ResponseModel(e.getClass()));
+        }
+    }
+
 //    @PostMapping("/statement")
 //    public ResponseEntity<ResponseModel> statement(@RequestParam(value = "campaign-id") String campaignIdStr) {
 //        int campaignId = Integer.parseInt(campaignIdStr);
