@@ -417,6 +417,126 @@
 						"description": "# API xóa cuộc vận động\n\n`Token not null`\n\n`Chỉ Tổ chức có quyền xóa cuộc vận động`"
 					},
 					"response": []
+				},
+				{
+					"name": "lấy các người dùng theo dõi cuộc vận động",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Token",
+								"value": "abcde",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8089/charity/campaign/user-get-followed-campaign",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8089",
+							"path": [
+								"charity",
+								"campaign",
+								"user-get-followed-campaign"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "lấy các cuộc vận động người dùng theo dõi",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Token",
+								"value": "abcde",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8089/charity/campaign/user-get-followed-campaign",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8089",
+							"path": [
+								"charity",
+								"campaign",
+								"user-get-followed-campaign"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "thêm người dùng theo dõi cuộc vận động",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Token",
+								"value": "abcde",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8089/charity/campaign/user-follow-campaign?campaign-id=2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8089",
+							"path": [
+								"charity",
+								"campaign",
+								"user-follow-campaign"
+							],
+							"query": [
+								{
+									"key": "campaign-id",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "thêm người dùng theo dõi cuộc vận động Copy",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Token",
+								"value": "abcde",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8089/charity/campaign/user-unfollow-campaign?campaign-id=2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8089",
+							"path": [
+								"charity",
+								"campaign",
+								"user-unfollow-campaign"
+							],
+							"query": [
+								{
+									"key": "campaign-id",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -429,7 +549,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8089/charity/post/get-post?campaign-id=3",
+							"raw": "http://localhost:8089/charity/post/get-post?campaign-id=2",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -443,7 +563,7 @@
 							"query": [
 								{
 									"key": "campaign-id",
-									"value": "3"
+									"value": "2"
 								}
 							]
 						},
@@ -457,7 +577,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8089/charity/post/get-post-by-id?post-id=1",
+							"raw": "http://localhost:8089/charity/post/get-post-by-id?post-id=2",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -471,7 +591,7 @@
 							"query": [
 								{
 									"key": "post-id",
-									"value": "1"
+									"value": "2"
 								}
 							]
 						},
