@@ -18,6 +18,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -309,7 +310,25 @@ public class CampaignController {
         }
     }
 
-    @GetMapping("/user-get-campaign-follow")
+    @GetMapping("/campaign-get-follower")
+    public ResponseEntity<Object> getFollowerCampaign(@RequestParam(value = "campaign-id") String campaignIdStr) {
+        try {
+            List<CampaignFollower> campaignFollowers = campaignFollowerRepository.findByCampaign_IdEquals(Integer.valueOf(campaignIdStr));
+            List<UserAccount> followers = new ArrayList<>();
+            for (CampaignFollower c : campaignFollowers) {
+                followers.add(c.getUser());
+            }
+
+            return ResponseEntity.status(HttpStatus.OK)
+                    .body(followers);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(new ResponseModel(e.getClass()));
+        }
+    }
+
+    @GetMapping("/user-get-followed-campaign")
     public ResponseEntity<Object> getCampaignsUserFollow(@RequestHeader(value = "Token") String token) {
         try {
             boolean isDonor = accessService.isDonor(token);
@@ -320,7 +339,7 @@ public class CampaignController {
             UserAccount donor = accessService.getUserByToken(token);
 
             return ResponseEntity.status(HttpStatus.OK)
-                    .body(campaignInfoRepository.findByCampaignFollowers_UserEquals(donor));
+                    .body(campaignFollowerRepository.findByUserEquals(donor));
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
@@ -341,6 +360,10 @@ public class CampaignController {
 
             CampaignInfo campaignInfo = campaignInfoRepository.getReferenceById(Integer.valueOf(campaignIdStr));
 
+            if (campaignFollowerRepository.existsByUserEqualsAndCampaignEquals(donor, campaignInfo))
+                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                        .body(new ResponseModel("You followed this campaign!"));
+
             CampaignFollower campaignFollower = new CampaignFollower();
             campaignFollower.setUser(donor);
             campaignFollower.setCampaign(campaignInfo);
@@ -355,7 +378,7 @@ public class CampaignController {
         }
     }
 
-    @PostMapping("/user-unfollow-campaign")
+    @DeleteMapping("/user-unfollow-campaign")
     public ResponseEntity<Object> userUnfollowCampaign(@RequestHeader(value = "Token") String token,
                                                         @RequestParam(value = "campaign-id") String campaignIdStr) {
         try {
@@ -368,7 +391,7 @@ public class CampaignController {
 
             CampaignInfo campaignInfo = campaignInfoRepository.getReferenceById(Integer.valueOf(campaignIdStr));
 
-            long deleteCounter = campaignFollowerRepository.deleteByUserEqualsAndCampaignEquals(donor, campaignInfo);
+            campaignFollowerRepository.deleteById(campaignFollowerRepository.findByUserEqualsAndCampaignEquals(donor, campaignInfo).getId());
 
             return ResponseEntity.status(HttpStatus.OK)
                     .body(new ResponseModel("Unfollowed!"));

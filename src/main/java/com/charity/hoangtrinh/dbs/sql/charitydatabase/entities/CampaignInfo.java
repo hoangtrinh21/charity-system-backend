@@ -4,8 +4,6 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.LinkedHashSet;
-import java.util.Set;
 
 @Data
 @NoArgsConstructor
@@ -78,8 +76,5 @@ public class CampaignInfo {
     @Lob
     @Column(name = "images")
     private String images;
-
-    @OneToMany(mappedBy = "campaign")
-    private Set<CampaignFollower> campaignFollowers = new LinkedHashSet<>();
 
 }
