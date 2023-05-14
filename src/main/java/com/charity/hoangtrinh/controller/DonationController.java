@@ -71,6 +71,21 @@ public class DonationController {
         }
     }
 
+    @GetMapping("/get-by-donor")
+    public ResponseEntity<Object> getByDonor(@RequestParam(value = "donor-id") String donorIdStr) {
+        try {
+            Integer id = Integer.parseInt(donorIdStr);
+
+            UserAccount donor = userAccountRepository.getReferenceById(id);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(donationRepository.findByIdDonorEquals(donor.getId()));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(new ResponseModel(e.getClass()));
+        }
+    }
+
     @PostMapping("/add-donation")
     public ResponseEntity<Object> addDonation(@RequestHeader(value = "Token") String token, @RequestBody String body) {
         try {
@@ -81,16 +96,16 @@ public class DonationController {
 
             JsonObject jsonBody = JsonParser.parseString(body).getAsJsonObject();
 
-            Integer idDonor  = Integer.valueOf(jsonBody.get("idDonor").getAsString());
-            String status   = jsonBody.get("status").getAsString();
-            String idOrganization       = jsonBody.get("idOrganization").getAsString();
-            String name = jsonBody.get("name").getAsString();
-            String donationAddress = jsonBody.get("donationAddress").getAsString();
-            String donationObject = jsonBody.get("donationObject").getAsString();
-            String date = jsonBody.get("date").getAsString();
-            String description = jsonBody.get("description").getAsString();
-            String images = jsonBody.get("images").getAsString();
-            JsonArray listRequest = jsonBody.get("listRequest").getAsJsonArray();
+            Integer idDonor         = Integer.valueOf(jsonBody.get("idDonor").getAsString());
+            String status           = jsonBody.get("status").getAsString();
+            String idOrganization   = jsonBody.get("idOrganization").getAsString();
+            String name             = jsonBody.get("name").getAsString();
+            String donationAddress  = jsonBody.get("donationAddress").getAsString();
+            String donationObject   = jsonBody.get("donationObject").getAsString();
+            String date             = jsonBody.get("date").getAsString();
+            String description      = jsonBody.get("description").getAsString();
+            String images           = jsonBody.get("images").getAsString();
+            JsonArray listRequest   = jsonBody.get("listRequest").getAsJsonArray();
 
             UserAccount donor = userAccountRepository.getReferenceById(idDonor);
 

@@ -841,6 +841,40 @@
 						"header": [
 							{
 								"key": "Token",
+								"value": "abcde",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8089/charity/donation/get-by-donor?donor-id=3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8089",
+							"path": [
+								"charity",
+								"donation",
+								"get-by-donor"
+							],
+							"query": [
+								{
+									"key": "donor-id",
+									"value": "3"
+								}
+							]
+						},
+						"description": "trường nào ko có trong respone thí trường nó  null trong database"
+					},
+					"response": []
+				},
+				{
+					"name": "get all các bài đăng ủng hộ Copy",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Token",
 								"value": "",
 								"type": "text"
 							}
