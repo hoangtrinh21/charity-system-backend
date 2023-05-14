@@ -198,6 +198,28 @@ public class DonationController {
         }
     }
 
+    @DeleteMapping("/delete-donation")
+    public ResponseEntity<Object> deleteCampaign(@RequestHeader(value = "Token") String token,
+                                                 @RequestParam(value = "id") String idStr) {
+        try {
+            boolean isDonor = accessService.isDonor(token);
+            if (!isDonor)
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                        .body(new ResponseModel("You are not donor!"));
+
+            Integer donationId = Integer.parseInt(idStr);
+
+            donationRepository.deleteById(donationId);
+
+            return ResponseEntity.status(HttpStatus.OK)
+                    .body("Deleted donation!");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(new ResponseModel(e.getClass()));
+        }
+    }
+
     @DeleteMapping("/donor-delete-donation")
     public ResponseEntity<Object> donorDeleteDonation(@RequestHeader(value = "Token") String token,
                                                       @RequestParam(value = "id") String idStr) {

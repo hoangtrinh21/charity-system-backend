@@ -15,7 +15,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"user_id\" : 2,\n    \"token\": \"abcd\"\n}",
+							"raw": "{\n    \"user_id\" : 3,\n    \"token\": \"abcde\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -297,7 +297,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "[\n    {\n        \"name\": \"donor 1\",\n        \"amount\": 1000000,\n        \"note\": \"ghi chú\",\n        \"type\": \"nhận\" // nhận hoặc trao,  \n    }\n]",
+									"raw": "[\n    {\n        \"name\": \"donor 1\",\n        \"amount\": 1000000,\n        \"note\": \"ủng hộ nhiemf trung\",\n        \"type\": \"nhận\" // nhận hoặc trao,  \n    }\n]",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -812,7 +812,7 @@
 							}
 						],
 						"url": {
-							"raw": "http://localhost:8089/charity/donation/get-by-id?donation-id=12",
+							"raw": "http://localhost:8089/charity/donation/get-by-id?donation-id=1",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -826,7 +826,7 @@
 							"query": [
 								{
 									"key": "donation-id",
-									"value": "12"
+									"value": "1"
 								}
 							]
 						},
@@ -911,7 +911,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"id\": 10,\n    \"idDonor\": 3,\n    \"status\": \"miền trung\",\n    \"organizationReceived\": \"organization\",\n    \"idOrganization\": 1,\n    \"listRequest\": [\n        {\n            \"name\": \"toi yeu nam dinh\",\n            \"id\": \"abc12345678910\",\n            \"status\": \"Đợi xác nhận\"\n        }\n    ],\n    \"name\": \"quần áo\",\n    \"donationAddress\": \"trẻ em\",\n    \"donationObject\": \"abc xyz\",\n    \"donorName\": \"donor\",\n    \"phone\": null,\n    \"address\": null,\n    \"province\": null,\n    \"district\": null,\n    \"ward\": null,\n    \"date\": \"12/05/2023\",\n    \"description\": \"mô tả\",\n    \"images\": \"caapj nhaat anh\"\n}",
+							"raw": "{\n    \"id\": 10,\n    \"idDonor\": 3,\n    \"status\": \"miền trung\",\n    \"organizationReceived\": \"organization\",\n    \"idOrganization\": 1,\n    \"listRequest\": [\n        {\n            \"name\": \"toi yeu nam dinh\",\n            \"id\": \"abc12345678910\",\n            \"status\": \"Đợi xác nhận\"\n        }\n    ],\n    \"name\": \"quần áo\",\n    \"donationAddress\": \"trẻ em\",\n    \"donationObject\": \"abc xyz\",\n    \"date\": \"12/05/2023\",\n    \"description\": \"mô tả\",\n    \"images\": \"caapj nhaat anh\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -961,6 +961,39 @@
 								{
 									"key": "id",
 									"value": "13"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "xóa bài đăng ủng hộ",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Token",
+								"value": "abcde",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8089/charity/donation/delete-donation?id=1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8089",
+							"path": [
+								"charity",
+								"donation",
+								"delete-donation"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "1"
 								}
 							]
 						}

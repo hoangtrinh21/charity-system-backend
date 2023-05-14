@@ -420,15 +420,6 @@ public class CampaignController {
             if (!campaignInfoOptional.isPresent())
                 return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                         .body(new ResponseModel("This campaign do not exists!"));
-            boolean isOrganization = accessService.isOrganization(token);
-            if (!isOrganization)
-                return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                        .body(new ResponseModel("You are not organization!"));
-
-            Integer organizationId  = accessService.getUserByToken(token).getCharityId();
-            if (!accessService.getUserByCampaignId(campaignId).getId().equals(organizationId))
-                return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
-                        .body(new ResponseModel("You do not have permission to this campaign!"));
 
             JsonArray jsonBody = JsonParser.parseString(body).getAsJsonArray();
             List<Statement> statementSaved = new ArrayList<>();
@@ -474,6 +465,18 @@ public class CampaignController {
 
             return ResponseEntity.status(HttpStatus.OK)
                     .body(statements);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(new ResponseModel(e.getClass() + ":" + e.getMessage()));
+        }
+    }
+
+    @GetMapping("/get-star")
+    public ResponseEntity<Object> getStarCampaigns() {
+        try {
+            return ResponseEntity.status(HttpStatus.OK)
+                    .body(campaignInfoRepository.findByStarTrue());
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)

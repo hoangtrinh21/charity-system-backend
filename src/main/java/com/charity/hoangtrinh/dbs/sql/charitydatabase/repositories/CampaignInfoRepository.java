@@ -9,6 +9,7 @@ import org.springframework.lang.Nullable;
 import java.util.List;
 
 public interface CampaignInfoRepository extends JpaRepository<CampaignInfo, Integer> {
+    List<CampaignInfo> findByStarTrue();
     @Query("select c from CampaignInfo c where c.organization.id = ?1")
     List<CampaignInfo> findByOrganization_IdEquals(Integer id);
     List<CampaignInfo> findByCampaignNameLikeAndRegionLikeAndCampaignTypeLikeAndTargetObjectLikeAndStatusLikeAndIsActiveTrue(@Nullable String campaignName, @Nullable String region, @Nullable String campaignType, @Nullable String targetObject, @Nullable String status);
