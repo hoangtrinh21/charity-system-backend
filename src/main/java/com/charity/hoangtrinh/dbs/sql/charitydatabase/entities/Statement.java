@@ -1,17 +1,16 @@
 package com.charity.hoangtrinh.dbs.sql.charitydatabase.entities;
 
-import lombok.*;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.Instant;
 
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
+@Getter
+@Setter
 @Entity
-@Table(name = "campaign_input")
-public class CampaignInput {
+@Table(name = "statement")
+public class Statement {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
@@ -20,14 +19,17 @@ public class CampaignInput {
     @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "donation_time", nullable = false)
-    private Instant donationTime;
+    @Column(name = "amount", nullable = false)
+    private Long amount;
 
-    @Column(name = "donation_amount", nullable = false)
-    private Long donationAmount;
-
-    @Column(name = "note")
+    @Column(name = "note", length = 1000)
     private String note;
+
+    @Column(name = "time_create", nullable = false)
+    private Instant timeCreate;
+
+    @Column(name = "type", nullable = false, length = 100)
+    private String type;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "campaign_id", nullable = false)

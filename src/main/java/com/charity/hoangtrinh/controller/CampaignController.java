@@ -1,15 +1,14 @@
 package com.charity.hoangtrinh.controller;
 
-import com.charity.hoangtrinh.dbs.sql.charitydatabase.entities.CampaignFollower;
-import com.charity.hoangtrinh.dbs.sql.charitydatabase.entities.CampaignInfo;
-import com.charity.hoangtrinh.dbs.sql.charitydatabase.entities.Charity;
-import com.charity.hoangtrinh.dbs.sql.charitydatabase.entities.UserAccount;
+import com.charity.hoangtrinh.dbs.sql.charitydatabase.entities.*;
 import com.charity.hoangtrinh.dbs.sql.charitydatabase.repositories.*;
 import com.charity.hoangtrinh.model.ResponseModel;
 import com.charity.hoangtrinh.services.AccessService;
 import com.charity.hoangtrinh.services.CampaignService;
 import com.charity.hoangtrinh.services.PostService;
 import com.charity.hoangtrinh.utils.JsonUtil;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,11 +16,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.Instant;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 
 @RestController
 @RequestMapping("/charity/campaign")
@@ -48,6 +45,8 @@ public class CampaignController {
     private CharityRepository charityRepository;
     @Autowired
     private CampaignFollowerRepository campaignFollowerRepository;
+    @Autowired
+    private StatementRepository statementRepository;
 
     /**
      * Lấy toàn bộ chiến dịch
@@ -149,7 +148,7 @@ public class CampaignController {
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(new ResponseModel(e.getClass()));
+                    .body(new ResponseModel(e.getClass() + ":" + e.getMessage()));
         }
     }
 
@@ -215,7 +214,7 @@ public class CampaignController {
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(new ResponseModel(e.getClass()));
+                    .body(new ResponseModel(e.getClass() + ":" + e.getMessage()));
         }
     }
 
@@ -285,7 +284,7 @@ public class CampaignController {
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(new ResponseModel(e.getClass()));
+                    .body(new ResponseModel(e.getClass() + ":" + e.getMessage()));
         }
     }
 
@@ -306,7 +305,7 @@ public class CampaignController {
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(new ResponseModel(e.getClass()));
+                    .body(new ResponseModel(e.getClass() + ":" + e.getMessage()));
         }
     }
 
@@ -325,7 +324,7 @@ public class CampaignController {
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(new ResponseModel(e.getClass()));
+                    .body(new ResponseModel(e.getClass() + ":" + e.getMessage()));
         }
     }
 
@@ -351,7 +350,7 @@ public class CampaignController {
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(new ResponseModel(e.getClass()));
+                    .body(new ResponseModel(e.getClass() + ":" + e.getMessage()));
         }
     }
 
@@ -382,7 +381,7 @@ public class CampaignController {
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(new ResponseModel(e.getClass()));
+                    .body(new ResponseModel(e.getClass() + ":" + e.getMessage()));
         }
     }
 
@@ -406,13 +405,79 @@ public class CampaignController {
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(new ResponseModel(e.getClass()));
+                    .body(new ResponseModel(e.getClass() + ":" + e.getMessage()));
         }
     }
 
-//    @PostMapping("/statement")
-//    public ResponseEntity<ResponseModel> statement(@RequestParam(value = "campaign-id") String campaignIdStr) {
-//        int campaignId = Integer.parseInt(campaignIdStr);
-//        CamIn
-//    }
+    @PostMapping("/add-statement-campaign")
+    public ResponseEntity<Object> addStatement(@RequestHeader(value = "Token") String token,
+                                               @RequestParam(value = "campaign-id") String campaignIdStr,
+                                               @RequestBody String body) {
+        try {
+            int campaignId      = Integer.parseInt(campaignIdStr);
+            Optional<CampaignInfo> campaignInfoOptional = campaignInfoRepository.findById(campaignId);
+
+            if (!campaignInfoOptional.isPresent())
+                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                        .body(new ResponseModel("This campaign do not exists!"));
+            boolean isOrganization = accessService.isOrganization(token);
+            if (!isOrganization)
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                        .body(new ResponseModel("You are not organization!"));
+
+            Integer organizationId  = accessService.getUserByToken(token).getCharityId();
+            if (!accessService.getUserByCampaignId(campaignId).getId().equals(organizationId))
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                        .body(new ResponseModel("You do not have permission to this campaign!"));
+
+            JsonArray jsonBody = JsonParser.parseString(body).getAsJsonArray();
+            List<Statement> statementSaved = new ArrayList<>();
+            for (JsonElement element : jsonBody) {
+                JsonObject object = element.getAsJsonObject();
+
+                Long donationAmount = object.get("amount").getAsLong();
+                String name = object.get("name").getAsString();
+                String note = object.get("note").getAsString();
+                Instant time = Instant.now();
+                String type = object.get("type").getAsString();
+
+                Statement statement = new Statement();
+                statement.setName(name);
+                statement.setTimeCreate(time);
+                statement.setNote(note);
+                statement.setType(type);
+                statement.setAmount(donationAmount);
+                statement.setCampaign(campaignInfoOptional.get());
+
+                statementRepository.save(statement);
+                statementSaved.add(statement);
+            }
+            return ResponseEntity.status(HttpStatus.OK)
+                    .body(statementSaved);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(new ResponseModel(e.getClass() + ":" + e.getMessage()));
+        }
+    }
+
+    @GetMapping("/get-statement-campaign")
+    public ResponseEntity<Object> getStatement(@RequestParam(value = "campaign-id") String campaignIdStr) {
+
+        try {
+            int campaignId = Integer.parseInt(campaignIdStr);
+            Optional<CampaignInfo> campaignInfoOptional = campaignInfoRepository.findById(campaignId);
+            if (!campaignInfoOptional.isPresent())
+                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                        .body(new ResponseModel("This campaign do not exists!"));
+            List<Statement> statements = statementRepository.findByCampaignEquals(campaignInfoOptional.get());
+
+            return ResponseEntity.status(HttpStatus.OK)
+                    .body(statements);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(new ResponseModel(e.getClass() + ":" + e.getMessage()));
+        }
+    }
 }
