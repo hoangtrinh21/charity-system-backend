@@ -125,6 +125,211 @@
 			"name": "chiến dịch (cuộc vận động)",
 			"item": [
 				{
+					"name": "follow",
+					"item": [
+						{
+							"name": "lấy các người dùng theo dõi cuộc vận động",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Token",
+										"value": "abcde",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:8089/charity/campaign/campaign-get-follower?campaign-id=1",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8089",
+									"path": [
+										"charity",
+										"campaign",
+										"campaign-get-follower"
+									],
+									"query": [
+										{
+											"key": "campaign-id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "thêm người dùng theo dõi cuộc vận động Copy",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Token",
+										"value": "abcde",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:8089/charity/campaign/user-unfollow-campaign?campaign-id=2",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8089",
+									"path": [
+										"charity",
+										"campaign",
+										"user-unfollow-campaign"
+									],
+									"query": [
+										{
+											"key": "campaign-id",
+											"value": "2"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "lấy các cuộc vận động người dùng theo dõi",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Token",
+										"value": "abcde",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:8089/charity/campaign/user-get-followed-campaign",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8089",
+									"path": [
+										"charity",
+										"campaign",
+										"user-get-followed-campaign"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "thêm người dùng theo dõi cuộc vận động",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Token",
+										"value": "abcde",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "http://localhost:8089/charity/campaign/user-follow-campaign?campaign-id=2",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8089",
+									"path": [
+										"charity",
+										"campaign",
+										"user-follow-campaign"
+									],
+									"query": [
+										{
+											"key": "campaign-id",
+											"value": "2"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "sao kê",
+					"item": [
+						{
+							"name": "lấy sao kê cuộc vận động",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:8089/charity/campaign/get-statement-campaign?campaign-id=2",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8089",
+									"path": [
+										"charity",
+										"campaign",
+										"get-statement-campaign"
+									],
+									"query": [
+										{
+											"key": "campaign-id",
+											"value": "2"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "thêm sao kê cuộc vận động",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Token",
+										"value": "abcd",
+										"type": "default"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "[\n    {\n        \"name\": \"donor 1\",\n        \"amount\": 1000000,\n        \"note\": \"ủng hộ nhiemf trung\",\n        \"type\": \"nhận\" // nhận hoặc trao,  \n    }\n]",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:8089/charity/campaign/add-statement-campaign?campaign-id=2",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "8089",
+									"path": [
+										"charity",
+										"campaign",
+										"add-statement-campaign"
+									],
+									"query": [
+										{
+											"key": "campaign-id",
+											"value": "2"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
 					"name": "get all cuộc vận động",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
