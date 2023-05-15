@@ -1,8 +1,9 @@
 {
 	"info": {
-		"_postman_id": "a9522f1c-03d0-478b-936b-a15db428dca9",
+		"_postman_id": "1cb65d50-e730-4f05-b6fd-5a9f1e158048",
 		"name": "uet-charity",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23235687"
 	},
 	"item": [
 		{
@@ -123,211 +124,6 @@
 		{
 			"name": "chiến dịch (cuộc vận động)",
 			"item": [
-				{
-					"name": "follow",
-					"item": [
-						{
-							"name": "lấy các người dùng theo dõi cuộc vận động",
-							"request": {
-								"method": "GET",
-								"header": [
-									{
-										"key": "Token",
-										"value": "abcde",
-										"type": "text"
-									}
-								],
-								"url": {
-									"raw": "http://localhost:8089/charity/campaign/campaign-get-follower?campaign-id=1",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "8089",
-									"path": [
-										"charity",
-										"campaign",
-										"campaign-get-follower"
-									],
-									"query": [
-										{
-											"key": "campaign-id",
-											"value": "1"
-										}
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "thêm người dùng theo dõi cuộc vận động Copy",
-							"request": {
-								"method": "DELETE",
-								"header": [
-									{
-										"key": "Token",
-										"value": "abcde",
-										"type": "text"
-									}
-								],
-								"url": {
-									"raw": "http://localhost:8089/charity/campaign/user-unfollow-campaign?campaign-id=2",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "8089",
-									"path": [
-										"charity",
-										"campaign",
-										"user-unfollow-campaign"
-									],
-									"query": [
-										{
-											"key": "campaign-id",
-											"value": "2"
-										}
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "lấy các cuộc vận động người dùng theo dõi",
-							"request": {
-								"method": "GET",
-								"header": [
-									{
-										"key": "Token",
-										"value": "abcde",
-										"type": "text"
-									}
-								],
-								"url": {
-									"raw": "http://localhost:8089/charity/campaign/user-get-followed-campaign",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "8089",
-									"path": [
-										"charity",
-										"campaign",
-										"user-get-followed-campaign"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "thêm người dùng theo dõi cuộc vận động",
-							"request": {
-								"method": "POST",
-								"header": [
-									{
-										"key": "Token",
-										"value": "abcde",
-										"type": "text"
-									}
-								],
-								"url": {
-									"raw": "http://localhost:8089/charity/campaign/user-follow-campaign?campaign-id=2",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "8089",
-									"path": [
-										"charity",
-										"campaign",
-										"user-follow-campaign"
-									],
-									"query": [
-										{
-											"key": "campaign-id",
-											"value": "2"
-										}
-									]
-								}
-							},
-							"response": []
-						}
-					]
-				},
-				{
-					"name": "sao kê",
-					"item": [
-						{
-							"name": "lấy sao kê cuộc vận động",
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": {
-									"raw": "http://localhost:8089/charity/campaign/get-statement-campaign?campaign-id=2",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "8089",
-									"path": [
-										"charity",
-										"campaign",
-										"get-statement-campaign"
-									],
-									"query": [
-										{
-											"key": "campaign-id",
-											"value": "2"
-										}
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "thêm sao kê cuộc vận động",
-							"request": {
-								"method": "POST",
-								"header": [
-									{
-										"key": "Token",
-										"value": "abcd",
-										"type": "default"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "[\n    {\n        \"name\": \"donor 1\",\n        \"amount\": 1000000,\n        \"note\": \"ủng hộ nhiemf trung\",\n        \"type\": \"nhận\" // nhận hoặc trao,  \n    }\n]",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "http://localhost:8089/charity/campaign/add-statement-campaign?campaign-id=2",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "8089",
-									"path": [
-										"charity",
-										"campaign",
-										"add-statement-campaign"
-									],
-									"query": [
-										{
-											"key": "campaign-id",
-											"value": "2"
-										}
-									]
-								}
-							},
-							"response": []
-						}
-					]
-				},
 				{
 					"name": "get all cuộc vận động",
 					"protocolProfileBehavior": {
@@ -564,7 +360,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"campaign_id\": 4, // not null\n    \"campaign_name\" : \"xyz\", // not null\n    \"introduction\" : \"asdfghjkl\", // not null\n    \"target_object\" : \"tre em\", // not null\n    \"region\" : \"tay bac\", // not null\n    \"status\" : \"dang van dong\", // not null\n    \"campaign_type\" : \"ho tro tre em vung cao\", // not null\n    \"target_amount\" : 100000000, // not null\n    \"receive_amount\" : 45000000, // not null\n    \"donor_amount\" : 0, // not null\n    \"spent_amount\" : 0, // not null\n    \"start_date\" : \"2023-06-01\", // not null\n    \"stop_receive_date\" : \"2023-06-15\", // not null\n    \"start_active_date\" : \"2023-06-16\", // not null\n    \"stop_active_date\" : \"2023-06-30\", // not null\n    \"stop_date\": \"2023-06-30\" // not null\n}",
+							"raw": "{\n    \"campaign_id\": 4, // not null\n    \"campaign_name\" : \"xyz\", // not null\n    \"introduction\" : \"asdfghjkl\", // not null\n    \"target_object\" : \"tre em\", // not null\n    \"region\" : \"tay bac\", // not null\n    \"status\" : \"dang van dong\", // not null\n    \"campaign_type\" : \"ho tro tre em vung cao\", // not null\n    \"target_amount\" : 100000000, // not null\n    \"receive_amount\" : 45000000, // not null\n    \"donor_amount\" : 0, // not null\n    \"spent_amount\" : 0, // not null\n    \"start_date\" : \"2023-06-01\", // not null\n    \"stop_receive_date\" : \"2023-06-15\", // not null\n    \"start_active_date\" : \"2023-06-16\", // not null\n    \"stop_active_date\" : \"2023-06-30\", // not null\n    \"stop_date\": \"2023-06-30\", // not null\n    \"isStar\": true\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -619,6 +415,126 @@
 							]
 						},
 						"description": "# API xóa cuộc vận động\n\n`Token not null`\n\n`Chỉ Tổ chức có quyền xóa cuộc vận động`"
+					},
+					"response": []
+				},
+				{
+					"name": "lấy các người dùng theo dõi cuộc vận động",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Token",
+								"value": "abcde",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8089/charity/campaign/user-get-followed-campaign",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8089",
+							"path": [
+								"charity",
+								"campaign",
+								"user-get-followed-campaign"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "lấy các cuộc vận động người dùng theo dõi",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Token",
+								"value": "abcde",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8089/charity/campaign/user-get-followed-campaign",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8089",
+							"path": [
+								"charity",
+								"campaign",
+								"user-get-followed-campaign"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "thêm người dùng theo dõi cuộc vận động",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Token",
+								"value": "abcde",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8089/charity/campaign/user-follow-campaign?campaign-id=2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8089",
+							"path": [
+								"charity",
+								"campaign",
+								"user-follow-campaign"
+							],
+							"query": [
+								{
+									"key": "campaign-id",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "người dùng unfollow cuộc vận động",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Token",
+								"value": "abcde",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8089/charity/campaign/user-unfollow-campaign?campaign-id=2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8089",
+							"path": [
+								"charity",
+								"campaign",
+								"user-unfollow-campaign"
+							],
+							"query": [
+								{
+									"key": "campaign-id",
+									"value": "2"
+								}
+							]
+						}
 					},
 					"response": []
 				}
@@ -812,7 +728,7 @@
 							}
 						],
 						"url": {
-							"raw": "http://localhost:8089/charity/donation/get-by-id?donation-id=1",
+							"raw": "http://localhost:8089/charity/donation/get-by-id?donation-id=12",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -826,7 +742,7 @@
 							"query": [
 								{
 									"key": "donation-id",
-									"value": "1"
+									"value": "12"
 								}
 							]
 						},
@@ -836,40 +752,6 @@
 				},
 				{
 					"name": "get all các bài đăng ủng hộ",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Token",
-								"value": "abcde",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "http://localhost:8089/charity/donation/get-by-donor?donor-id=3",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8089",
-							"path": [
-								"charity",
-								"donation",
-								"get-by-donor"
-							],
-							"query": [
-								{
-									"key": "donor-id",
-									"value": "3"
-								}
-							]
-						},
-						"description": "trường nào ko có trong respone thí trường nó  null trong database"
-					},
-					"response": []
-				},
-				{
-					"name": "get all các bài đăng ủng hộ Copy",
 					"request": {
 						"method": "GET",
 						"header": [
@@ -945,7 +827,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"id\": 10,\n    \"idDonor\": 3,\n    \"status\": \"miền trung\",\n    \"organizationReceived\": \"organization\",\n    \"idOrganization\": 1,\n    \"listRequest\": [\n        {\n            \"name\": \"toi yeu nam dinh\",\n            \"id\": \"abc12345678910\",\n            \"status\": \"Đợi xác nhận\"\n        }\n    ],\n    \"name\": \"quần áo\",\n    \"donationAddress\": \"trẻ em\",\n    \"donationObject\": \"abc xyz\",\n    \"date\": \"12/05/2023\",\n    \"description\": \"mô tả\",\n    \"images\": \"caapj nhaat anh\"\n}",
+							"raw": "{\n    \"id\": 10,\n    \"idDonor\": 3,\n    \"status\": \"miền trung\",\n    \"organizationReceived\": \"organization\",\n    \"idOrganization\": 1,\n    \"listRequest\": [\n        {\n            \"name\": \"toi yeu nam dinh\",\n            \"id\": \"abc12345678910\",\n            \"status\": \"Đợi xác nhận\"\n        }\n    ],\n    \"name\": \"quần áo\",\n    \"donationAddress\": \"trẻ em\",\n    \"donationObject\": \"abc xyz\",\n    \"donorName\": \"donor\",\n    \"phone\": null,\n    \"address\": null,\n    \"province\": null,\n    \"district\": null,\n    \"ward\": null,\n    \"date\": \"12/05/2023\",\n    \"description\": \"mô tả\",\n    \"images\": \"caapj nhaat anh\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -995,39 +877,6 @@
 								{
 									"key": "id",
 									"value": "13"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "xóa bài đăng ủng hộ",
-					"request": {
-						"method": "DELETE",
-						"header": [
-							{
-								"key": "Token",
-								"value": "abcde",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "http://localhost:8089/charity/donation/delete-donation?id=1",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8089",
-							"path": [
-								"charity",
-								"donation",
-								"delete-donation"
-							],
-							"query": [
-								{
-									"key": "id",
-									"value": "1"
 								}
 							]
 						}
