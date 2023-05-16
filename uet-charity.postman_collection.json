@@ -1,9 +1,8 @@
 {
 	"info": {
-		"_postman_id": "1cb65d50-e730-4f05-b6fd-5a9f1e158048",
+		"_postman_id": "a7f028b8-cb3c-477c-b896-d893f54590df",
 		"name": "uet-charity",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "23235687"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
@@ -817,7 +816,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"campaign_id\": 2, // not null\n    \"content\": \"Đây la nội dung bài đăng so 5435\", // not null\n    \"type\": \"Đây là loại bài đăng (vận động, hoạt động, ...)\" // not null\n}",
+							"raw": "{\n    \"title\": \"đây là tiêu đề bài viét\",\n    \"campaign_id\": 2, // not null\n    \"content\": \"Đây la nội dung bài đăng so 5435\", // not null\n    \"type\": \"Đây là loại bài đăng (vận động, hoạt động, ...)\" // not null\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -854,7 +853,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"post_id\": 1, // not null\n    \"campaign_id\": 7, // not null\n    \"content\": \"Đây la nội dung bài đăng caapj nhaat\", // not null\n    \"type\": \"Đây là loại bài đăng (vận động, hoạt động, ...)\" // not null\n}",
+							"raw": "{\n    \"post_id\": 1, // not null\n    \"title\": \"đây là tiêu đề bài viét\", // not null\n    \"campaign_id\": 7, // not null\n    \"content\": \"Đây la nội dung bài đăng caapj nhaat\", // not null\n    \"type\": \"Đây là loại bài đăng (vận động, hoạt động, ...)\" // not null\n}",
 							"options": {
 								"raw": {
 									"language": "json"

@@ -20,6 +20,9 @@ public class PostInfo {
     @Column(name = "content", nullable = false)
     private String content;
 
+    @Column(name = "title", nullable = false, length = 255)
+    private String title;
+
     @Column(name = "type", nullable = false, length = 100)
     private String type;
 

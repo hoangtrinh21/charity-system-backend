@@ -86,10 +86,12 @@ public class PostController {
                         .body(new ResponseModel("You do not have permission to this campaign!"));
 
             CampaignInfo    campaign    = campaignInfoRepository.getReferenceById(campaignId);
+            String          title       = JsonUtil.getString(jsonBody, "title");
             String          content     = JsonUtil.getString(jsonBody, "content");
             String          type        = JsonUtil.getString(jsonBody, "type");
             long            submitTime  = System.currentTimeMillis();
             PostInfo        post        = new PostInfo();
+            post.setTitle(title);
             post.setContent(content);
             post.setType(type);
             post.setCampaign(campaign);
@@ -127,12 +129,13 @@ public class PostController {
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
                         .body(new ResponseModel("You do not have permission to this campaign!"));
 
+            String          title       = JsonUtil.getString(jsonBody, "title");
             String content = JsonUtil.getString(jsonBody, "content");
             String type = JsonUtil.getString(jsonBody, "type");
             long submitTime = System.currentTimeMillis();
 
             CampaignInfo campaign = campaignInfoRepository.getReferenceById(campaignId);
-            PostInfo post = new PostInfo(postId, content, type, submitTime, campaign);
+            PostInfo post = new PostInfo(postId, title, content, type, submitTime, campaign);
 
             postInfoRepository.save(post);
 
