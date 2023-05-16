@@ -44,6 +44,7 @@ public class AccessService {
     }
 
     public boolean isDonor(String token) {
+        System.out.println(CacheConfig.accessToken.get(token).getRoleId());
         return token != null && checkAccessToken(token) == 200 &&
                 Objects.equals(Objects.requireNonNull(CacheConfig.accessToken.get(token)).getRoleId(),
                                 Constants.DONOR_ROLE_ID);
