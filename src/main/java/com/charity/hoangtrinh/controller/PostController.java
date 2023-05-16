@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/charity/post/")
@@ -54,10 +55,10 @@ public class PostController {
         try {
             Integer postId = Integer.parseInt(postIdStr);
 
-            PostInfo postInfo = postInfoRepository.getReferenceById(postId);
-            System.out.println(postInfo);
-            return ResponseEntity.status(HttpStatus.OK)
-                    .body(postInfo);
+            Optional<PostInfo> postInfoOptional = postInfoRepository.findById(postId);
+            return postInfoOptional.<ResponseEntity<Object>>map(postInfo -> ResponseEntity.status(HttpStatus.OK)
+                    .body(postInfo)).orElseGet(() -> ResponseEntity.status(HttpStatus.OK)
+                    .body(new ResponseModel("Post by id " + postId + " not found")));
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
