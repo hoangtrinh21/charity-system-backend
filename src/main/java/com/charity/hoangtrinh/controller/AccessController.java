@@ -13,10 +13,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 import java.util.Optional;
@@ -56,6 +53,23 @@ public class AccessController {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body(new ResponseModel("INTERNAL_SERVER_ERROR"));
+        }
+    }
+
+    @DeleteMapping("/delete-token")
+    public ResponseEntity<Object> deleteToken(@RequestBody String body) {
+        try {
+            JsonObject jsonBody = JsonParser.parseString(body).getAsJsonObject();
+            Integer userId = JsonUtil.getInt(jsonBody, "user_id");
+            String token = JsonUtil.getString(jsonBody,"token");
+            CacheConfig.accessToken.asMap().remove(token);
+            logger.info(CacheConfig.accessToken.asMap().toString());
+            return ResponseEntity.status(HttpStatus.OK)
+                    .body(new ResponseModel("Removed token of user " + userId));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(new ResponseModel(e.getClass() + ":" + e.getMessage()));
         }
     }
 }
