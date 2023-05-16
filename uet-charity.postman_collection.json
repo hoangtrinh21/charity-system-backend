@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "a7f028b8-cb3c-477c-b896-d893f54590df",
+		"_postman_id": "0271f3a7-a152-4bb5-9691-d8f2cd490e32",
 		"name": "uet-charity",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -297,7 +297,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "[\n    {\n        \"name\": \"donor 1\",\n        \"amount\": 1000000,\n        \"note\": \"ủng hộ nhiemf trung\",\n        \"type\": \"nhận\" // nhận hoặc trao,  \n    }\n]",
+									"raw": "[\n    {\n        \"name\": \"donor 1\",\n        \"amount\": 1000000,\n        \"note\": \"ủng hộ nhiemf trung\",\n        \"type\": \"nhận\" // nhận hoặc trao\n    }\n]",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -995,7 +995,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"idDonor\": \"3\",\n    \"status\": \"vùng caeo\",\n    \"idOrganization\": \"1\",\n    \"name\": \"quần áo\",\n    \"donationAddress\": \"trẻ em\",\n    \"donationObject\": \"abc xyz\",\n    \"date\": \"12/05/2023\",\n    \"description\": \"mô tả\",\n    \"images\": \"ảnh\",\n    \"listRequest\": [\n        {\n          \"status\": \"Đợi xác nhận\",\n          \"id\": \"abc12345678910\",\n          \"name\": \"toi yeu nam dinh\"\n        }\n    ]\n}",
+							"raw": "{\n    \"idDonor\": 3,\n    \"status\": \"vùng caeo\",\n    \"idOrganization\": 1,\n    \"name\": \"quần áo\",\n    \"donationAddress\": \"trẻ em\",\n    \"donationObject\": \"abc xyz\",\n    \"date\": \"12/05/2023\",\n    \"description\": \"mô tả\",\n    \"images\": \"ảnh\",\n    \"listRequest\": [\n        {\n          \"status\": \"Đợi xác nhận\",\n          \"id\": 1,\n          \"name\": \"toi yeu nam dinh\"\n        }\n    ]\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1031,7 +1031,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"id\": 10,\n    \"idDonor\": 3,\n    \"status\": \"miền trung\",\n    \"organizationReceived\": \"organization\",\n    \"idOrganization\": 1,\n    \"listRequest\": [\n        {\n            \"name\": \"toi yeu nam dinh\",\n            \"id\": \"abc12345678910\",\n            \"status\": \"Đợi xác nhận\"\n        }\n    ],\n    \"name\": \"quần áo\",\n    \"donationAddress\": \"trẻ em\",\n    \"donationObject\": \"abc xyz\",\n    \"donorName\": \"donor\",\n    \"phone\": null,\n    \"address\": null,\n    \"province\": null,\n    \"district\": null,\n    \"ward\": null,\n    \"date\": \"12/05/2023\",\n    \"description\": \"mô tả\",\n    \"images\": \"caapj nhaat anh\"\n}",
+							"raw": "{\n    \"id\": 10,\n    \"idDonor\": 3,\n    \"status\": \"miền trung\",\n    \"organizationReceived\": \"organization\",\n    \"idOrganization\": 1,\n    \"listRequest\": [\n        {\n            \"name\": \"toi yeu nam dinh\",\n            \"id\": 1,\n            \"status\": \"Đợi xác nhận\"\n        }\n    ],\n    \"name\": \"quần áo\",\n    \"donationAddress\": \"trẻ em\",\n    \"donationObject\": \"abc xyz\",\n    \"donorName\": \"donor\",\n    \"phone\": null,\n    \"address\": null,\n    \"province\": null,\n    \"district\": null,\n    \"ward\": null,\n    \"date\": \"12/05/2023\",\n    \"description\": \"mô tả\",\n    \"images\": \"caapj nhaat anh\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1076,6 +1076,39 @@
 								"charity",
 								"donation",
 								"donor-delete-donation"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "13"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "xóa bài đăng ủng hộ",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Token",
+								"value": "abcde",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8089/charity/donation/delete-donation?id=13",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8089",
+							"path": [
+								"charity",
+								"donation",
+								"delete-donation"
 							],
 							"query": [
 								{
