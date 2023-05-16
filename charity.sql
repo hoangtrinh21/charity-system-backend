@@ -19,10 +19,6 @@
 -- Table structure for table `administrative_regions`
 --
 
-DROP DATABASE IF EXISTS `charity`;
-CREATE DATABASE `charity`;
-USE `charity`;
-
 DROP TABLE IF EXISTS `administrative_regions`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
@@ -95,7 +91,6 @@ CREATE TABLE `campaign_followers` (
 
 LOCK TABLES `campaign_followers` WRITE;
 /*!40000 ALTER TABLE `campaign_followers` DISABLE KEYS */;
-INSERT INTO `campaign_followers` VALUES (7,3,2);
 /*!40000 ALTER TABLE `campaign_followers` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -140,7 +135,6 @@ CREATE TABLE `campaign_info` (
 
 LOCK TABLES `campaign_info` WRITE;
 /*!40000 ALTER TABLE `campaign_info` DISABLE KEYS */;
-INSERT INTO `campaign_info` VALUES (2,1,'cập nhật','asdfghjkl','tre em','tay bac','ho tro tre em vung cao',100000000,45000000,0,0,1683728913,'2023-06-01','2023-06-15','2023-06-16','2023-06-30','2023-06-30','dang van dong',_binary '',NULL,_binary '\0'),(3,1,'cuocoj vaanj dong 3','asdfghjkl','tre em','tay bac','ho tro tre em vung cao',100000000,0,0,0,1683728894,'2023-06-01','2023-06-15','2023-06-16','2023-06-30','2023-06-30','dang van dong',_binary '',NULL,_binary '\0');
 /*!40000 ALTER TABLE `campaign_info` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -217,8 +211,8 @@ DROP TABLE IF EXISTS `charities`;
 CREATE TABLE `charities` (
   `Id` int NOT NULL AUTO_INCREMENT,
   `CharityMotto` varchar(1000) DEFAULT NULL,
-  `CharityWebsite` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
-  `CharityBanner` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `CharityWebsite` varchar(255) DEFAULT NULL,
+  `CharityBanner` varchar(255) DEFAULT NULL,
   `CharityTarget` varchar(1000) DEFAULT NULL,
   `CharityDescription` varchar(1000) DEFAULT NULL,
   `CharityFacebook` varchar(500) DEFAULT NULL,
@@ -231,18 +225,14 @@ CREATE TABLE `charities` (
   `CharityAccountNumber` varchar(255) DEFAULT NULL,
   `Avatar` varchar(255) DEFAULT NULL,
   `CharityImages` varchar(3000) DEFAULT NULL,
-  `GoogleMap` varchar(255) DEFAULT NULL,
-  `IsVerificated` tinyint DEFAULT '0',
+  `GoogleMap` varchar(1000) DEFAULT NULL,
+  `IsVerified` tinyint DEFAULT '0',
   `NumFollower` int DEFAULT NULL,
   `NumCampaign` int DEFAULT NULL,
   `Reach` varchar(255) DEFAULT NULL,
   `Star` tinyint DEFAULT '0',
-  `charityName` varchar(255) DEFAULT NULL,
-  `user_id` int DEFAULT NULL,
-  PRIMARY KEY (`Id`),
-  KEY `FKo5771d5ka0oef10kgx9m6brpg` (`user_id`),
-  CONSTRAINT `FKo5771d5ka0oef10kgx9m6brpg` FOREIGN KEY (`user_id`) REFERENCES `user_account` (`Id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci AVG_ROW_LENGTH=5461;
+  PRIMARY KEY (`Id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci AVG_ROW_LENGTH=5461;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -251,7 +241,6 @@ CREATE TABLE `charities` (
 
 LOCK TABLES `charities` WRITE;
 /*!40000 ALTER TABLE `charities` DISABLE KEYS */;
-INSERT INTO `charities` VALUES (1,'a',NULL,NULL,'b','c','e','e ','e','g','h','i',NULL,NULL,NULL,NULL,NULL,0,NULL,NULL,NULL,0,NULL,NULL);
 /*!40000 ALTER TABLE `charities` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -347,7 +336,6 @@ CREATE TABLE `donations` (
 
 LOCK TABLES `donations` WRITE;
 /*!40000 ALTER TABLE `donations` DISABLE KEYS */;
-INSERT INTO `donations` VALUES (13,NULL,'vùng caeo','Tổ chức 1',1,'[{\"name\":\"toi yeu nam dinh\",\"id\":\"abc12345678910\",\"status\":\"Đợi xác nhận\"}]','quần áo','trẻ em','abc xyz','donor',NULL,NULL,NULL,NULL,NULL,'12/05/2023','mô tả','ảnh'),(14,3,'miền trung','Tổ chức 1',1,'[{\"name\":\"toi yeu nam dinh\",\"id\":\"abc12345678910\",\"status\":\"Đợi xác nhận\"}]','quần áo','trẻ em','abc xyz','donor',NULL,NULL,NULL,NULL,NULL,'12/05/2023','mô tả','caapj nhaat anh'),(15,3,'vùng caeo','Tổ chức 1',1,'[{\"name\":\"toi yeu nam dinh\",\"id\":\"abc12345678910\",\"status\":\"Đợi xác nhận\"}]','quần áo','trẻ em','abc xyz','donor',NULL,NULL,NULL,NULL,NULL,'12/05/2023','mô tả','ảnh'),(16,3,'vùng caeo',NULL,1,'[{\"name\":\"toi yeu nam dinh\",\"id\":1,\"status\":\"Đợi xác nhận\"}]','quần áo','trẻ em','abc xyz','donor',NULL,NULL,NULL,NULL,NULL,'12/05/2023','mô tả','ảnh'),(17,3,'vùng caeo',NULL,1,'[{\"name\":\"toi yeu nam dinh\",\"id\":1,\"status\":\"Đợi xác nhận\"}]','quần áo','trẻ em','abc xyz','donor',NULL,NULL,NULL,NULL,NULL,'12/05/2023','mô tả','ảnh');
 /*!40000 ALTER TABLE `donations` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -377,7 +365,6 @@ CREATE TABLE `post_info` (
 
 LOCK TABLES `post_info` WRITE;
 /*!40000 ALTER TABLE `post_info` DISABLE KEYS */;
-INSERT INTO `post_info` VALUES (5,'Đây la nội dung bài đăng caapj nhaat','Đây là loại bài đăng (vận động, hoạt động, ...)',1683730878700,3,''),(6,'Đây la nội dung bài đăng so 1','Đây là loại bài đăng (vận động, hoạt động, ...)',1683730693655,3,''),(7,'Đây la nội dung bài đăng so 1','Đây là loại bài đăng (vận động, hoạt động, ...)',1683730795672,3,''),(8,'Đây la nội dung bài đăng so 5435','Đây là loại bài đăng (vận động, hoạt động, ...)',1683731116486,2,''),(9,'Đây la nội dung bài đăng so 5435','Đây là loại bài đăng (vận động, hoạt động, ...)',1683732860809,2,'');
 /*!40000 ALTER TABLE `post_info` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -528,7 +515,6 @@ CREATE TABLE `user_account` (
 
 LOCK TABLES `user_account` WRITE;
 /*!40000 ALTER TABLE `user_account` DISABLE KEYS */;
-INSERT INTO `user_account` VALUES (2,'organization','o',NULL,NULL,NULL,3,NULL,NULL,0,1,NULL,NULL,NULL,NULL,NULL,NULL,0),(3,'donor','do',NULL,NULL,NULL,2,NULL,NULL,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0);
 /*!40000 ALTER TABLE `user_account` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -571,4 +557,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-05-16 13:16:59
+-- Dump completed on 2023-05-16 14:35:33
