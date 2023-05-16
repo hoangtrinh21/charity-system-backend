@@ -67,6 +67,35 @@ INSERT INTO `administrative_units` VALUES (1,'Thành phố trực thuộc trung 
 UNLOCK TABLES;
 
 --
+-- Table structure for table `campaign_followers`
+--
+
+DROP TABLE IF EXISTS `campaign_followers`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `campaign_followers` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `user_id` int NOT NULL,
+  `campaign_id` int NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `campaign_followers_FK` (`campaign_id`),
+  KEY `campaign_followers_FK_1` (`user_id`),
+  CONSTRAINT `campaign_followers_FK` FOREIGN KEY (`campaign_id`) REFERENCES `campaign_info` (`campaign_id`),
+  CONSTRAINT `campaign_followers_FK_1` FOREIGN KEY (`user_id`) REFERENCES `user_account` (`Id`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `campaign_followers`
+--
+
+LOCK TABLES `campaign_followers` WRITE;
+/*!40000 ALTER TABLE `campaign_followers` DISABLE KEYS */;
+INSERT INTO `campaign_followers` VALUES (7,3,2);
+/*!40000 ALTER TABLE `campaign_followers` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `campaign_info`
 --
 
@@ -180,8 +209,9 @@ DROP TABLE IF EXISTS `charities`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `charities` (
   `Id` int NOT NULL AUTO_INCREMENT,
-  `CharityName` varchar(1000) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
   `CharityMotto` varchar(1000) DEFAULT NULL,
+  `CharityWebsite` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `CharityBanner` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
   `CharityTarget` varchar(1000) DEFAULT NULL,
   `CharityDescription` varchar(1000) DEFAULT NULL,
   `CharityFacebook` varchar(500) DEFAULT NULL,
@@ -210,8 +240,32 @@ CREATE TABLE `charities` (
 
 LOCK TABLES `charities` WRITE;
 /*!40000 ALTER TABLE `charities` DISABLE KEYS */;
-INSERT INTO `charities` VALUES (1,'Tổ chức 1','a','b','c','e','e ','e','g','h','i',NULL,NULL,NULL,NULL,NULL,0,NULL,NULL,NULL,0);
+INSERT INTO `charities` VALUES (1,'a',NULL,NULL,'b','c','e','e ','e','g','h','i',NULL,NULL,NULL,NULL,NULL,0,NULL,NULL,NULL,0);
 /*!40000 ALTER TABLE `charities` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `charity_follow`
+--
+
+DROP TABLE IF EXISTS `charity_follow`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `charity_follow` (
+  `Id` int NOT NULL AUTO_INCREMENT,
+  `UserId` int DEFAULT NULL,
+  `CharityId` int DEFAULT NULL,
+  PRIMARY KEY (`Id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `charity_follow`
+--
+
+LOCK TABLES `charity_follow` WRITE;
+/*!40000 ALTER TABLE `charity_follow` DISABLE KEYS */;
+/*!40000 ALTER TABLE `charity_follow` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -348,6 +402,31 @@ INSERT INTO `provinces` VALUES ('01','Hà Nội','Thành phố Hà Nội','ha_no
 UNLOCK TABLES;
 
 --
+-- Table structure for table `request`
+--
+
+DROP TABLE IF EXISTS `request`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `request` (
+  `request_id` int NOT NULL AUTO_INCREMENT,
+  `donation_id` int NOT NULL,
+  `organization_id` int NOT NULL,
+  `status` varchar(100) NOT NULL,
+  PRIMARY KEY (`request_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `request`
+--
+
+LOCK TABLES `request` WRITE;
+/*!40000 ALTER TABLE `request` DISABLE KEYS */;
+/*!40000 ALTER TABLE `request` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `role`
 --
 
@@ -449,4 +528,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-05-12 12:08:58
+-- Dump completed on 2023-05-16 10:54:58

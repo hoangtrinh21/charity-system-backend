@@ -2,11 +2,7 @@ package com.charity.hoangtrinh.dbs.sql.charitydatabase.entities;
 
 import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import java.util.Objects;
+import javax.persistence.*;
 
 @Entity
 @Data
@@ -19,11 +15,16 @@ public class Charity {
     @Column(name = "Id", nullable = false)
     private Integer id;
 
+    private String charityName;
+
     @Column(name = "CharityMotto", length = 1000)
     private String charityMotto;
 
-    @Column(name = "CharityName", length = 1000)
-    private String charityName;
+    @Column(name = "CharityWebsite")
+    private String CharityWebsite;
+
+    @Column(name = "CharityBanner")
+    private String CharityBanner;
 
     @Column(name = "CharityTarget", length = 1000)
     private String charityTarget;
@@ -79,16 +80,11 @@ public class Charity {
     @Column(name = "Star")
     private Byte star;
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Charity charity = (Charity) o;
-        return Objects.equals(id, charity.id) && Objects.equals(charityMotto, charity.charityMotto) && Objects.equals(charityTarget, charity.charityTarget) && Objects.equals(charityDescription, charity.charityDescription) && Objects.equals(charityFacebook, charity.charityFacebook) && Objects.equals(charityInstagram, charity.charityInstagram) && Objects.equals(charityTwitter, charity.charityTwitter) && Objects.equals(charityLinkedIn, charity.charityLinkedIn) && Objects.equals(charityIntroVideo, charity.charityIntroVideo) && Objects.equals(charityBank, charity.charityBank) && Objects.equals(charityFile, charity.charityFile) && Objects.equals(charityAccountNumber, charity.charityAccountNumber) && Objects.equals(avatar, charity.avatar) && Objects.equals(charityImages, charity.charityImages) && Objects.equals(googleMap, charity.googleMap) && Objects.equals(isVerificated, charity.isVerificated) && Objects.equals(numFollower, charity.numFollower) && Objects.equals(numCampaign, charity.numCampaign) && Objects.equals(reach, charity.reach) && Objects.equals(star, charity.star);
-    }
+    @OneToOne
+    @JoinColumn(name = "user_id")
+    private UserAccount user;
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, charityMotto, charityTarget, charityDescription, charityFacebook, charityInstagram, charityTwitter, charityLinkedIn, charityIntroVideo, charityBank, charityFile, charityAccountNumber, avatar, charityImages, googleMap, isVerificated, numFollower, numCampaign, reach, star);
+    public void setCharityName(UserAccount user) {
+        this.charityName = user.getName();
     }
 }

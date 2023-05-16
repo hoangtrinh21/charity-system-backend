@@ -56,19 +56,40 @@ public class CampaignController {
     @GetMapping("/get-all")
     public ResponseEntity<Object> getAllCampaigns(@RequestHeader(value = "Token") String token) {
         try {
-            if (accessService.isAdmin(token))
+            List<CampaignInfo> campaignInfoList;
+
+            if (accessService.isAdmin(token)) {
+                campaignInfoList = campaignInfoRepository.findAll();
+                for (CampaignInfo campaignInfo : campaignInfoList) {
+                    Charity charity = campaignInfo.getOrganization();
+                    UserAccount userAccount = userAccountRepository.findByCharityIdEquals(charity.getId());
+                    charity.setCharityName(userAccount);
+                }
                 return ResponseEntity.status(HttpStatus.OK)
-                        .body(campaignInfoRepository.findAll());
+                        .body(campaignInfoList);
+            }
 
             if (accessService.isOrganization(token)) {
                 int organizationId = accessService.getUserByToken(token).getCharityId();
-                System.out.println(organizationId);
+                campaignInfoList = campaignInfoRepository.findByOrganization_IdEquals(organizationId);
+                for (CampaignInfo campaignInfo : campaignInfoList) {
+                    Charity charity = campaignInfo.getOrganization();
+                    UserAccount userAccount = userAccountRepository.findByCharityIdEquals(charity.getId());
+                    charity.setCharityName(userAccount);
+                }
                 return ResponseEntity.status(HttpStatus.OK)
-                        .body(campaignInfoRepository.findByOrganization_IdEquals(organizationId));
+                        .body(campaignInfoList);
+            }
+
+            campaignInfoList = campaignInfoRepository.findByIsActiveEquals(true);
+            for (CampaignInfo campaignInfo : campaignInfoList) {
+                Charity charity = campaignInfo.getOrganization();
+                UserAccount userAccount = userAccountRepository.findByCharityIdEquals(charity.getId());
+                charity.setCharityName(userAccount);
             }
 
             return ResponseEntity.status(HttpStatus.OK)
-                    .body(campaignInfoRepository.findByIsActiveEquals(true));
+                    .body(campaignInfoList);
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)

@@ -99,7 +99,7 @@ public class DonationController {
 //            Integer idDonor         = Integer.valueOf(jsonBody.get("idDonor").getAsString());
             Integer idDonor         = jsonBody.get("idDonor").getAsInt();
             String status           = jsonBody.get("status").getAsString();
-            String idOrganization   = jsonBody.get("idOrganization").getAsString();
+            Integer idOrganization  = jsonBody.get("idOrganization").getAsInt();
             String name             = jsonBody.get("name").getAsString();
             String donationAddress  = jsonBody.get("donationAddress").getAsString();
             String donationObject   = jsonBody.get("donationObject").getAsString();
@@ -161,9 +161,9 @@ public class DonationController {
             JsonObject jsonBody = JsonParser.parseString(body).getAsJsonObject();
 
             Integer id = jsonBody.get("id").getAsInt();
-            Integer idDonor  = Integer.valueOf(jsonBody.get("idDonor").getAsString());
+            Integer idDonor  = jsonBody.get("idDonor").getAsInt();
             String status   = jsonBody.get("status").getAsString();
-            String idOrganization       = jsonBody.get("idOrganization").getAsString();
+            Integer idOrganization       = jsonBody.get("idOrganization").getAsInt();
             String name = jsonBody.get("name").getAsString();
             String donationAddress = jsonBody.get("donationAddress").getAsString();
             String donationObject = jsonBody.get("donationObject").getAsString();
@@ -179,11 +179,9 @@ public class DonationController {
             donation.setStatus(status);
 
             donation.setId(id);
-            if (idOrganization != null) {
-                Charity organizationReceived = charityRepository.getReferenceById(Integer.valueOf(idOrganization));
-                donation.setOrganizationReceived(organizationReceived.getCharityName());
-                donation.setIdOrganization(organizationReceived.getId());
-            }
+            Charity organizationReceived = charityRepository.getReferenceById(idOrganization);
+            donation.setOrganizationReceived(organizationReceived.getCharityName());
+            donation.setIdOrganization(organizationReceived.getId());
 
             System.out.println(listRequest);
             JSONArray jsonArray = new JSONArray(listRequest.toString());
