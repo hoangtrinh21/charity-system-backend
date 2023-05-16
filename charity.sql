@@ -1,13 +1,13 @@
--- MySQL dump 10.13  Distrib 8.0.33, for Linux (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.26, for Win64 (x86_64)
 --
--- Host: 0.0.0.0    Database: charity
+-- Host: 127.0.0.1    Database: charity
 -- ------------------------------------------------------
 -- Server version	8.0.32
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!50503 SET NAMES utf8mb4 */;
+/*!50503 SET NAMES utf8 */;
 /*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
 /*!40103 SET TIME_ZONE='+00:00' */;
 /*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
@@ -18,6 +18,10 @@
 --
 -- Table structure for table `administrative_regions`
 --
+
+DROP DATABASE IF EXISTS `charity`;
+CREATE DATABASE `charity`;
+USE `charity`
 
 DROP TABLE IF EXISTS `administrative_regions`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
@@ -39,6 +43,33 @@ LOCK TABLES `administrative_regions` WRITE;
 INSERT INTO `administrative_regions` VALUES (1,'Đông Bắc Bộ','dong_bac_bo'),(2,'Tây Bắc Bộ','tay_bac_bo'),(3,'Đồng bằng sông Hồng','dong_bang_song_hong'),(4,'Bắc Trung Bộ','bac_trung_bo'),(5,'Duyên hải Nam Trung Bộ','duyen_hai_nam_trung_bo'),(6,'Tây Nguyên','tay_nguyen'),(7,'Đông Nam Bộ','dong_nam_bo'),(8,'Đồng bằng sông Cửu Long','dong_bang_song_cuu_long');
 /*!40000 ALTER TABLE `administrative_regions` ENABLE KEYS */;
 UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2023-05-16 16:41:58
+-- MySQL dump 10.13  Distrib 8.0.26, for Win64 (x86_64)
+--
+-- Host: 127.0.0.1    Database: charity
+-- ------------------------------------------------------
+-- Server version	8.0.32
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!50503 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
 -- Table structure for table `administrative_units`
@@ -65,6 +96,33 @@ LOCK TABLES `administrative_units` WRITE;
 INSERT INTO `administrative_units` VALUES (1,'Thành phố trực thuộc trung ương','Thành phố','thanh_pho_truc_thuoc_trung_uong'),(2,'Tỉnh','Tỉnh','tinh'),(3,'Thành phố thuộc thành phố trực thuộc trung ương','Thành phố','thanh_pho_thuoc_thanh_pho_truc_thuoc_trung_uong'),(4,'Thành phố thuộc tỉnh','Thành phố','thanh_pho_thuoc_tinh'),(5,'Quận','Quận','quan'),(6,'Thị xã','Thị xã','thi_xa'),(7,'Huyện','Huyện','huyen'),(8,'Phường','Phường','phuong'),(9,'Thị trấn','Thị trấn','thi_tran'),(10,'Xã','Xã','xa');
 /*!40000 ALTER TABLE `administrative_units` ENABLE KEYS */;
 UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2023-05-16 16:41:58
+-- MySQL dump 10.13  Distrib 8.0.26, for Win64 (x86_64)
+--
+-- Host: 127.0.0.1    Database: charity
+-- ------------------------------------------------------
+-- Server version	8.0.32
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!50503 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
 -- Table structure for table `campaign_followers`
@@ -93,6 +151,33 @@ LOCK TABLES `campaign_followers` WRITE;
 /*!40000 ALTER TABLE `campaign_followers` DISABLE KEYS */;
 /*!40000 ALTER TABLE `campaign_followers` ENABLE KEYS */;
 UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2023-05-16 16:41:58
+-- MySQL dump 10.13  Distrib 8.0.26, for Win64 (x86_64)
+--
+-- Host: 127.0.0.1    Database: charity
+-- ------------------------------------------------------
+-- Server version	8.0.32
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!50503 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
 -- Table structure for table `campaign_info`
@@ -137,6 +222,33 @@ LOCK TABLES `campaign_info` WRITE;
 /*!40000 ALTER TABLE `campaign_info` DISABLE KEYS */;
 /*!40000 ALTER TABLE `campaign_info` ENABLE KEYS */;
 UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2023-05-16 16:41:59
+-- MySQL dump 10.13  Distrib 8.0.26, for Win64 (x86_64)
+--
+-- Host: 127.0.0.1    Database: charity
+-- ------------------------------------------------------
+-- Server version	8.0.32
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!50503 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
 -- Table structure for table `campaign_input`
@@ -169,6 +281,33 @@ LOCK TABLES `campaign_input` WRITE;
 /*!40000 ALTER TABLE `campaign_input` DISABLE KEYS */;
 /*!40000 ALTER TABLE `campaign_input` ENABLE KEYS */;
 UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2023-05-16 16:41:58
+-- MySQL dump 10.13  Distrib 8.0.26, for Win64 (x86_64)
+--
+-- Host: 127.0.0.1    Database: charity
+-- ------------------------------------------------------
+-- Server version	8.0.32
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!50503 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
 -- Table structure for table `campaign_output`
@@ -200,6 +339,33 @@ LOCK TABLES `campaign_output` WRITE;
 /*!40000 ALTER TABLE `campaign_output` DISABLE KEYS */;
 /*!40000 ALTER TABLE `campaign_output` ENABLE KEYS */;
 UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2023-05-16 16:41:59
+-- MySQL dump 10.13  Distrib 8.0.26, for Win64 (x86_64)
+--
+-- Host: 127.0.0.1    Database: charity
+-- ------------------------------------------------------
+-- Server version	8.0.32
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!50503 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
 -- Table structure for table `charities`
@@ -231,8 +397,13 @@ CREATE TABLE `charities` (
   `NumCampaign` int DEFAULT NULL,
   `Reach` varchar(255) DEFAULT NULL,
   `Star` tinyint DEFAULT '0',
-  PRIMARY KEY (`Id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci AVG_ROW_LENGTH=5461;
+  `charityName` varchar(255) DEFAULT NULL,
+  `IsVerificated` tinyint DEFAULT NULL,
+  `user_id` int DEFAULT NULL,
+  PRIMARY KEY (`Id`),
+  KEY `FKo5771d5ka0oef10kgx9m6brpg` (`user_id`),
+  CONSTRAINT `FKo5771d5ka0oef10kgx9m6brpg` FOREIGN KEY (`user_id`) REFERENCES `user_account` (`Id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci AVG_ROW_LENGTH=5461;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -241,8 +412,36 @@ CREATE TABLE `charities` (
 
 LOCK TABLES `charities` WRITE;
 /*!40000 ALTER TABLE `charities` DISABLE KEYS */;
+INSERT INTO `charities` VALUES (1,'áđá',NULL,NULL,'ád','ádád',NULL,NULL,NULL,NULL,NULL,NULL,'handle file',NULL,NULL,NULL,NULL,0,NULL,NULL,NULL,0,NULL,NULL,NULL),(2,'sfà',NULL,NULL,'ádá','ádá',NULL,NULL,NULL,NULL,NULL,NULL,'handle file',NULL,NULL,NULL,NULL,0,NULL,NULL,NULL,0,NULL,NULL,NULL),(3,'sđá',NULL,NULL,'ád','áda',NULL,NULL,NULL,NULL,NULL,NULL,'handle file',NULL,NULL,NULL,NULL,0,NULL,NULL,NULL,0,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `charities` ENABLE KEYS */;
 UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2023-05-16 16:41:57
+-- MySQL dump 10.13  Distrib 8.0.26, for Win64 (x86_64)
+--
+-- Host: 127.0.0.1    Database: charity
+-- ------------------------------------------------------
+-- Server version	8.0.32
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!50503 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
 -- Table structure for table `charity_follow`
@@ -267,6 +466,33 @@ LOCK TABLES `charity_follow` WRITE;
 /*!40000 ALTER TABLE `charity_follow` DISABLE KEYS */;
 /*!40000 ALTER TABLE `charity_follow` ENABLE KEYS */;
 UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2023-05-16 16:41:57
+-- MySQL dump 10.13  Distrib 8.0.26, for Win64 (x86_64)
+--
+-- Host: 127.0.0.1    Database: charity
+-- ------------------------------------------------------
+-- Server version	8.0.32
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!50503 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
 -- Table structure for table `districts`
@@ -299,6 +525,33 @@ LOCK TABLES `districts` WRITE;
 INSERT INTO `districts` VALUES ('001','Ba Đình','Quận Ba Đình','ba_dinh','01',5),('002','Hoàn Kiếm','Quận Hoàn Kiếm','hoan_kiem','01',5),('003','Tây Hồ','Quận Tây Hồ','tay_ho','01',5),('004','Long Biên','Quận Long Biên','long_bien','01',5),('005','Cầu Giấy','Quận Cầu Giấy','cau_giay','01',5),('006','Đống Đa','Quận Đống Đa','dong_da','01',5),('007','Hai Bà Trưng','Quận Hai Bà Trưng','hai_ba_trung','01',5),('008','Hoàng Mai','Quận Hoàng Mai','hoang_mai','01',5),('009','Thanh Xuân','Quận Thanh Xuân','thanh_xuan','01',5),('016','Sóc Sơn','Huyện Sóc Sơn','soc_son','01',7),('017','Đông Anh','Huyện Đông Anh','dong_anh','01',7),('018','Gia Lâm','Huyện Gia Lâm','gia_lam','01',7),('019','Nam Từ Liêm','Quận Nam Từ Liêm','nam_tu_liem','01',5),('020','Thanh Trì','Huyện Thanh Trì','thanh_tri','01',7),('021','Bắc Từ Liêm','Quận Bắc Từ Liêm','bac_tu_liem','01',5),('024','Hà Giang','Thành phố Hà Giang','ha_giang','02',4),('026','Đồng Văn','Huyện Đồng Văn','dong_van','02',7),('027','Mèo Vạc','Huyện Mèo Vạc','meo_vac','02',7),('028','Yên Minh','Huyện Yên Minh','yen_minh','02',7),('029','Quản Bạ','Huyện Quản Bạ','quan_ba','02',7),('030','Vị Xuyên','Huyện Vị Xuyên','vi_xuyen','02',7),('031','Bắc Mê','Huyện Bắc Mê','bac_me','02',7),('032','Hoàng Su Phì','Huyện Hoàng Su Phì','hoang_su_phi','02',7),('033','Xín Mần','Huyện Xín Mần','xin_man','02',7),('034','Bắc Quang','Huyện Bắc Quang','bac_quang','02',7),('035','Quang Bình','Huyện Quang Bình','quang_binh','02',7),('040','Cao Bằng','Thành phố Cao Bằng','cao_bang','04',4),('042','Bảo Lâm','Huyện Bảo Lâm','bao_lam','04',7),('043','Bảo Lạc','Huyện Bảo Lạc','bao_lac','04',7),('045','Hà Quảng','Huyện Hà Quảng','ha_quang','04',7),('047','Trùng Khánh','Huyện Trùng Khánh','trung_khanh','04',7),('048','Hạ Lang','Huyện Hạ Lang','ha_lang','04',7),('049','Quảng Hòa','Huyện Quảng Hòa','quang_hoa','04',7),('051','Hoà An','Huyện Hoà An','hoa_an','04',7),('052','Nguyên Bình','Huyện Nguyên Bình','nguyen_binh','04',7),('053','Thạch An','Huyện Thạch An','thach_an','04',7),('058','Bắc Kạn','Thành phố Bắc Kạn','bac_kan','06',4),('060','Pác Nặm','Huyện Pác Nặm','pac_nam','06',7),('061','Ba Bể','Huyện Ba Bể','ba_be','06',7),('062','Ngân Sơn','Huyện Ngân Sơn','ngan_son','06',7),('063','Bạch Thông','Huyện Bạch Thông','bach_thong','06',7),('064','Chợ Đồn','Huyện Chợ Đồn','cho_don','06',7),('065','Chợ Mới','Huyện Chợ Mới','cho_moi','06',7),('066','Na Rì','Huyện Na Rì','na_ri','06',7),('070','Tuyên Quang','Thành phố Tuyên Quang','tuyen_quang','08',4),('071','Lâm Bình','Huyện Lâm Bình','lam_binh','08',7),('072','Na Hang','Huyện Na Hang','na_hang','08',7),('073','Chiêm Hóa','Huyện Chiêm Hóa','chiem_hoa','08',7),('074','Hàm Yên','Huyện Hàm Yên','ham_yen','08',7),('075','Yên Sơn','Huyện Yên Sơn','yen_son','08',7),('076','Sơn Dương','Huyện Sơn Dương','son_duong','08',7),('080','Lào Cai','Thành phố Lào Cai','lao_cai','10',4),('082','Bát Xát','Huyện Bát Xát','bat_xat','10',7),('083','Mường Khương','Huyện Mường Khương','muong_khuong','10',7),('084','Si Ma Cai','Huyện Si Ma Cai','si_ma_cai','10',7),('085','Bắc Hà','Huyện Bắc Hà','bac_ha','10',7),('086','Bảo Thắng','Huyện Bảo Thắng','bao_thang','10',7),('087','Bảo Yên','Huyện Bảo Yên','bao_yen','10',7),('088','Sa Pa','Thị xã Sa Pa','sa_pa','10',6),('089','Văn Bàn','Huyện Văn Bàn','van_ban','10',7),('094','Điện Biên Phủ','Thành phố Điện Biên Phủ','dien_bien_phu','11',4),('095','Mường Lay','Thị xã Mường Lay','muong_lay','11',6),('096','Mường Nhé','Huyện Mường Nhé','muong_nhe','11',7),('097','Mường Chà','Huyện Mường Chà','muong_cha','11',7),('098','Tủa Chùa','Huyện Tủa Chùa','tua_chua','11',7),('099','Tuần Giáo','Huyện Tuần Giáo','tuan_giao','11',7),('100','Điện Biên','Huyện Điện Biên','dien_bien','11',7),('101','Điện Biên Đông','Huyện Điện Biên Đông','dien_bien_dong','11',7),('102','Mường Ảng','Huyện Mường Ảng','muong_ang','11',7),('103','Nậm Pồ','Huyện Nậm Pồ','nam_po','11',7),('105','Lai Châu','Thành phố Lai Châu','lai_chau','12',4),('106','Tam Đường','Huyện Tam Đường','tam_duong','12',7),('107','Mường Tè','Huyện Mường Tè','muong_te','12',7),('108','Sìn Hồ','Huyện Sìn Hồ','sin_ho','12',7),('109','Phong Thổ','Huyện Phong Thổ','phong_tho','12',7),('110','Than Uyên','Huyện Than Uyên','than_uyen','12',7),('111','Tân Uyên','Huyện Tân Uyên','tan_uyen','12',7),('112','Nậm Nhùn','Huyện Nậm Nhùn','nam_nhun','12',7),('116','Sơn La','Thành phố Sơn La','son_la','14',4),('118','Quỳnh Nhai','Huyện Quỳnh Nhai','quynh_nhai','14',7),('119','Thuận Châu','Huyện Thuận Châu','thuan_chau','14',7),('120','Mường La','Huyện Mường La','muong_la','14',7),('121','Bắc Yên','Huyện Bắc Yên','bac_yen','14',7),('122','Phù Yên','Huyện Phù Yên','phu_yen','14',7),('123','Mộc Châu','Huyện Mộc Châu','moc_chau','14',7),('124','Yên Châu','Huyện Yên Châu','yen_chau','14',7),('125','Mai Sơn','Huyện Mai Sơn','mai_son','14',7),('126','Sông Mã','Huyện Sông Mã','song_ma','14',7),('127','Sốp Cộp','Huyện Sốp Cộp','sop_cop','14',7),('128','Vân Hồ','Huyện Vân Hồ','van_ho','14',7),('132','Yên Bái','Thành phố Yên Bái','yen_bai','15',4),('133','Nghĩa Lộ','Thị xã Nghĩa Lộ','nghia_lo','15',6),('135','Lục Yên','Huyện Lục Yên','luc_yen','15',7),('136','Văn Yên','Huyện Văn Yên','van_yen','15',7),('137','Mù Căng Chải','Huyện Mù Căng Chải','mu_cang_chai','15',7),('138','Trấn Yên','Huyện Trấn Yên','tran_yen','15',7),('139','Trạm Tấu','Huyện Trạm Tấu','tram_tau','15',7),('140','Văn Chấn','Huyện Văn Chấn','van_chan','15',7),('141','Yên Bình','Huyện Yên Bình','yen_binh','15',7),('148','Hòa Bình','Thành phố Hòa Bình','hoa_binh','17',4),('150','Đà Bắc','Huyện Đà Bắc','da_bac','17',7),('152','Lương Sơn','Huyện Lương Sơn','luong_son','17',7),('153','Kim Bôi','Huyện Kim Bôi','kim_boi','17',7),('154','Cao Phong','Huyện Cao Phong','cao_phong','17',7),('155','Tân Lạc','Huyện Tân Lạc','tan_lac','17',7),('156','Mai Châu','Huyện Mai Châu','mai_chau','17',7),('157','Lạc Sơn','Huyện Lạc Sơn','lac_son','17',7),('158','Yên Thủy','Huyện Yên Thủy','yen_thuy','17',7),('159','Lạc Thủy','Huyện Lạc Thủy','lac_thuy','17',7),('164','Thái Nguyên','Thành phố Thái Nguyên','thai_nguyen','19',4),('165','Sông Công','Thành phố Sông Công','song_cong','19',4),('167','Định Hóa','Huyện Định Hóa','dinh_hoa','19',7),('168','Phú Lương','Huyện Phú Lương','phu_luong','19',7),('169','Đồng Hỷ','Huyện Đồng Hỷ','dong_hy','19',7),('170','Võ Nhai','Huyện Võ Nhai','vo_nhai','19',7),('171','Đại Từ','Huyện Đại Từ','dai_tu','19',7),('172','Phổ Yên','Thành phố Phổ Yên','pho_yen','19',4),('173','Phú Bình','Huyện Phú Bình','phu_binh','19',7),('178','Lạng Sơn','Thành phố Lạng Sơn','lang_son','20',4),('180','Tràng Định','Huyện Tràng Định','trang_dinh','20',7),('181','Bình Gia','Huyện Bình Gia','binh_gia','20',7),('182','Văn Lãng','Huyện Văn Lãng','van_lang','20',7),('183','Cao Lộc','Huyện Cao Lộc','cao_loc','20',7),('184','Văn Quan','Huyện Văn Quan','van_quan','20',7),('185','Bắc Sơn','Huyện Bắc Sơn','bac_son','20',7),('186','Hữu Lũng','Huyện Hữu Lũng','huu_lung','20',7),('187','Chi Lăng','Huyện Chi Lăng','chi_lang','20',7),('188','Lộc Bình','Huyện Lộc Bình','loc_binh','20',7),('189','Đình Lập','Huyện Đình Lập','dinh_lap','20',7),('193','Hạ Long','Thành phố Hạ Long','ha_long','22',4),('194','Móng Cái','Thành phố Móng Cái','mong_cai','22',4),('195','Cẩm Phả','Thành phố Cẩm Phả','cam_pha','22',4),('196','Uông Bí','Thành phố Uông Bí','uong_bi','22',4),('198','Bình Liêu','Huyện Bình Liêu','binh_lieu','22',7),('199','Tiên Yên','Huyện Tiên Yên','tien_yen','22',7),('200','Đầm Hà','Huyện Đầm Hà','dam_ha','22',7),('201','Hải Hà','Huyện Hải Hà','hai_ha','22',7),('202','Ba Chẽ','Huyện Ba Chẽ','ba_che','22',7),('203','Vân Đồn','Huyện Vân Đồn','van_don','22',7),('205','Đông Triều','Thị xã Đông Triều','dong_trieu','22',6),('206','Quảng Yên','Thị xã Quảng Yên','quang_yen','22',6),('207','Cô Tô','Huyện Cô Tô','co_to','22',7),('213','Bắc Giang','Thành phố Bắc Giang','bac_giang','24',4),('215','Yên Thế','Huyện Yên Thế','yen_the','24',7),('216','Tân Yên','Huyện Tân Yên','tan_yen','24',7),('217','Lạng Giang','Huyện Lạng Giang','lang_giang','24',7),('218','Lục Nam','Huyện Lục Nam','luc_nam','24',7),('219','Lục Ngạn','Huyện Lục Ngạn','luc_ngan','24',7),('220','Sơn Động','Huyện Sơn Động','son_dong','24',7),('221','Yên Dũng','Huyện Yên Dũng','yen_dung','24',7),('222','Việt Yên','Huyện Việt Yên','viet_yen','24',7),('223','Hiệp Hòa','Huyện Hiệp Hòa','hiep_hoa','24',7),('227','Việt Trì','Thành phố Việt Trì','viet_tri','25',4),('228','Phú Thọ','Thị xã Phú Thọ','phu_tho','25',6),('230','Đoan Hùng','Huyện Đoan Hùng','doan_hung','25',7),('231','Hạ Hoà','Huyện Hạ Hoà','ha_hoa','25',7),('232','Thanh Ba','Huyện Thanh Ba','thanh_ba','25',7),('233','Phù Ninh','Huyện Phù Ninh','phu_ninh','25',7),('234','Yên Lập','Huyện Yên Lập','yen_lap','25',7),('235','Cẩm Khê','Huyện Cẩm Khê','cam_khe','25',7),('236','Tam Nông','Huyện Tam Nông','tam_nong','25',7),('237','Lâm Thao','Huyện Lâm Thao','lam_thao','25',7),('238','Thanh Sơn','Huyện Thanh Sơn','thanh_son','25',7),('239','Thanh Thuỷ','Huyện Thanh Thuỷ','thanh_thuy','25',7),('240','Tân Sơn','Huyện Tân Sơn','tan_son','25',7),('243','Vĩnh Yên','Thành phố Vĩnh Yên','vinh_yen','26',4),('244','Phúc Yên','Thành phố Phúc Yên','phuc_yen','26',4),('246','Lập Thạch','Huyện Lập Thạch','lap_thach','26',7),('247','Tam Dương','Huyện Tam Dương','tam_duong','26',7),('248','Tam Đảo','Huyện Tam Đảo','tam_dao','26',7),('249','Bình Xuyên','Huyện Bình Xuyên','binh_xuyen','26',7),('250','Mê Linh','Huyện Mê Linh','me_linh','01',7),('251','Yên Lạc','Huyện Yên Lạc','yen_lac','26',7),('252','Vĩnh Tường','Huyện Vĩnh Tường','vinh_tuong','26',7),('253','Sông Lô','Huyện Sông Lô','song_lo','26',7),('256','Bắc Ninh','Thành phố Bắc Ninh','bac_ninh','27',4),('258','Yên Phong','Huyện Yên Phong','yen_phong','27',7),('259','Quế Võ','Huyện Quế Võ','que_vo','27',7),('260','Tiên Du','Huyện Tiên Du','tien_du','27',7),('261','Từ Sơn','Thành phố Từ Sơn','tu_son','27',4),('262','Thuận Thành','Huyện Thuận Thành','thuan_thanh','27',7),('263','Gia Bình','Huyện Gia Bình','gia_binh','27',7),('264','Lương Tài','Huyện Lương Tài','luong_tai','27',7),('268','Hà Đông','Quận Hà Đông','ha_dong','01',5),('269','Sơn Tây','Thị xã Sơn Tây','son_tay','01',6),('271','Ba Vì','Huyện Ba Vì','ba_vi','01',7),('272','Phúc Thọ','Huyện Phúc Thọ','phuc_tho','01',7),('273','Đan Phượng','Huyện Đan Phượng','dan_phuong','01',7),('274','Hoài Đức','Huyện Hoài Đức','hoai_duc','01',7),('275','Quốc Oai','Huyện Quốc Oai','quoc_oai','01',7),('276','Thạch Thất','Huyện Thạch Thất','thach_that','01',7),('277','Chương Mỹ','Huyện Chương Mỹ','chuong_my','01',7),('278','Thanh Oai','Huyện Thanh Oai','thanh_oai','01',7),('279','Thường Tín','Huyện Thường Tín','thuong_tin','01',7),('280','Phú Xuyên','Huyện Phú Xuyên','phu_xuyen','01',7),('281','Ứng Hòa','Huyện Ứng Hòa','ung_hoa','01',7),('282','Mỹ Đức','Huyện Mỹ Đức','my_duc','01',7),('288','Hải Dương','Thành phố Hải Dương','hai_duong','30',4),('290','Chí Linh','Thành phố Chí Linh','chi_linh','30',4),('291','Nam Sách','Huyện Nam Sách','nam_sach','30',7),('292','Kinh Môn','Thị xã Kinh Môn','kinh_mon','30',6),('293','Kim Thành','Huyện Kim Thành','kim_thanh','30',7),('294','Thanh Hà','Huyện Thanh Hà','thanh_ha','30',7),('295','Cẩm Giàng','Huyện Cẩm Giàng','cam_giang','30',7),('296','Bình Giang','Huyện Bình Giang','binh_giang','30',7),('297','Gia Lộc','Huyện Gia Lộc','gia_loc','30',7),('298','Tứ Kỳ','Huyện Tứ Kỳ','tu_ky','30',7),('299','Ninh Giang','Huyện Ninh Giang','ninh_giang','30',7),('300','Thanh Miện','Huyện Thanh Miện','thanh_mien','30',7),('303','Hồng Bàng','Quận Hồng Bàng','hong_bang','31',5),('304','Ngô Quyền','Quận Ngô Quyền','ngo_quyen','31',5),('305','Lê Chân','Quận Lê Chân','le_chan','31',5),('306','Hải An','Quận Hải An','hai_an','31',5),('307','Kiến An','Quận Kiến An','kien_an','31',5),('308','Đồ Sơn','Quận Đồ Sơn','do_son','31',5),('309','Dương Kinh','Quận Dương Kinh','duong_kinh','31',5),('311','Thuỷ Nguyên','Huyện Thuỷ Nguyên','thuy_nguyen','31',7),('312','An Dương','Huyện An Dương','an_duong','31',7),('313','An Lão','Huyện An Lão','an_lao','31',7),('314','Kiến Thuỵ','Huyện Kiến Thuỵ','kien_thuy','31',7),('315','Tiên Lãng','Huyện Tiên Lãng','tien_lang','31',7),('316','Vĩnh Bảo','Huyện Vĩnh Bảo','vinh_bao','31',7),('317','Cát Hải','Huyện Cát Hải','cat_hai','31',7),('318','Bạch Long Vĩ','Huyện Bạch Long Vĩ','bach_long_vi','31',7),('323','Hưng Yên','Thành phố Hưng Yên','hung_yen','33',4),('325','Văn Lâm','Huyện Văn Lâm','van_lam','33',7),('326','Văn Giang','Huyện Văn Giang','van_giang','33',7),('327','Yên Mỹ','Huyện Yên Mỹ','yen_my','33',7),('328','Mỹ Hào','Thị xã Mỹ Hào','my_hao','33',6),('329','Ân Thi','Huyện Ân Thi','an_thi','33',7),('330','Khoái Châu','Huyện Khoái Châu','khoai_chau','33',7),('331','Kim Động','Huyện Kim Động','kim_dong','33',7),('332','Tiên Lữ','Huyện Tiên Lữ','tien_lu','33',7),('333','Phù Cừ','Huyện Phù Cừ','phu_cu','33',7),('336','Thái Bình','Thành phố Thái Bình','thai_binh','34',4),('338','Quỳnh Phụ','Huyện Quỳnh Phụ','quynh_phu','34',7),('339','Hưng Hà','Huyện Hưng Hà','hung_ha','34',7),('340','Đông Hưng','Huyện Đông Hưng','dong_hung','34',7),('341','Thái Thụy','Huyện Thái Thụy','thai_thuy','34',7),('342','Tiền Hải','Huyện Tiền Hải','tien_hai','34',7),('343','Kiến Xương','Huyện Kiến Xương','kien_xuong','34',7),('344','Vũ Thư','Huyện Vũ Thư','vu_thu','34',7),('347','Phủ Lý','Thành phố Phủ Lý','phu_ly','35',4),('349','Duy Tiên','Thị xã Duy Tiên','duy_tien','35',6),('350','Kim Bảng','Huyện Kim Bảng','kim_bang','35',7),('351','Thanh Liêm','Huyện Thanh Liêm','thanh_liem','35',7),('352','Bình Lục','Huyện Bình Lục','binh_luc','35',7),('353','Lý Nhân','Huyện Lý Nhân','ly_nhan','35',7),('356','Nam Định','Thành phố Nam Định','nam_dinh','36',4),('358','Mỹ Lộc','Huyện Mỹ Lộc','my_loc','36',7),('359','Vụ Bản','Huyện Vụ Bản','vu_ban','36',7),('360','Ý Yên','Huyện Ý Yên','y_yen','36',7),('361','Nghĩa Hưng','Huyện Nghĩa Hưng','nghia_hung','36',7),('362','Nam Trực','Huyện Nam Trực','nam_truc','36',7),('363','Trực Ninh','Huyện Trực Ninh','truc_ninh','36',7),('364','Xuân Trường','Huyện Xuân Trường','xuan_truong','36',7),('365','Giao Thủy','Huyện Giao Thủy','giao_thuy','36',7),('366','Hải Hậu','Huyện Hải Hậu','hai_hau','36',7),('369','Ninh Bình','Thành phố Ninh Bình','ninh_binh','37',4),('370','Tam Điệp','Thành phố Tam Điệp','tam_diep','37',4),('372','Nho Quan','Huyện Nho Quan','nho_quan','37',7),('373','Gia Viễn','Huyện Gia Viễn','gia_vien','37',7),('374','Hoa Lư','Huyện Hoa Lư','hoa_lu','37',7),('375','Yên Khánh','Huyện Yên Khánh','yen_khanh','37',7),('376','Kim Sơn','Huyện Kim Sơn','kim_son','37',7),('377','Yên Mô','Huyện Yên Mô','yen_mo','37',7),('380','Thanh Hóa','Thành phố Thanh Hóa','thanh_hoa','38',4),('381','Bỉm Sơn','Thị xã Bỉm Sơn','bim_son','38',6),('382','Sầm Sơn','Thành phố Sầm Sơn','sam_son','38',4),('384','Mường Lát','Huyện Mường Lát','muong_lat','38',7),('385','Quan Hóa','Huyện Quan Hóa','quan_hoa','38',7),('386','Bá Thước','Huyện Bá Thước','ba_thuoc','38',7),('387','Quan Sơn','Huyện Quan Sơn','quan_son','38',7),('388','Lang Chánh','Huyện Lang Chánh','lang_chanh','38',7),('389','Ngọc Lặc','Huyện Ngọc Lặc','ngoc_lac','38',7),('390','Cẩm Thủy','Huyện Cẩm Thủy','cam_thuy','38',7),('391','Thạch Thành','Huyện Thạch Thành','thach_thanh','38',7),('392','Hà Trung','Huyện Hà Trung','ha_trung','38',7),('393','Vĩnh Lộc','Huyện Vĩnh Lộc','vinh_loc','38',7),('394','Yên Định','Huyện Yên Định','yen_dinh','38',7),('395','Thọ Xuân','Huyện Thọ Xuân','tho_xuan','38',7),('396','Thường Xuân','Huyện Thường Xuân','thuong_xuan','38',7),('397','Triệu Sơn','Huyện Triệu Sơn','trieu_son','38',7),('398','Thiệu Hóa','Huyện Thiệu Hóa','thieu_hoa','38',7),('399','Hoằng Hóa','Huyện Hoằng Hóa','hoang_hoa','38',7),('400','Hậu Lộc','Huyện Hậu Lộc','hau_loc','38',7),('401','Nga Sơn','Huyện Nga Sơn','nga_son','38',7),('402','Như Xuân','Huyện Như Xuân','nhu_xuan','38',7),('403','Như Thanh','Huyện Như Thanh','nhu_thanh','38',7),('404','Nông Cống','Huyện Nông Cống','nong_cong','38',7),('405','Đông Sơn','Huyện Đông Sơn','dong_son','38',7),('406','Quảng Xương','Huyện Quảng Xương','quang_xuong','38',7),('407','Nghi Sơn','Thị xã Nghi Sơn','nghi_son','38',6),('412','Vinh','Thành phố Vinh','vinh','40',4),('413','Cửa Lò','Thị xã Cửa Lò','cua_lo','40',6),('414','Thái Hoà','Thị xã Thái Hoà','thai_hoa','40',6),('415','Quế Phong','Huyện Quế Phong','que_phong','40',7),('416','Quỳ Châu','Huyện Quỳ Châu','quy_chau','40',7),('417','Kỳ Sơn','Huyện Kỳ Sơn','ky_son','40',7),('418','Tương Dương','Huyện Tương Dương','tuong_duong','40',7),('419','Nghĩa Đàn','Huyện Nghĩa Đàn','nghia_dan','40',7),('420','Quỳ Hợp','Huyện Quỳ Hợp','quy_hop','40',7),('421','Quỳnh Lưu','Huyện Quỳnh Lưu','quynh_luu','40',7),('422','Con Cuông','Huyện Con Cuông','con_cuong','40',7),('423','Tân Kỳ','Huyện Tân Kỳ','tan_ky','40',7),('424','Anh Sơn','Huyện Anh Sơn','anh_son','40',7),('425','Diễn Châu','Huyện Diễn Châu','dien_chau','40',7),('426','Yên Thành','Huyện Yên Thành','yen_thanh','40',7),('427','Đô Lương','Huyện Đô Lương','do_luong','40',7),('428','Thanh Chương','Huyện Thanh Chương','thanh_chuong','40',7),('429','Nghi Lộc','Huyện Nghi Lộc','nghi_loc','40',7),('430','Nam Đàn','Huyện Nam Đàn','nam_dan','40',7),('431','Hưng Nguyên','Huyện Hưng Nguyên','hung_nguyen','40',7),('432','Hoàng Mai','Thị xã Hoàng Mai','hoang_mai','40',6),('436','Hà Tĩnh','Thành phố Hà Tĩnh','ha_tinh','42',4),('437','Hồng Lĩnh','Thị xã Hồng Lĩnh','hong_linh','42',6),('439','Hương Sơn','Huyện Hương Sơn','huong_son','42',7),('440','Đức Thọ','Huyện Đức Thọ','duc_tho','42',7),('441','Vũ Quang','Huyện Vũ Quang','vu_quang','42',7),('442','Nghi Xuân','Huyện Nghi Xuân','nghi_xuan','42',7),('443','Can Lộc','Huyện Can Lộc','can_loc','42',7),('444','Hương Khê','Huyện Hương Khê','huong_khe','42',7),('445','Thạch Hà','Huyện Thạch Hà','thach_ha','42',7),('446','Cẩm Xuyên','Huyện Cẩm Xuyên','cam_xuyen','42',7),('447','Kỳ Anh','Huyện Kỳ Anh','ky_anh','42',7),('448','Lộc Hà','Huyện Lộc Hà','loc_ha','42',7),('449','Kỳ Anh','Thị xã Kỳ Anh','ky_anh','42',6),('450','Đồng Hới','Thành phố Đồng Hới','dong_hoi','44',4),('452','Minh Hóa','Huyện Minh Hóa','minh_hoa','44',7),('453','Tuyên Hóa','Huyện Tuyên Hóa','tuyen_hoa','44',7),('454','Quảng Trạch','Huyện Quảng Trạch','quang_trach','44',7),('455','Bố Trạch','Huyện Bố Trạch','bo_trach','44',7),('456','Quảng Ninh','Huyện Quảng Ninh','quang_ninh','44',7),('457','Lệ Thủy','Huyện Lệ Thủy','le_thuy','44',7),('458','Ba Đồn','Thị xã Ba Đồn','ba_don','44',6),('461','Đông Hà','Thành phố Đông Hà','dong_ha','45',4),('462','Quảng Trị','Thị xã Quảng Trị','quang_tri','45',6),('464','Vĩnh Linh','Huyện Vĩnh Linh','vinh_linh','45',7),('465','Hướng Hóa','Huyện Hướng Hóa','huong_hoa','45',7),('466','Gio Linh','Huyện Gio Linh','gio_linh','45',7),('467','Đa Krông','Huyện Đa Krông','da_krong','45',7),('468','Cam Lộ','Huyện Cam Lộ','cam_lo','45',7),('469','Triệu Phong','Huyện Triệu Phong','trieu_phong','45',7),('470','Hải Lăng','Huyện Hải Lăng','hai_lang','45',7),('471','Cồn Cỏ','Huyện Cồn Cỏ','con_co','45',7),('474','Huế','Thành phố Huế','hue','46',4),('476','Phong Điền','Huyện Phong Điền','phong_dien','46',7),('477','Quảng Điền','Huyện Quảng Điền','quang_dien','46',7),('478','Phú Vang','Huyện Phú Vang','phu_vang','46',7),('479','Hương Thủy','Thị xã Hương Thủy','huong_thuy','46',6),('480','Hương Trà','Thị xã Hương Trà','huong_tra','46',6),('481','A Lưới','Huyện A Lưới','a_luoi','46',7),('482','Phú Lộc','Huyện Phú Lộc','phu_loc','46',7),('483','Nam Đông','Huyện Nam Đông','nam_dong','46',7),('490','Liên Chiểu','Quận Liên Chiểu','lien_chieu','48',5),('491','Thanh Khê','Quận Thanh Khê','thanh_khe','48',5),('492','Hải Châu','Quận Hải Châu','hai_chau','48',5),('493','Sơn Trà','Quận Sơn Trà','son_tra','48',5),('494','Ngũ Hành Sơn','Quận Ngũ Hành Sơn','ngu_hanh_son','48',5),('495','Cẩm Lệ','Quận Cẩm Lệ','cam_le','48',5),('497','Hòa Vang','Huyện Hòa Vang','hoa_vang','48',7),('498','Hoàng Sa','Huyện Hoàng Sa','hoang_sa','48',7),('502','Tam Kỳ','Thành phố Tam Kỳ','tam_ky','49',4),('503','Hội An','Thành phố Hội An','hoi_an','49',4),('504','Tây Giang','Huyện Tây Giang','tay_giang','49',7),('505','Đông Giang','Huyện Đông Giang','dong_giang','49',7),('506','Đại Lộc','Huyện Đại Lộc','dai_loc','49',7),('507','Điện Bàn','Thị xã Điện Bàn','dien_ban','49',6),('508','Duy Xuyên','Huyện Duy Xuyên','duy_xuyen','49',7),('509','Quế Sơn','Huyện Quế Sơn','que_son','49',7),('510','Nam Giang','Huyện Nam Giang','nam_giang','49',7),('511','Phước Sơn','Huyện Phước Sơn','phuoc_son','49',7),('512','Hiệp Đức','Huyện Hiệp Đức','hiep_duc','49',7),('513','Thăng Bình','Huyện Thăng Bình','thang_binh','49',7),('514','Tiên Phước','Huyện Tiên Phước','tien_phuoc','49',7),('515','Bắc Trà My','Huyện Bắc Trà My','bac_tra_my','49',7),('516','Nam Trà My','Huyện Nam Trà My','nam_tra_my','49',7),('517','Núi Thành','Huyện Núi Thành','nui_thanh','49',7),('518','Phú Ninh','Huyện Phú Ninh','phu_ninh','49',7),('519','Nông Sơn','Huyện Nông Sơn','nong_son','49',7),('522','Quảng Ngãi','Thành phố Quảng Ngãi','quang_ngai','51',4),('524','Bình Sơn','Huyện Bình Sơn','binh_son','51',7),('525','Trà Bồng','Huyện Trà Bồng','tra_bong','51',7),('527','Sơn Tịnh','Huyện Sơn Tịnh','son_tinh','51',7),('528','Tư Nghĩa','Huyện Tư Nghĩa','tu_nghia','51',7),('529','Sơn Hà','Huyện Sơn Hà','son_ha','51',7),('530','Sơn Tây','Huyện Sơn Tây','son_tay','51',7),('531','Minh Long','Huyện Minh Long','minh_long','51',7),('532','Nghĩa Hành','Huyện Nghĩa Hành','nghia_hanh','51',7),('533','Mộ Đức','Huyện Mộ Đức','mo_duc','51',7),('534','Đức Phổ','Thị xã Đức Phổ','duc_pho','51',6),('535','Ba Tơ','Huyện Ba Tơ','ba_to','51',7),('536','Lý Sơn','Huyện Lý Sơn','ly_son','51',7),('540','Quy Nhơn','Thành phố Quy Nhơn','quy_nhon','52',4),('542','An Lão','Huyện An Lão','an_lao','52',7),('543','Hoài Nhơn','Thị xã Hoài Nhơn','hoai_nhon','52',6),('544','Hoài Ân','Huyện Hoài Ân','hoai_an','52',7),('545','Phù Mỹ','Huyện Phù Mỹ','phu_my','52',7),('546','Vĩnh Thạnh','Huyện Vĩnh Thạnh','vinh_thanh','52',7),('547','Tây Sơn','Huyện Tây Sơn','tay_son','52',7),('548','Phù Cát','Huyện Phù Cát','phu_cat','52',7),('549','An Nhơn','Thị xã An Nhơn','an_nhon','52',6),('550','Tuy Phước','Huyện Tuy Phước','tuy_phuoc','52',7),('551','Vân Canh','Huyện Vân Canh','van_canh','52',7),('555','Tuy Hoà','Thành phố Tuy Hoà','tuy_hoa','54',4),('557','Sông Cầu','Thị xã Sông Cầu','song_cau','54',6),('558','Đồng Xuân','Huyện Đồng Xuân','dong_xuan','54',7),('559','Tuy An','Huyện Tuy An','tuy_an','54',7),('560','Sơn Hòa','Huyện Sơn Hòa','son_hoa','54',7),('561','Sông Hinh','Huyện Sông Hinh','song_hinh','54',7),('562','Tây Hoà','Huyện Tây Hoà','tay_hoa','54',7),('563','Phú Hoà','Huyện Phú Hoà','phu_hoa','54',7),('564','Đông Hòa','Thị xã Đông Hòa','dong_hoa','54',6),('568','Nha Trang','Thành phố Nha Trang','nha_trang','56',4),('569','Cam Ranh','Thành phố Cam Ranh','cam_ranh','56',4),('570','Cam Lâm','Huyện Cam Lâm','cam_lam','56',7),('571','Vạn Ninh','Huyện Vạn Ninh','van_ninh','56',7),('572','Ninh Hòa','Thị xã Ninh Hòa','ninh_hoa','56',6),('573','Khánh Vĩnh','Huyện Khánh Vĩnh','khanh_vinh','56',7),('574','Diên Khánh','Huyện Diên Khánh','dien_khanh','56',7),('575','Khánh Sơn','Huyện Khánh Sơn','khanh_son','56',7),('576','Trường Sa','Huyện Trường Sa','truong_sa','56',7),('582','Phan Rang-Tháp Chàm','Thành phố Phan Rang-Tháp Chàm','phan_rang-thap_cham','58',4),('584','Bác Ái','Huyện Bác Ái','bac_ai','58',7),('585','Ninh Sơn','Huyện Ninh Sơn','ninh_son','58',7),('586','Ninh Hải','Huyện Ninh Hải','ninh_hai','58',7),('587','Ninh Phước','Huyện Ninh Phước','ninh_phuoc','58',7),('588','Thuận Bắc','Huyện Thuận Bắc','thuan_bac','58',7),('589','Thuận Nam','Huyện Thuận Nam','thuan_nam','58',7),('593','Phan Thiết','Thành phố Phan Thiết','phan_thiet','60',4),('594','La Gi','Thị xã La Gi','la_gi','60',6),('595','Tuy Phong','Huyện Tuy Phong','tuy_phong','60',7),('596','Bắc Bình','Huyện Bắc Bình','bac_binh','60',7),('597','Hàm Thuận Bắc','Huyện Hàm Thuận Bắc','ham_thuan_bac','60',7),('598','Hàm Thuận Nam','Huyện Hàm Thuận Nam','ham_thuan_nam','60',7),('599','Tánh Linh','Huyện Tánh Linh','tanh_linh','60',7),('600','Đức Linh','Huyện Đức Linh','duc_linh','60',7),('601','Hàm Tân','Huyện Hàm Tân','ham_tan','60',7),('602','Phú Quí','Huyện Phú Quí','phu_qui','60',7),('608','Kon Tum','Thành phố Kon Tum','kon_tum','62',4),('610','Đắk Glei','Huyện Đắk Glei','dak_glei','62',7),('611','Ngọc Hồi','Huyện Ngọc Hồi','ngoc_hoi','62',7),('612','Đắk Tô','Huyện Đắk Tô','dak_to','62',7),('613','Kon Plông','Huyện Kon Plông','kon_plong','62',7),('614','Kon Rẫy','Huyện Kon Rẫy','kon_ray','62',7),('615','Đắk Hà','Huyện Đắk Hà','dak_ha','62',7),('616','Sa Thầy','Huyện Sa Thầy','sa_thay','62',7),('617','Tu Mơ Rông','Huyện Tu Mơ Rông','tu_mo_rong','62',7),('618','Ia H\' Drai','Huyện Ia H\' Drai','ia_h\'_drai','62',7),('622','Pleiku','Thành phố Pleiku','pleiku','64',4),('623','An Khê','Thị xã An Khê','an_khe','64',6),('624','Ayun Pa','Thị xã Ayun Pa','ayun_pa','64',6),('625','KBang','Huyện KBang','kbang','64',7),('626','Đăk Đoa','Huyện Đăk Đoa','dak_doa','64',7),('627','Chư Păh','Huyện Chư Păh','chu_pah','64',7),('628','Ia Grai','Huyện Ia Grai','ia_grai','64',7),('629','Mang Yang','Huyện Mang Yang','mang_yang','64',7),('630','Kông Chro','Huyện Kông Chro','kong_chro','64',7),('631','Đức Cơ','Huyện Đức Cơ','duc_co','64',7),('632','Chư Prông','Huyện Chư Prông','chu_prong','64',7),('633','Chư Sê','Huyện Chư Sê','chu_se','64',7),('634','Đăk Pơ','Huyện Đăk Pơ','dak_po','64',7),('635','Ia Pa','Huyện Ia Pa','ia_pa','64',7),('637','Krông Pa','Huyện Krông Pa','krong_pa','64',7),('638','Phú Thiện','Huyện Phú Thiện','phu_thien','64',7),('639','Chư Pưh','Huyện Chư Pưh','chu_puh','64',7),('643','Buôn Ma Thuột','Thành phố Buôn Ma Thuột','buon_ma_thuot','66',4),('644','Buôn Hồ','Thị xã Buôn Hồ','buon_ho','66',6),('645','Ea H\'leo','Huyện Ea H\'leo','ea_h\'leo','66',7),('646','Ea Súp','Huyện Ea Súp','ea_sup','66',7),('647','Buôn Đôn','Huyện Buôn Đôn','buon_don','66',7),('648','Cư M\'gar','Huyện Cư M\'gar','cu_m\'gar','66',7),('649','Krông Búk','Huyện Krông Búk','krong_buk','66',7),('650','Krông Năng','Huyện Krông Năng','krong_nang','66',7),('651','Ea Kar','Huyện Ea Kar','ea_kar','66',7),('652','M\'Đrắk','Huyện M\'Đrắk','m\'drak','66',7),('653','Krông Bông','Huyện Krông Bông','krong_bong','66',7),('654','Krông Pắc','Huyện Krông Pắc','krong_pac','66',7),('655','Krông A Na','Huyện Krông A Na','krong_a_na','66',7),('656','Lắk','Huyện Lắk','lak','66',7),('657','Cư Kuin','Huyện Cư Kuin','cu_kuin','66',7),('660','Gia Nghĩa','Thành phố Gia Nghĩa','gia_nghia','67',4),('661','Đăk Glong','Huyện Đăk Glong','dak_glong','67',7),('662','Cư Jút','Huyện Cư Jút','cu_jut','67',7),('663','Đắk Mil','Huyện Đắk Mil','dak_mil','67',7),('664','Krông Nô','Huyện Krông Nô','krong_no','67',7),('665','Đắk Song','Huyện Đắk Song','dak_song','67',7),('666','Đắk R\'Lấp','Huyện Đắk R\'Lấp','dak_r\'lap','67',7),('667','Tuy Đức','Huyện Tuy Đức','tuy_duc','67',7),('672','Đà Lạt','Thành phố Đà Lạt','da_lat','68',4),('673','Bảo Lộc','Thành phố Bảo Lộc','bao_loc','68',4),('674','Đam Rông','Huyện Đam Rông','dam_rong','68',7),('675','Lạc Dương','Huyện Lạc Dương','lac_duong','68',7),('676','Lâm Hà','Huyện Lâm Hà','lam_ha','68',7),('677','Đơn Dương','Huyện Đơn Dương','don_duong','68',7),('678','Đức Trọng','Huyện Đức Trọng','duc_trong','68',7),('679','Di Linh','Huyện Di Linh','di_linh','68',7),('680','Bảo Lâm','Huyện Bảo Lâm','bao_lam','68',7),('681','Đạ Huoai','Huyện Đạ Huoai','da_huoai','68',7),('682','Đạ Tẻh','Huyện Đạ Tẻh','da_teh','68',7),('683','Cát Tiên','Huyện Cát Tiên','cat_tien','68',7),('688','Phước Long','Thị xã Phước Long','phuoc_long','70',6),('689','Đồng Xoài','Thành phố Đồng Xoài','dong_xoai','70',4),('690','Bình Long','Thị xã Bình Long','binh_long','70',6),('691','Bù Gia Mập','Huyện Bù Gia Mập','bu_gia_map','70',7),('692','Lộc Ninh','Huyện Lộc Ninh','loc_ninh','70',7),('693','Bù Đốp','Huyện Bù Đốp','bu_dop','70',7),('694','Hớn Quản','Huyện Hớn Quản','hon_quan','70',7),('695','Đồng Phú','Huyện Đồng Phú','dong_phu','70',7),('696','Bù Đăng','Huyện Bù Đăng','bu_dang','70',7),('697','Chơn Thành','Thị xã Chơn Thành','chon_thanh','70',6),('698','Phú Riềng','Huyện Phú Riềng','phu_rieng','70',7),('703','Tây Ninh','Thành phố Tây Ninh','tay_ninh','72',4),('705','Tân Biên','Huyện Tân Biên','tan_bien','72',7),('706','Tân Châu','Huyện Tân Châu','tan_chau','72',7),('707','Dương Minh Châu','Huyện Dương Minh Châu','duong_minh_chau','72',7),('708','Châu Thành','Huyện Châu Thành','chau_thanh','72',7),('709','Hòa Thành','Thị xã Hòa Thành','hoa_thanh','72',6),('710','Gò Dầu','Huyện Gò Dầu','go_dau','72',7),('711','Bến Cầu','Huyện Bến Cầu','ben_cau','72',7),('712','Trảng Bàng','Thị xã Trảng Bàng','trang_bang','72',6),('718','Thủ Dầu Một','Thành phố Thủ Dầu Một','thu_dau_mot','74',4),('719','Bàu Bàng','Huyện Bàu Bàng','bau_bang','74',7),('720','Dầu Tiếng','Huyện Dầu Tiếng','dau_tieng','74',7),('721','Bến Cát','Thị xã Bến Cát','ben_cat','74',6),('722','Phú Giáo','Huyện Phú Giáo','phu_giao','74',7),('723','Tân Uyên','Thị xã Tân Uyên','tan_uyen','74',6),('724','Dĩ An','Thành phố Dĩ An','di_an','74',4),('725','Thuận An','Thành phố Thuận An','thuan_an','74',4),('726','Bắc Tân Uyên','Huyện Bắc Tân Uyên','bac_tan_uyen','74',7),('731','Biên Hòa','Thành phố Biên Hòa','bien_hoa','75',4),('732','Long Khánh','Thành phố Long Khánh','long_khanh','75',4),('734','Tân Phú','Huyện Tân Phú','tan_phu','75',7),('735','Vĩnh Cửu','Huyện Vĩnh Cửu','vinh_cuu','75',7),('736','Định Quán','Huyện Định Quán','dinh_quan','75',7),('737','Trảng Bom','Huyện Trảng Bom','trang_bom','75',7),('738','Thống Nhất','Huyện Thống Nhất','thong_nhat','75',7),('739','Cẩm Mỹ','Huyện Cẩm Mỹ','cam_my','75',7),('740','Long Thành','Huyện Long Thành','long_thanh','75',7),('741','Xuân Lộc','Huyện Xuân Lộc','xuan_loc','75',7),('742','Nhơn Trạch','Huyện Nhơn Trạch','nhon_trach','75',7),('747','Vũng Tàu','Thành phố Vũng Tàu','vung_tau','77',4),('748','Bà Rịa','Thành phố Bà Rịa','ba_ria','77',4),('750','Châu Đức','Huyện Châu Đức','chau_duc','77',7),('751','Xuyên Mộc','Huyện Xuyên Mộc','xuyen_moc','77',7),('752','Long Điền','Huyện Long Điền','long_dien','77',7),('753','Đất Đỏ','Huyện Đất Đỏ','dat_do','77',7),('754','Phú Mỹ','Thị xã Phú Mỹ','phu_my','77',6),('755','Côn Đảo','Huyện Côn Đảo','con_dao','77',7),('760','1','Quận 1','1','79',5),('761','12','Quận 12','12','79',5),('764','Gò Vấp','Quận Gò Vấp','go_vap','79',5),('765','Bình Thạnh','Quận Bình Thạnh','binh_thanh','79',5),('766','Tân Bình','Quận Tân Bình','tan_binh','79',5),('767','Tân Phú','Quận Tân Phú','tan_phu','79',5),('768','Phú Nhuận','Quận Phú Nhuận','phu_nhuan','79',5),('769','Thủ Đức','Thành phố Thủ Đức','thu_duc','79',3),('770','3','Quận 3','3','79',5),('771','10','Quận 10','10','79',5),('772','11','Quận 11','11','79',5),('773','4','Quận 4','4','79',5),('774','5','Quận 5','5','79',5),('775','6','Quận 6','6','79',5),('776','8','Quận 8','8','79',5),('777','Bình Tân','Quận Bình Tân','binh_tan','79',5),('778','7','Quận 7','7','79',5),('783','Củ Chi','Huyện Củ Chi','cu_chi','79',7),('784','Hóc Môn','Huyện Hóc Môn','hoc_mon','79',7),('785','Bình Chánh','Huyện Bình Chánh','binh_chanh','79',7),('786','Nhà Bè','Huyện Nhà Bè','nha_be','79',7),('787','Cần Giờ','Huyện Cần Giờ','can_gio','79',7),('794','Tân An','Thành phố Tân An','tan_an','80',4),('795','Kiến Tường','Thị xã Kiến Tường','kien_tuong','80',6),('796','Tân Hưng','Huyện Tân Hưng','tan_hung','80',7),('797','Vĩnh Hưng','Huyện Vĩnh Hưng','vinh_hung','80',7),('798','Mộc Hóa','Huyện Mộc Hóa','moc_hoa','80',7),('799','Tân Thạnh','Huyện Tân Thạnh','tan_thanh','80',7),('800','Thạnh Hóa','Huyện Thạnh Hóa','thanh_hoa','80',7),('801','Đức Huệ','Huyện Đức Huệ','duc_hue','80',7),('802','Đức Hòa','Huyện Đức Hòa','duc_hoa','80',7),('803','Bến Lức','Huyện Bến Lức','ben_luc','80',7),('804','Thủ Thừa','Huyện Thủ Thừa','thu_thua','80',7),('805','Tân Trụ','Huyện Tân Trụ','tan_tru','80',7),('806','Cần Đước','Huyện Cần Đước','can_duoc','80',7),('807','Cần Giuộc','Huyện Cần Giuộc','can_giuoc','80',7),('808','Châu Thành','Huyện Châu Thành','chau_thanh','80',7),('815','Mỹ Tho','Thành phố Mỹ Tho','my_tho','82',4),('816','Gò Công','Thị xã Gò Công','go_cong','82',6),('817','Cai Lậy','Thị xã Cai Lậy','cai_lay','82',6),('818','Tân Phước','Huyện Tân Phước','tan_phuoc','82',7),('819','Cái Bè','Huyện Cái Bè','cai_be','82',7),('820','Cai Lậy','Huyện Cai Lậy','cai_lay','82',7),('821','Châu Thành','Huyện Châu Thành','chau_thanh','82',7),('822','Chợ Gạo','Huyện Chợ Gạo','cho_gao','82',7),('823','Gò Công Tây','Huyện Gò Công Tây','go_cong_tay','82',7),('824','Gò Công Đông','Huyện Gò Công Đông','go_cong_dong','82',7),('825','Tân Phú Đông','Huyện Tân Phú Đông','tan_phu_dong','82',7),('829','Bến Tre','Thành phố Bến Tre','ben_tre','83',4),('831','Châu Thành','Huyện Châu Thành','chau_thanh','83',7),('832','Chợ Lách','Huyện Chợ Lách','cho_lach','83',7),('833','Mỏ Cày Nam','Huyện Mỏ Cày Nam','mo_cay_nam','83',7),('834','Giồng Trôm','Huyện Giồng Trôm','giong_trom','83',7),('835','Bình Đại','Huyện Bình Đại','binh_dai','83',7),('836','Ba Tri','Huyện Ba Tri','ba_tri','83',7),('837','Thạnh Phú','Huyện Thạnh Phú','thanh_phu','83',7),('838','Mỏ Cày Bắc','Huyện Mỏ Cày Bắc','mo_cay_bac','83',7),('842','Trà Vinh','Thành phố Trà Vinh','tra_vinh','84',4),('844','Càng Long','Huyện Càng Long','cang_long','84',7),('845','Cầu Kè','Huyện Cầu Kè','cau_ke','84',7),('846','Tiểu Cần','Huyện Tiểu Cần','tieu_can','84',7),('847','Châu Thành','Huyện Châu Thành','chau_thanh','84',7),('848','Cầu Ngang','Huyện Cầu Ngang','cau_ngang','84',7),('849','Trà Cú','Huyện Trà Cú','tra_cu','84',7),('850','Duyên Hải','Huyện Duyên Hải','duyen_hai','84',7),('851','Duyên Hải','Thị xã Duyên Hải','duyen_hai','84',6),('855','Vĩnh Long','Thành phố Vĩnh Long','vinh_long','86',4),('857','Long Hồ','Huyện Long Hồ','long_ho','86',7),('858','Mang Thít','Huyện Mang Thít','mang_thit','86',7),('859','Vũng Liêm','Huyện Vũng Liêm','vung_liem','86',7),('860','Tam Bình','Huyện Tam Bình','tam_binh','86',7),('861','Bình Minh','Thị xã Bình Minh','binh_minh','86',6),('862','Trà Ôn','Huyện Trà Ôn','tra_on','86',7),('863','Bình Tân','Huyện Bình Tân','binh_tan','86',7),('866','Cao Lãnh','Thành phố Cao Lãnh','cao_lanh','87',4),('867','Sa Đéc','Thành phố Sa Đéc','sa_dec','87',4),('868','Hồng Ngự','Thành phố Hồng Ngự','hong_ngu','87',4),('869','Tân Hồng','Huyện Tân Hồng','tan_hong','87',7),('870','Hồng Ngự','Huyện Hồng Ngự','hong_ngu','87',7),('871','Tam Nông','Huyện Tam Nông','tam_nong','87',7),('872','Tháp Mười','Huyện Tháp Mười','thap_muoi','87',7),('873','Cao Lãnh','Huyện Cao Lãnh','cao_lanh','87',7),('874','Thanh Bình','Huyện Thanh Bình','thanh_binh','87',7),('875','Lấp Vò','Huyện Lấp Vò','lap_vo','87',7),('876','Lai Vung','Huyện Lai Vung','lai_vung','87',7),('877','Châu Thành','Huyện Châu Thành','chau_thanh','87',7),('883','Long Xuyên','Thành phố Long Xuyên','long_xuyen','89',4),('884','Châu Đốc','Thành phố Châu Đốc','chau_doc','89',4),('886','An Phú','Huyện An Phú','an_phu','89',7),('887','Tân Châu','Thị xã Tân Châu','tan_chau','89',6),('888','Phú Tân','Huyện Phú Tân','phu_tan','89',7),('889','Châu Phú','Huyện Châu Phú','chau_phu','89',7),('890','Tịnh Biên','Huyện Tịnh Biên','tinh_bien','89',7),('891','Tri Tôn','Huyện Tri Tôn','tri_ton','89',7),('892','Châu Thành','Huyện Châu Thành','chau_thanh','89',7),('893','Chợ Mới','Huyện Chợ Mới','cho_moi','89',7),('894','Thoại Sơn','Huyện Thoại Sơn','thoai_son','89',7),('899','Rạch Giá','Thành phố Rạch Giá','rach_gia','91',4),('900','Hà Tiên','Thành phố Hà Tiên','ha_tien','91',4),('902','Kiên Lương','Huyện Kiên Lương','kien_luong','91',7),('903','Hòn Đất','Huyện Hòn Đất','hon_dat','91',7),('904','Tân Hiệp','Huyện Tân Hiệp','tan_hiep','91',7),('905','Châu Thành','Huyện Châu Thành','chau_thanh','91',7),('906','Giồng Riềng','Huyện Giồng Riềng','giong_rieng','91',7),('907','Gò Quao','Huyện Gò Quao','go_quao','91',7),('908','An Biên','Huyện An Biên','an_bien','91',7),('909','An Minh','Huyện An Minh','an_minh','91',7),('910','Vĩnh Thuận','Huyện Vĩnh Thuận','vinh_thuan','91',7),('911','Phú Quốc','Thành phố Phú Quốc','phu_quoc','91',4),('912','Kiên Hải','Huyện Kiên Hải','kien_hai','91',7),('913','U Minh Thượng','Huyện U Minh Thượng','u_minh_thuong','91',7),('914','Giang Thành','Huyện Giang Thành','giang_thanh','91',7),('916','Ninh Kiều','Quận Ninh Kiều','ninh_kieu','92',5),('917','Ô Môn','Quận Ô Môn','o_mon','92',5),('918','Bình Thuỷ','Quận Bình Thuỷ','binh_thuy','92',5),('919','Cái Răng','Quận Cái Răng','cai_rang','92',5),('923','Thốt Nốt','Quận Thốt Nốt','thot_not','92',5),('924','Vĩnh Thạnh','Huyện Vĩnh Thạnh','vinh_thanh','92',7),('925','Cờ Đỏ','Huyện Cờ Đỏ','co_do','92',7),('926','Phong Điền','Huyện Phong Điền','phong_dien','92',7),('927','Thới Lai','Huyện Thới Lai','thoi_lai','92',7),('930','Vị Thanh','Thành phố Vị Thanh','vi_thanh','93',4),('931','Ngã Bảy','Thành phố Ngã Bảy','nga_bay','93',4),('932','Châu Thành A','Huyện Châu Thành A','chau_thanh_a','93',7),('933','Châu Thành','Huyện Châu Thành','chau_thanh','93',7),('934','Phụng Hiệp','Huyện Phụng Hiệp','phung_hiep','93',7),('935','Vị Thuỷ','Huyện Vị Thuỷ','vi_thuy','93',7),('936','Long Mỹ','Huyện Long Mỹ','long_my','93',7),('937','Long Mỹ','Thị xã Long Mỹ','long_my','93',6),('941','Sóc Trăng','Thành phố Sóc Trăng','soc_trang','94',4),('942','Châu Thành','Huyện Châu Thành','chau_thanh','94',7),('943','Kế Sách','Huyện Kế Sách','ke_sach','94',7),('944','Mỹ Tú','Huyện Mỹ Tú','my_tu','94',7),('945','Cù Lao Dung','Huyện Cù Lao Dung','cu_lao_dung','94',7),('946','Long Phú','Huyện Long Phú','long_phu','94',7),('947','Mỹ Xuyên','Huyện Mỹ Xuyên','my_xuyen','94',7),('948','Ngã Năm','Thị xã Ngã Năm','nga_nam','94',6),('949','Thạnh Trị','Huyện Thạnh Trị','thanh_tri','94',7),('950','Vĩnh Châu','Thị xã Vĩnh Châu','vinh_chau','94',6),('951','Trần Đề','Huyện Trần Đề','tran_de','94',7),('954','Bạc Liêu','Thành phố Bạc Liêu','bac_lieu','95',4),('956','Hồng Dân','Huyện Hồng Dân','hong_dan','95',7),('957','Phước Long','Huyện Phước Long','phuoc_long','95',7),('958','Vĩnh Lợi','Huyện Vĩnh Lợi','vinh_loi','95',7),('959','Giá Rai','Thị xã Giá Rai','gia_rai','95',6),('960','Đông Hải','Huyện Đông Hải','dong_hai','95',7),('961','Hoà Bình','Huyện Hoà Bình','hoa_binh','95',7),('964','Cà Mau','Thành phố Cà Mau','ca_mau','96',4),('966','U Minh','Huyện U Minh','u_minh','96',7),('967','Thới Bình','Huyện Thới Bình','thoi_binh','96',7),('968','Trần Văn Thời','Huyện Trần Văn Thời','tran_van_thoi','96',7),('969','Cái Nước','Huyện Cái Nước','cai_nuoc','96',7),('970','Đầm Dơi','Huyện Đầm Dơi','dam_doi','96',7),('971','Năm Căn','Huyện Năm Căn','nam_can','96',7),('972','Phú Tân','Huyện Phú Tân','phu_tan','96',7),('973','Ngọc Hiển','Huyện Ngọc Hiển','ngoc_hien','96',7);
 /*!40000 ALTER TABLE `districts` ENABLE KEYS */;
 UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2023-05-16 16:41:57
+-- MySQL dump 10.13  Distrib 8.0.26, for Win64 (x86_64)
+--
+-- Host: 127.0.0.1    Database: charity
+-- ------------------------------------------------------
+-- Server version	8.0.32
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!50503 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
 -- Table structure for table `donations`
@@ -325,9 +578,9 @@ CREATE TABLE `donations` (
   `ward` varchar(255) DEFAULT NULL,
   `date` varchar(255) DEFAULT NULL,
   `description` varchar(255) DEFAULT NULL,
-  `images` varchar(255) DEFAULT NULL,
+  `images` longtext,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -336,8 +589,36 @@ CREATE TABLE `donations` (
 
 LOCK TABLES `donations` WRITE;
 /*!40000 ALTER TABLE `donations` DISABLE KEYS */;
+INSERT INTO `donations` VALUES (18,NULL,'Đã nhận',NULL,1,'[{\"name\":\"Áo ấm cho em\",\"id\":1,\"status\":\"Đã quyên góp\"}]','mi tom kkk','zczxc','áđá','hai khuat','0348399696','dfdsf','Tỉnh Cao Bằng','Huyện Trùng Khánh','Xã Quang Trung','16/5/2023','zxczx','https://firebasestorage.googleapis.com/v0/b/charityapp-b5d6f.appspot.com/o/avatar%2Favt-l3-2.png?alt=media&token=ca4e52ca-392d-4dae-9fda-931bd4c00223'),(19,4,'Đã nhận',NULL,1,'[{\"name\":\"ao am cho em\",\"id\":1,\"status\":\"Đã xác nhận\"}]','quan ao kkk','xcvxc','fxvbc','hai khuat','0348399696','dfdsf','Tỉnh Cao Bằng','Huyện Trùng Khánh','Xã Quang Trung','16/5/2023','cxvcxv','https://firebasestorage.googleapis.com/v0/b/charityapp-b5d6f.appspot.com/o/avatar%2Favt-l3-1.jpg?alt=media&token=2a10a34a-c28b-46c0-aafb-dd29c9a7cb6f, https://firebasestorage.googleapis.com/v0/b/charityapp-b5d6f.appspot.com/o/avatar%2Favt.png?alt=media&token=abac88b7-c527-4efe-b930-59643cef5e1c'),(20,4,'Đã nhận',NULL,1,'[{\"name\":\"Áo ấm cho em\",\"id\":1,\"status\":\"Đã xác nhận\"},{\"name\":\"Áo ấm cho em\",\"id\":2,\"status\":\"Bị hủy\"}]','sach vo update','áđá','sadcád','hai khuat','0348399696','dfdsf','Tỉnh Cao Bằng','Huyện Trùng Khánh','Xã Quang Trung','16/5/2023','áđá','https://firebasestorage.googleapis.com/v0/b/charityapp-b5d6f.appspot.com/o/avatar%2Fanh2kb.jpg?alt=media&token=9dec0617-efe4-4cb8-9c81-c375a9d55eae'),(21,4,'Từ chối nhận',NULL,2,'[{\"name\":\"tu thien nam dinh\",\"id\":2,\"status\":\"Bị hủy\"}]',' but but up','ád','ád','hai khuat','0348399696','dfdsf','Tỉnh Cao Bằng','Huyện Trùng Khánh','Xã Quang Trung','16/5/2023','ád','https://firebasestorage.googleapis.com/v0/b/charityapp-b5d6f.appspot.com/o/avatar%2Fb1-4-min.jpg?alt=media&token=0f01e284-41fa-4e7d-bde8-8a896896b719, https://firebasestorage.googleapis.com/v0/b/charityapp-b5d6f.appspot.com/o/avatar%2Fanh2kb.jpg?alt=media&token=1e00fdf7-9d8a-45eb-881c-8f0ec34570de'),(22,6,'Chưa nhận',NULL,NULL,'[{\"name\":\"Áo ấm cho em\",\"id\":2,\"status\":\"Đợi xác nhận\"},{\"name\":\"Áo ấm cho em\",\"id\":1,\"status\":\"Đợi xác nhận\"},{\"name\":\"Áo ấm cho em\",\"id\":3,\"status\":\"Đợi xác nhận\"}]','do dung ung ho nguoi dung 2','dsf','xvg','trinh haong','0348699696','dsfsdf','Tỉnh Tuyên Quang','Huyện Yên Sơn','Xã Kiến Thiết','16/5/2023','dsf','https://firebasestorage.googleapis.com/v0/b/charityapp-b5d6f.appspot.com/o/avatar%2Favt-l3-2.png?alt=media&token=b635dd98-e06a-4a76-a1f6-a73f9f6072d7'),(23,7,'Chưa nhận',NULL,NULL,'[{\"name\":\"Áo ấm cho em\",\"id\":2,\"status\":\"Đợi xác nhận\"}]','mi chinh nguoi dung 3','sad','zfx','xuan son','0359949494','dvgdsf','Tỉnh Hà Giang','Huyện Mèo Vạc','Xã Pải Lủng','16/5/2023','ád','https://firebasestorage.googleapis.com/v0/b/charityapp-b5d6f.appspot.com/o/avatar%2Favt-l3-2.png?alt=media&token=f7bae2b6-5960-4c7c-9a69-759b6686e2be'),(24,7,'Chờ xác nhận','tu thien nam dinh',2,'[{\"name\":\"tu thien nam dinh\",\"id\":2,\"status\":\"Yêu cầu xác nhận\"}]','ban hoc nd3','xzcc','xdv','xuan son','0359949494','dvgdsf','Tỉnh Hà Giang','Huyện Mèo Vạc','Xã Pải Lủng','16/5/2023','szxczx','https://firebasestorage.googleapis.com/v0/b/charityapp-b5d6f.appspot.com/o/avatar%2Fanhtest2.jpg?alt=media&token=4fd0f332-1dd7-45af-beb0-9325fa355498'),(26,4,'Từ chối nhận',NULL,1,'[{\"name\":\"ao am cho em\",\"id\":1,\"status\":\"Bị hủy\"}]','khau trang','sađá','dxf','hai khuat','0348399696','dfdsf','Tỉnh Cao Bằng','Huyện Trùng Khánh','Xã Quang Trung','16/5/2023','sad','https://firebasestorage.googleapis.com/v0/b/charityapp-b5d6f.appspot.com/o/avatar%2Favt.png?alt=media&token=82be3cda-2a5f-44ea-96b6-85fec641f18f'),(27,4,'Chưa nhận',NULL,NULL,'[]','binh nuoc','sadá','sađ','hai khuat','0348399696','dfdsf','Tỉnh Cao Bằng','Huyện Trùng Khánh','Xã Quang Trung','16/5/2023','ádá','https://firebasestorage.googleapis.com/v0/b/charityapp-b5d6f.appspot.com/o/avatar%2Fanh2kb.jpg?alt=media&token=653b0bdd-0e79-4678-a822-11f990f11ce0'),(28,4,'Chờ xác nhận','ao am cho em',1,'[{\"name\":\"ao am cho em\",\"id\":1,\"status\":\"Yêu cầu xác nhận\"}]','banh mi','zxcxzc','zxczxc','hai khuat','0348399696','dfdsf','Tỉnh Cao Bằng','Huyện Trùng Khánh','Xã Quang Trung','16/5/2023','xzcxzc','https://firebasestorage.googleapis.com/v0/b/charityapp-b5d6f.appspot.com/o/avatar%2Favt-l3-1.jpg?alt=media&token=80d22022-b5aa-47b7-b516-264829e61cc7'),(29,4,'Chưa nhận',NULL,NULL,'[{\"name\":\"Áo ấm cho em\",\"id\":1,\"status\":\"Đợi xác nhận\"},{\"name\":\"Áo ấm cho em\",\"id\":2,\"status\":\"Đợi xác nhận\"},{\"name\":\"Áo ấm cho em\",\"id\":3,\"status\":\"Đợi xác nhận\"}]','xe dap','ghcjgh','hgcgc','hai khuat','0348399696','dfdsf','Tỉnh Cao Bằng','Huyện Trùng Khánh','Xã Quang Trung','16/5/2023','jhvhjk','https://firebasestorage.googleapis.com/v0/b/charityapp-b5d6f.appspot.com/o/avatar%2Fanh2kb.jpg?alt=media&token=f222ee45-052b-424c-be31-cbb300f80144'),(30,6,'Chờ xác nhận','tu thien nam dinh',2,'[{\"name\":\"tu thien nam dinh\",\"id\":2,\"status\":\"Yêu cầu xác nhận\"}]','do nd2','sdf','sdf','trinh haong','0348699696','dsfsdf','Tỉnh Tuyên Quang','Huyện Yên Sơn','Xã Kiến Thiết','16/5/2023','dsf','https://firebasestorage.googleapis.com/v0/b/charityapp-b5d6f.appspot.com/o/avatar%2Fanh2kb.jpg?alt=media&token=6877b3ed-d6ea-49a6-927f-b79699d12560'),(31,6,'Chưa nhận',NULL,NULL,'[{\"name\":\"Áo ấm cho em\",\"id\":1,\"status\":\"Đợi xác nhận\"}]','coc nuco nd2','dsf','sdf','trinh haong','0348699696','dsfsdf','Tỉnh Tuyên Quang','Huyện Yên Sơn','Xã Kiến Thiết','16/5/2023','dsfsd','https://firebasestorage.googleapis.com/v0/b/charityapp-b5d6f.appspot.com/o/avatar%2Fanh2kb.jpg?alt=media&token=e4165419-3f6c-4292-b399-9c5edb4e3b08');
 /*!40000 ALTER TABLE `donations` ENABLE KEYS */;
 UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2023-05-16 16:41:59
+-- MySQL dump 10.13  Distrib 8.0.26, for Win64 (x86_64)
+--
+-- Host: 127.0.0.1    Database: charity
+-- ------------------------------------------------------
+-- Server version	8.0.32
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!50503 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
 -- Table structure for table `post_info`
@@ -367,6 +648,33 @@ LOCK TABLES `post_info` WRITE;
 /*!40000 ALTER TABLE `post_info` DISABLE KEYS */;
 /*!40000 ALTER TABLE `post_info` ENABLE KEYS */;
 UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2023-05-16 16:41:58
+-- MySQL dump 10.13  Distrib 8.0.26, for Win64 (x86_64)
+--
+-- Host: 127.0.0.1    Database: charity
+-- ------------------------------------------------------
+-- Server version	8.0.32
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!50503 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
 -- Table structure for table `provinces`
@@ -399,6 +707,33 @@ LOCK TABLES `provinces` WRITE;
 INSERT INTO `provinces` VALUES ('01','Hà Nội','Thành phố Hà Nội','ha_noi',1,3),('02','Hà Giang','Tỉnh Hà Giang','ha_giang',2,1),('04','Cao Bằng','Tỉnh Cao Bằng','cao_bang',2,1),('06','Bắc Kạn','Tỉnh Bắc Kạn','bac_kan',2,1),('08','Tuyên Quang','Tỉnh Tuyên Quang','tuyen_quang',2,1),('10','Lào Cai','Tỉnh Lào Cai','lao_cai',2,2),('11','Điện Biên','Tỉnh Điện Biên','dien_bien',2,2),('12','Lai Châu','Tỉnh Lai Châu','lai_chau',2,2),('14','Sơn La','Tỉnh Sơn La','son_la',2,2),('15','Yên Bái','Tỉnh Yên Bái','yen_bai',2,2),('17','Hoà Bình','Tỉnh Hoà Bình','hoa_binh',2,2),('19','Thái Nguyên','Tỉnh Thái Nguyên','thai_nguyen',2,1),('20','Lạng Sơn','Tỉnh Lạng Sơn','lang_son',2,1),('22','Quảng Ninh','Tỉnh Quảng Ninh','quang_ninh',2,1),('24','Bắc Giang','Tỉnh Bắc Giang','bac_giang',2,1),('25','Phú Thọ','Tỉnh Phú Thọ','phu_tho',2,1),('26','Vĩnh Phúc','Tỉnh Vĩnh Phúc','vinh_phuc',2,3),('27','Bắc Ninh','Tỉnh Bắc Ninh','bac_ninh',2,3),('30','Hải Dương','Tỉnh Hải Dương','hai_duong',2,3),('31','Hải Phòng','Thành phố Hải Phòng','hai_phong',1,3),('33','Hưng Yên','Tỉnh Hưng Yên','hung_yen',2,3),('34','Thái Bình','Tỉnh Thái Bình','thai_binh',2,3),('35','Hà Nam','Tỉnh Hà Nam','ha_nam',2,3),('36','Nam Định','Tỉnh Nam Định','nam_dinh',2,3),('37','Ninh Bình','Tỉnh Ninh Bình','ninh_binh',2,3),('38','Thanh Hóa','Tỉnh Thanh Hóa','thanh_hoa',2,4),('40','Nghệ An','Tỉnh Nghệ An','nghe_an',2,4),('42','Hà Tĩnh','Tỉnh Hà Tĩnh','ha_tinh',2,4),('44','Quảng Bình','Tỉnh Quảng Bình','quang_binh',2,4),('45','Quảng Trị','Tỉnh Quảng Trị','quang_tri',2,4),('46','Thừa Thiên Huế','Tỉnh Thừa Thiên Huế','thua_thien_hue',2,4),('48','Đà Nẵng','Thành phố Đà Nẵng','da_nang',1,5),('49','Quảng Nam','Tỉnh Quảng Nam','quang_nam',2,5),('51','Quảng Ngãi','Tỉnh Quảng Ngãi','quang_ngai',2,5),('52','Bình Định','Tỉnh Bình Định','binh_dinh',2,5),('54','Phú Yên','Tỉnh Phú Yên','phu_yen',2,5),('56','Khánh Hòa','Tỉnh Khánh Hòa','khanh_hoa',2,5),('58','Ninh Thuận','Tỉnh Ninh Thuận','ninh_thuan',2,5),('60','Bình Thuận','Tỉnh Bình Thuận','binh_thuan',2,5),('62','Kon Tum','Tỉnh Kon Tum','kon_tum',2,6),('64','Gia Lai','Tỉnh Gia Lai','gia_lai',2,6),('66','Đắk Lắk','Tỉnh Đắk Lắk','dak_lak',2,6),('67','Đắk Nông','Tỉnh Đắk Nông','dak_nong',2,6),('68','Lâm Đồng','Tỉnh Lâm Đồng','lam_dong',2,6),('70','Bình Phước','Tỉnh Bình Phước','binh_phuoc',2,7),('72','Tây Ninh','Tỉnh Tây Ninh','tay_ninh',2,7),('74','Bình Dương','Tỉnh Bình Dương','binh_duong',2,7),('75','Đồng Nai','Tỉnh Đồng Nai','dong_nai',2,7),('77','Bà Rịa - Vũng Tàu','Tỉnh Bà Rịa - Vũng Tàu','ba_ria_vung_tau',2,7),('79','Hồ Chí Minh','Thành phố Hồ Chí Minh','ho_chi_minh',1,7),('80','Long An','Tỉnh Long An','long_an',2,8),('82','Tiền Giang','Tỉnh Tiền Giang','tien_giang',2,8),('83','Bến Tre','Tỉnh Bến Tre','ben_tre',2,8),('84','Trà Vinh','Tỉnh Trà Vinh','tra_vinh',2,8),('86','Vĩnh Long','Tỉnh Vĩnh Long','vinh_long',2,8),('87','Đồng Tháp','Tỉnh Đồng Tháp','dong_thap',2,8),('89','An Giang','Tỉnh An Giang','an_giang',2,8),('91','Kiên Giang','Tỉnh Kiên Giang','kien_giang',2,8),('92','Cần Thơ','Thành phố Cần Thơ','can_tho',1,8),('93','Hậu Giang','Tỉnh Hậu Giang','hau_giang',2,8),('94','Sóc Trăng','Tỉnh Sóc Trăng','soc_trang',2,8),('95','Bạc Liêu','Tỉnh Bạc Liêu','bac_lieu',2,8),('96','Cà Mau','Tỉnh Cà Mau','ca_mau',2,8);
 /*!40000 ALTER TABLE `provinces` ENABLE KEYS */;
 UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2023-05-16 16:41:58
+-- MySQL dump 10.13  Distrib 8.0.26, for Win64 (x86_64)
+--
+-- Host: 127.0.0.1    Database: charity
+-- ------------------------------------------------------
+-- Server version	8.0.32
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!50503 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
 -- Table structure for table `request`
@@ -424,6 +759,33 @@ LOCK TABLES `request` WRITE;
 /*!40000 ALTER TABLE `request` DISABLE KEYS */;
 /*!40000 ALTER TABLE `request` ENABLE KEYS */;
 UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2023-05-16 16:41:57
+-- MySQL dump 10.13  Distrib 8.0.26, for Win64 (x86_64)
+--
+-- Host: 127.0.0.1    Database: charity
+-- ------------------------------------------------------
+-- Server version	8.0.32
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!50503 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
 -- Table structure for table `role`
@@ -448,6 +810,33 @@ LOCK TABLES `role` WRITE;
 INSERT INTO `role` VALUES (1,'Admin'),(2,'UserNormal'),(3,'UserCharity');
 /*!40000 ALTER TABLE `role` ENABLE KEYS */;
 UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2023-05-16 16:41:57
+-- MySQL dump 10.13  Distrib 8.0.26, for Win64 (x86_64)
+--
+-- Host: 127.0.0.1    Database: charity
+-- ------------------------------------------------------
+-- Server version	8.0.32
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!50503 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
 -- Table structure for table `statement`
@@ -478,6 +867,33 @@ LOCK TABLES `statement` WRITE;
 /*!40000 ALTER TABLE `statement` DISABLE KEYS */;
 /*!40000 ALTER TABLE `statement` ENABLE KEYS */;
 UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2023-05-16 16:41:59
+-- MySQL dump 10.13  Distrib 8.0.26, for Win64 (x86_64)
+--
+-- Host: 127.0.0.1    Database: charity
+-- ------------------------------------------------------
+-- Server version	8.0.32
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!50503 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
 -- Table structure for table `user_account`
@@ -506,7 +922,7 @@ CREATE TABLE `user_account` (
   `WardId` varchar(10) DEFAULT NULL,
   `IsVerified` tinyint DEFAULT '0',
   PRIMARY KEY (`Id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci AVG_ROW_LENGTH=3276;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci AVG_ROW_LENGTH=3276;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -515,8 +931,36 @@ CREATE TABLE `user_account` (
 
 LOCK TABLES `user_account` WRITE;
 /*!40000 ALTER TABLE `user_account` DISABLE KEYS */;
+INSERT INTO `user_account` VALUES (4,'hai khuat','nguoidung1','0348399696','cloQN+4OWo8z7RjnrjAP+aLIlNnm428fFeZeyhLMC0hpxlSw80ZW2eQyquFXxAzfD5IVnDboNxmQWEDsXfHi2Q==','Q+ELUB58TMCVd8x//UpNO56ccI3CMh1qeNwsK5mtSIc=',2,'dfdsf','hai@gmail.com',0,NULL,'Tỉnh Cao Bằng','Huyện Trùng Khánh','Xã Quang Trung','04','047','01465',0),(5,'ao am cho em','tochuc1','0348599595','Bsg7klq4JhzMEbIYnlW4pGe7S4tB7xAfjrivWOHxmvqOEeeSy7a1xkYivKNT5TvtKYdg4GtaM3aJzmi/n5+rcg==','+Fg9T7ZqfsvycpA1En1qpYX6Aj8NhSbsPBIj1rBikSE=',3,'sad','tochuc1@gmail.com',0,1,'Tỉnh Hà Giang','Thành phố Hà Giang','Phường Quang Trung','02','024','00688',0),(6,'trinh haong','nguoidung2','0348699696','7pdaboJFvRjBNjDmi2DbIQY2BetobzmqlHhCqwhUbPVE/YB3/Zy9ZQUExuirsUpDSZohThDwqAVIogNldPeeNw==','XjmHrWLUX0Aq/9dM5Q/k/fOZ/Fctv3D4LsLEV2UaJ8o=',2,'dsfsdf','hoang@gmail.com',0,NULL,'Tỉnh Tuyên Quang','Huyện Yên Sơn','Xã Kiến Thiết','08','075','02437',0),(7,'xuan son','nguoidung3','0359949494','V6PrAKOj15CCFV4gKFrPWPa0Fmaly293gDFIWmKGaQgxxOzqezFbaygzmbBn1fV0rUdJlBigCO+WZCFncVsIrw==','v2ADPfyZ9VbV0HZFCeu7ADsboEUoSEl7KDJhA7+RYY4=',2,'dvgdsf','son@gmail.com',0,NULL,'Tỉnh Hà Giang','Huyện Mèo Vạc','Xã Pải Lủng','02','027','00775',0),(8,'tu thien nam dinh','tochuc2','0348979898','ueR+5hbeHU3lA+V/14pqDYMxKj3xT0QuCock/T/NDZTv2kUS5mk88pa0nmmdrxyIZp8NHxUCev4e48H7NAhqfQ==','9XR2Y1XFbqjLdROEPlAqORVXb0dPWw4+1+xlQEqaW4s=',3,'sađá','tochuc2@gmail.com',0,2,'Tỉnh Hà Giang','Huyện Mèo Vạc','Xã Pải Lủng','02','027','00775',0),(9,'mai am yeu thuong','tochuc3','0348929394','FYbEGntfxEdrE476Bdzyi3vCgMxYD3gbWjsSxYyaiYtaO3cO776ubmHfpLH6hA2fzsCjz6uw+cZIa8B6hUI/ag==','ENHJzpIwYmkXiwND0PPOR0q+yIyIl3cJEatMeMY/P+M=',3,'sad','tochuc3@gmail.com',0,3,'Tỉnh Hà Giang','Huyện Mèo Vạc','Xã Pải Lủng','02','027','00775',0);
 /*!40000 ALTER TABLE `user_account` ENABLE KEYS */;
 UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2023-05-16 16:41:58
+-- MySQL dump 10.13  Distrib 8.0.26, for Win64 (x86_64)
+--
+-- Host: 127.0.0.1    Database: charity
+-- ------------------------------------------------------
+-- Server version	8.0.32
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!50503 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
 -- Table structure for table `wards`
@@ -557,4 +1001,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-05-16 14:35:33
+-- Dump completed on 2023-05-16 16:41:58

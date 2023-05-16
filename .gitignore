@@ -33,3 +33,4 @@ build/
 .vscode/
 /src/main/java/com/charity/hoangtrinh/Main.java
 /src/main/java/com/charity/hoangtrinh/MainTest.java
+/dataSql/
