@@ -386,20 +386,25 @@ public class CampaignController {
         try {
             boolean isDonor = accessService.isDonor(token);
 
+
             if (!isDonor)
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                         .body(new ResponseModel("You are not donor!"));
             UserAccount donor = accessService.getUserByToken(token);
 
-            CampaignInfo campaignInfo = campaignInfoRepository.getReferenceById(Integer.valueOf(campaignIdStr));
+            Optional<CampaignInfo> campaignInfoOptional = campaignInfoRepository.findById(Integer.valueOf(campaignIdStr));
 
-            if (campaignFollowerRepository.existsByUserEqualsAndCampaignEquals(donor, campaignInfo))
+            if (!campaignInfoOptional.isPresent())
+                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                        .body(new ResponseModel("Don't have this campaign!"));
+
+            if (campaignFollowerRepository.existsByUserEqualsAndCampaignEquals(donor, campaignInfoOptional.get()))
                 return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                         .body(new ResponseModel("You followed this campaign!"));
 
             CampaignFollower campaignFollower = new CampaignFollower();
             campaignFollower.setUser(donor);
-            campaignFollower.setCampaign(campaignInfo);
+            campaignFollower.setCampaign(campaignInfoOptional.get());
             campaignFollowerRepository.save(campaignFollower);
 
             return ResponseEntity.status(HttpStatus.OK)
