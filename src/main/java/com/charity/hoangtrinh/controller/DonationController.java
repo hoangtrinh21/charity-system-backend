@@ -100,7 +100,12 @@ public class DonationController {
 //            Integer idDonor         = Integer.valueOf(jsonBody.get("idDonor").getAsString());
             Integer idDonor         = jsonBody.get("idDonor").getAsInt();
             String status           = jsonBody.get("status").getAsString();
-            Integer idOrganization  = jsonBody.get("idOrganization") == null ? null : jsonBody.get("idOrganization").getAsInt();
+            Integer idOrganization = null;
+            try {
+                idOrganization = jsonBody.get("idOrganization").getAsInt();
+            } catch (UnsupportedOperationException e) {
+                // do nothing
+            }
             String name             = jsonBody.get("name").getAsString();
             String donationAddress  = jsonBody.get("donationAddress").getAsString();
             String donationObject   = jsonBody.get("donationObject").getAsString();
