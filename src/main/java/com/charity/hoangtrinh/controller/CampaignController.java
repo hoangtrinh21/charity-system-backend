@@ -380,7 +380,7 @@ public class CampaignController {
         }
     }
 
-    @PostMapping("/user-follow-campaign")
+    @GetMapping("/user-follow-campaign")
     public ResponseEntity<Object> userFollowCampaign(@RequestHeader(value = "Token") String token,
                                                         @RequestParam(value = "campaign-id") String campaignIdStr) {
         try {
