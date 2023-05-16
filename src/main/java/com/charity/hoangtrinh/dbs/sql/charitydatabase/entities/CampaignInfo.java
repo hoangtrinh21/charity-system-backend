@@ -13,6 +13,7 @@ import java.time.LocalDate;
 @Table(name = "campaign_info")
 public class CampaignInfo {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "campaign_id", nullable = false)
     private Integer id;
 
@@ -70,7 +71,7 @@ public class CampaignInfo {
     private String status;
 
     @Column(name = "is_active", nullable = false)
-    private Boolean isActive = false;
+    private Boolean isActive = true;
 
     @Lob
     @Column(name = "images")

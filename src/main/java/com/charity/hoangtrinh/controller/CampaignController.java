@@ -104,9 +104,10 @@ public class CampaignController {
             boolean isAdminOrOrganization = accessService.isAdmin(token) || accessService.isOrganization(token);
             Integer campaignId = Integer.parseInt(campaignIdStr);
 
-            if (isAdminOrOrganization)
+            if (isAdminOrOrganization) {
                 return ResponseEntity.status(HttpStatus.OK)
                         .body(campaignInfoRepository.findById(campaignId));
+            }
 
             return ResponseEntity.status(HttpStatus.OK)
                     .body(campaignInfoRepository.findByIdEqualsAndIsActiveEquals(campaignId ,true));
@@ -230,6 +231,7 @@ public class CampaignController {
             campaignInfo.setImages(images);
             campaignInfoRepository.save(campaignInfo);
 
+            campaignInfo.getOrganization().setCharityName(userAccountRepository.findByCharityIdEquals(organizationId));
             return ResponseEntity.status(HttpStatus.CREATED)
                     .body(campaignInfo);
         } catch (Exception e) {
@@ -264,7 +266,7 @@ public class CampaignController {
             String  campaignType    = JsonUtil.getString(jsonBody, "campaign_type");
             String  status          = JsonUtil.getString(jsonBody, "status");
             String  images          = JsonUtil.getString(jsonBody, "images");
-            boolean  isStar         = jsonBody.get("star").getAsBoolean();
+            boolean  isStar         = jsonBody.get("isStar").getAsBoolean();
             Long    targetAmount    = JsonUtil.getLong(jsonBody, "target_amount");
             Long    receiveAmount   = JsonUtil.getLong(jsonBody, "receive_amount");
             Long    donorAmount     = JsonUtil.getLong(jsonBody, "donor_amount");
@@ -301,8 +303,9 @@ public class CampaignController {
             campaignInfo.setStar(isStar);
             campaignInfoRepository.save(campaignInfo);
 
+            campaignInfo.getOrganization().setCharityName(userAccountRepository.findByCharityIdEquals(organizationId));
             return ResponseEntity.status(HttpStatus.CREATED)
-                    .body(new ResponseModel("Updated campaign"));
+                    .body(campaignInfo);
 
         } catch (Exception e) {
             e.printStackTrace();
