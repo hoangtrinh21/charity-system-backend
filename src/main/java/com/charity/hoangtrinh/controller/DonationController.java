@@ -48,7 +48,9 @@ public class DonationController {
         try {
             List<Donation> donations = donationRepository.findAll();
             for (Donation d : donations) {
-                d.setOrganizationReceived(userAccountRepository.findByCharityIdEquals(d.getIdOrganization()).getName());
+                UserAccount userAccount = userAccountRepository.findByCharityIdEquals(d.getIdOrganization());
+                if (userAccount != null)
+                    d.setOrganizationReceived(userAccountRepository.findByCharityIdEquals(d.getIdOrganization()).getName());
             }
             return ResponseEntity.status(HttpStatus.OK)
                     .body(donations);
