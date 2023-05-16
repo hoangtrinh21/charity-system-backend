@@ -19,10 +19,6 @@
 -- Table structure for table `administrative_regions`
 --
 
-DROP DATABASE IF EXISTS `charity`;
-CREATE DATABASE `charity`;
-USE `charity`;
-
 DROP TABLE IF EXISTS `administrative_regions`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
@@ -127,6 +123,7 @@ CREATE TABLE `campaign_info` (
   `status` varchar(50) NOT NULL,
   `is_active` bit(1) NOT NULL,
   `images` text,
+  `star` bit(1) NOT NULL,
   PRIMARY KEY (`campaign_id`),
   KEY `campaign_info_FK_1` (`organization_id`),
   CONSTRAINT `campaign_info_FK` FOREIGN KEY (`organization_id`) REFERENCES `charities` (`Id`)
@@ -139,7 +136,7 @@ CREATE TABLE `campaign_info` (
 
 LOCK TABLES `campaign_info` WRITE;
 /*!40000 ALTER TABLE `campaign_info` DISABLE KEYS */;
-INSERT INTO `campaign_info` VALUES (2,1,'cập nhật','asdfghjkl','tre em','tay bac','ho tro tre em vung cao',100000000,45000000,0,0,1683728913,'2023-06-01','2023-06-15','2023-06-16','2023-06-30','2023-06-30','dang van dong',_binary '',NULL),(3,1,'cuocoj vaanj dong 3','asdfghjkl','tre em','tay bac','ho tro tre em vung cao',100000000,0,0,0,1683728894,'2023-06-01','2023-06-15','2023-06-16','2023-06-30','2023-06-30','dang van dong',_binary '',NULL);
+INSERT INTO `campaign_info` VALUES (2,1,'cập nhật','asdfghjkl','tre em','tay bac','ho tro tre em vung cao',100000000,45000000,0,0,1683728913,'2023-06-01','2023-06-15','2023-06-16','2023-06-30','2023-06-30','dang van dong',_binary '',NULL,_binary '\0'),(3,1,'cuocoj vaanj dong 3','asdfghjkl','tre em','tay bac','ho tro tre em vung cao',100000000,0,0,0,1683728894,'2023-06-01','2023-06-15','2023-06-16','2023-06-30','2023-06-30','dang van dong',_binary '',NULL,_binary '\0');
 /*!40000 ALTER TABLE `campaign_info` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -158,6 +155,8 @@ CREATE TABLE `campaign_input` (
   `amount` bigint NOT NULL,
   `note` varchar(255) DEFAULT NULL,
   `campaign_id` int NOT NULL,
+  `donation_amount` bigint NOT NULL,
+  `donation_time` datetime(6) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `campaign_input_FK` (`campaign_id`),
   CONSTRAINT `campaign_input_FK` FOREIGN KEY (`campaign_id`) REFERENCES `campaign_info` (`campaign_id`)
@@ -234,7 +233,11 @@ CREATE TABLE `charities` (
   `NumCampaign` int DEFAULT NULL,
   `Reach` varchar(255) DEFAULT NULL,
   `Star` tinyint DEFAULT '0',
-  PRIMARY KEY (`Id`)
+  `charityName` varchar(255) DEFAULT NULL,
+  `user_id` int DEFAULT NULL,
+  PRIMARY KEY (`Id`),
+  KEY `FKo5771d5ka0oef10kgx9m6brpg` (`user_id`),
+  CONSTRAINT `FKo5771d5ka0oef10kgx9m6brpg` FOREIGN KEY (`user_id`) REFERENCES `user_account` (`Id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci AVG_ROW_LENGTH=5461;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -244,7 +247,7 @@ CREATE TABLE `charities` (
 
 LOCK TABLES `charities` WRITE;
 /*!40000 ALTER TABLE `charities` DISABLE KEYS */;
-INSERT INTO `charities` VALUES (1,'a',NULL,NULL,'b','c','e','e ','e','g','h','i',NULL,NULL,NULL,NULL,NULL,0,NULL,NULL,NULL,0);
+INSERT INTO `charities` VALUES (1,'a',NULL,NULL,'b','c','e','e ','e','g','h','i',NULL,NULL,NULL,NULL,NULL,0,NULL,NULL,NULL,0,NULL,NULL);
 /*!40000 ALTER TABLE `charities` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -331,7 +334,7 @@ CREATE TABLE `donations` (
   `description` varchar(255) DEFAULT NULL,
   `images` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -340,7 +343,7 @@ CREATE TABLE `donations` (
 
 LOCK TABLES `donations` WRITE;
 /*!40000 ALTER TABLE `donations` DISABLE KEYS */;
-INSERT INTO `donations` VALUES (13,NULL,'vùng caeo','Tổ chức 1',1,'[{\"name\":\"toi yeu nam dinh\",\"id\":\"abc12345678910\",\"status\":\"Đợi xác nhận\"}]','quần áo','trẻ em','abc xyz','donor',NULL,NULL,NULL,NULL,NULL,'12/05/2023','mô tả','ảnh'),(14,3,'miền trung','Tổ chức 1',1,'[{\"name\":\"toi yeu nam dinh\",\"id\":\"abc12345678910\",\"status\":\"Đợi xác nhận\"}]','quần áo','trẻ em','abc xyz','donor',NULL,NULL,NULL,NULL,NULL,'12/05/2023','mô tả','caapj nhaat anh'),(15,3,'vùng caeo','Tổ chức 1',1,'[{\"name\":\"toi yeu nam dinh\",\"id\":\"abc12345678910\",\"status\":\"Đợi xác nhận\"}]','quần áo','trẻ em','abc xyz','donor',NULL,NULL,NULL,NULL,NULL,'12/05/2023','mô tả','ảnh');
+INSERT INTO `donations` VALUES (13,NULL,'vùng caeo','Tổ chức 1',1,'[{\"name\":\"toi yeu nam dinh\",\"id\":\"abc12345678910\",\"status\":\"Đợi xác nhận\"}]','quần áo','trẻ em','abc xyz','donor',NULL,NULL,NULL,NULL,NULL,'12/05/2023','mô tả','ảnh'),(14,3,'miền trung','Tổ chức 1',1,'[{\"name\":\"toi yeu nam dinh\",\"id\":\"abc12345678910\",\"status\":\"Đợi xác nhận\"}]','quần áo','trẻ em','abc xyz','donor',NULL,NULL,NULL,NULL,NULL,'12/05/2023','mô tả','caapj nhaat anh'),(15,3,'vùng caeo','Tổ chức 1',1,'[{\"name\":\"toi yeu nam dinh\",\"id\":\"abc12345678910\",\"status\":\"Đợi xác nhận\"}]','quần áo','trẻ em','abc xyz','donor',NULL,NULL,NULL,NULL,NULL,'12/05/2023','mô tả','ảnh'),(16,3,'vùng caeo',NULL,1,'[{\"name\":\"toi yeu nam dinh\",\"id\":1,\"status\":\"Đợi xác nhận\"}]','quần áo','trẻ em','abc xyz','donor',NULL,NULL,NULL,NULL,NULL,'12/05/2023','mô tả','ảnh'),(17,3,'vùng caeo',NULL,1,'[{\"name\":\"toi yeu nam dinh\",\"id\":1,\"status\":\"Đợi xác nhận\"}]','quần áo','trẻ em','abc xyz','donor',NULL,NULL,NULL,NULL,NULL,'12/05/2023','mô tả','ảnh');
 /*!40000 ALTER TABLE `donations` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -357,6 +360,7 @@ CREATE TABLE `post_info` (
   `type` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `submit_time` bigint NOT NULL,
   `campaign_id` int NOT NULL,
+  `title` varchar(255) NOT NULL,
   PRIMARY KEY (`post_id`),
   KEY `campaign_id_fkey` (`campaign_id`),
   CONSTRAINT `post_info_FK` FOREIGN KEY (`campaign_id`) REFERENCES `campaign_info` (`campaign_id`)
@@ -369,7 +373,7 @@ CREATE TABLE `post_info` (
 
 LOCK TABLES `post_info` WRITE;
 /*!40000 ALTER TABLE `post_info` DISABLE KEYS */;
-INSERT INTO `post_info` VALUES (5,'Đây la nội dung bài đăng caapj nhaat','Đây là loại bài đăng (vận động, hoạt động, ...)',1683730878700,3),(6,'Đây la nội dung bài đăng so 1','Đây là loại bài đăng (vận động, hoạt động, ...)',1683730693655,3),(7,'Đây la nội dung bài đăng so 1','Đây là loại bài đăng (vận động, hoạt động, ...)',1683730795672,3),(8,'Đây la nội dung bài đăng so 5435','Đây là loại bài đăng (vận động, hoạt động, ...)',1683731116486,2),(9,'Đây la nội dung bài đăng so 5435','Đây là loại bài đăng (vận động, hoạt động, ...)',1683732860809,2);
+INSERT INTO `post_info` VALUES (5,'Đây la nội dung bài đăng caapj nhaat','Đây là loại bài đăng (vận động, hoạt động, ...)',1683730878700,3,''),(6,'Đây la nội dung bài đăng so 1','Đây là loại bài đăng (vận động, hoạt động, ...)',1683730693655,3,''),(7,'Đây la nội dung bài đăng so 1','Đây là loại bài đăng (vận động, hoạt động, ...)',1683730795672,3,''),(8,'Đây la nội dung bài đăng so 5435','Đây là loại bài đăng (vận động, hoạt động, ...)',1683731116486,2,''),(9,'Đây la nội dung bài đăng so 5435','Đây là loại bài đăng (vận động, hoạt động, ...)',1683732860809,2,'');
 /*!40000 ALTER TABLE `post_info` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -455,6 +459,36 @@ INSERT INTO `role` VALUES (1,'Admin'),(2,'UserNormal'),(3,'UserCharity');
 UNLOCK TABLES;
 
 --
+-- Table structure for table `statement`
+--
+
+DROP TABLE IF EXISTS `statement`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `statement` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `amount` bigint NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `note` varchar(1000) DEFAULT NULL,
+  `time_create` datetime(6) NOT NULL,
+  `type` varchar(100) NOT NULL,
+  `campaign_id` int NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FK8nsfct4idi7d6w0rbtgqk0d6w` (`campaign_id`),
+  CONSTRAINT `FK8nsfct4idi7d6w0rbtgqk0d6w` FOREIGN KEY (`campaign_id`) REFERENCES `campaign_info` (`campaign_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `statement`
+--
+
+LOCK TABLES `statement` WRITE;
+/*!40000 ALTER TABLE `statement` DISABLE KEYS */;
+/*!40000 ALTER TABLE `statement` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `user_account`
 --
 
@@ -479,6 +513,7 @@ CREATE TABLE `user_account` (
   `ProvinceId` varchar(10) DEFAULT NULL,
   `DistrictId` varchar(10) DEFAULT NULL,
   `WardId` varchar(10) DEFAULT NULL,
+  `IsVerified` tinyint DEFAULT '0',
   PRIMARY KEY (`Id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci AVG_ROW_LENGTH=3276;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -489,7 +524,7 @@ CREATE TABLE `user_account` (
 
 LOCK TABLES `user_account` WRITE;
 /*!40000 ALTER TABLE `user_account` DISABLE KEYS */;
-INSERT INTO `user_account` VALUES (2,'organization','o',NULL,NULL,NULL,3,NULL,NULL,0,1,NULL,NULL,NULL,NULL,NULL,NULL),(3,'donor','do',NULL,NULL,NULL,2,NULL,NULL,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL);
+INSERT INTO `user_account` VALUES (2,'organization','o',NULL,NULL,NULL,3,NULL,NULL,0,1,NULL,NULL,NULL,NULL,NULL,NULL,0),(3,'donor','do',NULL,NULL,NULL,2,NULL,NULL,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,0);
 /*!40000 ALTER TABLE `user_account` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -532,4 +567,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-05-16 10:54:58
+-- Dump completed on 2023-05-16 13:16:59
