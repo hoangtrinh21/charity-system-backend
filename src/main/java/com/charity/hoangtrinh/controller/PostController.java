@@ -136,7 +136,7 @@ public class PostController {
             long submitTime = System.currentTimeMillis();
 
             CampaignInfo campaign = campaignInfoRepository.getReferenceById(campaignId);
-            PostInfo post = new PostInfo(postId, title, content, type, submitTime, campaign);
+            PostInfo post = new PostInfo(postId, content, title, type, submitTime, campaign);
 
             postInfoRepository.save(post);
 
