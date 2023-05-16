@@ -47,6 +47,9 @@ public class DonationController {
     public Object getAllDonation() {
         try {
             List<Donation> donations = donationRepository.findAll();
+            for (Donation d : donations) {
+                d.setOrganizationReceived(userAccountRepository.findByCharityIdEquals(d.getIdOrganization()).getName());
+            }
             return ResponseEntity.status(HttpStatus.OK)
                     .body(donations);
         } catch (Exception e) {
@@ -62,6 +65,7 @@ public class DonationController {
             Integer id = Integer.parseInt(donationIdStr);
 
             Donation donation = donationRepository.getReferenceById(id);
+            donation.setOrganizationReceived(userAccountRepository.findByCharityIdEquals(donation.getIdOrganization()).getName());
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body(donation);
         } catch (Exception e) {
