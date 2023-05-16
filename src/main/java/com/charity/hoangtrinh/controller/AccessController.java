@@ -57,15 +57,28 @@ public class AccessController {
     }
 
     @DeleteMapping("/delete-token")
-    public ResponseEntity<Object> deleteToken(@RequestBody String body) {
+    public ResponseEntity<Object> deleteToken(@RequestParam(value = "user-id") String userIdStr) {
         try {
-            JsonObject jsonBody = JsonParser.parseString(body).getAsJsonObject();
-            Integer userId = JsonUtil.getInt(jsonBody, "user_id");
-            String token = JsonUtil.getString(jsonBody,"token");
-            CacheConfig.accessToken.asMap().remove(token);
+            int userId = Integer.parseInt(userIdStr);
+
+            Optional<UserAccount> userAccountOptional = userAccountRepository.findById(userId);
+            if (!userAccountOptional.isPresent())
+                return ResponseEntity.status(HttpStatus.OK)
+                        .body(new ResponseModel("Do not have user: " + userId));
+
+            UserAccount user = userAccountOptional.get();
+
+            int count = 0;
+            for (String t : CacheConfig.accessToken.asMap().keySet()) {
+                if (CacheConfig.accessToken.asMap().get(t).equals(user)) {
+                    CacheConfig.accessToken.asMap().remove(t);
+                    count++;
+                }
+            }
+
             logger.info(CacheConfig.accessToken.asMap().toString());
             return ResponseEntity.status(HttpStatus.OK)
-                    .body(new ResponseModel("Removed token of user " + userId));
+                    .body(new ResponseModel("Removed " + count + " token of user " + userId));
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
