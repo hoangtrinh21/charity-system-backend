@@ -15,7 +15,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"user_id\" : 3,\n    \"token\": \"abcde\"\n}",
+							"raw": "{\n    \"user_id\" : 5,\n    \"token\": \"abcd\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -33,6 +33,33 @@
 								"charity",
 								"access",
 								"token"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "push access token Copy",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8089/charity/access/delete-token?user-id=5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8089",
+							"path": [
+								"charity",
+								"access",
+								"delete-token"
+							],
+							"query": [
+								{
+									"key": "user-id",
+									"value": "5"
+								}
 							]
 						}
 					},
@@ -694,7 +721,7 @@
 							}
 						],
 						"url": {
-							"raw": "http://localhost:8089/charity/campaign/user-follow-campaign?campaign-id=2",
+							"raw": "http://localhost:8089/charity/campaign/user-follow-campaign?campaign-id=4",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -708,7 +735,7 @@
 							"query": [
 								{
 									"key": "campaign-id",
-									"value": "2"
+									"value": "4"
 								}
 							]
 						}
@@ -759,7 +786,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8089/charity/post/get-post?campaign-id=2",
+							"raw": "http://localhost:8089/charity/post/get-post?campaign-id=5",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -773,7 +800,7 @@
 							"query": [
 								{
 									"key": "campaign-id",
-									"value": "2"
+									"value": "5"
 								}
 							]
 						},
@@ -822,7 +849,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"title\": \"đây là tiêu đề bài viét\",\n    \"campaign_id\": 2, // not null\n    \"content\": \"Đây la nội dung bài đăng so 5435\", // not null\n    \"type\": \"Đây là loại bài đăng (vận động, hoạt động, ...)\" // not null\n}",
+							"raw": "{\n    \"title\": \"đây là tiêu đề bài viét\",\n    \"campaign_id\": 5, // not null\n    \"content\": \"Đây la nội dung bài đăng so 5435\", // not null\n    \"type\": \"Đây là loại bài đăng (vận động, hoạt động, ...)\" // not null\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1121,6 +1148,101 @@
 									"key": "id",
 									"value": "13"
 								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "thông báo",
+			"item": [
+				{
+					"name": "get cal thông báo của user",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Token",
+								"value": "abcd",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8089/charity/message/get-receive",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8089",
+							"path": [
+								"charity",
+								"message",
+								"get-receive"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get cal message  đã gửi của user",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Token",
+								"value": "abcd",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8089/charity/message/get-send",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8089",
+							"path": [
+								"charity",
+								"message",
+								"get-send"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "them message gửi đi",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Token",
+								"value": "abcd",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"content\": \"Đây là nội dung thông báo!\", // not null\n    \"user_id_receive\": 1, // not null\n    \"user_id_send\": \n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8089/charity/message/add-message",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8089",
+							"path": [
+								"charity",
+								"message",
+								"add-message"
 							]
 						}
 					},
