@@ -1,6 +1,7 @@
 package com.charity.hoangtrinh.services;
 
 import com.charity.hoangtrinh.dbs.sql.charitydatabase.entities.CampaignInfo;
+import com.charity.hoangtrinh.dbs.sql.charitydatabase.entities.UserAccount;
 import com.charity.hoangtrinh.dbs.sql.charitydatabase.repositories.CampaignInfoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -33,5 +34,4 @@ public class CampaignService {
 //        if (isAdmin)
 //            return campaignInfoRepository.
 //    }
-
 }
