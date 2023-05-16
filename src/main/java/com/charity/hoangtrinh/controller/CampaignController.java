@@ -442,6 +442,13 @@ public class CampaignController {
                 statement.setAmount(donationAmount);
                 statement.setCampaign(campaignInfoOptional.get());
 
+                CampaignInfo campaignInfo = campaignInfoOptional.get();
+                long oldReceiveAmount = campaignInfo.getReceiveAmount();
+                long oldSpentAmount = campaignInfo.getSpentAmount();
+                if (type.equals("nhận")) campaignInfo.setReceiveAmount(oldReceiveAmount + donationAmount);
+                else campaignInfo.setSpentAmount(oldSpentAmount + donationAmount);
+                campaignInfoRepository.save(campaignInfo);
+
                 statementRepository.save(statement);
                 statementSaved.add(statement);
             }
