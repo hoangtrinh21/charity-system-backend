@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "0271f3a7-a152-4bb5-9691-d8f2cd490e32",
+		"_postman_id": "e1cda28d-fba4-4783-9e68-f9db4579bb31",
 		"name": "uet-charity",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -634,7 +634,7 @@
 							}
 						],
 						"url": {
-							"raw": "http://localhost:8089/charity/campaign/user-get-followed-campaign",
+							"raw": "http://localhost:8089/charity/campaign/campaign-get-follower?campaign-id=5",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -643,7 +643,13 @@
 							"path": [
 								"charity",
 								"campaign",
-								"user-get-followed-campaign"
+								"campaign-get-follower"
+							],
+							"query": [
+								{
+									"key": "campaign-id",
+									"value": "5"
+								}
 							]
 						}
 					},
