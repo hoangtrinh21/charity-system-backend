@@ -96,7 +96,8 @@ public class DonationController {
 
             JsonObject jsonBody = JsonParser.parseString(body).getAsJsonObject();
 
-            Integer idDonor         = Integer.valueOf(jsonBody.get("idDonor").getAsString());
+//            Integer idDonor         = Integer.valueOf(jsonBody.get("idDonor").getAsString());
+            Integer idDonor         = jsonBody.get("idDonor").getAsInt();
             String status           = jsonBody.get("status").getAsString();
             String idOrganization   = jsonBody.get("idOrganization").getAsString();
             String name             = jsonBody.get("name").getAsString();
