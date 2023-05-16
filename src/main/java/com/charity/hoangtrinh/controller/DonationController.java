@@ -95,6 +95,7 @@ public class DonationController {
                         .body(new ResponseModel("You are not donor!"));
 
             JsonObject jsonBody = JsonParser.parseString(body).getAsJsonObject();
+            System.out.println(jsonBody);
 
 //            Integer idDonor         = Integer.valueOf(jsonBody.get("idDonor").getAsString());
             Integer idDonor         = jsonBody.get("idDonor").getAsInt();
