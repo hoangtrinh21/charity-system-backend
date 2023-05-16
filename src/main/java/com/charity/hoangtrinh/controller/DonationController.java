@@ -176,7 +176,12 @@ public class DonationController {
             Integer id = jsonBody.get("id").getAsInt();
             Integer idDonor  = jsonBody.get("idDonor").getAsInt();
             String status   = jsonBody.get("status").getAsString();
-            Integer idOrganization       = jsonBody.get("idOrganization").getAsInt();
+            Integer idOrganization = null;
+            try {
+                idOrganization = jsonBody.get("idOrganization").getAsInt();
+            } catch (UnsupportedOperationException e) {
+                // do nothing
+            }
             String name = jsonBody.get("name").getAsString();
             String donationAddress = jsonBody.get("donationAddress").getAsString();
             String donationObject = jsonBody.get("donationObject").getAsString();
@@ -192,6 +197,7 @@ public class DonationController {
             donation.setStatus(status);
 
             donation.setId(id);
+            assert idOrganization != null;
             Charity organizationReceived = charityRepository.getReferenceById(idOrganization);
             donation.setOrganizationReceived(organizationReceived.getCharityName());
             donation.setIdOrganization(organizationReceived.getId());
