@@ -100,7 +100,7 @@ public class DonationController {
 //            Integer idDonor         = Integer.valueOf(jsonBody.get("idDonor").getAsString());
             Integer idDonor         = jsonBody.get("idDonor").getAsInt();
             String status           = jsonBody.get("status").getAsString();
-            Integer idOrganization  = jsonBody.get("idOrganization").getAsInt();
+            Integer idOrganization  = jsonBody.get("idOrganization") == null ? null : jsonBody.get("idOrganization").getAsInt();
             String name             = jsonBody.get("name").getAsString();
             String donationAddress  = jsonBody.get("donationAddress").getAsString();
             String donationObject   = jsonBody.get("donationObject").getAsString();
@@ -116,7 +116,7 @@ public class DonationController {
             donation.setStatus(status);
 
             if (idOrganization != null) {
-                Charity organizationReceived = charityRepository.getReferenceById(Integer.valueOf(idOrganization));
+                Charity organizationReceived = charityRepository.getReferenceById(idOrganization);
                 donation.setOrganizationReceived(organizationReceived.getCharityName());
                 donation.setIdOrganization(organizationReceived.getId());
             }
