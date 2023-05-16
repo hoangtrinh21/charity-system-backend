@@ -197,10 +197,11 @@ public class DonationController {
             donation.setStatus(status);
 
             donation.setId(id);
-            assert idOrganization != null;
-            Charity organizationReceived = charityRepository.getReferenceById(idOrganization);
-            donation.setOrganizationReceived(organizationReceived.getCharityName());
-            donation.setIdOrganization(organizationReceived.getId());
+            if (idOrganization != null) {
+                Charity organizationReceived = charityRepository.getReferenceById(idOrganization);
+                donation.setOrganizationReceived(organizationReceived.getCharityName());
+                donation.setIdOrganization(organizationReceived.getId());
+            }
 
             System.out.println(listRequest);
             JSONArray jsonArray = new JSONArray(listRequest.toString());
