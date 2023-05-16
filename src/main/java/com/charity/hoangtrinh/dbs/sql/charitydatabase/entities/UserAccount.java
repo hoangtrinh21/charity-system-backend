@@ -64,4 +64,7 @@ public class UserAccount {
     @Column(name = "WardId", length = 10)
     private String wardId;
 
+    @Column(name = "IsVerified")
+    private Byte isVerified;
+
 }
