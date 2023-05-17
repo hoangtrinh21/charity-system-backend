@@ -34,7 +34,7 @@ public class MessageController {
 
             List<Message> receiveMessages = messageRepository.findByUserIdReceiveEquals(user);
 
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+            return ResponseEntity.status(HttpStatus.OK)
                     .body(receiveMessages);
         } catch (Exception e) {
             e.printStackTrace();
@@ -50,7 +50,7 @@ public class MessageController {
 
             List<Message> sendMessages = messageRepository.findByUserIdSendEquals(user);
 
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+            return ResponseEntity.status(HttpStatus.OK)
                     .body(sendMessages);
         } catch (Exception e) {
             e.printStackTrace();
@@ -84,7 +84,7 @@ public class MessageController {
             message.setUserIdSend(userSend);
             messageRepository.save(message);
 
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+            return ResponseEntity.status(HttpStatus.OK)
                     .body(message);
         } catch (Exception e) {
             e.printStackTrace();
