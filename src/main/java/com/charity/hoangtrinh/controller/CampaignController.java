@@ -105,12 +105,26 @@ public class CampaignController {
             Integer campaignId = Integer.parseInt(campaignIdStr);
 
             if (isAdminOrOrganization) {
+                CampaignInfo campaignInfo;
+                campaignInfo = campaignInfoRepository.findById(campaignId).get();
+                Charity charity = campaignInfo.getOrganization();
+                UserAccount userAccount = userAccountRepository.findByCharityIdEquals(charity.getId());
+                charity.setCharityName(userAccount);
+
                 return ResponseEntity.status(HttpStatus.OK)
-                        .body(campaignInfoRepository.findById(campaignId));
+                        .body(campaignInfo);
+            }
+
+            List<CampaignInfo> campaignInfoList = campaignInfoRepository.findByIdEqualsAndIsActiveEquals(campaignId ,true);
+
+            for (CampaignInfo campaignInfo : campaignInfoList) {
+                Charity charity = campaignInfo.getOrganization();
+                UserAccount userAccount = userAccountRepository.findByCharityIdEquals(charity.getId());
+                charity.setCharityName(userAccount);
             }
 
             return ResponseEntity.status(HttpStatus.OK)
-                    .body(campaignInfoRepository.findByIdEqualsAndIsActiveEquals(campaignId ,true));
+                    .body(campaignInfoList);
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
@@ -127,12 +141,29 @@ public class CampaignController {
 
             if (isAdminOrOrganization &&
                     Objects.equals(accessService.getUserByToken(token),
-                            userAccountRepository.findByCharityIdEquals(organizationId)))
+                            userAccountRepository.findByCharityIdEquals(organizationId))) {
+                List<CampaignInfo> campaignInfoList = campaignInfoRepository.findByOrganization_IdEquals(organizationId);
+
+                for (CampaignInfo campaignInfo : campaignInfoList) {
+                    Charity charity = campaignInfo.getOrganization();
+                    UserAccount userAccount = userAccountRepository.findByCharityIdEquals(charity.getId());
+                    charity.setCharityName(userAccount);
+                }
+
                 return ResponseEntity.status(HttpStatus.OK)
-                        .body(campaignInfoRepository.findByOrganization_IdEquals(organizationId));
+                        .body(campaignInfoList);
+            }
+
+            List<CampaignInfo> campaignInfoList = campaignInfoRepository.findByOrganization_IdEqualsAndIsActiveEquals(organizationId, true);
+
+            for (CampaignInfo campaignInfo : campaignInfoList) {
+                Charity charity = campaignInfo.getOrganization();
+                UserAccount userAccount = userAccountRepository.findByCharityIdEquals(charity.getId());
+                charity.setCharityName(userAccount);
+            }
 
             return ResponseEntity.status(HttpStatus.OK)
-                    .body(campaignInfoRepository.findByOrganization_IdEqualsAndIsActiveEquals(organizationId, true));
+                    .body(campaignInfoList);
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
