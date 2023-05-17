@@ -68,19 +68,20 @@ public class MessageController {
                 return ResponseEntity.status(isLogged)
                         .body(new ResponseModel(HttpStatus.valueOf(isLogged).name()));
 
+            UserAccount userSend = accessService.getUserByToken(token);
+
             JsonObject jsonBody = JsonParser.parseString(body).getAsJsonObject();
             String content = JsonUtil.getString(jsonBody, "content");
             Integer userIdReceive = JsonUtil.getInt(jsonBody, "user_id_receive");
-            Integer userIdSend = JsonUtil.getInt(jsonBody, "user_id_send");
 
-            if (content == null || userIdSend == null || userIdReceive == null)
+            if (content == null || userIdReceive == null)
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                         .body(new ResponseModel("content and user_id_receive and user_id_send must be not null!"));
 
             Message message = new Message();
             message.setContent(content);
             message.setUserIdReceive(userAccountRepository.getReferenceById(userIdReceive));
-            message.setUserIdSend(userAccountRepository.getReferenceById(userIdSend));
+            message.setUserIdSend(userSend);
             messageRepository.save(message);
 
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)

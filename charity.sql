@@ -82,7 +82,7 @@ CREATE TABLE `campaign_followers` (
   KEY `campaign_followers_FK_1` (`user_id`),
   CONSTRAINT `campaign_followers_FK` FOREIGN KEY (`campaign_id`) REFERENCES `campaign_info` (`campaign_id`),
   CONSTRAINT `campaign_followers_FK_1` FOREIGN KEY (`user_id`) REFERENCES `user_account` (`Id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -91,7 +91,6 @@ CREATE TABLE `campaign_followers` (
 
 LOCK TABLES `campaign_followers` WRITE;
 /*!40000 ALTER TABLE `campaign_followers` DISABLE KEYS */;
-INSERT INTO `campaign_followers` VALUES (9,4,5);
 /*!40000 ALTER TABLE `campaign_followers` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -127,7 +126,7 @@ CREATE TABLE `campaign_info` (
   PRIMARY KEY (`campaign_id`),
   KEY `campaign_info_FK_1` (`organization_id`),
   CONSTRAINT `campaign_info_FK` FOREIGN KEY (`organization_id`) REFERENCES `charities` (`Id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -136,7 +135,6 @@ CREATE TABLE `campaign_info` (
 
 LOCK TABLES `campaign_info` WRITE;
 /*!40000 ALTER TABLE `campaign_info` DISABLE KEYS */;
-INSERT INTO `campaign_info` VALUES (5,1,'xyz','asdfghjkl','tre em','tay bac','ho tro tre em vung cao',100000000,0,0,0,1684245524,'2023-06-01','2023-06-15','2023-06-16','2023-06-30','2023-06-30','dang van dong',_binary '',NULL,_binary '\0'),(6,1,'xyz','asdfghjkl','tre em','tay bac','ho tro tre em vung cao',100000000,0,0,0,1684245800,'2023-06-01','2023-06-15','2023-06-16','2023-06-30','2023-06-30','dang van dong',_binary '',NULL,_binary '\0');
 /*!40000 ALTER TABLE `campaign_info` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -228,7 +226,7 @@ CREATE TABLE `charities` (
   `Avatar` varchar(255) DEFAULT NULL,
   `CharityImages` varchar(3000) DEFAULT NULL,
   `GoogleMap` varchar(1000) DEFAULT NULL,
-  `IsVerified` smallint DEFAULT '0',
+  `IsVerified` tinyint DEFAULT '0',
   `NumFollower` int DEFAULT NULL,
   `NumCampaign` int DEFAULT NULL,
   `Reach` varchar(255) DEFAULT NULL,
@@ -349,30 +347,32 @@ INSERT INTO `donations` VALUES (18,NULL,'Đã nhận',NULL,1,'[{\"name\":\"Áo �
 UNLOCK TABLES;
 
 --
--- Table structure for table `feedback`
+-- Table structure for table `messages`
 --
 
-DROP TABLE IF EXISTS `feedback`;
+DROP TABLE IF EXISTS `messages`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `feedback` (
+CREATE TABLE `messages` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `message` longtext NOT NULL,
-  `type` varchar(20) NOT NULL,
-  `user_id` int NOT NULL,
+  `content` longtext,
+  `user_id_receive` int NOT NULL,
+  `user_id_send` int NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `feedback_FK` (`user_id`),
-  CONSTRAINT `feedback_FK` FOREIGN KEY (`user_id`) REFERENCES `user_account` (`Id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  KEY `FKsgwm8aumrpmrndbl7nf89h02g` (`user_id_receive`),
+  KEY `FKelqy9svcg11vxw6l9quwij3tw` (`user_id_send`),
+  CONSTRAINT `FKelqy9svcg11vxw6l9quwij3tw` FOREIGN KEY (`user_id_send`) REFERENCES `user_account` (`Id`),
+  CONSTRAINT `FKsgwm8aumrpmrndbl7nf89h02g` FOREIGN KEY (`user_id_receive`) REFERENCES `user_account` (`Id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `feedback`
+-- Dumping data for table `messages`
 --
 
-LOCK TABLES `feedback` WRITE;
-/*!40000 ALTER TABLE `feedback` DISABLE KEYS */;
-/*!40000 ALTER TABLE `feedback` ENABLE KEYS */;
+LOCK TABLES `messages` WRITE;
+/*!40000 ALTER TABLE `messages` DISABLE KEYS */;
+/*!40000 ALTER TABLE `messages` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -392,7 +392,7 @@ CREATE TABLE `post_info` (
   PRIMARY KEY (`post_id`),
   KEY `campaign_id_fkey` (`campaign_id`),
   CONSTRAINT `post_info_FK` FOREIGN KEY (`campaign_id`) REFERENCES `campaign_info` (`campaign_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -401,7 +401,6 @@ CREATE TABLE `post_info` (
 
 LOCK TABLES `post_info` WRITE;
 /*!40000 ALTER TABLE `post_info` DISABLE KEYS */;
-INSERT INTO `post_info` VALUES (10,'Đây la nội dung bài đăng so 5435','Đây là loại bài đăng (vận động, hoạt động, ...)',1684247439704,5,'đây là tiêu đề bài viét');
 /*!40000 ALTER TABLE `post_info` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -543,7 +542,7 @@ CREATE TABLE `user_account` (
   `WardId` varchar(10) DEFAULT NULL,
   `IsVerified` tinyint DEFAULT '0',
   PRIMARY KEY (`Id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci AVG_ROW_LENGTH=3276;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci AVG_ROW_LENGTH=3276;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -552,7 +551,7 @@ CREATE TABLE `user_account` (
 
 LOCK TABLES `user_account` WRITE;
 /*!40000 ALTER TABLE `user_account` DISABLE KEYS */;
-INSERT INTO `user_account` VALUES (4,'hai khuat','nguoidung1','0348399696','cloQN+4OWo8z7RjnrjAP+aLIlNnm428fFeZeyhLMC0hpxlSw80ZW2eQyquFXxAzfD5IVnDboNxmQWEDsXfHi2Q==','Q+ELUB58TMCVd8x//UpNO56ccI3CMh1qeNwsK5mtSIc=',2,'dfdsf','hai@gmail.com',0,NULL,'Tỉnh Cao Bằng','Huyện Trùng Khánh','Xã Quang Trung','04','047','01465',0),(5,'ao am cho em','tochuc1','0348599595','Bsg7klq4JhzMEbIYnlW4pGe7S4tB7xAfjrivWOHxmvqOEeeSy7a1xkYivKNT5TvtKYdg4GtaM3aJzmi/n5+rcg==','+Fg9T7ZqfsvycpA1En1qpYX6Aj8NhSbsPBIj1rBikSE=',3,'sad','tochuc1@gmail.com',0,1,'Tỉnh Hà Giang','Thành phố Hà Giang','Phường Quang Trung','02','024','00688',0),(6,'trinh haong','nguoidung2','0348699696','7pdaboJFvRjBNjDmi2DbIQY2BetobzmqlHhCqwhUbPVE/YB3/Zy9ZQUExuirsUpDSZohThDwqAVIogNldPeeNw==','XjmHrWLUX0Aq/9dM5Q/k/fOZ/Fctv3D4LsLEV2UaJ8o=',2,'dsfsdf','hoang@gmail.com',0,NULL,'Tỉnh Tuyên Quang','Huyện Yên Sơn','Xã Kiến Thiết','08','075','02437',0),(7,'xuan son','nguoidung3','0359949494','V6PrAKOj15CCFV4gKFrPWPa0Fmaly293gDFIWmKGaQgxxOzqezFbaygzmbBn1fV0rUdJlBigCO+WZCFncVsIrw==','v2ADPfyZ9VbV0HZFCeu7ADsboEUoSEl7KDJhA7+RYY4=',2,'dvgdsf','son@gmail.com',0,NULL,'Tỉnh Hà Giang','Huyện Mèo Vạc','Xã Pải Lủng','02','027','00775',0),(8,'tu thien nam dinh','tochuc2','0348979898','ueR+5hbeHU3lA+V/14pqDYMxKj3xT0QuCock/T/NDZTv2kUS5mk88pa0nmmdrxyIZp8NHxUCev4e48H7NAhqfQ==','9XR2Y1XFbqjLdROEPlAqORVXb0dPWw4+1+xlQEqaW4s=',3,'sađá','tochuc2@gmail.com',0,2,'Tỉnh Hà Giang','Huyện Mèo Vạc','Xã Pải Lủng','02','027','00775',0),(9,'mai am yeu thuong','tochuc3','0348929394','FYbEGntfxEdrE476Bdzyi3vCgMxYD3gbWjsSxYyaiYtaO3cO776ubmHfpLH6hA2fzsCjz6uw+cZIa8B6hUI/ag==','ENHJzpIwYmkXiwND0PPOR0q+yIyIl3cJEatMeMY/P+M=',3,'sad','tochuc3@gmail.com',0,3,'Tỉnh Hà Giang','Huyện Mèo Vạc','Xã Pải Lủng','02','027','00775',0);
+INSERT INTO `user_account` VALUES (4,'Tài khoản admin','AdminTK','0347379993','DH6DA4PEXzTf8yPMpeg2tqswOnzJRSNa85RodN9aZH4zd2gTakO/xeK3ngpvjwd7owZ7FDnW4m6RhOhIvpTR/Q==','UQIyapg+65rGgEIFKyxpJnLZYn7UgF4A/WeB0NrRjw4=',1,'144','taikhoanadmin@gmail.com',0,NULL,'Thành phố Hà Nội','Quận Hoàn Kiếm','Phường Đồng Xuân','01','002','00040',0),(5,'Tai khoan người dùng','UserTK','0356788888','DH6DA4PEXzTf8yPMpeg2tqswOnzJRSNa85RodN9aZH4zd2gTakO/xeK3ngpvjwd7owZ7FDnW4m6RhOhIvpTR/Q==','UQIyapg+65rGgEIFKyxpJnLZYn7UgF4A/WeB0NrRjw4=',2,'144','taikhoanadmin@gmail.com',0,NULL,'Thành phố Hà Nội','Quận Hoàn Kiếm','Phường Đồng Xuân','01','002','00040',0),(6,'Áo ấm cho em','CharityTK','0347379994','p2PXGwmw+BvucVhH3SrmlbFJWufnWTLPd8r8MhocnWs9V6wM9j4sikZDHEQwcBqJfY+mDsHlXWUv0cCsfhSS5g==','KDELA6FXWii1TXkZxCecslLHzxPTVoRFSujBt8twFBk=',3,'144','aoamchoem@gmail.com',0,1,'Thành phố Hà Nội','Quận Ba Đình','Phường Phúc Xá','01','001','00001',0),(7,'xuan son','nguoidung3','0359949494','V6PrAKOj15CCFV4gKFrPWPa0Fmaly293gDFIWmKGaQgxxOzqezFbaygzmbBn1fV0rUdJlBigCO+WZCFncVsIrw==','v2ADPfyZ9VbV0HZFCeu7ADsboEUoSEl7KDJhA7+RYY4=',2,'dvgdsf','son@gmail.com',0,NULL,'Tỉnh Hà Giang','Huyện Mèo Vạc','Xã Pải Lủng','02','027','00775',0),(8,'tu thien nam dinh','tochuc2','0348979898','ueR+5hbeHU3lA+V/14pqDYMxKj3xT0QuCock/T/NDZTv2kUS5mk88pa0nmmdrxyIZp8NHxUCev4e48H7NAhqfQ==','9XR2Y1XFbqjLdROEPlAqORVXb0dPWw4+1+xlQEqaW4s=',3,'sađá','tochuc2@gmail.com',0,2,'Tỉnh Hà Giang','Huyện Mèo Vạc','Xã Pải Lủng','02','027','00775',0),(9,'mai am yeu thuong','tochuc3','0348929394','FYbEGntfxEdrE476Bdzyi3vCgMxYD3gbWjsSxYyaiYtaO3cO776ubmHfpLH6hA2fzsCjz6uw+cZIa8B6hUI/ag==','ENHJzpIwYmkXiwND0PPOR0q+yIyIl3cJEatMeMY/P+M=',3,'sad','tochuc3@gmail.com',0,3,'Tỉnh Hà Giang','Huyện Mèo Vạc','Xã Pải Lủng','02','027','00775',0),(10,'hai khuat','nguoidung1','0348399696','cloQN+4OWo8z7RjnrjAP+aLIlNnm428fFeZeyhLMC0hpxlSw80ZW2eQyquFXxAzfD5IVnDboNxmQWEDsXfHi2Q==','Q+ELUB58TMCVd8x//UpNO56ccI3CMh1qeNwsK5mtSIc=',2,'dfdsf','hai@gmail.com',0,NULL,'Tỉnh Cao Bằng','Huyện Trùng Khánh','Xã Quang Trung','04','047','01465',0),(11,'ao am cho em','tochuc1','0348599595','Bsg7klq4JhzMEbIYnlW4pGe7S4tB7xAfjrivWOHxmvqOEeeSy7a1xkYivKNT5TvtKYdg4GtaM3aJzmi/n5+rcg==','+Fg9T7ZqfsvycpA1En1qpYX6Aj8NhSbsPBIj1rBikSE=',3,'sad','tochuc1@gmail.com',0,1,'Tỉnh Hà Giang','Thành phố Hà Giang','Phường Quang Trung','02','024','00688',0),(12,'trinh haong','nguoidung2','0348699696','7pdaboJFvRjBNjDmi2DbIQY2BetobzmqlHhCqwhUbPVE/YB3/Zy9ZQUExuirsUpDSZohThDwqAVIogNldPeeNw==','XjmHrWLUX0Aq/9dM5Q/k/fOZ/Fctv3D4LsLEV2UaJ8o=',2,'dsfsdf','hoang@gmail.com',0,NULL,'Tỉnh Tuyên Quang','Huyện Yên Sơn','Xã Kiến Thiết','08','075','02437',0);
 /*!40000 ALTER TABLE `user_account` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -595,4 +594,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-05-16 23:43:59
+-- Dump completed on 2023-05-17 10:41:40
