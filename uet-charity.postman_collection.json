@@ -1141,7 +1141,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:8089/charity/donation/donor-delete-donation?id=13",
+							"raw": "http://localhost:8089/charity/donation/donor-delete-donation-update-request?id=13",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -1150,7 +1150,7 @@
 							"path": [
 								"charity",
 								"donation",
-								"donor-delete-donation"
+								"donor-delete-donation-update-request"
 							],
 							"query": [
 								{
