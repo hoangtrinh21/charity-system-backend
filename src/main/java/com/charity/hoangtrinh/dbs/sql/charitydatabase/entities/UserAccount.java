@@ -1,5 +1,6 @@
 package com.charity.hoangtrinh.dbs.sql.charitydatabase.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -25,9 +26,11 @@ public class UserAccount {
     @Column(name = "PhoneNumber", length = 20)
     private String phoneNumber;
 
+    @JsonIgnore
     @Column(name = "Password")
     private String password;
 
+    @JsonIgnore
     @Column(name = "SaltPassword")
     private String saltPassword;
 
