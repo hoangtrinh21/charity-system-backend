@@ -1121,6 +1121,48 @@
 					"response": []
 				},
 				{
+					"name": "donor xóa, update list requesst",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Token",
+								"value": "abcde",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n        {\n            \"name\": \"toi yeu nam dinh\",\n            \"id\": 1,\n            \"status\": \"Đợi xác nhận\"\n        }\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8089/charity/donation/donor-delete-donation?id=13",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8089",
+							"path": [
+								"charity",
+								"donation",
+								"donor-delete-donation"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "13"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "xóa bài đăng ủng hộ",
 					"request": {
 						"method": "DELETE",

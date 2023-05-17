@@ -254,6 +254,40 @@ public class DonationController {
         }
     }
 
+    @DeleteMapping("/donor-delete-donation-update-request")
+    public ResponseEntity<Object> donorDeleteRequestDonation(@RequestHeader(value = "Token") String token,
+                                                             @RequestParam(value = "id") String idStr,
+                                                             @RequestBody String body) {
+        try {
+            boolean isDonor = accessService.isDonor(token);
+            if (!isDonor)
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                        .body(new ResponseModel("You are not donor!"));
+
+            Integer donationId = Integer.parseInt(idStr);
+
+            Donation donation = donationRepository.getReferenceById(donationId);
+            Integer idDonor  = donation.getIdDonor();
+
+            if (!Objects.equals(idDonor, accessService.getUserByToken(token).getId()))
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                        .body(new ResponseModel("You are not permission this donation!"));
+
+            JSONArray requestsJson = new JSONArray(body);
+
+            donation.setIdDonor(null);
+            donation.setListRequest(requestsJson);
+            donationRepository.save(donation);
+
+            return ResponseEntity.status(HttpStatus.OK)
+                    .body(donation);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(new ResponseModel(e.getClass()));
+        }
+    }
+
     @DeleteMapping("/donor-delete-donation")
     public ResponseEntity<Object> donorDeleteDonation(@RequestHeader(value = "Token") String token,
                                                       @RequestParam(value = "id") String idStr) {
