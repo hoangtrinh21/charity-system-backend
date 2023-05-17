@@ -254,7 +254,7 @@ public class DonationController {
         }
     }
 
-    @DeleteMapping("/donor-delete-donation-update-request")
+    @PutMapping("/donor-delete-donation-update-request")
     public ResponseEntity<Object> donorDeleteRequestDonation(@RequestHeader(value = "Token") String token,
                                                              @RequestParam(value = "id") String idStr,
                                                              @RequestBody String body) {
