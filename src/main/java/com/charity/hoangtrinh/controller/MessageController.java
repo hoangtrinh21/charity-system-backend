@@ -30,6 +30,7 @@ public class MessageController {
     public ResponseEntity<Object> getMessageUserReceive(@RequestHeader(value = "Token") String token) {
         try {
             UserAccount user = accessService.getUserByToken(token);
+            System.out.println(user);
 
             List<Message> receiveMessages = messageRepository.findByUserIdReceiveEquals(user);
 
@@ -42,8 +43,8 @@ public class MessageController {
         }
     }
 
-    @GetMapping("/get-send")
-    public ResponseEntity<Object> getMessageUserSend(@RequestHeader(value = "Token") String token) {
+    @GetMapping("/get-sent")
+    public ResponseEntity<Object> getMessageUserSent(@RequestHeader(value = "Token") String token) {
         try {
             UserAccount user = accessService.getUserByToken(token);
 
