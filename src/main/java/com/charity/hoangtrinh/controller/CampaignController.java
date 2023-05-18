@@ -2,15 +2,13 @@ package com.charity.hoangtrinh.controller;
 
 import com.charity.hoangtrinh.dbs.sql.charitydatabase.entities.*;
 import com.charity.hoangtrinh.dbs.sql.charitydatabase.repositories.*;
+import com.charity.hoangtrinh.model.CampaignInfoDTO;
 import com.charity.hoangtrinh.model.ResponseModel;
 import com.charity.hoangtrinh.services.AccessService;
 import com.charity.hoangtrinh.services.CampaignService;
 import com.charity.hoangtrinh.services.PostService;
 import com.charity.hoangtrinh.utils.JsonUtil;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
+import com.google.gson.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -57,6 +55,7 @@ public class CampaignController {
     public ResponseEntity<Object> getAllCampaigns(@RequestHeader(value = "Token") String token) {
         try {
             List<CampaignInfo> campaignInfoList;
+            List<CampaignInfoDTO> resList = new ArrayList<>();
 
             if (accessService.isAdmin(token)) {
                 campaignInfoList = campaignInfoRepository.findAll();
@@ -86,10 +85,13 @@ public class CampaignController {
                 Charity charity = campaignInfo.getOrganization();
                 UserAccount userAccount = userAccountRepository.findByCharityIdEquals(charity.getId());
                 charity.setCharityName(userAccount);
+
+                boolean isFollow = campaignFollowerRepository.existsByUserEqualsAndCampaignEquals(userAccount, campaignInfo);
+                resList.add(new CampaignInfoDTO(campaignInfo, isFollow));
             }
 
             return ResponseEntity.status(HttpStatus.OK)
-                    .body(campaignInfoList);
+                    .body(resList);
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
@@ -116,15 +118,18 @@ public class CampaignController {
             }
 
             List<CampaignInfo> campaignInfoList = campaignInfoRepository.findByIdEqualsAndIsActiveEquals(campaignId ,true);
+            List<CampaignInfoDTO> resList = new ArrayList<>();
 
             for (CampaignInfo campaignInfo : campaignInfoList) {
                 Charity charity = campaignInfo.getOrganization();
                 UserAccount userAccount = userAccountRepository.findByCharityIdEquals(charity.getId());
                 charity.setCharityName(userAccount);
+                boolean isFollow = campaignFollowerRepository.existsByUserEqualsAndCampaignEquals(userAccount, campaignInfo);
+                resList.add(new CampaignInfoDTO(campaignInfo, isFollow));
             }
 
             return ResponseEntity.status(HttpStatus.OK)
-                    .body(campaignInfoList);
+                    .body(resList);
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
@@ -155,15 +160,18 @@ public class CampaignController {
             }
 
             List<CampaignInfo> campaignInfoList = campaignInfoRepository.findByOrganization_IdEqualsAndIsActiveEquals(organizationId, true);
+            List<CampaignInfoDTO> resList = new ArrayList<>();
 
             for (CampaignInfo campaignInfo : campaignInfoList) {
                 Charity charity = campaignInfo.getOrganization();
                 UserAccount userAccount = userAccountRepository.findByCharityIdEquals(charity.getId());
                 charity.setCharityName(userAccount);
+                boolean isFollow = campaignFollowerRepository.existsByUserEqualsAndCampaignEquals(userAccount, campaignInfo);
+                resList.add(new CampaignInfoDTO(campaignInfo, isFollow));
             }
 
             return ResponseEntity.status(HttpStatus.OK)
-                    .body(campaignInfoList);
+                    .body(resList);
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
@@ -171,39 +179,33 @@ public class CampaignController {
         }
     }
 
-
-    /**
-     * Lấy các chiến dịch theo các diều kiện (campaign name, region,...)
-     * @param params các diều kiện
-     * @return Toàn bộ chiến dịch trong database nếu là admin  hoặc tổ chức từ thiện, ngược lại trả về các chiến dịch chưa bị khóa
-     */
-    @GetMapping("/get-by-condition")
-    public ResponseEntity<Object> getByCondition(@RequestHeader(value = "Token") String token,
-                                                        @RequestParam Map<String, String> params) {
-        try {
-            boolean isAdminOrOrganization = accessService.isAdmin(token) || accessService.isOrganization(token);
-            String campaignName     = params.get("campaign-name");
-            String region           = params.get("region");
-            String campaignType     = params.get("campaign-type");
-            String targetObject     = params.get("target-object");
-            String status           = params.get("status");
-
-            if (isAdminOrOrganization)
-                return ResponseEntity.status(HttpStatus.OK)
-                        .body(campaignInfoRepository.findByCampaignNameLikeAndRegionLikeAndCampaignTypeLikeAndTargetObjectLikeAndStatusLike(
-                                campaignName, region, campaignType, targetObject, status
-                        ));
-            
-            return ResponseEntity.status(HttpStatus.OK)
-                    .body(campaignInfoRepository.findByCampaignNameLikeAndRegionLikeAndCampaignTypeLikeAndTargetObjectLikeAndStatusLikeAndIsActiveTrue(
-                            campaignName, region, campaignType, targetObject, status
-                    ));
-        } catch (Exception e) {
-            e.printStackTrace();
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(new ResponseModel(e.getClass() + ":" + e.getMessage()));
-        }
-    }
+//    @GetMapping("/get-by-condition")
+//    public ResponseEntity<Object> getByCondition(@RequestHeader(value = "Token") String token,
+//                                                        @RequestParam Map<String, String> params) {
+//        try {
+//            boolean isAdminOrOrganization = accessService.isAdmin(token) || accessService.isOrganization(token);
+//            String campaignName     = params.get("campaign-name");
+//            String region           = params.get("region");
+//            String campaignType     = params.get("campaign-type");
+//            String targetObject     = params.get("target-object");
+//            String status           = params.get("status");
+//
+//            if (isAdminOrOrganization)
+//                return ResponseEntity.status(HttpStatus.OK)
+//                        .body(campaignInfoRepository.findByCampaignNameLikeAndRegionLikeAndCampaignTypeLikeAndTargetObjectLikeAndStatusLike(
+//                                campaignName, region, campaignType, targetObject, status
+//                        ));
+//
+//            return ResponseEntity.status(HttpStatus.OK)
+//                    .body(campaignInfoRepository.findByCampaignNameLikeAndRegionLikeAndCampaignTypeLikeAndTargetObjectLikeAndStatusLikeAndIsActiveTrue(
+//                            campaignName, region, campaignType, targetObject, status
+//                    ));
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+//                    .body(new ResponseModel(e.getClass() + ":" + e.getMessage()));
+//        }
+//    }
 
 
     @PostMapping("/add-campaign")
@@ -224,17 +226,14 @@ public class CampaignController {
             String  introduction    = JsonUtil.getString(jsonBody, "introduction");
             String  targetObject    = JsonUtil.getString(jsonBody, "target_object");
             String  region          = JsonUtil.getString(jsonBody, "region");
-            String  campaignType    = JsonUtil.getString(jsonBody, "campaign_type");
             String  status          = JsonUtil.getString(jsonBody, "status");
             String  images          = JsonUtil.getString(jsonBody, "images");
+            String introVideo       = JsonUtil.getString(jsonBody, "intro_video");
             Long    targetAmount    = JsonUtil.getLong(jsonBody, "target_amount");
             Long    receiveAmount   = 0L;
             Long    donorAmount     = 0L;
             Long    spentAmount     = 0L;
             LocalDate startDate         = JsonUtil.getLocalDate(jsonBody, "start_date");
-            LocalDate stopReceiveDate   = JsonUtil.getLocalDate(jsonBody, "stop_receive_date");
-            LocalDate startActiveDate   = JsonUtil.getLocalDate(jsonBody, "start_active_date");
-            LocalDate stopActiveDate    = JsonUtil.getLocalDate(jsonBody, "stop_active_date");
             LocalDate stopDate          = JsonUtil.getLocalDate(jsonBody, "stop_date");
 
             assert organizationId != null;
@@ -247,7 +246,6 @@ public class CampaignController {
             campaignInfo.setIntroduction(introduction);
             campaignInfo.setTargetObject(targetObject);
             campaignInfo.setRegion(region);
-            campaignInfo.setCampaignType(campaignType);
             campaignInfo.setStatus(status);
             campaignInfo.setTargetAmount(targetAmount);
             campaignInfo.setReceiveAmount(receiveAmount);
@@ -255,11 +253,9 @@ public class CampaignController {
             campaignInfo.setOrganization(organization);
             campaignInfo.setSpentAmount(spentAmount);
             campaignInfo.setStartDate(startDate);
-            campaignInfo.setStopReceiveDate(stopReceiveDate);
-            campaignInfo.setStartActiveDate(startActiveDate);
-            campaignInfo.setStopActiveDate(stopActiveDate);
             campaignInfo.setStopDate(stopDate);
             campaignInfo.setImages(images);
+            campaignInfo.setIntroVideo(introVideo);
             campaignInfoRepository.save(campaignInfo);
 
             campaignInfo.getOrganization().setCharityName(userAccountRepository.findByCharityIdEquals(organizationId));
@@ -294,18 +290,12 @@ public class CampaignController {
             String  introduction    = JsonUtil.getString(jsonBody, "introduction");
             String  targetObject    = JsonUtil.getString(jsonBody, "target_object");
             String  region          = JsonUtil.getString(jsonBody, "region");
-            String  campaignType    = JsonUtil.getString(jsonBody, "campaign_type");
             String  status          = JsonUtil.getString(jsonBody, "status");
             String  images          = JsonUtil.getString(jsonBody, "images");
             boolean  isStar         = jsonBody.get("isStar").getAsBoolean();
             Long    targetAmount    = JsonUtil.getLong(jsonBody, "target_amount");
             Long    receiveAmount   = JsonUtil.getLong(jsonBody, "receive_amount");
-            Long    donorAmount     = JsonUtil.getLong(jsonBody, "donor_amount");
-            Long    spentAmount     = JsonUtil.getLong(jsonBody, "spent_amount");
             LocalDate startDate         = JsonUtil.getLocalDate(jsonBody, "start_date");
-            LocalDate stopReceiveDate   = JsonUtil.getLocalDate(jsonBody, "stop_receive_date");
-            LocalDate startActiveDate   = JsonUtil.getLocalDate(jsonBody, "start_active_date");
-            LocalDate stopActiveDate    = JsonUtil.getLocalDate(jsonBody, "stop_active_date");
             LocalDate stopDate          = JsonUtil.getLocalDate(jsonBody, "stop_date");
 
             Charity organization = charityRepository.getReferenceById(organizationId);
@@ -318,17 +308,11 @@ public class CampaignController {
             campaignInfo.setIntroduction(introduction);
             campaignInfo.setTargetObject(targetObject);
             campaignInfo.setRegion(region);
-            campaignInfo.setCampaignType(campaignType);
             campaignInfo.setStatus(status);
             campaignInfo.setTargetAmount(targetAmount);
             campaignInfo.setReceiveAmount(receiveAmount);
-            campaignInfo.setDonorAmount(donorAmount);
             campaignInfo.setOrganization(organization);
-            campaignInfo.setSpentAmount(spentAmount);
             campaignInfo.setStartDate(startDate);
-            campaignInfo.setStopReceiveDate(stopReceiveDate);
-            campaignInfo.setStartActiveDate(startActiveDate);
-            campaignInfo.setStopActiveDate(stopActiveDate);
             campaignInfo.setStopDate(stopDate);
             campaignInfo.setImages(images);
             campaignInfo.setStar(isStar);

@@ -1,12 +1,13 @@
 package com.charity.hoangtrinh.dbs.sql.charitydatabase.entities;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 
-@Getter
-@Setter
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @Entity
 @Table(name = "notification")
 public class Notification {
@@ -20,7 +21,10 @@ public class Notification {
     private String message;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "user_id", nullable = false)
-    private UserAccount user;
+    @JoinColumn(name = "receive_user_id", nullable = false)
+    private UserAccount receiveUser;
 
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "created_user_id", nullable = false)
+    private UserAccount createdUser;
 }

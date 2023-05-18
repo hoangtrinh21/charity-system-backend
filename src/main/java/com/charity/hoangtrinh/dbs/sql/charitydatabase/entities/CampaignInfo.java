@@ -34,9 +34,6 @@ public class CampaignInfo {
     @Column(name = "region", nullable = false)
     private String region;
 
-    @Column(name = "campaign_type", length = 100)
-    private String campaignType;
-
     @Column(name = "target_amount", nullable = false)
     private Long targetAmount;
 
@@ -55,15 +52,6 @@ public class CampaignInfo {
     @Column(name = "start_date", nullable = false)
     private LocalDate startDate;
 
-    @Column(name = "stop_receive_date", nullable = false)
-    private LocalDate stopReceiveDate;
-
-    @Column(name = "start_active_date", nullable = false)
-    private LocalDate startActiveDate;
-
-    @Column(name = "stop_active_date", nullable = false)
-    private LocalDate stopActiveDate;
-
     @Column(name = "stop_date", nullable = false)
     private LocalDate stopDate;
 
@@ -76,6 +64,9 @@ public class CampaignInfo {
     @Lob
     @Column(name = "images")
     private String images;
+
+    @Column(name = "intro_video")
+    private String introVideo;
 
     @Column(name = "star", nullable = false)
     private Boolean star = false;

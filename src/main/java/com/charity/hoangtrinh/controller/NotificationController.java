@@ -27,15 +27,33 @@ public class NotificationController {
     @Autowired
     private UserAccountRepository userAccountRepository;
 
-    @GetMapping("/get-by-user")
-    public ResponseEntity<Object> getByUser(@RequestHeader(value = "Token") String token) {
+    @GetMapping("/get-sent-by-user")
+    public ResponseEntity<Object> getSendByUser(@RequestHeader(value = "Token") String token) {
         try {
             if (accessService.checkAccessToken(token) != 200)
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
                         .body(new ResponseModel("UNAUTHORIZED"));
 
-            UserAccount user = accessService.getUserByToken(token);
-            List<Notification> notifications = notificationRepository.findByUserEquals(user);
+            UserAccount userCreate = accessService.getUserByToken(token);
+            List<Notification> notifications = notificationRepository.findByCreatedUserEquals(userCreate);
+            return ResponseEntity.status(HttpStatus.OK)
+                    .body(notifications);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(new ResponseModel(e.getClass() + ":" + e.getMessage()));
+        }
+    }
+
+    @GetMapping("/get-receive-by-user")
+    public ResponseEntity<Object> getReceiveByUser(@RequestHeader(value = "Token") String token) {
+        try {
+            if (accessService.checkAccessToken(token) != 200)
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                        .body(new ResponseModel("UNAUTHORIZED"));
+
+            UserAccount userReceive = accessService.getUserByToken(token);
+            List<Notification> notifications = notificationRepository.findByReceiveUserEquals(userReceive);
             return ResponseEntity.status(HttpStatus.OK)
                     .body(notifications);
         } catch (Exception e) {
@@ -49,15 +67,23 @@ public class NotificationController {
     public ResponseEntity<Object> postToUser(@RequestBody String body) {
         try {
             JsonObject jsonBody = JsonParser.parseString(body).getAsJsonObject();
-            int userId = jsonBody.get("user_id").getAsInt();
+            int receiveUserId = jsonBody.get("receive_user_id").getAsInt();
+            int createdUserId = jsonBody.get("created_user_id").getAsInt();
             String message = jsonBody.get("message").getAsString();
-            Optional<UserAccount> userAccountOptional = userAccountRepository.findById(Integer.valueOf(userId));
-            if (!userAccountOptional.isPresent())
+
+            Optional<UserAccount> userCreatedOptional = userAccountRepository.findById(createdUserId);
+            if (!userCreatedOptional.isPresent())
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                        .body(new ResponseModel("Don't have user with id " + userId));
+                        .body(new ResponseModel("Don't have user with id " + createdUserId));
+
+            Optional<UserAccount> userReceiveOptional = userAccountRepository.findById(receiveUserId);
+            if (!userReceiveOptional.isPresent())
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                        .body(new ResponseModel("Don't have user with id " + receiveUserId));
 
             Notification notification = new Notification();
-            notification.setUser(userAccountOptional.get());
+            notification.setCreatedUser(userCreatedOptional.get());
+            notification.setReceiveUser(userReceiveOptional.get());
             notification.setMessage(message);
             notificationRepository.save(notification);
 

@@ -112,21 +112,18 @@ CREATE TABLE `campaign_info` (
   `introduction` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `target_object` varchar(255) NOT NULL,
   `region` varchar(255) NOT NULL,
-  `campaign_type` varchar(100) DEFAULT NULL,
   `target_amount` bigint NOT NULL,
   `receive_amount` bigint NOT NULL,
   `donor_amount` bigint NOT NULL,
   `spent_amount` bigint NOT NULL,
   `last_update_time` int NOT NULL,
   `start_date` date NOT NULL,
-  `stop_receive_date` date NOT NULL,
-  `start_active_date` date NOT NULL,
-  `stop_active_date` date NOT NULL,
   `stop_date` date NOT NULL,
   `status` varchar(50) NOT NULL,
   `is_active` bit(1) NOT NULL,
   `images` text,
   `star` bit(1) NOT NULL,
+  `intro_video` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`campaign_id`),
   KEY `campaign_info_FK_1` (`organization_id`),
   CONSTRAINT `campaign_info_FK` FOREIGN KEY (`organization_id`) REFERENCES `charities` (`Id`)
@@ -139,7 +136,7 @@ CREATE TABLE `campaign_info` (
 
 LOCK TABLES `campaign_info` WRITE;
 /*!40000 ALTER TABLE `campaign_info` DISABLE KEYS */;
-INSERT INTO `campaign_info` VALUES (4,1,'xyz','asdfghjkl','tre em','tay bac','ho tro tre em vung cao',100000000,0,0,0,1684375545,'2023-06-01','2023-06-15','2023-06-16','2023-06-30','2023-06-30','dang van dong',_binary '',NULL,_binary '\0');
+INSERT INTO `campaign_info` VALUES (4,1,'xyz','đây là bài viết giới thiệu cuộc vận động','Đây là dối tượng hướng tới','khu vực hướng tới',100000000,0,0,0,1684435924,'2023-06-01','2023-06-30','đang vận động',_binary '','img1, img2',_binary '\0','url video');
 /*!40000 ALTER TABLE `campaign_info` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -251,7 +248,7 @@ CREATE TABLE `charities` (
 
 LOCK TABLES `charities` WRITE;
 /*!40000 ALTER TABLE `charities` DISABLE KEYS */;
-INSERT INTO `charities` VALUES (1,'áđá',NULL,NULL,'ád','ádád',NULL,NULL,NULL,NULL,NULL,NULL,'handle file',NULL,NULL,NULL,NULL,0,NULL,NULL,NULL,0,NULL,NULL,NULL),(2,'sfà',NULL,NULL,'ádá','ádá',NULL,NULL,NULL,NULL,NULL,NULL,'handle file',NULL,NULL,NULL,NULL,0,NULL,NULL,NULL,0,NULL,NULL,NULL),(3,'sđá',NULL,NULL,'ád','áda',NULL,NULL,NULL,NULL,NULL,NULL,'handle file',NULL,NULL,NULL,NULL,0,NULL,NULL,NULL,0,NULL,NULL,NULL);
+INSERT INTO `charities` VALUES (1,'Phương trâm của tổ chức từ thiện \'Áo ấm trao em\' là giúp đỡ những trẻ em nghèo và vùng khó khăn trong cộng đồng bằng cách cung cấp các dịch vụ cơ bản như thức ăn, nước uống, quần áo và y tế. Chúng tôi cũng tập trung vào việc giúp đỡ trẻ em bị bỏ rơi, đưa họ đến trường và hỗ trợ họ trong việc học tập và phát triển bản thân.','https://www.facebook.com/AoAmChoEm','https://firebasestorage.googleapis.com/v0/b/charityapp-b5d6f.appspot.com/o/avatar%2F313417262_5406749056089876_4262535589861793175_n.jpg?alt=media&token=1225341e-e749-4bd2-956d-4e040b367aaf','Mục tiêu của tổ chức từ thiện \'Áo ấm trao em\' là cung cấp áo ấm và quần áo miễn phí cho trẻ em và người lớn khó khăn trong cộng đồng, đặc biệt là trong mùa đông lạnh giá. Chúng tôi mong muốn giúp đỡ và mang lại sự ấm áp cho những người đang gặp khó khăn trong cuộc sống.','Xin chào và chào mừng đến với tổ chức từ thiện \'Áo ấm trao em\'. Chúng tôi hoạt động với mục đích giúp đỡ những trẻ em khó khăn và gia đình nghèo trong cộng đồng. Chúng tôi cố gắng cung cấp cho các em cơ hội học tập và phát triển bản thân để họ có thể có một tương lai tốt đẹp hơn. Chân thành cảm ơn sự quan tâm và hỗ trợ của các bạn!','','','','','https://www.youtube.com/embed/6h2fq03pJTk','','','0123456789 - Nguyen Van A - MB Bank - Ngân hàng Quân đội','https://firebasestorage.googleapis.com/v0/b/charityapp-b5d6f.appspot.com/o/avatar%2F60279_319097728188393_1252016383_n.jpg?alt=media&token=310b4cd3-0e2d-467c-b846-57b6faaedf15','https://firebasestorage.googleapis.com/v0/b/charityapp-b5d6f.appspot.com/o/avatar%2F331389796_589978462627805_747567276571006630_n.jpg?alt=media&token=9cb28ac5-373d-4b6b-a297-c20dd002f281,https://firebasestorage.googleapis.com/v0/b/charityapp-b5d6f.appspot.com/o/avatar%2F331143309_711209323885616_5846730995840208781_n.jpg?alt=media&token=7d454f24-6ec9-46cf-a7e7-d89668e8dc83,https://firebasestorage.googleapis.com/v0/b/charityapp-b5d6f.appspot.com/o/avatar%2F331061934_585800673440204_7417033235134927881_n.jpg?alt=media&token=049e4cdb-7adf-4ba9-9cbf-ae05e34083ac,https://firebasestorage.googleapis.com/v0/b/charityapp-b5d6f.appspot.com/o/avatar%2F313417262_5406749056089876_4262535589861793175_n.jpg?alt=media&token=e6f2b8f3-2ff5-4c06-99fc-3a21779e107d,https://firebasestorage.googleapis.com/v0/b/charityapp-b5d6f.appspot.com/o/avatar%2F60279_319097728188393_1252016383_n.jpg?alt=media&token=5602be10-d21e-4845-a8a8-cb972bed1c1d','https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3723.895775694646!2d105.77971787492926!3d21.03685588061447!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x313454caaf9fa467%3A0x4cfd76cf514e1ce1!2zMTQ0IFh1w6JuIFRo4buneSwgTWFpIEThu4tjaCwgQ-G6p3UgR2nhuqV5LCBIw6AgTuG7mWksIFZp4buHdCBOYW0!5e0!3m2!1svi!2s!4v1684423717007!5m2!1svi!2s',0,NULL,NULL,NULL,0,NULL,NULL,NULL),(2,'Hãy cho đi, ngay cả khi bạn có một chút.','https://Quytrangkhuyet.com','https://firebasestorage.googleapis.com/v0/b/charityapp-b5d6f.appspot.com/o/avatar%2F291330274_757767925639560_6919455420809788880_n.jpg?alt=media&token=5980cdd6-2519-4269-8dfe-34b11de58374','Cứu trợ và chăm sóc cho các cụ già không nơi nương tựạ, trẻ em bị bỏ rơi và mẹ bầu cơ nhỡ','QUỸ TRĂNG KHUYẾT là một tổ chức từ thiện về nhân đạo và sự sống, nhằm kết nối cộng đồng và thực hiện các hoạt động trợ giúp trực tiếp cho các CỤ GIÀ không nơi nương tựa, TRẺ EM bị bỏ rơi và MẸ BẦU cơ nhỡ. Trăng Khuyết hoạt động độc lập, phi tôn giáo và phi lợi nhuận trên toàn lãnh thổ Việt Nam. Thông qua pháp nhân là Quỹ Từ Thiện & BTXH Trăng Khuyết, một doanh nghiệp xã hội, hoạt động 100% nhằm mục đích hỗ trợ cộng đồng.','https://www.facebook.com/tuthientrangkhuyet','','','','https://www.youtube.com/embed/1O0W3c7rYTk','','','5999678 - Ngân Hàng Á Châu (ACB) - QUỸ TỪ THIỆN & BTXH TRĂNG KHUYẾT','https://firebasestorage.googleapis.com/v0/b/charityapp-b5d6f.appspot.com/o/avatar%2F275502572_682620936487593_3139425350149649459_n.jpg?alt=media&token=209f0b45-7b51-4b66-be4e-fed3902943e7','https://firebasestorage.googleapis.com/v0/b/charityapp-b5d6f.appspot.com/o/avatar%2F341374651_616792260311194_7891060275260598400_n.jpg?alt=media&token=3e8ad7da-6574-4ef6-a3bf-a07ea431d0eb,https://firebasestorage.googleapis.com/v0/b/charityapp-b5d6f.appspot.com/o/avatar%2F341068907_234669459062824_7705570912220522839_n.jpg?alt=media&token=735fc070-1d8f-4c29-8c21-bb9d40cb624c,https://firebasestorage.googleapis.com/v0/b/charityapp-b5d6f.appspot.com/o/avatar%2F340867568_1706284436498078_3863059658257926172_n.jpg?alt=media&token=8c2a6f13-dec1-4eb6-86fb-38dc742b040a,https://firebasestorage.googleapis.com/v0/b/charityapp-b5d6f.appspot.com/o/avatar%2F345633937_597246162354764_5663573550214311213_n.jpg?alt=media&token=6ca8cd80-8545-4067-9c74-3b3c82e32853,https://firebasestorage.googleapis.com/v0/b/charityapp-b5d6f.appspot.com/o/avatar%2F344351814_253134960619935_4690919352454329900_n.jpg?alt=media&token=a0fe2948-fa13-4eff-8080-997072fd09d1','https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.0893959956725!2d106.66409107425997!3d10.804464989345986!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x317529251d2f55d1%3A0xcb92ac22e85753bb!2zNTQgxJAuIFBo4buVIFF1YW5nLCBQaMaw4budbmcgMiwgVMOibiBCw6xuaCwgVGjDoG5oIHBo4buRIEjhu5MgQ2jDrSBNaW5oLCBWaeG7h3QgTmFt!5e0!3m2!1svi!2s!4v1684424797388!5m2!1svi!2s',0,NULL,NULL,NULL,0,NULL,NULL,NULL),(3,'Trách nhiệm - Cam kết - Can đảm - Tin cậy',' https://sosvietnam.org/','https://firebasestorage.googleapis.com/v0/b/charityapp-b5d6f.appspot.com/o/avatar%2F347610737_789793939127192_8606295335934675084_n.jpg?alt=media&token=cbb967e6-36ba-4bfb-9abd-26ece5ea0836','KHÔNG TRẺ EM NÀO PHẢI LỚN LÊN MỘT MÌNH và ngày càng THÊM NHIỀU TRẺ ĐƯỢC SỐNG TRONG MỘT MÁI NHÀ YÊU THƯƠNG VÀ CÓ CƠ HỘI BÌNH ĐẲNG ĐỂ THÀNH CÔNG TRONG CUỘC SỐNG','Làng trẻ em SOS là tổ chức phi chính phủ, phi lợi nhuận, phi tôn giáo nhằm nuôi dưỡng, chăm sóc và giáo dục trẻ mồ côi, trẻ bị bỏ rơi và trẻ có hoàn cảnh đặc biệt khó khăn. Làng trẻ em SOS VIệt Nam được thành lập từ năm 1987 và hoạt động theo mô hình gia đình thay thế với 4 nguyên tắc sư phạm là: Trẻ em - Ba Mẹ - Gia đình - Cộng đồng. Hiện nay, làng trẻ em SOS Việt Nam đã phát triển tại 17 tỉnh thành với 17 làng, với hơn 70 chương trình, dự án như trường Mẫu giáo, trường Phổ thông Hermann Gmeiner, Trường Trung cấp Nghề Việt Trì, và Xưởng Nghề dành cho học sinh và thanh niên trong Làng SOS và ngoài cộng đồng. Tổng số trẻ hưởng lợi lên đến hơn 260.000 trẻ.','https://www.facebook.com/soschildrensvillagesVietnam/','','','','https://www.youtube.com/embed/tidHYfg1u44','','','','https://firebasestorage.googleapis.com/v0/b/charityapp-b5d6f.appspot.com/o/avatar%2Favt_n.jpg?alt=media&token=396af62a-246a-48af-b03c-8fed2e695565','https://firebasestorage.googleapis.com/v0/b/charityapp-b5d6f.appspot.com/o/avatar%2F346629780_207929908683793_455842464566482793_n.jpg?alt=media&token=818bdc77-892b-4798-943c-7b12645e8a7d,https://firebasestorage.googleapis.com/v0/b/charityapp-b5d6f.appspot.com/o/avatar%2F342182065_943242046926890_1177391953974792708_n.jpg?alt=media&token=de2a8e9a-6d1b-455e-97ae-1639bc1932c8,https://firebasestorage.googleapis.com/v0/b/charityapp-b5d6f.appspot.com/o/avatar%2F342514364_883269216104802_4980032092419368124_n.jpg?alt=media&token=96d5822c-589c-48d8-9e03-32e463b22eb5,https://firebasestorage.googleapis.com/v0/b/charityapp-b5d6f.appspot.com/o/avatar%2F308503920_5680855278644685_1261761955890728507_n.jpg?alt=media&token=bc97720e-c8c4-419c-b7e3-f2a5d1feceae,https://firebasestorage.googleapis.com/v0/b/charityapp-b5d6f.appspot.com/o/avatar%2F342543800_949305609747053_2859494790336206452_n.jpg?alt=media&token=3222c078-e93f-4cab-882b-60a5cc431e60','https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3723.870518215138!2d105.77768117492937!3d21.037866280613784!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x313454ca9a29e603%3A0xd31ac42d8432f0c3!2zMSBQaOG6oW0gVsSDbiDEkOG7k25nLCBNYWkgROG7i2NoLCBD4bqndSBHaeG6pXksIEjDoCBO4buZaSwgVmnhu4d0IE5hbQ!5e0!3m2!1svi!2s!4v1684425717639!5m2!1svi!2s',0,NULL,NULL,NULL,0,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `charities` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -338,7 +335,7 @@ CREATE TABLE `donations` (
   `description` varchar(255) DEFAULT NULL,
   `images` longtext,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -347,7 +344,7 @@ CREATE TABLE `donations` (
 
 LOCK TABLES `donations` WRITE;
 /*!40000 ALTER TABLE `donations` DISABLE KEYS */;
-INSERT INTO `donations` VALUES (18,NULL,'Đã nhận',NULL,1,'[{\"name\":\"Áo ấm cho em\",\"id\":1,\"status\":\"Đã quyên góp\"}]','mi tom kkk','zczxc','áđá','hai khuat','0348399696','dfdsf','Tỉnh Cao Bằng','Huyện Trùng Khánh','Xã Quang Trung','16/5/2023','zxczx','https://firebasestorage.googleapis.com/v0/b/charityapp-b5d6f.appspot.com/o/avatar%2Favt-l3-2.png?alt=media&token=ca4e52ca-392d-4dae-9fda-931bd4c00223'),(19,4,'Đã nhận',NULL,1,'[{\"name\":\"ao am cho em\",\"id\":1,\"status\":\"Đã xác nhận\"}]','quan ao kkk','xcvxc','fxvbc','hai khuat','0348399696','dfdsf','Tỉnh Cao Bằng','Huyện Trùng Khánh','Xã Quang Trung','16/5/2023','cxvcxv','https://firebasestorage.googleapis.com/v0/b/charityapp-b5d6f.appspot.com/o/avatar%2Favt-l3-1.jpg?alt=media&token=2a10a34a-c28b-46c0-aafb-dd29c9a7cb6f, https://firebasestorage.googleapis.com/v0/b/charityapp-b5d6f.appspot.com/o/avatar%2Favt.png?alt=media&token=abac88b7-c527-4efe-b930-59643cef5e1c'),(20,4,'Đã nhận',NULL,1,'[{\"name\":\"Áo ấm cho em\",\"id\":1,\"status\":\"Đã xác nhận\"},{\"name\":\"Áo ấm cho em\",\"id\":2,\"status\":\"Bị hủy\"}]','sach vo update','áđá','sadcád','hai khuat','0348399696','dfdsf','Tỉnh Cao Bằng','Huyện Trùng Khánh','Xã Quang Trung','16/5/2023','áđá','https://firebasestorage.googleapis.com/v0/b/charityapp-b5d6f.appspot.com/o/avatar%2Fanh2kb.jpg?alt=media&token=9dec0617-efe4-4cb8-9c81-c375a9d55eae'),(21,4,'Từ chối nhận',NULL,2,'[{\"name\":\"tu thien nam dinh\",\"id\":2,\"status\":\"Bị hủy\"}]',' but but up','ád','ád','hai khuat','0348399696','dfdsf','Tỉnh Cao Bằng','Huyện Trùng Khánh','Xã Quang Trung','16/5/2023','ád','https://firebasestorage.googleapis.com/v0/b/charityapp-b5d6f.appspot.com/o/avatar%2Fb1-4-min.jpg?alt=media&token=0f01e284-41fa-4e7d-bde8-8a896896b719, https://firebasestorage.googleapis.com/v0/b/charityapp-b5d6f.appspot.com/o/avatar%2Fanh2kb.jpg?alt=media&token=1e00fdf7-9d8a-45eb-881c-8f0ec34570de'),(22,6,'Chưa nhận',NULL,NULL,'[{\"name\":\"Áo ấm cho em\",\"id\":2,\"status\":\"Đợi xác nhận\"},{\"name\":\"Áo ấm cho em\",\"id\":1,\"status\":\"Đợi xác nhận\"},{\"name\":\"Áo ấm cho em\",\"id\":3,\"status\":\"Đợi xác nhận\"}]','do dung ung ho nguoi dung 2','dsf','xvg','trinh haong','0348699696','dsfsdf','Tỉnh Tuyên Quang','Huyện Yên Sơn','Xã Kiến Thiết','16/5/2023','dsf','https://firebasestorage.googleapis.com/v0/b/charityapp-b5d6f.appspot.com/o/avatar%2Favt-l3-2.png?alt=media&token=b635dd98-e06a-4a76-a1f6-a73f9f6072d7'),(23,7,'Chưa nhận',NULL,NULL,'[{\"name\":\"Áo ấm cho em\",\"id\":2,\"status\":\"Đợi xác nhận\"}]','mi chinh nguoi dung 3','sad','zfx','xuan son','0359949494','dvgdsf','Tỉnh Hà Giang','Huyện Mèo Vạc','Xã Pải Lủng','16/5/2023','ád','https://firebasestorage.googleapis.com/v0/b/charityapp-b5d6f.appspot.com/o/avatar%2Favt-l3-2.png?alt=media&token=f7bae2b6-5960-4c7c-9a69-759b6686e2be'),(24,7,'Chờ xác nhận','tu thien nam dinh',2,'[{\"name\":\"tu thien nam dinh\",\"id\":2,\"status\":\"Yêu cầu xác nhận\"}]','ban hoc nd3','xzcc','xdv','xuan son','0359949494','dvgdsf','Tỉnh Hà Giang','Huyện Mèo Vạc','Xã Pải Lủng','16/5/2023','szxczx','https://firebasestorage.googleapis.com/v0/b/charityapp-b5d6f.appspot.com/o/avatar%2Fanhtest2.jpg?alt=media&token=4fd0f332-1dd7-45af-beb0-9325fa355498'),(26,4,'Từ chối nhận',NULL,1,'[{\"name\":\"ao am cho em\",\"id\":1,\"status\":\"Bị hủy\"}]','khau trang','sađá','dxf','hai khuat','0348399696','dfdsf','Tỉnh Cao Bằng','Huyện Trùng Khánh','Xã Quang Trung','16/5/2023','sad','https://firebasestorage.googleapis.com/v0/b/charityapp-b5d6f.appspot.com/o/avatar%2Favt.png?alt=media&token=82be3cda-2a5f-44ea-96b6-85fec641f18f'),(27,4,'Chưa nhận',NULL,NULL,'[]','binh nuoc','sadá','sađ','hai khuat','0348399696','dfdsf','Tỉnh Cao Bằng','Huyện Trùng Khánh','Xã Quang Trung','16/5/2023','ádá','https://firebasestorage.googleapis.com/v0/b/charityapp-b5d6f.appspot.com/o/avatar%2Fanh2kb.jpg?alt=media&token=653b0bdd-0e79-4678-a822-11f990f11ce0'),(28,4,'Chờ xác nhận','ao am cho em',1,'[{\"name\":\"ao am cho em\",\"id\":1,\"status\":\"Yêu cầu xác nhận\"}]','banh mi','zxcxzc','zxczxc','hai khuat','0348399696','dfdsf','Tỉnh Cao Bằng','Huyện Trùng Khánh','Xã Quang Trung','16/5/2023','xzcxzc','https://firebasestorage.googleapis.com/v0/b/charityapp-b5d6f.appspot.com/o/avatar%2Favt-l3-1.jpg?alt=media&token=80d22022-b5aa-47b7-b516-264829e61cc7'),(29,4,'Chưa nhận',NULL,NULL,'[{\"name\":\"Áo ấm cho em\",\"id\":1,\"status\":\"Đợi xác nhận\"},{\"name\":\"Áo ấm cho em\",\"id\":2,\"status\":\"Đợi xác nhận\"},{\"name\":\"Áo ấm cho em\",\"id\":3,\"status\":\"Đợi xác nhận\"}]','xe dap','ghcjgh','hgcgc','hai khuat','0348399696','dfdsf','Tỉnh Cao Bằng','Huyện Trùng Khánh','Xã Quang Trung','16/5/2023','jhvhjk','https://firebasestorage.googleapis.com/v0/b/charityapp-b5d6f.appspot.com/o/avatar%2Fanh2kb.jpg?alt=media&token=f222ee45-052b-424c-be31-cbb300f80144'),(30,6,'Chờ xác nhận','tu thien nam dinh',2,'[{\"name\":\"tu thien nam dinh\",\"id\":2,\"status\":\"Yêu cầu xác nhận\"}]','do nd2','sdf','sdf','trinh haong','0348699696','dsfsdf','Tỉnh Tuyên Quang','Huyện Yên Sơn','Xã Kiến Thiết','16/5/2023','dsf','https://firebasestorage.googleapis.com/v0/b/charityapp-b5d6f.appspot.com/o/avatar%2Fanh2kb.jpg?alt=media&token=6877b3ed-d6ea-49a6-927f-b79699d12560'),(31,6,'Chưa nhận',NULL,NULL,'[{\"name\":\"Áo ấm cho em\",\"id\":1,\"status\":\"Đợi xác nhận\"}]','coc nuco nd2','dsf','sdf','trinh haong','0348699696','dsfsdf','Tỉnh Tuyên Quang','Huyện Yên Sơn','Xã Kiến Thiết','16/5/2023','dsfsd','https://firebasestorage.googleapis.com/v0/b/charityapp-b5d6f.appspot.com/o/avatar%2Fanh2kb.jpg?alt=media&token=e4165419-3f6c-4292-b399-9c5edb4e3b08');
+INSERT INTO `donations` VALUES (37,4,'Chưa nhận',NULL,NULL,'[{\"name\":\"Áo ấm cho em\",\"id\":1,\"status\":\"Đợi xác nhận\"},{\"name\":\"Từ Thiện Trăng Khuyết\",\"id\":2,\"status\":\"Đợi xác nhận\"}]','Quần Áo','Lai Châu','Trẻ em','Hải Khuất','0348399696','xóm 10','Tỉnh Cao Bằng','Huyện Trùng Khánh','Xã Quang Trung','18/5/2023','Quần áo cũ đã qua sử dụng, đã được chọn lựa,...','https://firebasestorage.googleapis.com/v0/b/charityapp-b5d6f.appspot.com/o/avatar%2F125187193_286365579333268_6936559611348470557_n.jpg?alt=media&token=86ba066b-4715-48cd-b2ab-ef25282c8822, https://firebasestorage.googleapis.com/v0/b/charityapp-b5d6f.appspot.com/o/avatar%2F125181474_1031853657226889_6619401785658743166_n.jpg?alt=media&token=48551102-05da-43c5-9fe1-4c9c114e6ff8, https://firebasestorage.googleapis.com/v0/b/charityapp-b5d6f.appspot.com/o/avatar%2F124885478_421110195721109_4644500650897298301_n.jpg?alt=media&token=07ef4342-6bc5-4e91-a9cc-fcecfaa39f4e'),(38,4,'Chờ xác nhận','Áo ấm cho em',1,'[{\"name\":\"Áo ấm cho em\",\"id\":1,\"status\":\"Yêu cầu xác nhận\"}]','Sách vở','Nam định','Trẻ em','Hải Khuất','0348399696','xóm 10','Tỉnh Cao Bằng','Huyện Trùng Khánh','Xã Quang Trung','18/5/2023','Sách vở mới vã cũ đã qua sử dụng','https://firebasestorage.googleapis.com/v0/b/charityapp-b5d6f.appspot.com/o/avatar%2Fnghe-an-quyen-tang-hang-nghin-bo-sgk-vo-viet-cho-hoc-sinh-vung-lu-40-.4579.jpg?alt=media&token=38473432-1214-4e36-8a42-a59cefd45310, https://firebasestorage.googleapis.com/v0/b/charityapp-b5d6f.appspot.com/o/avatar%2Fnghe-an-quyen-tang-hang-nghin-bo-sgk-vo-viet-cho-hoc-sinh-vung-lu-40-.5539.jpg?alt=media&token=5c6b2d98-dddc-4b04-ad51-e4ae7bb297cb, https://firebasestorage.googleapis.com/v0/b/charityapp-b5d6f.appspot.com/o/avatar%2Fnghe-an-quyen-tang-hang-nghin-bo-sgk-vo-viet-cho-hoc-sinh-vung-lu-40-.3169.jpg?alt=media&token=7da65a8b-b2a8-46d9-bad3-51c31524ec71, https://firebasestorage.googleapis.com/v0/b/charityapp-b5d6f.appspot.com/o/avatar%2Fnghe-an-quyen-tang-hang-nghin-bo-sgk-vo-viet-cho-hoc-sinh-vung-lu-40-.1715.jpg?alt=media&token=23532f8d-e1b1-4f62-a3d3-191de5288967'),(39,4,'Đã nhận',NULL,3,'[{\"name\":\"Làng trẻ em SOS Việt Nam\",\"id\":3,\"status\":\"Đã xác nhận\"},{\"name\":\"Áo ấm cho em\",\"id\":1,\"status\":\"Bị hủy\"}]','Gạo, Mì tôm','Hà Giang','tất cả','Hải Khuất','0348399696','xóm 10','Tỉnh Cao Bằng','Huyện Trùng Khánh','Xã Quang Trung','19/5/2023','Gạo và Mì Tôm đóng gói','https://firebasestorage.googleapis.com/v0/b/charityapp-b5d6f.appspot.com/o/avatar%2Fxa-huu-khuong_BZHL.jpg?alt=media&token=534d8c7c-524c-437c-b21d-8937bbcfa281, https://firebasestorage.googleapis.com/v0/b/charityapp-b5d6f.appspot.com/o/avatar%2Fgao-cuu-tro_XMWS.jpg?alt=media&token=ae31d312-49d3-4841-bd79-45d882d5e9aa'),(40,4,'Từ chối nhận',NULL,2,'[{\"name\":\"Từ Thiện Trăng Khuyết\",\"id\":2,\"status\":\"Bị hủy\"}]','Khẩu trang y tế','Lạng Sơn','Mọi người vùng dịch','Hải Khuất','0348399696','xóm 10','Tỉnh Cao Bằng','Huyện Trùng Khánh','Xã Quang Trung','19/5/2023','Khẩu trang y tế 5 lớp đảm bảo phòng dịch','https://firebasestorage.googleapis.com/v0/b/charityapp-b5d6f.appspot.com/o/avatar%2Fvna_potal_dien_bien_nhom_thien_nguyen_tu_may_khau_trang_phat_cho_nguoi_ngheo__100658191_stand-1.jpg?alt=media&token=3f6f89dd-11a3-400c-ae9d-7e4a6372e2a8'),(41,6,'Chưa nhận',NULL,NULL,'[]','Nước lọc đóng chai','cả nước','Người dân vùng lũ','Trịnh Hoàng','0348699696','số 200','Tỉnh Tuyên Quang','Huyện Yên Sơn','Xã Kiến Thiết','19/5/2023','nước lọc được đóng chai tiện lợi','https://firebasestorage.googleapis.com/v0/b/charityapp-b5d6f.appspot.com/o/avatar%2Fz2184354828568_5d48c01cbfd6af2d698ce3a742668477_2.jpg?alt=media&token=62856d2f-ba9e-4b7f-be2d-bdd1f363f068'),(42,6,'Chưa nhận',NULL,NULL,'[{\"name\":\"Từ Thiện Trăng Khuyết\",\"id\":2,\"status\":\"Đợi xác nhận\"},{\"name\":\"Làng trẻ em SOS Việt Nam\",\"id\":3,\"status\":\"Đợi xác nhận\"}]','Giày dép','Lạng Sơn','trẻ em vung cao','Trịnh Hoàng','0348699696','số 200','Tỉnh Tuyên Quang','Huyện Yên Sơn','Xã Kiến Thiết','19/5/2023','Giày dép mới và cũ đã qua sử dụng','https://firebasestorage.googleapis.com/v0/b/charityapp-b5d6f.appspot.com/o/avatar%2Ft%E1%BA%A3i%20xu%E1%BB%91ng.jpeg?alt=media&token=b6f12ae8-3dfc-48d9-9aa9-a198333c9ac2');
 /*!40000 ALTER TABLE `donations` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -360,13 +357,13 @@ DROP TABLE IF EXISTS `feedback`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `feedback` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `message` longtext NOT NULL,
-  `reply` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
+  `message` varchar(255) NOT NULL,
+  `reply` varchar(255) DEFAULT NULL,
   `user_id` int NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `feedback_FK` (`user_id`),
-  CONSTRAINT `feedback_FK` FOREIGN KEY (`user_id`) REFERENCES `user_account` (`Id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  KEY `FKmyeioklh8skbkh8c4nwq6drtc` (`user_id`),
+  CONSTRAINT `FKmyeioklh8skbkh8c4nwq6drtc` FOREIGN KEY (`user_id`) REFERENCES `user_account` (`Id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -375,7 +372,6 @@ CREATE TABLE `feedback` (
 
 LOCK TABLES `feedback` WRITE;
 /*!40000 ALTER TABLE `feedback` DISABLE KEYS */;
-INSERT INTO `feedback` VALUES (1,'Đây là feedback user gửi cho admin','Đây là reply admin gửi lại user',10);
 /*!40000 ALTER TABLE `feedback` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -396,7 +392,7 @@ CREATE TABLE `messages` (
   KEY `FKelqy9svcg11vxw6l9quwij3tw` (`user_id_send`),
   CONSTRAINT `FKelqy9svcg11vxw6l9quwij3tw` FOREIGN KEY (`user_id_send`) REFERENCES `user_account` (`Id`),
   CONSTRAINT `FKsgwm8aumrpmrndbl7nf89h02g` FOREIGN KEY (`user_id_receive`) REFERENCES `user_account` (`Id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -405,8 +401,36 @@ CREATE TABLE `messages` (
 
 LOCK TABLES `messages` WRITE;
 /*!40000 ALTER TABLE `messages` DISABLE KEYS */;
-INSERT INTO `messages` VALUES (3,'Đây là nội dung thông báo!',4,12),(4,'Đây là nội dung thông báo!',4,12);
 /*!40000 ALTER TABLE `messages` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `notification`
+--
+
+DROP TABLE IF EXISTS `notification`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `notification` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `message` longtext NOT NULL,
+  `receive_user_id` int NOT NULL,
+  `created_user_id` int NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FKprqu8mc4fpqn7if9rfma49qqo` (`receive_user_id`),
+  KEY `FKo07akhffm4dce1qdgrnyqq0u1` (`created_user_id`),
+  CONSTRAINT `FKo07akhffm4dce1qdgrnyqq0u1` FOREIGN KEY (`created_user_id`) REFERENCES `user_account` (`Id`),
+  CONSTRAINT `FKprqu8mc4fpqn7if9rfma49qqo` FOREIGN KEY (`receive_user_id`) REFERENCES `user_account` (`Id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `notification`
+--
+
+LOCK TABLES `notification` WRITE;
+/*!40000 ALTER TABLE `notification` DISABLE KEYS */;
+/*!40000 ALTER TABLE `notification` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -426,7 +450,7 @@ CREATE TABLE `post_info` (
   PRIMARY KEY (`post_id`),
   KEY `campaign_id_fkey` (`campaign_id`),
   CONSTRAINT `post_info_FK` FOREIGN KEY (`campaign_id`) REFERENCES `campaign_info` (`campaign_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -585,7 +609,7 @@ CREATE TABLE `user_account` (
 
 LOCK TABLES `user_account` WRITE;
 /*!40000 ALTER TABLE `user_account` DISABLE KEYS */;
-INSERT INTO `user_account` VALUES (4,'Tài khoản admin','AdminTK','0347379993','DH6DA4PEXzTf8yPMpeg2tqswOnzJRSNa85RodN9aZH4zd2gTakO/xeK3ngpvjwd7owZ7FDnW4m6RhOhIvpTR/Q==','UQIyapg+65rGgEIFKyxpJnLZYn7UgF4A/WeB0NrRjw4=',1,'144','taikhoanadmin@gmail.com',0,NULL,'Thành phố Hà Nội','Quận Hoàn Kiếm','Phường Đồng Xuân','01','002','00040',0),(5,'Tai khoan người dùng','UserTK','0356788888','DH6DA4PEXzTf8yPMpeg2tqswOnzJRSNa85RodN9aZH4zd2gTakO/xeK3ngpvjwd7owZ7FDnW4m6RhOhIvpTR/Q==','UQIyapg+65rGgEIFKyxpJnLZYn7UgF4A/WeB0NrRjw4=',2,'144','taikhoanadmin@gmail.com',0,NULL,'Thành phố Hà Nội','Quận Hoàn Kiếm','Phường Đồng Xuân','01','002','00040',0),(6,'Áo ấm cho em','CharityTK','0347379994','p2PXGwmw+BvucVhH3SrmlbFJWufnWTLPd8r8MhocnWs9V6wM9j4sikZDHEQwcBqJfY+mDsHlXWUv0cCsfhSS5g==','KDELA6FXWii1TXkZxCecslLHzxPTVoRFSujBt8twFBk=',3,'144','aoamchoem@gmail.com',0,1,'Thành phố Hà Nội','Quận Ba Đình','Phường Phúc Xá','01','001','00001',0),(7,'xuan son','nguoidung3','0359949494','V6PrAKOj15CCFV4gKFrPWPa0Fmaly293gDFIWmKGaQgxxOzqezFbaygzmbBn1fV0rUdJlBigCO+WZCFncVsIrw==','v2ADPfyZ9VbV0HZFCeu7ADsboEUoSEl7KDJhA7+RYY4=',2,'dvgdsf','son@gmail.com',0,NULL,'Tỉnh Hà Giang','Huyện Mèo Vạc','Xã Pải Lủng','02','027','00775',0),(8,'tu thien nam dinh','tochuc2','0348979898','ueR+5hbeHU3lA+V/14pqDYMxKj3xT0QuCock/T/NDZTv2kUS5mk88pa0nmmdrxyIZp8NHxUCev4e48H7NAhqfQ==','9XR2Y1XFbqjLdROEPlAqORVXb0dPWw4+1+xlQEqaW4s=',3,'sađá','tochuc2@gmail.com',0,2,'Tỉnh Hà Giang','Huyện Mèo Vạc','Xã Pải Lủng','02','027','00775',0),(9,'mai am yeu thuong','tochuc3','0348929394','FYbEGntfxEdrE476Bdzyi3vCgMxYD3gbWjsSxYyaiYtaO3cO776ubmHfpLH6hA2fzsCjz6uw+cZIa8B6hUI/ag==','ENHJzpIwYmkXiwND0PPOR0q+yIyIl3cJEatMeMY/P+M=',3,'sad','tochuc3@gmail.com',0,3,'Tỉnh Hà Giang','Huyện Mèo Vạc','Xã Pải Lủng','02','027','00775',0),(10,'hai khuat','nguoidung1','0348399696','cloQN+4OWo8z7RjnrjAP+aLIlNnm428fFeZeyhLMC0hpxlSw80ZW2eQyquFXxAzfD5IVnDboNxmQWEDsXfHi2Q==','Q+ELUB58TMCVd8x//UpNO56ccI3CMh1qeNwsK5mtSIc=',2,'dfdsf','hai@gmail.com',0,NULL,'Tỉnh Cao Bằng','Huyện Trùng Khánh','Xã Quang Trung','04','047','01465',0),(12,'trinh haong','nguoidung2','0348699696','7pdaboJFvRjBNjDmi2DbIQY2BetobzmqlHhCqwhUbPVE/YB3/Zy9ZQUExuirsUpDSZohThDwqAVIogNldPeeNw==','XjmHrWLUX0Aq/9dM5Q/k/fOZ/Fctv3D4LsLEV2UaJ8o=',2,'dsfsdf','hoang@gmail.com',0,NULL,'Tỉnh Tuyên Quang','Huyện Yên Sơn','Xã Kiến Thiết','08','075','02437',0);
+INSERT INTO `user_account` VALUES (4,'Hải Khuất','nguoidung1','0348399696','rr5G6NySLlAK2Vl2lCf6hFkopJ2aFb0oueu6AjYiK4b92ojLGS2FTSZQjAxWxL7WWSa4ivJp0vl8pQ50YUliyg==','MiPj6OiUOg7Zmp25ZaSFDiDB5jl0DAILii6N5cems/Q=',2,'xóm 10','haikhuat308@gmail.com',0,NULL,'Tỉnh Cao Bằng','Huyện Trùng Khánh','Xã Quang Trung','04','047','01465',0),(5,'Áo ấm cho em','tochuc1','0348599595','Bsg7klq4JhzMEbIYnlW4pGe7S4tB7xAfjrivWOHxmvqOEeeSy7a1xkYivKNT5TvtKYdg4GtaM3aJzmi/n5+rcg==','+Fg9T7ZqfsvycpA1En1qpYX6Aj8NhSbsPBIj1rBikSE=',3,'144 Xuân Thủy','aoamchoem@gmail.com',0,1,'Thành phố Hà Nội','Quận Cầu Giấy','Phường Dịch Vọng Hậu','01','005','00167',0),(6,'Trịnh Hoàng','nguoidung2','0348699696','7pdaboJFvRjBNjDmi2DbIQY2BetobzmqlHhCqwhUbPVE/YB3/Zy9ZQUExuirsUpDSZohThDwqAVIogNldPeeNw==','XjmHrWLUX0Aq/9dM5Q/k/fOZ/Fctv3D4LsLEV2UaJ8o=',2,'số 200','hoang@gmail.com',0,NULL,'Tỉnh Tuyên Quang','Huyện Yên Sơn','Xã Kiến Thiết','08','075','02437',0),(7,'Xuân Sơn','nguoidung3','0359949494','V6PrAKOj15CCFV4gKFrPWPa0Fmaly293gDFIWmKGaQgxxOzqezFbaygzmbBn1fV0rUdJlBigCO+WZCFncVsIrw==','v2ADPfyZ9VbV0HZFCeu7ADsboEUoSEl7KDJhA7+RYY4=',2,'số 300','son@gmail.com',0,NULL,'Tỉnh Bắc Giang','Huyện Lục Nam','Xã Đông Hưng','24','218','07450',0),(8,'Từ Thiện Trăng Khuyết','tochuc2','0348979898','ueR+5hbeHU3lA+V/14pqDYMxKj3xT0QuCock/T/NDZTv2kUS5mk88pa0nmmdrxyIZp8NHxUCev4e48H7NAhqfQ==','9XR2Y1XFbqjLdROEPlAqORVXb0dPWw4+1+xlQEqaW4s=',3,'54 Phổ Quang','tuthientrangkhuyet@gmail.com',0,2,'Thành phố Hồ Chí Minh','Quận Tân Bình','Phường 02','79','766','26965',0),(9,'Làng trẻ em SOS Việt Nam','tochuc3','0348929394','FYbEGntfxEdrE476Bdzyi3vCgMxYD3gbWjsSxYyaiYtaO3cO776ubmHfpLH6hA2fzsCjz6uw+cZIa8B6hUI/ag==','ENHJzpIwYmkXiwND0PPOR0q+yIyIl3cJEatMeMY/P+M=',3,'ngõ 1 Phạm Văn Đồng','sosvietnam@gmail.com',0,3,'Thành phố Hà Nội','Quận Cầu Giấy','Phường Mai Dịch','01','005','00163',0),(10,'Tài khoản admin','AdminTK','0347379993','DH6DA4PEXzTf8yPMpeg2tqswOnzJRSNa85RodN9aZH4zd2gTakO/xeK3ngpvjwd7owZ7FDnW4m6RhOhIvpTR/Q==','UQIyapg+65rGgEIFKyxpJnLZYn7UgF4A/WeB0NrRjw4=',1,'144','taikhoanadmin@gmail.com',0,NULL,'Thành phố Hà Nội','Quận Hoàn Kiếm','Phường Đồng Xuân','01','002','00040',0);
 /*!40000 ALTER TABLE `user_account` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -628,4 +652,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-05-18 16:24:08
+-- Dump completed on 2023-05-19  2:19:12
