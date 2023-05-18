@@ -162,22 +162,23 @@ public class PostController {
 
 
         try {
-            assert campaignId != null;
+            if (campaignId == null || postId == null)
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                        .body(new ResponseModel("campaign-id and post-id must be not null!"));
             if (!Objects.equals(charityRepository.getReferenceById(accessService.getUserByToken(token).getCharityId()),
                     accessService.getUserByCampaignId(Integer.parseInt(campaignId))))
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
                         .body(new ResponseModel("You do not have permission to this campaign!"));
 
-
-            assert postId != null;
-            postInfoRepository.deleteById(Integer.valueOf(postId));
+            Integer postID = Integer.parseInt(postId);
+            postInfoRepository.deleteById(postID);
 
             return ResponseEntity.status(HttpStatus.OK)
                     .body(new ResponseModel("Deleted campaign"));
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(new ResponseModel(e.getMessage()));
+                    .body(new ResponseModel(e.getMessage()) + "(campaign-id :" + campaignId + ", post-id :" + postId + ")");
         }
     }
 }
