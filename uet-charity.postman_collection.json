@@ -1,11 +1,11 @@
 {
 	"collection": {
 		"info": {
-			"_postman_id": "91888c63-0e8a-4fce-8fe3-c8e1b250654c",
+			"_postman_id": "392ee263-7428-4bd6-9721-02fffe1571af",
 			"name": "uet-charity",
 			"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-			"updatedAt": "2023-05-18T01:59:39.000Z",
-			"uid": "24700822-91888c63-0e8a-4fce-8fe3-c8e1b250654c"
+			"updatedAt": "2023-05-18T18:17:27.000Z",
+			"uid": "18916357-392ee263-7428-4bd6-9721-02fffe1571af"
 		},
 		"item": [
 			{
@@ -13,7 +13,7 @@
 				"item": [
 					{
 						"name": "push access token",
-						"id": "7b4e9043-b47f-489b-a7a1-a3a51d4f68e0",
+						"id": "32215859-6047-43ad-97c9-042ec89fa2c8",
 						"protocolProfileBehavior": {
 							"disableBodyPruning": true
 						},
@@ -22,7 +22,7 @@
 							"header": [],
 							"body": {
 								"mode": "raw",
-								"raw": "{\n    \"user_id\" : 10,\n    \"token\": \"nguoidung1\"\n}",
+								"raw": "{\n    \"user_id\" : 5,\n    \"token\": \"tochuc1\"\n}",
 								"options": {
 									"raw": {
 										"language": "json"
@@ -44,11 +44,11 @@
 							}
 						},
 						"response": [],
-						"uid": "24700822-7b4e9043-b47f-489b-a7a1-a3a51d4f68e0"
+						"uid": "18916357-32215859-6047-43ad-97c9-042ec89fa2c8"
 					},
 					{
 						"name": "push access token Copy",
-						"id": "9134763c-8f1f-41d5-8ad4-322cb8748aaa",
+						"id": "37229dda-db21-4266-94b5-4fc99fc2ec1f",
 						"protocolProfileBehavior": {
 							"disableBodyPruning": true
 						},
@@ -76,18 +76,18 @@
 							}
 						},
 						"response": [],
-						"uid": "24700822-9134763c-8f1f-41d5-8ad4-322cb8748aaa"
+						"uid": "18916357-37229dda-db21-4266-94b5-4fc99fc2ec1f"
 					}
 				],
-				"id": "31273815-4540-47d9-b9a7-55e1145a6488",
-				"uid": "24700822-31273815-4540-47d9-b9a7-55e1145a6488"
+				"id": "9b37bf2e-5aa5-465d-a42d-0c76df5d6d0f",
+				"uid": "18916357-9b37bf2e-5aa5-465d-a42d-0c76df5d6d0f"
 			},
 			{
 				"name": "address",
 				"item": [
 					{
 						"name": "lấy toàn bộ các tỉnh",
-						"id": "97e54ab0-8fa0-4a40-a96d-170aa743c207",
+						"id": "04d3a6bf-1f2b-4a7a-9e2b-d5bbeb87882b",
 						"protocolProfileBehavior": {
 							"disableBodyPruning": true
 						},
@@ -109,11 +109,11 @@
 							}
 						},
 						"response": [],
-						"uid": "24700822-97e54ab0-8fa0-4a40-a96d-170aa743c207"
+						"uid": "18916357-04d3a6bf-1f2b-4a7a-9e2b-d5bbeb87882b"
 					},
 					{
 						"name": "get all huyện thuộc tỉnh",
-						"id": "a9d4daac-cf1a-46ae-8c51-2e6524ae598f",
+						"id": "eeade0f3-d21c-458b-ae82-7a220608912a",
 						"protocolProfileBehavior": {
 							"disableBodyPruning": true
 						},
@@ -141,11 +141,11 @@
 							}
 						},
 						"response": [],
-						"uid": "24700822-a9d4daac-cf1a-46ae-8c51-2e6524ae598f"
+						"uid": "18916357-eeade0f3-d21c-458b-ae82-7a220608912a"
 					},
 					{
 						"name": "get all xã thuộc huyện",
-						"id": "691a57a4-95eb-4773-b85e-34106a992a65",
+						"id": "360e0f71-f1d1-45b9-b18a-68140548b130",
 						"protocolProfileBehavior": {
 							"disableBodyPruning": true
 						},
@@ -173,11 +173,11 @@
 							}
 						},
 						"response": [],
-						"uid": "24700822-691a57a4-95eb-4773-b85e-34106a992a65"
+						"uid": "18916357-360e0f71-f1d1-45b9-b18a-68140548b130"
 					}
 				],
-				"id": "5fcc66b3-7168-45ec-846a-19ac41e984a9",
-				"uid": "24700822-5fcc66b3-7168-45ec-846a-19ac41e984a9"
+				"id": "d703ccc1-01ff-4d4a-9d3b-5edf7a6ac850",
+				"uid": "18916357-d703ccc1-01ff-4d4a-9d3b-5edf7a6ac850"
 			},
 			{
 				"name": "chiến dịch (cuộc vận động)",
@@ -187,7 +187,7 @@
 						"item": [
 							{
 								"name": "lấy các người dùng theo dõi cuộc vận động",
-								"id": "6e4a5ca8-a523-408a-89a1-b1c85f32689e",
+								"id": "f4b8be67-6428-48f8-ad78-97b17026592f",
 								"protocolProfileBehavior": {
 									"disableBodyPruning": true
 								},
@@ -221,11 +221,11 @@
 									}
 								},
 								"response": [],
-								"uid": "24700822-6e4a5ca8-a523-408a-89a1-b1c85f32689e"
+								"uid": "18916357-f4b8be67-6428-48f8-ad78-97b17026592f"
 							},
 							{
 								"name": "thêm người dùng theo dõi cuộc vận động Copy",
-								"id": "80ff2205-2143-47c4-a94c-52bf75299344",
+								"id": "809e7909-238a-4294-9d3a-f37798c593dc",
 								"protocolProfileBehavior": {
 									"disableBodyPruning": true
 								},
@@ -259,11 +259,11 @@
 									}
 								},
 								"response": [],
-								"uid": "24700822-80ff2205-2143-47c4-a94c-52bf75299344"
+								"uid": "18916357-809e7909-238a-4294-9d3a-f37798c593dc"
 							},
 							{
 								"name": "lấy các cuộc vận động người dùng theo dõi",
-								"id": "601aee27-7327-4ae6-8639-443a0305583b",
+								"id": "6c793fba-222f-45e5-9e84-45a25348ab0e",
 								"protocolProfileBehavior": {
 									"disableBodyPruning": true
 								},
@@ -291,11 +291,11 @@
 									}
 								},
 								"response": [],
-								"uid": "24700822-601aee27-7327-4ae6-8639-443a0305583b"
+								"uid": "18916357-6c793fba-222f-45e5-9e84-45a25348ab0e"
 							},
 							{
 								"name": "thêm người dùng theo dõi cuộc vận động",
-								"id": "3518766a-b77d-4e25-8eed-8f9cad96c1ce",
+								"id": "06f8c1de-eb9d-4f9d-8423-52b23b7e015e",
 								"protocolProfileBehavior": {
 									"disableBodyPruning": true
 								},
@@ -329,18 +329,18 @@
 									}
 								},
 								"response": [],
-								"uid": "24700822-3518766a-b77d-4e25-8eed-8f9cad96c1ce"
+								"uid": "18916357-06f8c1de-eb9d-4f9d-8423-52b23b7e015e"
 							}
 						],
-						"id": "20a3e2ab-2e5c-4a5c-a011-7f55d93da2c4",
-						"uid": "24700822-20a3e2ab-2e5c-4a5c-a011-7f55d93da2c4"
+						"id": "0989407e-2ee6-462c-a194-804f9660f3bf",
+						"uid": "18916357-0989407e-2ee6-462c-a194-804f9660f3bf"
 					},
 					{
 						"name": "sao kê",
 						"item": [
 							{
 								"name": "lấy sao kê cuộc vận động",
-								"id": "fa8efca9-b120-41ff-828a-29b2da7b1a0d",
+								"id": "c17611de-c10b-474d-ad56-2c777c9a3d0e",
 								"protocolProfileBehavior": {
 									"disableBodyPruning": true
 								},
@@ -368,11 +368,11 @@
 									}
 								},
 								"response": [],
-								"uid": "24700822-fa8efca9-b120-41ff-828a-29b2da7b1a0d"
+								"uid": "18916357-c17611de-c10b-474d-ad56-2c777c9a3d0e"
 							},
 							{
 								"name": "thêm sao kê cuộc vận động",
-								"id": "6a07a880-6d9b-46e9-9a50-f6e5c0dd06ee",
+								"id": "ede23c1f-fb0d-42b7-86de-e43d980efa2c",
 								"protocolProfileBehavior": {
 									"disableBodyPruning": true
 								},
@@ -415,15 +415,15 @@
 									}
 								},
 								"response": [],
-								"uid": "24700822-6a07a880-6d9b-46e9-9a50-f6e5c0dd06ee"
+								"uid": "18916357-ede23c1f-fb0d-42b7-86de-e43d980efa2c"
 							}
 						],
-						"id": "6a331f1c-ea2e-44d0-8e28-b66ab2ed65da",
-						"uid": "24700822-6a331f1c-ea2e-44d0-8e28-b66ab2ed65da"
+						"id": "2781866f-cd9f-4d0b-9e5c-75305cab97fb",
+						"uid": "18916357-2781866f-cd9f-4d0b-9e5c-75305cab97fb"
 					},
 					{
 						"name": "get all cuộc vận động",
-						"id": "3a7ff735-bc7f-4dd2-aa17-694f3b700947",
+						"id": "98a1a8f0-fd74-42d4-b134-f186c651f346",
 						"protocolProfileBehavior": {
 							"disableBodyPruning": true
 						},
@@ -456,11 +456,11 @@
 							"description": "# API lấy toàn bộ các cuộc vận động\n\n`Token có thể null`\n\n`Từ Token -> vai trò của ngườ dùng`\n\n* Admin: Trả về toàn bộ cuộc vận động (bị khóa và không bị khóa)\n* Tổ chức: Trả về toàn bộ cuộc vận động của tổ chức đó (bị khóa và chưa bị khóa)\n* Người dùng khách: trả về toàn bộ các cuộc vận động không bị khóa"
 						},
 						"response": [],
-						"uid": "24700822-3a7ff735-bc7f-4dd2-aa17-694f3b700947"
+						"uid": "18916357-98a1a8f0-fd74-42d4-b134-f186c651f346"
 					},
 					{
 						"name": "get by id cuộc vận động",
-						"id": "71bf96ac-c108-40c1-91a7-2b199c9b2341",
+						"id": "cecb0fcf-ea7b-4cf2-b6e1-5cb1eca2bc1a",
 						"protocolProfileBehavior": {
 							"disableBodyPruning": true
 						},
@@ -499,11 +499,11 @@
 							"description": "# API lấy toàn bộ các cuộc vận động\n\n`Token có thể null`\n\n`Từ Token -> vai trò của ngườ dùng`\n\n* Admin: Trả về toàn bộ cuộc vận động (bị khóa và không bị khóa)\n* Tổ chức: Trả về toàn bộ cuộc vận động của tổ chức đó (bị khóa và chưa bị khóa)\n* Người dùng khách: trả về toàn bộ các cuộc vận động không bị khóa"
 						},
 						"response": [],
-						"uid": "24700822-71bf96ac-c108-40c1-91a7-2b199c9b2341"
+						"uid": "18916357-cecb0fcf-ea7b-4cf2-b6e1-5cb1eca2bc1a"
 					},
 					{
 						"name": "get by id tổ chức tạo cuộc vận động",
-						"id": "e99466d8-a89c-4de2-90fa-e96e77755e10",
+						"id": "b4644ee4-6c23-4a01-b5f3-0722795e9ef0",
 						"protocolProfileBehavior": {
 							"disableBodyPruning": true
 						},
@@ -542,11 +542,11 @@
 							"description": "# API lấy toàn bộ các cuộc vận động\n\n`Token có thể null`\n\n`Từ Token -> vai trò của ngườ dùng`\n\n* Admin: Trả về toàn bộ cuộc vận động (bị khóa và không bị khóa)\n* Tổ chức: Trả về toàn bộ cuộc vận động của tổ chức đó (bị khóa và chưa bị khóa)\n* Người dùng khách: trả về toàn bộ các cuộc vận động không bị khóa"
 						},
 						"response": [],
-						"uid": "24700822-e99466d8-a89c-4de2-90fa-e96e77755e10"
+						"uid": "18916357-b4644ee4-6c23-4a01-b5f3-0722795e9ef0"
 					},
 					{
 						"name": "get all cuộc vận động bằng các param",
-						"id": "865127ca-a839-41c7-96ec-5c1064843528",
+						"id": "f9c5249a-7084-418f-b00e-e16e03f3898b",
 						"protocolProfileBehavior": {
 							"disableBodyPruning": true
 						},
@@ -616,11 +616,11 @@
 							"description": "# Lấy toàn bộ các cuộc vận động băng các  param\n\n`Các param có thể null`\n\n`Token có thể null`\n\n`Từ Token -> vai trò của người dùng`\n\n* Admin: Trả về toàn bộ cuộc vận động (bị khóa và không bị khóa)\n* Tổ chức: Trả về toàn bộ cuộc vận động của tổ chức đó (bị khóa và chưa bị khóa)\n* Người dùng khách: trả về toàn bộ các cuộc vận động không bị khóa"
 						},
 						"response": [],
-						"uid": "24700822-865127ca-a839-41c7-96ec-5c1064843528"
+						"uid": "18916357-f9c5249a-7084-418f-b00e-e16e03f3898b"
 					},
 					{
 						"name": "thêm cuộc vận động",
-						"id": "d5bfe9f8-4181-4107-8788-70bb34b81325",
+						"id": "f79c541b-cade-4077-8436-1b9d6f9a3e96",
 						"protocolProfileBehavior": {
 							"disableBodyPruning": true
 						},
@@ -629,13 +629,13 @@
 							"header": [
 								{
 									"key": "Token",
-									"value": "abcd",
+									"value": "tochuc1",
 									"type": "default"
 								}
 							],
 							"body": {
 								"mode": "raw",
-								"raw": "{\n    \"campaign_name\" : \"xyz\", // not null\n    \"introduction\" : \"asdfghjkl\", // not null\n    \"target_object\" : \"tre em\", // not null\n    \"region\" : \"tay bac\", // not null\n    \"status\" : \"dang van dong\", // not null\n    \"campaign_type\" : \"ho tro tre em vung cao\", // not null\n    \"target_amount\" : 100000000, // not null\n    \"start_date\" : \"2023-06-01\", // not null\n    \"stop_receive_date\" : \"2023-06-15\", // not null\n    \"start_active_date\" : \"2023-06-16\", // not null\n    \"stop_active_date\" : \"2023-06-30\", // not null\n    \"stop_date\": \"2023-06-30\" // not null\n}",
+								"raw": "{\n    \"campaign_name\" : \"xyz\", // not null\n    \"introduction\" : \"đây là bài viết giới thiệu cuộc vận động\", // not null\n    \"target_object\" : \"Đây là dối tượng hướng tới\", // not null\n    \"region\" : \"khu vực hướng tới\", // not null\n    \"status\" : \"đang vận động\", // not null\n    \"images\": \"img1, img2\",\n    \"intro_video\": \"url video\",\n    \"target_amount\" : 100000000, // not null\n    \"start_date\" : \"2023-06-01\", // not null\n    \"stop_date\": \"2023-06-30\" // not null\n}",
 								"options": {
 									"raw": {
 										"language": "json"
@@ -658,11 +658,11 @@
 							"description": "# API thêm cuộc vận động\n\n`Token not null`\n\n`Chỉ Tổ chức có quyền thêm cuộc vận động`\n\n`Các trường trong body not null`"
 						},
 						"response": [],
-						"uid": "24700822-d5bfe9f8-4181-4107-8788-70bb34b81325"
+						"uid": "18916357-f79c541b-cade-4077-8436-1b9d6f9a3e96"
 					},
 					{
 						"name": "cập nhật cuộc vận động",
-						"id": "0815c16d-56da-4373-8835-e93aa9bbbfb6",
+						"id": "a5de71ce-d2b9-4b1e-91dc-8d1253844ea2",
 						"protocolProfileBehavior": {
 							"disableBodyPruning": true
 						},
@@ -671,13 +671,13 @@
 							"header": [
 								{
 									"key": "Token",
-									"value": "abcd",
+									"value": "nguoidung1",
 									"type": "default"
 								}
 							],
 							"body": {
 								"mode": "raw",
-								"raw": "{\n    \"campaign_id\": 4, // not null\n    \"campaign_name\" : \"xyz\", // not null\n    \"introduction\" : \"asdfghjkl\", // not null\n    \"target_object\" : \"tre em\", // not null\n    \"region\" : \"tay bac\", // not null\n    \"status\" : \"dang van dong\", // not null\n    \"campaign_type\" : \"ho tro tre em vung cao\", // not null\n    \"target_amount\" : 100000000, // not null\n    \"receive_amount\" : 45000000, // not null\n    \"donor_amount\" : 0, // not null\n    \"spent_amount\" : 0, // not null\n    \"start_date\" : \"2023-06-01\", // not null\n    \"stop_receive_date\" : \"2023-06-15\", // not null\n    \"start_active_date\" : \"2023-06-16\", // not null\n    \"stop_active_date\" : \"2023-06-30\", // not null\n    \"stop_date\": \"2023-06-30\", // not null\n    \"isStar\": true\n}",
+								"raw": "{\n    \"campaign_id\": 4, // not null\n    \"introduction\" : \"đây là bài viết giới thiệu cuộc vận động\", // not null\n    \"target_object\" : \"Đây là dối tượng hướng tới\", // not null\n    \"region\" : \"khu vực hướng tới\", // not null\n    \"status\" : \"đang vận động\", // not null\n    \"images\": \"img1, img2\",\n    \"intro_video\": \"url video\",\n    \"target_amount\" : 100000000, // not null\n    \"receive_amount\" : 45000000, // not null\n    \"start_date\" : \"2023-06-01\", // not null\n    \"isStar\": true\n}",
 								"options": {
 									"raw": {
 										"language": "json"
@@ -700,11 +700,11 @@
 							"description": "# API cập nhật cuộc vận động\n\n`Token not null`\n\n`Chỉ Tổ chức có quyền chỉn sửa cuộc vận động`"
 						},
 						"response": [],
-						"uid": "24700822-0815c16d-56da-4373-8835-e93aa9bbbfb6"
+						"uid": "18916357-a5de71ce-d2b9-4b1e-91dc-8d1253844ea2"
 					},
 					{
 						"name": "xóa cuộc vận động",
-						"id": "ef55ea5d-5c18-4713-8a1f-7abbde194ecd",
+						"id": "a6bd8e93-8948-4c4c-85c9-1b8b9345975e",
 						"protocolProfileBehavior": {
 							"disableBodyPruning": true
 						},
@@ -739,11 +739,11 @@
 							"description": "# API xóa cuộc vận động\n\n`Token not null`\n\n`Chỉ Tổ chức có quyền xóa cuộc vận động`"
 						},
 						"response": [],
-						"uid": "24700822-ef55ea5d-5c18-4713-8a1f-7abbde194ecd"
+						"uid": "18916357-a6bd8e93-8948-4c4c-85c9-1b8b9345975e"
 					},
 					{
 						"name": "lấy các người dùng theo dõi cuộc vận động",
-						"id": "cfcc9608-10f2-4d65-8fe2-58b428943bff",
+						"id": "1aa93180-a9ea-4cbb-819f-b18463a89961",
 						"protocolProfileBehavior": {
 							"disableBodyPruning": true
 						},
@@ -777,11 +777,11 @@
 							}
 						},
 						"response": [],
-						"uid": "24700822-cfcc9608-10f2-4d65-8fe2-58b428943bff"
+						"uid": "18916357-1aa93180-a9ea-4cbb-819f-b18463a89961"
 					},
 					{
 						"name": "lấy các cuộc vận động người dùng theo dõi",
-						"id": "c04b500d-0e2f-44eb-9f1a-934a733a37ee",
+						"id": "3a229a5e-e929-4f4e-81bb-50b76fe76847",
 						"protocolProfileBehavior": {
 							"disableBodyPruning": true
 						},
@@ -809,11 +809,11 @@
 							}
 						},
 						"response": [],
-						"uid": "24700822-c04b500d-0e2f-44eb-9f1a-934a733a37ee"
+						"uid": "18916357-3a229a5e-e929-4f4e-81bb-50b76fe76847"
 					},
 					{
 						"name": "thêm người dùng theo dõi cuộc vận động",
-						"id": "337933ac-1ee7-44e1-9c5d-daa2f4db9b8f",
+						"id": "755b508e-0f10-492b-b90d-0fc8a768cc3c",
 						"protocolProfileBehavior": {
 							"disableBodyPruning": true
 						},
@@ -847,11 +847,11 @@
 							}
 						},
 						"response": [],
-						"uid": "24700822-337933ac-1ee7-44e1-9c5d-daa2f4db9b8f"
+						"uid": "18916357-755b508e-0f10-492b-b90d-0fc8a768cc3c"
 					},
 					{
 						"name": "người dùng unfollow cuộc vận động",
-						"id": "f93ff475-4a4c-4c85-8494-44f2a5f143dd",
+						"id": "d5a85e43-8afb-4d2f-8989-65b1451c26c9",
 						"protocolProfileBehavior": {
 							"disableBodyPruning": true
 						},
@@ -885,18 +885,18 @@
 							}
 						},
 						"response": [],
-						"uid": "24700822-f93ff475-4a4c-4c85-8494-44f2a5f143dd"
+						"uid": "18916357-d5a85e43-8afb-4d2f-8989-65b1451c26c9"
 					}
 				],
-				"id": "3a147071-0cef-4abb-a7f7-2acf8a95af56",
-				"uid": "24700822-3a147071-0cef-4abb-a7f7-2acf8a95af56"
+				"id": "67ce22b2-4976-47d6-836e-3ea66664e0c3",
+				"uid": "18916357-67ce22b2-4976-47d6-836e-3ea66664e0c3"
 			},
 			{
 				"name": "bài đăng vận động",
 				"item": [
 					{
 						"name": "get all bài đăng của chiến dịch",
-						"id": "f625d48a-6fb3-4e02-9776-16f2b88d80d3",
+						"id": "fdcc742d-b36c-48ef-a54b-dc364ef8be15",
 						"protocolProfileBehavior": {
 							"disableBodyPruning": true
 						},
@@ -925,11 +925,11 @@
 							"description": "# API lấy toàn bộ bài đăng của cuộc vận động\n\n\\`param not null\\`"
 						},
 						"response": [],
-						"uid": "24700822-f625d48a-6fb3-4e02-9776-16f2b88d80d3"
+						"uid": "18916357-fdcc742d-b36c-48ef-a54b-dc364ef8be15"
 					},
 					{
 						"name": "get all bài đăng theo id",
-						"id": "de5b602e-cbcc-4d01-bfa2-6c05cf36313d",
+						"id": "207f55b2-321a-4bb8-a49e-16183a823c37",
 						"protocolProfileBehavior": {
 							"disableBodyPruning": true
 						},
@@ -958,11 +958,11 @@
 							"description": "# API lấy bài đăng theo post id\n\n\\`param not null\\`"
 						},
 						"response": [],
-						"uid": "24700822-de5b602e-cbcc-4d01-bfa2-6c05cf36313d"
+						"uid": "18916357-207f55b2-321a-4bb8-a49e-16183a823c37"
 					},
 					{
 						"name": "thêm bài đăng vào chiến dịch",
-						"id": "dd08b3be-0a5c-4241-b110-fbc4bac5770e",
+						"id": "bbd18458-edfb-45fb-a731-2b4a29af6b55",
 						"protocolProfileBehavior": {
 							"disableBodyPruning": true
 						},
@@ -1000,11 +1000,11 @@
 							"description": "# API thêm bài đăng theo post id\n\n`param not null`\n\n`Các trường trong body bắt buộc có`"
 						},
 						"response": [],
-						"uid": "24700822-dd08b3be-0a5c-4241-b110-fbc4bac5770e"
+						"uid": "18916357-bbd18458-edfb-45fb-a731-2b4a29af6b55"
 					},
 					{
 						"name": "cập nhật bài đăng vào chiến dịch Copy",
-						"id": "2a431a10-4c81-41b0-9e4f-b9c917445c65",
+						"id": "85ee7d0f-10eb-4786-9cd4-bf9e8061f7c6",
 						"protocolProfileBehavior": {
 							"disableBodyPruning": true
 						},
@@ -1042,11 +1042,11 @@
 							"description": "# API cập nhật đăng theo post id"
 						},
 						"response": [],
-						"uid": "24700822-2a431a10-4c81-41b0-9e4f-b9c917445c65"
+						"uid": "18916357-85ee7d0f-10eb-4786-9cd4-bf9e8061f7c6"
 					},
 					{
 						"name": "xóa bài đăng của chiến dịch",
-						"id": "d1289da1-5326-426f-a471-fdcd39df938f",
+						"id": "3affc525-e30e-4dc9-a3f0-c096a958dcaa",
 						"protocolProfileBehavior": {
 							"disableBodyPruning": true
 						},
@@ -1085,18 +1085,18 @@
 							"description": "# API xóa bài đăng theo post id\n\n`param not null`"
 						},
 						"response": [],
-						"uid": "24700822-d1289da1-5326-426f-a471-fdcd39df938f"
+						"uid": "18916357-3affc525-e30e-4dc9-a3f0-c096a958dcaa"
 					}
 				],
-				"id": "8982949e-f43b-48ab-a934-cc06fe59872e",
-				"uid": "24700822-8982949e-f43b-48ab-a934-cc06fe59872e"
+				"id": "402c85fc-390d-4894-907d-e922e58ca6e6",
+				"uid": "18916357-402c85fc-390d-4894-907d-e922e58ca6e6"
 			},
 			{
 				"name": "ủng hộ của người dùng khách",
 				"item": [
 					{
 						"name": "get bài đăng ủng hộ bằng id",
-						"id": "eaf1ac4b-86b8-493c-869c-8d8e352ff1c5",
+						"id": "37088a85-54f8-47e1-acc2-38e57733b13e",
 						"protocolProfileBehavior": {
 							"disableBodyPruning": true
 						},
@@ -1131,11 +1131,11 @@
 							"description": "trường nào ko có trong respone thí trường nó  null trong database"
 						},
 						"response": [],
-						"uid": "24700822-eaf1ac4b-86b8-493c-869c-8d8e352ff1c5"
+						"uid": "18916357-37088a85-54f8-47e1-acc2-38e57733b13e"
 					},
 					{
 						"name": "get all các bài đăng ủng hộ",
-						"id": "b5f82507-895b-465c-9303-09c9f6dd8084",
+						"id": "4297d885-8362-4c82-8049-6080fc30627c",
 						"protocolProfileBehavior": {
 							"disableBodyPruning": true
 						},
@@ -1164,11 +1164,11 @@
 							"description": "trường nào ko có trong respone thí trường nó  null trong database"
 						},
 						"response": [],
-						"uid": "24700822-b5f82507-895b-465c-9303-09c9f6dd8084"
+						"uid": "18916357-4297d885-8362-4c82-8049-6080fc30627c"
 					},
 					{
 						"name": "thêm bài đăng ủng hộ",
-						"id": "3b35fefa-8a04-43ca-a592-fcccc15359cb",
+						"id": "2b0d5069-15b7-481d-9d30-41c96da90887",
 						"protocolProfileBehavior": {
 							"disableBodyPruning": true
 						},
@@ -1205,11 +1205,11 @@
 							}
 						},
 						"response": [],
-						"uid": "24700822-3b35fefa-8a04-43ca-a592-fcccc15359cb"
+						"uid": "18916357-2b0d5069-15b7-481d-9d30-41c96da90887"
 					},
 					{
 						"name": "cập nhật bài đăng ủng hộ",
-						"id": "7c6604ce-d129-4c34-93bf-b1fdd04e3882",
+						"id": "aa65c3f3-ced4-453f-9af2-e662ae635daa",
 						"protocolProfileBehavior": {
 							"disableBodyPruning": true
 						},
@@ -1246,11 +1246,11 @@
 							}
 						},
 						"response": [],
-						"uid": "24700822-7c6604ce-d129-4c34-93bf-b1fdd04e3882"
+						"uid": "18916357-aa65c3f3-ced4-453f-9af2-e662ae635daa"
 					},
 					{
 						"name": "donor xóa bài đăng ủng hộ",
-						"id": "1d352ef6-4d3e-47a0-b61e-a1febef38a70",
+						"id": "53313b8e-7eb0-4a84-a95e-be98ef627382",
 						"protocolProfileBehavior": {
 							"disableBodyPruning": true
 						},
@@ -1284,11 +1284,11 @@
 							}
 						},
 						"response": [],
-						"uid": "24700822-1d352ef6-4d3e-47a0-b61e-a1febef38a70"
+						"uid": "18916357-53313b8e-7eb0-4a84-a95e-be98ef627382"
 					},
 					{
 						"name": "donor xóa, update list requesst",
-						"id": "1f55fbf8-3034-493a-93ba-1960cffcfaf1",
+						"id": "1bab7421-0dac-4bbf-b652-7c7e5cc0793e",
 						"protocolProfileBehavior": {
 							"disableBodyPruning": true
 						},
@@ -1331,11 +1331,11 @@
 							}
 						},
 						"response": [],
-						"uid": "24700822-1f55fbf8-3034-493a-93ba-1960cffcfaf1"
+						"uid": "18916357-1bab7421-0dac-4bbf-b652-7c7e5cc0793e"
 					},
 					{
 						"name": "xóa bài đăng ủng hộ",
-						"id": "e4abc8ea-d936-4211-b4a8-1d6e62cf45e2",
+						"id": "10434bff-254a-4ba5-8718-c5463cb6ffe1",
 						"protocolProfileBehavior": {
 							"disableBodyPruning": true
 						},
@@ -1369,18 +1369,18 @@
 							}
 						},
 						"response": [],
-						"uid": "24700822-e4abc8ea-d936-4211-b4a8-1d6e62cf45e2"
+						"uid": "18916357-10434bff-254a-4ba5-8718-c5463cb6ffe1"
 					}
 				],
-				"id": "ea00f0fc-0820-4128-8434-54510fb713d1",
-				"uid": "24700822-ea00f0fc-0820-4128-8434-54510fb713d1"
+				"id": "8d55a3d3-ee97-4c91-8db6-2c996579ae41",
+				"uid": "18916357-8d55a3d3-ee97-4c91-8db6-2c996579ae41"
 			},
 			{
 				"name": "phản hồi",
 				"item": [
 					{
 						"name": "admin get feedback",
-						"id": "a31e00f8-26f5-4863-b388-99b6943e769f",
+						"id": "238bc4f2-36c9-40b8-867a-6e1b0d8d91c2",
 						"protocolProfileBehavior": {
 							"disableBodyPruning": true
 						},
@@ -1408,11 +1408,11 @@
 							}
 						},
 						"response": [],
-						"uid": "24700822-a31e00f8-26f5-4863-b388-99b6943e769f"
+						"uid": "18916357-238bc4f2-36c9-40b8-867a-6e1b0d8d91c2"
 					},
 					{
 						"name": "user get reply của admin",
-						"id": "be1bd4ad-2547-4734-bab5-405bf8a5e2c2",
+						"id": "98cf5afc-4fe5-4f0a-bf81-e013c2ad1af6",
 						"protocolProfileBehavior": {
 							"disableBodyPruning": true
 						},
@@ -1441,11 +1441,11 @@
 							"description": "trường họp reply == null là feedback đấy chưa dduiwocj admin trả lời"
 						},
 						"response": [],
-						"uid": "24700822-be1bd4ad-2547-4734-bab5-405bf8a5e2c2"
+						"uid": "18916357-98cf5afc-4fe5-4f0a-bf81-e013c2ad1af6"
 					},
 					{
 						"name": "user gửi feedback",
-						"id": "0163953f-480d-4a1e-b7f6-6869bfaac768",
+						"id": "d9eb159a-27ea-41f8-8849-3a35bee1efc7",
 						"protocolProfileBehavior": {
 							"disableBodyPruning": true
 						},
@@ -1482,11 +1482,11 @@
 							}
 						},
 						"response": [],
-						"uid": "24700822-0163953f-480d-4a1e-b7f6-6869bfaac768"
+						"uid": "18916357-d9eb159a-27ea-41f8-8849-3a35bee1efc7"
 					},
 					{
 						"name": "admin gửi reply",
-						"id": "f8416a72-7ab6-47dd-b643-f6ee901c7ff9",
+						"id": "565b4371-c434-420b-bade-b6499eee539d",
 						"protocolProfileBehavior": {
 							"disableBodyPruning": true
 						},
@@ -1523,11 +1523,11 @@
 							}
 						},
 						"response": [],
-						"uid": "24700822-f8416a72-7ab6-47dd-b643-f6ee901c7ff9"
+						"uid": "18916357-565b4371-c434-420b-bade-b6499eee539d"
 					}
 				],
-				"id": "ebe28a55-cddc-413d-a13c-561fca7852bf",
-				"uid": "24700822-ebe28a55-cddc-413d-a13c-561fca7852bf"
+				"id": "2ac5a713-2e33-44e6-9809-e749ad4a7030",
+				"uid": "18916357-2ac5a713-2e33-44e6-9809-e749ad4a7030"
 			}
 		]
 	}
