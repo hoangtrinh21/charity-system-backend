@@ -1,19 +1,20 @@
 package com.charity.hoangtrinh.dbs.sql.charitydatabase.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.*;
+import lombok.Getter;
+import lombok.Setter;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
+@Getter
+@Setter
 @Entity
 @Table(name = "user_account")
 public class UserAccount {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id", nullable = false)
     private Integer id;
 
@@ -66,8 +67,5 @@ public class UserAccount {
 
     @Column(name = "WardId", length = 10)
     private String wardId;
-
-    @Column(name = "IsVerified")
-    private Byte isVerified;
 
 }

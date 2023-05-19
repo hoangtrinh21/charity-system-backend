@@ -1,0 +1,1 @@
+mysqldump -h 0.0.0.0 -P 3310 -u root -p --routines charity > charity.sql
