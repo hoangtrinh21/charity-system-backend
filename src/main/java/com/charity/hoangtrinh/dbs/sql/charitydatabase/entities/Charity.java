@@ -1,31 +1,32 @@
 package com.charity.hoangtrinh.dbs.sql.charitydatabase.entities;
 
-import lombok.*;
+import lombok.Getter;
+import lombok.Setter;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
+@Getter
+@Setter
 @Entity
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
 @Table(name = "charities")
 public class Charity {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id", nullable = false)
     private Integer id;
-
-    private String charityName;
 
     @Column(name = "CharityMotto", length = 1000)
     private String charityMotto;
 
+    private String charityName;
+
     @Column(name = "CharityWebsite")
-    private String CharityWebsite;
+    private String charityWebsite;
 
     @Column(name = "CharityBanner")
-    private String CharityBanner;
+    private String charityBanner;
 
     @Column(name = "CharityTarget", length = 1000)
     private String charityTarget;
@@ -63,11 +64,11 @@ public class Charity {
     @Column(name = "CharityImages", length = 3000)
     private String charityImages;
 
-    @Column(name = "GoogleMap")
+    @Column(name = "GoogleMap", length = 1000)
     private String googleMap;
 
-    @Column(name = "IsVerificated")
-    private Byte isVerificated;
+    @Column(name = "IsVerified")
+    private Short isVerified;
 
     @Column(name = "NumFollower")
     private Integer numFollower;
@@ -80,10 +81,6 @@ public class Charity {
 
     @Column(name = "Star")
     private Byte star;
-
-    @OneToOne
-    @JoinColumn(name = "user_id")
-    private UserAccount user;
 
     public void setCharityName(UserAccount user) {
         this.charityName = user.getName();
