@@ -27,24 +27,28 @@ public class NotificationController {
     @Autowired
     private UserAccountRepository userAccountRepository;
 
-    @GetMapping("/get-sent-by-user")
-    public ResponseEntity<Object> getSendByUser(@RequestHeader(value = "Token") String token) {
-        try {
-            if (accessService.checkAccessToken(token) != 200)
-                return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
-                        .body(new ResponseModel("UNAUTHORIZED"));
+//    @GetMapping("/get-sent-by-user")
+//    public ResponseEntity<Object> getSendByUser(@RequestHeader(value = "Token") String token) {
+//        try {
+//            if (accessService.checkAccessToken(token) != 200)
+//                return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+//                        .body(new ResponseModel("UNAUTHORIZED"));
+//
+//            UserAccount userCreate = accessService.getUserByToken(token);
+//            List<Notification> notifications = notificationRepository.findByCreatedUserEquals(userCreate);
+//            return ResponseEntity.status(HttpStatus.OK)
+//                    .body(notifications);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+//                    .body(new ResponseModel(e.getClass() + ":" + e.getMessage()));
+//        }
+//    }
 
-            UserAccount userCreate = accessService.getUserByToken(token);
-            List<Notification> notifications = notificationRepository.findByCreatedUserEquals(userCreate);
-            return ResponseEntity.status(HttpStatus.OK)
-                    .body(notifications);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(new ResponseModel(e.getClass() + ":" + e.getMessage()));
-        }
-    }
-
+    /**
+     * lấy thông báo người dùng được nhận
+     * @param token token của người dùng dudwcj nhận
+     */
     @GetMapping("/get-receive-by-user")
     public ResponseEntity<Object> getReceiveByUser(@RequestHeader(value = "Token") String token) {
         try {

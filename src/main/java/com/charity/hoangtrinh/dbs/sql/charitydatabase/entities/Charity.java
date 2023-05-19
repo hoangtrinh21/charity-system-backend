@@ -3,10 +3,7 @@ package com.charity.hoangtrinh.dbs.sql.charitydatabase.entities;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Getter
 @Setter
@@ -20,6 +17,7 @@ public class Charity {
     @Column(name = "CharityMotto", length = 1000)
     private String charityMotto;
 
+    @Transient
     private String charityName;
 
     @Column(name = "CharityWebsite")
