@@ -292,16 +292,18 @@ public class CampaignController {
             String  region          = JsonUtil.getString(jsonBody, "region");
             String  status          = JsonUtil.getString(jsonBody, "status");
             String  images          = JsonUtil.getString(jsonBody, "images");
-            boolean  isStar         = jsonBody.get("isStar").getAsBoolean();
+            String introVideo       = JsonUtil.getString(jsonBody, "intro_video");
             Long    targetAmount    = JsonUtil.getLong(jsonBody, "target_amount");
-            Long    receiveAmount   = JsonUtil.getLong(jsonBody, "receive_amount");
             LocalDate startDate         = JsonUtil.getLocalDate(jsonBody, "start_date");
             LocalDate stopDate          = JsonUtil.getLocalDate(jsonBody, "stop_date");
 
             Charity organization = charityRepository.getReferenceById(organizationId);
 
-            CampaignInfo campaignInfo = new CampaignInfo();
-            campaignInfo.setId(campaignId);
+            Optional<CampaignInfo> campaignInfoOptional = campaignInfoRepository.findById(campaignId);
+            if (!campaignInfoOptional.isPresent())
+                return ResponseEntity.status(HttpStatus.OK)
+                                .body(new ResponseModel("Campaign is not found with id " + campaignId));
+            CampaignInfo campaignInfo = campaignInfoOptional.get();
             campaignInfo.setOrganization(organization);
             campaignInfo.setLastUpdateTime(lastUpdateTime);
             campaignInfo.setCampaignName(campaignName);
@@ -310,12 +312,11 @@ public class CampaignController {
             campaignInfo.setRegion(region);
             campaignInfo.setStatus(status);
             campaignInfo.setTargetAmount(targetAmount);
-            campaignInfo.setReceiveAmount(receiveAmount);
             campaignInfo.setOrganization(organization);
             campaignInfo.setStartDate(startDate);
             campaignInfo.setStopDate(stopDate);
             campaignInfo.setImages(images);
-            campaignInfo.setStar(isStar);
+            campaignInfo.setIntroVideo(introVideo);
             campaignInfoRepository.save(campaignInfo);
 
             campaignInfo.getOrganization().setCharityName(userAccountRepository.findByCharityIdEquals(organizationId));
