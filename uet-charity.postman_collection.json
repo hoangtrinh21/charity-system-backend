@@ -1543,7 +1543,7 @@
 							"header": [
 								{
 									"key": "Token",
-									"value": "admin",
+									"value": "tochuc1",
 									"type": "default"
 								}
 							],
@@ -1581,7 +1581,7 @@
 							],
 							"body": {
 								"mode": "raw",
-								"raw": "{\n    \"message\": \"Đây là feedback user gửi cho admin\"\n}",
+								"raw": "{\n    \"receive_user_id\": 5, // Đây là id của user nhận thông báo\n    \"created_user_id\": 4, // Đây là id của user tạo ra thông báo\n    \"message\": \"Đây là nội dung thông báo thứ 1 người dùng 4 gửi cho người dùng 5\"\n}",
 								"options": {
 									"raw": {
 										"language": "json"
@@ -1589,7 +1589,7 @@
 								}
 							},
 							"url": {
-								"raw": "http://localhost:8089/charity/feedback/post-to-user",
+								"raw": "http://localhost:8089/charity/notification/post-to-user",
 								"protocol": "http",
 								"host": [
 									"localhost"
@@ -1597,7 +1597,7 @@
 								"port": "8089",
 								"path": [
 									"charity",
-									"feedback",
+									"notification",
 									"post-to-user"
 								]
 							}
