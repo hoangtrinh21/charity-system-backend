@@ -354,7 +354,7 @@ CREATE TABLE `feedback` (
   PRIMARY KEY (`id`),
   KEY `FKmyeioklh8skbkh8c4nwq6drtc` (`user_id`),
   CONSTRAINT `FKmyeioklh8skbkh8c4nwq6drtc` FOREIGN KEY (`user_id`) REFERENCES `user_account` (`Id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -363,7 +363,7 @@ CREATE TABLE `feedback` (
 
 LOCK TABLES `feedback` WRITE;
 /*!40000 ALTER TABLE `feedback` DISABLE KEYS */;
-INSERT INTO `feedback` VALUES (1,'Đây là feedback user gửi cho admin','Đây là reply admin gửi lại user',4);
+INSERT INTO `feedback` VALUES (1,'Tổ chức Áo ấm cho em có dấu hiệu lừa đảo','Chúng tôi đã xem xét phản hồi của bạn cùng với đó là về Tổ chức Áo ấm cho em nhưng Chúng tôi chưa thấy dấu hiệu nào',4),(2,'Giao diện bị lỗi bên người dùng','',7),(3,'Tổ chức không upload được ảnh','Lỗi không gửi được hình ảnh do api gửi lên bị lỗi và đã được sửa vào ngày 19/5/2023',5),(4,'Trang web bị chậm và hay bị đơ',NULL,6),(5,'Không tạo được cuộc vận động','Không tạo được cuộc vận động do bạn chưa nhập đầy đủ các trường cần thiết để tạo ra một cuộc vận đông',8),(6,'Đã gửi cấp tích xanh từ lâu nhưng chưa thấy phản hồi','Chúng tôi đang xem xét các nội dung mà bạn gửi lên và sẽ phản hồi trong thời gian sớm nhất',9);
 /*!40000 ALTER TABLE `feedback` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -672,4 +672,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-05-19 11:44:33
+-- Dump completed on 2023-05-19 11:50:34
