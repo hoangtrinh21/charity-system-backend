@@ -24,10 +24,7 @@ import javax.sql.rowset.serial.SerialBlob;
 import java.nio.charset.StandardCharsets;
 import java.sql.Blob;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 
 @RestController
 @RequestMapping("/charity/donation")
@@ -107,12 +104,12 @@ public class DonationController {
 //            Integer idDonor         = Integer.valueOf(jsonBody.get("idDonor").getAsString());
             Integer idDonor         = jsonBody.get("idDonor").getAsInt();
             String status           = jsonBody.get("status").getAsString();
-            Integer idOrganization = null;
-            try {
-                idOrganization = jsonBody.get("idOrganization").getAsInt();
-            } catch (UnsupportedOperationException e) {
-                // do nothing
-            }
+            Integer idOrganization = jsonBody.get("idOrganization") == null ? null : jsonBody.get("idOrganization").getAsInt();
+//            try {
+//                idOrganization = jsonBody.get("idOrganization").getAsInt();
+//            } catch (UnsupportedOperationException e) {
+//                // do nothing
+//            }
             String name             = jsonBody.get("name").getAsString();
             String donationAddress  = jsonBody.get("donationAddress").getAsString();
             String donationObject   = jsonBody.get("donationObject").getAsString();
@@ -174,14 +171,9 @@ public class DonationController {
             JsonObject jsonBody = JsonParser.parseString(body).getAsJsonObject();
 
             Integer id = jsonBody.get("id").getAsInt();
-            Integer idDonor  = jsonBody.get("idDonor").getAsInt();
+            Integer idDonor = jsonBody.get("idDonor") == null ? null : jsonBody.get("idDonor").getAsInt();
             String status   = jsonBody.get("status").getAsString();
-            Integer idOrganization = null;
-            try {
-                idOrganization = jsonBody.get("idOrganization").getAsInt();
-            } catch (UnsupportedOperationException e) {
-                // do nothing
-            }
+            Integer idOrganization = jsonBody.get("idOrganization") == null ? null : jsonBody.get("idOrganization").getAsInt();
             String name = jsonBody.get("name").getAsString();
             String donationAddress = jsonBody.get("donationAddress").getAsString();
             String donationObject = jsonBody.get("donationObject").getAsString();
@@ -190,13 +182,27 @@ public class DonationController {
             String images = jsonBody.get("images").getAsString();
             JsonArray listRequest = jsonBody.get("listRequest").getAsJsonArray();
 
-            UserAccount donor = userAccountRepository.getReferenceById(idDonor);
 
-            Donation donation = new Donation();
-            donation.setIdDonor(idDonor);
+            Optional<Donation> donationOptional = donationRepository.findById(id);
+            if (!donationOptional.isPresent())
+                return ResponseEntity.status(HttpStatus.OK)
+                                .body(new ResponseModel("Not found donation by id " + id));
+
+            Donation donation = donationOptional.get();
+
+            if (idDonor != null) {
+                UserAccount donor = userAccountRepository.getReferenceById(idDonor);
+                donation.setIdDonor(idDonor);
+                donation.setDonorName(donor.getName());
+                donation.setPhone(donor.getPhoneNumber());
+                donation.setAddress(donor.getAddress());
+                donation.setProvince(donor.getProvince());
+                donation.setDistrict(donor.getDistrict());
+                donation.setWard(donor.getWard());
+            }
+
             donation.setStatus(status);
 
-            donation.setId(id);
             if (idOrganization != null) {
                 Charity organizationReceived = charityRepository.getReferenceById(idOrganization);
                 donation.setOrganizationReceived(organizationReceived.getCharityName());
@@ -211,12 +217,6 @@ public class DonationController {
             donation.setName(name);
             donation.setDonationAddress(donationAddress);
             donation.setDonationObject(donationObject);
-            donation.setDonorName(donor.getName());
-            donation.setPhone(donor.getPhoneNumber());
-            donation.setAddress(donor.getAddress());
-            donation.setProvince(donor.getProvince());
-            donation.setDistrict(donor.getDistrict());
-            donation.setWard(donor.getWard());
             donation.setDate(date);
             donation.setDescription(description);
             donation.setImages(images);
@@ -276,6 +276,7 @@ public class DonationController {
             JSONArray requestsJson = new JSONArray(body);
 
             donation.setIdDonor(null);
+
             donation.setListRequest(requestsJson);
             donationRepository.save(donation);
 
