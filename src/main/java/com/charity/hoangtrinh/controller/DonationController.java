@@ -207,6 +207,9 @@ public class DonationController {
                 Charity organizationReceived = charityRepository.getReferenceById(idOrganization);
                 donation.setOrganizationReceived(userAccountRepository.findByCharityIdEquals(idOrganization).getName());
                 donation.setIdOrganization(organizationReceived.getId());
+            } else {
+                donation.setOrganizationReceived(null);
+                donation.setIdOrganization(null);
             }
 
             System.out.println(listRequest);
