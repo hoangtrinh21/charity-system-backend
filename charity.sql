@@ -219,7 +219,7 @@ CREATE TABLE `charities` (
   `CharityLinkedIn` varchar(500) DEFAULT NULL,
   `CharityIntroVideo` varchar(500) DEFAULT NULL,
   `CharityBank` varchar(255) DEFAULT NULL,
-  `CharityFile` varchar(255) DEFAULT NULL,
+  `CharityFile` varchar(5000) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
   `CharityAccountNumber` varchar(255) DEFAULT NULL,
   `Avatar` varchar(255) DEFAULT NULL,
   `CharityImages` varchar(3000) DEFAULT NULL,
@@ -265,6 +265,32 @@ CREATE TABLE `charity_follow` (
 LOCK TABLES `charity_follow` WRITE;
 /*!40000 ALTER TABLE `charity_follow` DISABLE KEYS */;
 /*!40000 ALTER TABLE `charity_follow` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `charity_process_verify`
+--
+
+DROP TABLE IF EXISTS `charity_process_verify`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `charity_process_verify` (
+  `Id` int NOT NULL AUTO_INCREMENT,
+  `CharityId` int DEFAULT NULL,
+  `MessageToAdmin` varchar(1000) DEFAULT NULL,
+  `MessageToCharity` varchar(1000) DEFAULT NULL,
+  PRIMARY KEY (`Id`),
+  UNIQUE KEY `CharityId` (`CharityId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `charity_process_verify`
+--
+
+LOCK TABLES `charity_process_verify` WRITE;
+/*!40000 ALTER TABLE `charity_process_verify` DISABLE KEYS */;
+/*!40000 ALTER TABLE `charity_process_verify` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -326,7 +352,7 @@ CREATE TABLE `donations` (
   `description` varchar(255) DEFAULT NULL,
   `images` longtext,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=47 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -335,7 +361,7 @@ CREATE TABLE `donations` (
 
 LOCK TABLES `donations` WRITE;
 /*!40000 ALTER TABLE `donations` DISABLE KEYS */;
-INSERT INTO `donations` VALUES (37,4,'Chưa nhận',NULL,NULL,'[{\"name\":\"Áo ấm cho em\",\"id\":1,\"status\":\"Đợi xác nhận\"},{\"name\":\"Từ Thiện Trăng Khuyết\",\"id\":2,\"status\":\"Đợi xác nhận\"}]','Quần Áo','Lai Châu','Trẻ em','Hải Khuất','0348399696','xóm 10','Tỉnh Cao Bằng','Huyện Trùng Khánh','Xã Quang Trung','18/5/2023','Quần áo cũ đã qua sử dụng, đã được chọn lựa,...','https://firebasestorage.googleapis.com/v0/b/charityapp-b5d6f.appspot.com/o/avatar%2F125187193_286365579333268_6936559611348470557_n.jpg?alt=media&token=86ba066b-4715-48cd-b2ab-ef25282c8822, https://firebasestorage.googleapis.com/v0/b/charityapp-b5d6f.appspot.com/o/avatar%2F125181474_1031853657226889_6619401785658743166_n.jpg?alt=media&token=48551102-05da-43c5-9fe1-4c9c114e6ff8, https://firebasestorage.googleapis.com/v0/b/charityapp-b5d6f.appspot.com/o/avatar%2F124885478_421110195721109_4644500650897298301_n.jpg?alt=media&token=07ef4342-6bc5-4e91-a9cc-fcecfaa39f4e'),(38,4,'Chờ xác nhận','Áo ấm cho em',1,'[{\"name\":\"Áo ấm cho em\",\"id\":1,\"status\":\"Yêu cầu xác nhận\"}]','Sách vở','Nam định','Trẻ em','Hải Khuất','0348399696','xóm 10','Tỉnh Cao Bằng','Huyện Trùng Khánh','Xã Quang Trung','18/5/2023','Sách vở mới vã cũ đã qua sử dụng','https://firebasestorage.googleapis.com/v0/b/charityapp-b5d6f.appspot.com/o/avatar%2Fnghe-an-quyen-tang-hang-nghin-bo-sgk-vo-viet-cho-hoc-sinh-vung-lu-40-.4579.jpg?alt=media&token=38473432-1214-4e36-8a42-a59cefd45310, https://firebasestorage.googleapis.com/v0/b/charityapp-b5d6f.appspot.com/o/avatar%2Fnghe-an-quyen-tang-hang-nghin-bo-sgk-vo-viet-cho-hoc-sinh-vung-lu-40-.5539.jpg?alt=media&token=5c6b2d98-dddc-4b04-ad51-e4ae7bb297cb, https://firebasestorage.googleapis.com/v0/b/charityapp-b5d6f.appspot.com/o/avatar%2Fnghe-an-quyen-tang-hang-nghin-bo-sgk-vo-viet-cho-hoc-sinh-vung-lu-40-.3169.jpg?alt=media&token=7da65a8b-b2a8-46d9-bad3-51c31524ec71, https://firebasestorage.googleapis.com/v0/b/charityapp-b5d6f.appspot.com/o/avatar%2Fnghe-an-quyen-tang-hang-nghin-bo-sgk-vo-viet-cho-hoc-sinh-vung-lu-40-.1715.jpg?alt=media&token=23532f8d-e1b1-4f62-a3d3-191de5288967'),(39,4,'Đã nhận',NULL,3,'[{\"name\":\"Làng trẻ em SOS Việt Nam\",\"id\":3,\"status\":\"Đã xác nhận\"},{\"name\":\"Áo ấm cho em\",\"id\":1,\"status\":\"Bị hủy\"}]','Gạo, Mì tôm','Hà Giang','tất cả','Hải Khuất','0348399696','xóm 10','Tỉnh Cao Bằng','Huyện Trùng Khánh','Xã Quang Trung','19/5/2023','Gạo và Mì Tôm đóng gói','https://firebasestorage.googleapis.com/v0/b/charityapp-b5d6f.appspot.com/o/avatar%2Fxa-huu-khuong_BZHL.jpg?alt=media&token=534d8c7c-524c-437c-b21d-8937bbcfa281, https://firebasestorage.googleapis.com/v0/b/charityapp-b5d6f.appspot.com/o/avatar%2Fgao-cuu-tro_XMWS.jpg?alt=media&token=ae31d312-49d3-4841-bd79-45d882d5e9aa'),(40,4,'Từ chối nhận',NULL,2,'[{\"name\":\"Từ Thiện Trăng Khuyết\",\"id\":2,\"status\":\"Bị hủy\"}]','Khẩu trang y tế','Lạng Sơn','Mọi người vùng dịch','Hải Khuất','0348399696','xóm 10','Tỉnh Cao Bằng','Huyện Trùng Khánh','Xã Quang Trung','19/5/2023','Khẩu trang y tế 5 lớp đảm bảo phòng dịch','https://firebasestorage.googleapis.com/v0/b/charityapp-b5d6f.appspot.com/o/avatar%2Fvna_potal_dien_bien_nhom_thien_nguyen_tu_may_khau_trang_phat_cho_nguoi_ngheo__100658191_stand-1.jpg?alt=media&token=3f6f89dd-11a3-400c-ae9d-7e4a6372e2a8'),(41,6,'Chưa nhận',NULL,NULL,'[]','Nước lọc đóng chai','cả nước','Người dân vùng lũ','Trịnh Hoàng','0348699696','số 200','Tỉnh Tuyên Quang','Huyện Yên Sơn','Xã Kiến Thiết','19/5/2023','nước lọc được đóng chai tiện lợi','https://firebasestorage.googleapis.com/v0/b/charityapp-b5d6f.appspot.com/o/avatar%2Fz2184354828568_5d48c01cbfd6af2d698ce3a742668477_2.jpg?alt=media&token=62856d2f-ba9e-4b7f-be2d-bdd1f363f068'),(42,6,'Chưa nhận',NULL,NULL,'[{\"name\":\"Từ Thiện Trăng Khuyết\",\"id\":2,\"status\":\"Đợi xác nhận\"},{\"name\":\"Làng trẻ em SOS Việt Nam\",\"id\":3,\"status\":\"Đợi xác nhận\"}]','Giày dép','Lạng Sơn','trẻ em vung cao','Trịnh Hoàng','0348699696','số 200','Tỉnh Tuyên Quang','Huyện Yên Sơn','Xã Kiến Thiết','19/5/2023','Giày dép mới và cũ đã qua sử dụng','https://firebasestorage.googleapis.com/v0/b/charityapp-b5d6f.appspot.com/o/avatar%2Ft%E1%BA%A3i%20xu%E1%BB%91ng.jpeg?alt=media&token=b6f12ae8-3dfc-48d9-9aa9-a198333c9ac2');
+INSERT INTO `donations` VALUES (37,4,'Chưa nhận',NULL,NULL,'[{\"name\":\"Áo ấm cho em\",\"id\":1,\"status\":\"Đợi xác nhận\"},{\"name\":\"Từ Thiện Trăng Khuyết\",\"id\":2,\"status\":\"Đợi xác nhận\"}]','Quần Áo','Lai Châu','Trẻ em','Hải Khuất','0348399696','xóm 10','Tỉnh Cao Bằng','Huyện Trùng Khánh','Xã Quang Trung','18/5/2023','Quần áo cũ đã qua sử dụng, đã được chọn lựa,...','https://firebasestorage.googleapis.com/v0/b/charityapp-b5d6f.appspot.com/o/avatar%2F125187193_286365579333268_6936559611348470557_n.jpg?alt=media&token=86ba066b-4715-48cd-b2ab-ef25282c8822, https://firebasestorage.googleapis.com/v0/b/charityapp-b5d6f.appspot.com/o/avatar%2F125181474_1031853657226889_6619401785658743166_n.jpg?alt=media&token=48551102-05da-43c5-9fe1-4c9c114e6ff8, https://firebasestorage.googleapis.com/v0/b/charityapp-b5d6f.appspot.com/o/avatar%2F124885478_421110195721109_4644500650897298301_n.jpg?alt=media&token=07ef4342-6bc5-4e91-a9cc-fcecfaa39f4e'),(38,4,'Chờ xác nhận','Áo ấm cho em',1,'[{\"name\":\"Áo ấm cho em\",\"id\":1,\"status\":\"Yêu cầu xác nhận\"}]','Sách vở','Nam định','Trẻ em','Hải Khuất','0348399696','xóm 10','Tỉnh Cao Bằng','Huyện Trùng Khánh','Xã Quang Trung','18/5/2023','Sách vở mới vã cũ đã qua sử dụng','https://firebasestorage.googleapis.com/v0/b/charityapp-b5d6f.appspot.com/o/avatar%2Fnghe-an-quyen-tang-hang-nghin-bo-sgk-vo-viet-cho-hoc-sinh-vung-lu-40-.4579.jpg?alt=media&token=38473432-1214-4e36-8a42-a59cefd45310, https://firebasestorage.googleapis.com/v0/b/charityapp-b5d6f.appspot.com/o/avatar%2Fnghe-an-quyen-tang-hang-nghin-bo-sgk-vo-viet-cho-hoc-sinh-vung-lu-40-.5539.jpg?alt=media&token=5c6b2d98-dddc-4b04-ad51-e4ae7bb297cb, https://firebasestorage.googleapis.com/v0/b/charityapp-b5d6f.appspot.com/o/avatar%2Fnghe-an-quyen-tang-hang-nghin-bo-sgk-vo-viet-cho-hoc-sinh-vung-lu-40-.3169.jpg?alt=media&token=7da65a8b-b2a8-46d9-bad3-51c31524ec71, https://firebasestorage.googleapis.com/v0/b/charityapp-b5d6f.appspot.com/o/avatar%2Fnghe-an-quyen-tang-hang-nghin-bo-sgk-vo-viet-cho-hoc-sinh-vung-lu-40-.1715.jpg?alt=media&token=23532f8d-e1b1-4f62-a3d3-191de5288967'),(39,4,'Đã nhận',NULL,3,'[{\"name\":\"Làng trẻ em SOS Việt Nam\",\"id\":3,\"status\":\"Đã xác nhận\"},{\"name\":\"Áo ấm cho em\",\"id\":1,\"status\":\"Bị hủy\"}]','Gạo, Mì tôm','Hà Giang','tất cả','Hải Khuất','0348399696','xóm 10','Tỉnh Cao Bằng','Huyện Trùng Khánh','Xã Quang Trung','19/5/2023','Gạo và Mì Tôm đóng gói','https://firebasestorage.googleapis.com/v0/b/charityapp-b5d6f.appspot.com/o/avatar%2Fxa-huu-khuong_BZHL.jpg?alt=media&token=534d8c7c-524c-437c-b21d-8937bbcfa281, https://firebasestorage.googleapis.com/v0/b/charityapp-b5d6f.appspot.com/o/avatar%2Fgao-cuu-tro_XMWS.jpg?alt=media&token=ae31d312-49d3-4841-bd79-45d882d5e9aa'),(40,4,'Từ chối nhận',NULL,2,'[{\"name\":\"Từ Thiện Trăng Khuyết\",\"id\":2,\"status\":\"Bị hủy\"}]','Khẩu trang y tế','Lạng Sơn','Mọi người vùng dịch','Hải Khuất','0348399696','xóm 10','Tỉnh Cao Bằng','Huyện Trùng Khánh','Xã Quang Trung','19/5/2023','Khẩu trang y tế 5 lớp đảm bảo phòng dịch','https://firebasestorage.googleapis.com/v0/b/charityapp-b5d6f.appspot.com/o/avatar%2Fvna_potal_dien_bien_nhom_thien_nguyen_tu_may_khau_trang_phat_cho_nguoi_ngheo__100658191_stand-1.jpg?alt=media&token=3f6f89dd-11a3-400c-ae9d-7e4a6372e2a8'),(41,6,'Chưa nhận',NULL,NULL,'[]','Nước lọc đóng chai','cả nước','Người dân vùng lũ','Trịnh Hoàng','0348699696','số 200','Tỉnh Tuyên Quang','Huyện Yên Sơn','Xã Kiến Thiết','19/5/2023','nước lọc được đóng chai tiện lợi','https://firebasestorage.googleapis.com/v0/b/charityapp-b5d6f.appspot.com/o/avatar%2Fz2184354828568_5d48c01cbfd6af2d698ce3a742668477_2.jpg?alt=media&token=62856d2f-ba9e-4b7f-be2d-bdd1f363f068'),(42,6,'Chưa nhận',NULL,NULL,'[{\"name\":\"Từ Thiện Trăng Khuyết\",\"id\":2,\"status\":\"Đợi xác nhận\"},{\"name\":\"Làng trẻ em SOS Việt Nam\",\"id\":3,\"status\":\"Đợi xác nhận\"}]','Giày dép','Lạng Sơn','trẻ em vung cao','Trịnh Hoàng','0348699696','số 200','Tỉnh Tuyên Quang','Huyện Yên Sơn','Xã Kiến Thiết','19/5/2023','Giày dép mới và cũ đã qua sử dụng','https://firebasestorage.googleapis.com/v0/b/charityapp-b5d6f.appspot.com/o/avatar%2Ft%E1%BA%A3i%20xu%E1%BB%91ng.jpeg?alt=media&token=b6f12ae8-3dfc-48d9-9aa9-a198333c9ac2'),(44,NULL,'nhận','Áo ấm cho em',1,'[{\"name\":\"toi yeu nam dinh\",\"id\":1,\"status\":\"Đợi xác nhận\"}]','quần áo','trẻ em','abc xyz','Hải Khuất','0348399696','xóm 10','Tỉnh Cao Bằng','Huyện Trùng Khánh','Xã Quang Trung','12/05/2023','mô tả','ảnh'),(45,4,'chưa nhận','Áo ấm cho em',1,'[{\"name\":\"toi yeu nam dinh\",\"id\":1,\"status\":\"Đợi xác nhận\"}]','quần áo','trẻ em','abc xyz','Hải Khuất','0348399696','xóm 10','Tỉnh Cao Bằng','Huyện Trùng Khánh','Xã Quang Trung','12/05/2023','mô tả','ảnh'),(46,4,'chưa nhận',NULL,NULL,'[{\"name\":\"toi yeu nam dinh\",\"id\":1,\"status\":\"Đợi xác nhận\"}]','quần áo','trẻ em','abc xyz','Hải Khuất','0348399696','xóm 10','Tỉnh Cao Bằng','Huyện Trùng Khánh','Xã Quang Trung','12/05/2023','mô tả','ảnh');
 /*!40000 ALTER TABLE `donations` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -349,12 +375,14 @@ DROP TABLE IF EXISTS `feedback`;
 CREATE TABLE `feedback` (
   `id` int NOT NULL AUTO_INCREMENT,
   `message` varchar(255) NOT NULL,
+  `time_create` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `reply` varchar(255) DEFAULT NULL,
+  `time_reply` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
   `user_id` int NOT NULL,
   PRIMARY KEY (`id`),
   KEY `FKmyeioklh8skbkh8c4nwq6drtc` (`user_id`),
   CONSTRAINT `FKmyeioklh8skbkh8c4nwq6drtc` FOREIGN KEY (`user_id`) REFERENCES `user_account` (`Id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -363,7 +391,7 @@ CREATE TABLE `feedback` (
 
 LOCK TABLES `feedback` WRITE;
 /*!40000 ALTER TABLE `feedback` DISABLE KEYS */;
-INSERT INTO `feedback` VALUES (1,'Tổ chức Áo ấm cho em có dấu hiệu lừa đảo','Chúng tôi đã xem xét phản hồi của bạn cùng với đó là về Tổ chức Áo ấm cho em nhưng Chúng tôi chưa thấy dấu hiệu nào',4),(2,'Giao diện bị lỗi bên người dùng','',7),(3,'Tổ chức không upload được ảnh','Lỗi không gửi được hình ảnh do api gửi lên bị lỗi và đã được sửa vào ngày 19/5/2023',5),(4,'Trang web bị chậm và hay bị đơ',NULL,6),(5,'Không tạo được cuộc vận động','Không tạo được cuộc vận động do bạn chưa nhập đầy đủ các trường cần thiết để tạo ra một cuộc vận đông',8),(6,'Đã gửi cấp tích xanh từ lâu nhưng chưa thấy phản hồi','Chúng tôi đang xem xét các nội dung mà bạn gửi lên và sẽ phản hồi trong thời gian sớm nhất',9);
+INSERT INTO `feedback` VALUES (1,'Tổ chức Áo ấm cho em có dấu hiệu lừa đảo','','Chúng tôi đã xem xét phản hồi của bạn cùng với đó là về Tổ chức Áo ấm cho em nhưng Chúng tôi chưa thấy dấu hiệu nào',NULL,4),(2,'Giao diện bị lỗi bên người dùng','','',NULL,7),(3,'Tổ chức không upload được ảnh','','Lỗi không gửi được hình ảnh do api gửi lên bị lỗi và đã được sửa vào ngày 19/5/2023',NULL,5),(4,'Trang web bị chậm và hay bị đơ','',NULL,NULL,6),(5,'Không tạo được cuộc vận động','','Không tạo được cuộc vận động do bạn chưa nhập đầy đủ các trường cần thiết để tạo ra một cuộc vận đông',NULL,8),(6,'Đã gửi cấp tích xanh từ lâu nhưng chưa thấy phản hồi','','Chúng tôi đang xem xét các nội dung mà bạn gửi lên và sẽ phản hồi trong thời gian sớm nhất',NULL,9),(7,'Thêm thời gian gửi feedback và thời gian reply','2023-05-21T11:37:37.062','Hệ thống đã hiển thị thêm thời gian','2023-05-21T11:38:21.110',5);
 /*!40000 ALTER TABLE `feedback` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -406,6 +434,7 @@ DROP TABLE IF EXISTS `notification`;
 CREATE TABLE `notification` (
   `id` int NOT NULL AUTO_INCREMENT,
   `message` longtext NOT NULL,
+  `time_create` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `receive_user_id` int NOT NULL,
   `created_user_id` int NOT NULL,
   PRIMARY KEY (`id`),
@@ -413,7 +442,7 @@ CREATE TABLE `notification` (
   KEY `FKo07akhffm4dce1qdgrnyqq0u1` (`created_user_id`),
   CONSTRAINT `FKo07akhffm4dce1qdgrnyqq0u1` FOREIGN KEY (`created_user_id`) REFERENCES `user_account` (`Id`),
   CONSTRAINT `FKprqu8mc4fpqn7if9rfma49qqo` FOREIGN KEY (`receive_user_id`) REFERENCES `user_account` (`Id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -422,6 +451,7 @@ CREATE TABLE `notification` (
 
 LOCK TABLES `notification` WRITE;
 /*!40000 ALTER TABLE `notification` DISABLE KEYS */;
+INSERT INTO `notification` VALUES (3,'Đây là nội dung thông báo thứ 1 người dùng 4 gửi cho người dùng 5','2023-05-21T11:30:14.047',5,4);
 /*!40000 ALTER TABLE `notification` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -442,7 +472,7 @@ CREATE TABLE `post_info` (
   PRIMARY KEY (`post_id`),
   KEY `campaign_id_fkey` (`campaign_id`),
   CONSTRAINT `post_info_FK` FOREIGN KEY (`campaign_id`) REFERENCES `campaign_info` (`campaign_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -674,4 +704,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-05-19 22:04:06
+-- Dump completed on 2023-05-21 23:03:18
