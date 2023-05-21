@@ -14,6 +14,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -61,6 +63,7 @@ public class FeedbackController {
             Feedback feedback = new Feedback();
             feedback.setMessage(message);
             feedback.setUserAccount(user);
+            feedback.setTimeCreate(LocalDateTime.now().toString());
             feedbackRepository.save(feedback);
 
             return ResponseEntity.status(HttpStatus.OK)
@@ -108,6 +111,7 @@ public class FeedbackController {
 
             Feedback reply = feedbackRepository.getReferenceById(feedbackId);
             reply.setReply(mess);
+            reply.setTimeReply(LocalDateTime.now().toString());
             feedbackRepository.save(reply);
 
             return ResponseEntity.status(HttpStatus.OK)

@@ -20,6 +20,9 @@ public class Notification {
     @Column(name = "message", nullable = false)
     private String message;
 
+    @Column(name = "time_create", nullable = false)
+    private String timeCreate;
+
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "receive_user_id", nullable = false)
     private UserAccount receiveUser;

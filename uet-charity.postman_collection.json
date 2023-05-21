@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "e4617380-2ee4-4864-9aef-92ed83ef3dda",
+		"_postman_id": "20b2113a-941e-4f3d-b71a-45ab87aa78b0",
 		"name": "uet-charity",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "18916357"
@@ -787,7 +787,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8089/charity/post/get-post?campaign-id=4",
+							"raw": "http://localhost:8089/charity/post/get-post?campaign-id=5",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -801,7 +801,7 @@
 							"query": [
 								{
 									"key": "campaign-id",
-									"value": "4"
+									"value": "5"
 								}
 							]
 						},
@@ -844,7 +844,7 @@
 						"header": [
 							{
 								"key": "Token",
-								"value": "abcd",
+								"value": "tochuc1",
 								"type": "text"
 							}
 						],
@@ -1023,13 +1023,13 @@
 						"header": [
 							{
 								"key": "Token",
-								"value": "abcde",
+								"value": "nguoidung1",
 								"type": "text"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"idDonor\": 3,\n    \"status\": \"vùng caeo\",\n    \"idOrganization\": 1,\n    \"name\": \"quần áo\",\n    \"donationAddress\": \"trẻ em\",\n    \"donationObject\": \"abc xyz\",\n    \"date\": \"12/05/2023\",\n    \"description\": \"mô tả\",\n    \"images\": \"ảnh\",\n    \"listRequest\": [\n        {\n          \"status\": \"Đợi xác nhận\",\n          \"id\": 1,\n          \"name\": \"toi yeu nam dinh\"\n        }\n    ]\n}",
+							"raw": "{\n    \"idDonor\": 4,\n    \"status\": \"chưa nhận\",\n    // \"idOrganization\": null,\n    \"name\": \"quần áo\",\n    \"donationAddress\": \"trẻ em\",\n    \"donationObject\": \"abc xyz\",\n    \"date\": \"12/05/2023\",\n    \"description\": \"mô tả\",\n    \"images\": \"ảnh\",\n    \"listRequest\": [\n        {\n          \"status\": \"Đợi xác nhận\",\n          \"id\": 1,\n          \"name\": \"toi yeu nam dinh\"\n        }\n    ]\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1059,13 +1059,13 @@
 						"header": [
 							{
 								"key": "Token",
-								"value": "abcde",
+								"value": "nguoidung1",
 								"type": "text"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"id\": 10,\n    \"idDonor\": 3,\n    \"status\": \"miền trung\",\n    \"organizationReceived\": \"organization\",\n    \"idOrganization\": 1,\n    \"listRequest\": [\n        {\n            \"name\": \"toi yeu nam dinh\",\n            \"id\": 1,\n            \"status\": \"Đợi xác nhận\"\n        }\n    ],\n    \"name\": \"quần áo\",\n    \"donationAddress\": \"trẻ em\",\n    \"donationObject\": \"abc xyz\",\n    \"donorName\": \"donor\",\n    \"phone\": null,\n    \"address\": null,\n    \"province\": null,\n    \"district\": null,\n    \"ward\": null,\n    \"date\": \"12/05/2023\",\n    \"description\": \"mô tả\",\n    \"images\": \"caapj nhaat anh\"\n}",
+							"raw": "{ //nếu trường nào null thì ko có\n    \"id\": 44,\n    \"status\": \"nhận\",\n    \"idOrganization\": 1,\n    \"name\": \"quần áo\",\n    \"donationAddress\": \"trẻ em\",\n    \"donationObject\": \"abc xyz\",\n    \"date\": \"12/05/2023\",\n    \"description\": \"mô tả\",\n    \"images\": \"ảnh\",\n    \"listRequest\": [\n        {\n          \"status\": \"Đợi xác nhận\",\n          \"id\": 1,\n          \"name\": \"toi yeu nam dinh\"\n        }\n    ]\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1095,12 +1095,12 @@
 						"header": [
 							{
 								"key": "Token",
-								"value": "abcde",
+								"value": "nguoidung1",
 								"type": "text"
 							}
 						],
 						"url": {
-							"raw": "http://localhost:8089/charity/donation/donor-delete-donation?id=13",
+							"raw": "http://localhost:8089/charity/donation/donor-delete-donation?id=44",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -1114,7 +1114,7 @@
 							"query": [
 								{
 									"key": "id",
-									"value": "13"
+									"value": "44"
 								}
 							]
 						}
@@ -1170,12 +1170,12 @@
 						"header": [
 							{
 								"key": "Token",
-								"value": "abcde",
+								"value": "nguoidung1",
 								"type": "text"
 							}
 						],
 						"url": {
-							"raw": "http://localhost:8089/charity/donation/delete-donation?id=13",
+							"raw": "http://localhost:8089/charity/donation/delete-donation?id=43",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -1189,7 +1189,7 @@
 							"query": [
 								{
 									"key": "id",
-									"value": "13"
+									"value": "43"
 								}
 							]
 						}

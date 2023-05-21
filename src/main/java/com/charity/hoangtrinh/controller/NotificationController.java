@@ -1,6 +1,5 @@
 package com.charity.hoangtrinh.controller;
 
-import com.charity.hoangtrinh.dbs.sql.charitydatabase.entities.Feedback;
 import com.charity.hoangtrinh.dbs.sql.charitydatabase.entities.Notification;
 import com.charity.hoangtrinh.dbs.sql.charitydatabase.entities.UserAccount;
 import com.charity.hoangtrinh.dbs.sql.charitydatabase.repositories.NotificationRepository;
@@ -14,6 +13,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -89,6 +90,7 @@ public class NotificationController {
             notification.setCreatedUser(userCreatedOptional.get());
             notification.setReceiveUser(userReceiveOptional.get());
             notification.setMessage(message);
+            notification.setTimeCreate(LocalDateTime.now().toString());
             notificationRepository.save(notification);
 
             return ResponseEntity.status(HttpStatus.OK)

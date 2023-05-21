@@ -21,8 +21,14 @@ public class Feedback {
     @Column(name = "message", nullable = false)
     private String message;
 
+    @Column(name = "time_create", nullable = false)
+    private String timeCreate;
+
     @Column(name = "reply")
     private String reply;
+
+    @Column(name = "time_reply")
+    private String timeReply;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "user_id", nullable = false)
