@@ -57,8 +57,8 @@ public class AccessController {
     }
 
 
-    //.../charity/access/get-user-id-by-organization-id
-    @PostMapping("/get-user-id-by-organization-id")
+    ///charity/access/get-user-id-by-organization-id?organization-id=1
+    @GetMapping("/get-user-id-by-organization-id")
     public ResponseEntity<ResponseModel> getUserIdByOrganizationId(@RequestParam(value = "organization-id") String organizationIdStr) {
         try {
             Integer organizationId = Integer.parseInt(organizationIdStr);
