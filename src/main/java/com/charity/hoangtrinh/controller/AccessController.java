@@ -56,6 +56,25 @@ public class AccessController {
         }
     }
 
+    @PostMapping("/get-user-id-by-organization-id")
+    public ResponseEntity<ResponseModel> getUserIdByOrganizationId(@RequestParam String organizationIdStr) {
+        try {
+            Integer organizationId = Integer.parseInt(organizationIdStr);
+
+            UserAccount userAccount = userAccountRepository.findByCharityIdEquals(organizationId);
+            if (userAccount == null)
+                return ResponseEntity.status(HttpStatus.OK)
+                        .body(new ResponseModel("Don't have user by organization id " + organizationId));
+
+            return ResponseEntity.status(HttpStatus.OK)
+                    .body(new ResponseModel(userAccount.getId()));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(new ResponseModel("INTERNAL_SERVER_ERROR"));
+        }
+    }
+
     @DeleteMapping("/delete-token")
     public ResponseEntity<Object> deleteToken(@RequestParam(value = "user-id") String userIdStr) {
         try {
