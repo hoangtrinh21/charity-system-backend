@@ -137,6 +137,18 @@ public class CampaignController {
         }
     }
 
+    @GetMapping("/get-outstanding")
+    public ResponseEntity<Object> getOutstanding() {
+        try {
+            return ResponseEntity.status(HttpStatus.OK)
+                    .body(campaignService.getOutstanding());
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(new ResponseModel(e.getClass()));
+        }
+    }
+
     @GetMapping("/get-by-organization")
     public ResponseEntity<Object> getByOrganization(@RequestHeader(value = "Token") String token,
                                           @RequestParam(value = "organization-id") String organizationIdStr) {

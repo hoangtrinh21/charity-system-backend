@@ -7,5 +7,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface StatementRepository extends JpaRepository<Statement, Integer> {
+    long countByCampaignEquals(CampaignInfo campaign);
     List<Statement> findByCampaignEquals(CampaignInfo campaign);
 }
