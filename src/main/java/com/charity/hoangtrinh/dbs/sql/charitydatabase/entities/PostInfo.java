@@ -29,7 +29,8 @@ public class PostInfo {
     @Column(name = "submit_time", nullable = false)
     private Long submitTime;
 
-    @Column(name = "images", nullable = false, length = 10000)
+    @Lob
+    @Column(name = "images", nullable = false)
     private String images;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
