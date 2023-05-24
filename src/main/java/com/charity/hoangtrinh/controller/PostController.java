@@ -133,10 +133,19 @@ public class PostController {
             String          title       = JsonUtil.getString(jsonBody, "title");
             String content = JsonUtil.getString(jsonBody, "content");
             String type = JsonUtil.getString(jsonBody, "type");
+            String images = JsonUtil.getString(jsonBody, "images");
             long submitTime = System.currentTimeMillis();
 
             CampaignInfo campaign = campaignInfoRepository.getReferenceById(campaignId);
-            PostInfo post = new PostInfo(postId, content, title, type, submitTime, campaign);
+
+            PostInfo post = new PostInfo();
+            post.setId(postId);
+            post.setCampaign(campaign);
+            post.setContent(content);
+            post.setTitle(title);
+            post.setType(type);
+            post.setImages(images);
+            post.setSubmitTime(submitTime);
 
             postInfoRepository.save(post);
 
