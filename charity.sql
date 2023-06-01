@@ -145,17 +145,14 @@ DROP TABLE IF EXISTS `campaign_input`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `campaign_input` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) NOT NULL,
-  `time` datetime NOT NULL,
-  `type` varchar(100) DEFAULT NULL,
-  `amount` bigint NOT NULL,
-  `note` varchar(255) DEFAULT NULL,
-  `campaign_id` int NOT NULL,
   `donation_amount` bigint NOT NULL,
   `donation_time` datetime(6) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `note` varchar(255) DEFAULT NULL,
+  `campaign_id` int NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `campaign_input_FK` (`campaign_id`),
-  CONSTRAINT `campaign_input_FK` FOREIGN KEY (`campaign_id`) REFERENCES `campaign_info` (`campaign_id`)
+  KEY `FKsfqfacve02em5q6tsuyfg3ui3` (`campaign_id`),
+  CONSTRAINT `FKsfqfacve02em5q6tsuyfg3ui3` FOREIGN KEY (`campaign_id`) REFERENCES `campaign_info` (`campaign_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -177,16 +174,16 @@ DROP TABLE IF EXISTS `campaign_output`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `campaign_output` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `time` datetime NOT NULL,
-  `type` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
   `amount` bigint NOT NULL,
-  `reason` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `note` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `name` varchar(255) NOT NULL,
+  `note` varchar(255) DEFAULT NULL,
+  `reason` varchar(255) NOT NULL,
+  `time` datetime(6) NOT NULL,
+  `type` varchar(100) DEFAULT NULL,
   `campaign_id` int NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `campaign_input_FK` (`campaign_id`) USING BTREE,
-  CONSTRAINT `campaign_input_FK_copy` FOREIGN KEY (`campaign_id`) REFERENCES `campaign_info` (`campaign_id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+  KEY `FKbaf4nk2ot2gytehrb6gojyp60` (`campaign_id`),
+  CONSTRAINT `FKbaf4nk2ot2gytehrb6gojyp60` FOREIGN KEY (`campaign_id`) REFERENCES `campaign_info` (`campaign_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -670,6 +667,31 @@ UNLOCK TABLES;
 --
 -- Dumping routines for database 'charity'
 --
+/*!50003 DROP PROCEDURE IF EXISTS `Proc_GetCurrentUser` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`%` PROCEDURE `Proc_GetCurrentUser`(IN v_Id INT)
+BEGIN
+  DECLARE v_charityId INT;
+  
+  SELECT charityId INTO v_charityId FROM user_account ua WHERE Id = v_Id LIMIT 1;
+  SELECT * FROM charities c RIGHT JOIN user_account ua ON ua.CharityId = c.Id WHERE ua.Id = v_Id LIMIT 1;
+  
+  SELECT COUNT(cf.UserId) FROM charity_follow cf WHERE cf.CharityId = v_charityId GROUP BY cf.CharityId;
+  SELECT COUNT(campaign_id) FROM campaign_info WHERE organization_id = v_charityId GROUP BY organization_id;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -680,4 +702,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-06-01 21:58:29
+-- Dump completed on 2023-06-01 23:07:15
