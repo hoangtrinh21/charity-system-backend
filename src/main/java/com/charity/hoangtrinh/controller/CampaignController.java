@@ -359,9 +359,14 @@ public class CampaignController {
                 return ResponseEntity.status(HttpStatus.OK)
                         .body(new ResponseModel("Don't have campaign with id: " + campaignId));
 
-            campaignFollowerRepository.deleteByCampaignEquals(campaignInfo.get());
-            postInfoRepository.deleteByCampaignEquals(campaignInfo.get());
-            statementRepository.deleteByCampaignEquals(campaignInfo.get());
+            if (campaignFollowerRepository.existsByCampaignEquals(campaignInfo.get()))
+                campaignFollowerRepository.deleteByCampaignEquals(campaignInfo.get());
+
+            if (postInfoRepository.existsByCampaignEquals(campaignInfo.get()))
+                postInfoRepository.deleteByCampaignEquals(campaignInfo.get());
+
+            if (statementRepository.existsByCampaignEquals(campaignInfo.get()))
+                statementRepository.deleteByCampaignEquals(campaignInfo.get());
 
             campaignInfoRepository.deleteById(campaignId);
             return ResponseEntity.status(HttpStatus.OK)
