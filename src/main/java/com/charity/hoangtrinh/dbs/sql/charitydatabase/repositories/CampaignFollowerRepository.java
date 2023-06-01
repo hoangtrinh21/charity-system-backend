@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface CampaignFollowerRepository extends JpaRepository<CampaignFollower, Integer> {
+    long deleteByCampaignEquals(CampaignInfo campaign);
     List<CampaignFollower> findByCampaign_IdEquals(Integer id);
     CampaignFollower findByUserEqualsAndCampaignEquals(UserAccount user, CampaignInfo campaign);
     boolean existsByUserEqualsAndCampaignEquals(UserAccount user, CampaignInfo campaign);

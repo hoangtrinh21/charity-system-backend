@@ -351,7 +351,17 @@ public class CampaignController {
             if (!isOrganization)
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                         .body(new ResponseModel("You are not organization!"));
+
             Integer campaignId = Integer.parseInt(campaignIdStr);
+            Optional<CampaignInfo> campaignInfo = campaignInfoRepository.findById(campaignId);
+
+            if (!campaignInfo.isPresent())
+                return ResponseEntity.status(HttpStatus.OK)
+                        .body(new ResponseModel("Don't have campaign with id: " + campaignId));
+
+            campaignFollowerRepository.deleteByCampaignEquals(campaignInfo.get());
+            postInfoRepository.deleteByCampaignEquals(campaignInfo.get());
+            statementRepository.deleteByCampaignEquals(campaignInfo.get());
 
             campaignInfoRepository.deleteById(campaignId);
             return ResponseEntity.status(HttpStatus.OK)
